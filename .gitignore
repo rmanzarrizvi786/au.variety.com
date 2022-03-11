@@ -15,8 +15,6 @@ plugins/ssm-ga/*
 !plugins/tbm-amp
 !plugins/tbm-adm
 
-themes/musicnetwork_ORIGINAL
-
 # ignore specific themes
 themes/twenty*/
 
