@@ -1,0 +1,9 @@
+<section class="newsletter // lrv-u-width-100p {{ newsletter_classes }}">
+	<div class="newsletter__inner // {{ newsletter_inner_classes }}">
+		{% if c_heading %}
+			{% include "@larva/components/c-heading/c-heading.twig" with c_heading %}
+		{% endif %}
+
+		{% include "@larva/objects/o-email-capture-form/o-email-capture-form.twig" with o_email_capture_form %}
+	</div>
+</section>

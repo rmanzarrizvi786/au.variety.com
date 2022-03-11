@@ -1,0 +1,31 @@
+<section class="live-events__wrapper // {{ live_events_wrapper_classes }}">
+	<div class="live-events // {{ live_events_classes }}">
+		<div class="live-events__primary // {{ live_events_primary_classes }}">
+			{% include "@project/objects/o-more-from-heading/o-more-from-heading.twig" with o_more_from_heading %}
+
+			{% include "@larva/components/c-span/c-span.twig" with c_span %}
+
+			{% include "@larva/components/c-dek/c-dek.twig" with c_dek %}
+
+			{% include "@project/objects/o-more-link/o-more-link.twig" with o_more_link_desktop %}
+		</div>
+
+		<div class="live-events__secondary // {{ live_events_secondary_classes }}">
+			{% include "@larva/components/c-span/c-span.twig" with c_span_secondary %}
+
+			<div class="live-events__images // {{ live_events_images_classes }}">
+				{% for item in live_events_images %}
+					{% include "@larva/components/c-lazy-image/c-lazy-image.twig" with item %}
+				{% endfor %}
+			</div>
+
+			{% for item in live_events_taglines %}
+				{% include "@larva/components/c-tagline/c-tagline.twig" with item %}
+			{% endfor %}
+
+			{% include "@project/objects/o-more-link/o-more-link.twig" with o_more_link_mobile %}
+		</div>
+	</div>
+
+	{% include "@project/modules/cxense-widget/cxense-widget.twig" with cxense_subscribe_widget %}
+</section>

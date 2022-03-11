@@ -1,0 +1,40 @@
+<section class="homepage-voices__wrapper // u-margin-t-125 {{ homepage_voices_wrapper_classes }}">
+
+	<div class="homepage-voices // {{ homepage_voices_classes }}">
+		<div class="homepage-voices__header // {{ homepage_voices_header_classes }}">
+			{% if c_span_title %}
+				{% include "@larva/components/c-span/c-span.twig" with c_span_title %}
+			{% endif %}
+
+			{% include "@project/objects/o-more-from-heading/o-more-from-heading.twig" with o_more_from_heading %}
+
+			{% if c_span_subtitle %}
+				<div class="lrv-u-padding-tb-050">
+					{% include "@larva/components/c-span/c-span.twig" with c_span_subtitle %}
+				</div>
+			{% endif %}
+
+			{% if cxense_magazine_subscribe_widget %}
+				{% include "@project/modules/cxense-widget/cxense-widget.twig" with cxense_magazine_subscribe_widget %}
+			{% endif %}
+
+			{% if c_link %}
+				{% include "@larva/components/c-link/c-link.twig" with c_link %}
+			{% endif %}
+		</div>
+
+		{% if c_lazy_image_mobile %}
+			{% include "@larva/components/c-lazy-image/c-lazy-image.twig" with c_lazy_image_mobile %}
+		{% endif %}
+
+		{% include "@larva/objects/o-tease-list/o-tease-list.twig" with o_tease_list %}
+
+		<div class="homepage-voices__footer // {{ header_voices_footer_classes }}">
+			{% if c_footer_tagline %}
+				{% include "@larva/components/c-tagline/c-tagline.twig" with c_footer_tagline %}
+			{% endif %}
+
+			{% include "@project/objects/o-more-link/o-more-link.twig" with o_more_link %}
+		</div>
+	</div>
+</section>

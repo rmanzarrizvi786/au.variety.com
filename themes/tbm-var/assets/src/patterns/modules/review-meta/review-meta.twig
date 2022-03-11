@@ -1,0 +1,11 @@
+<div class="review-meta // {{ review_meta_classes }}">
+	{% if c_title %}
+		{% include "@larva/components/c-heading/c-heading.twig" with c_title %}
+	{% endif %}
+
+	{% if c_heading %}
+		{% include "@larva/components/c-heading/c-heading.twig" with c_heading %}
+	{% endif %}
+
+	{% include "@project/objects/o-meta-list/o-meta-list.twig" with o_meta_list %}
+</div>

@@ -1,0 +1,16 @@
+<header class="header // js-Header {{ header_classes }}">
+	<div class="js-Header-contents lrv-u-flex lrv-u-justify-content-space-between a-stacking-context a-stack-1">
+		<div class="js-hide-when-sticky lrv-u-width-100p {{ header_contents_classes }}">
+			{% include "@project/modules/header-main/header-main.twig" with header_main %}
+		</div>
+
+		<div class="js-show-when-sticky lrv-u-width-100p js-sticky-header-slidedown">
+			{% include "@project/modules/header-sticky/header-sticky.twig" with header_sticky %}
+		</div>
+		<div class="a-subscription-banner lrv-a-hidden">
+			<div class="lrv-a-wrapper">
+				<div id="cx-fly-out-variety"></div>
+			</div>
+		</div>
+	</div>
+</header>

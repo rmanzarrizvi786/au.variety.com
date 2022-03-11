@@ -1,0 +1,54 @@
+{% if is_single %}
+	<div class="o-tease {{ modifier_class }} {{ o_tease_classes }}" {{ o_tease_data_attributes }}>
+{% else %}
+	<article class="o-tease {{ modifier_class }} {{ o_tease_classes }}" {{ o_tease_data_attributes }}>
+{% endif %}
+
+	{% if o_tease_url %}
+		<a href="{{ o_tease_url }}" class="{{ o_tease_link_classes }}">
+	{% endif %}
+		<div class="o-tease__primary {{ o_tease_primary_classes }}">
+			{% if sponsored_most_popular_ad_action %}
+				{{ sponsored_most_popular_ad_action }}
+			{% endif %}
+
+			{% if c_span %}
+				{% include "@larva/components/c-span/c-span.twig" with c_span %}
+			{% endif %}
+
+			{% if c_title %}
+				{% include "@larva/components/c-title/c-title.twig" with c_title %}
+			{% endif %}
+
+			{% if o_span_group %}
+				{% include "@larva/objects/o-span-group/o-span-group.twig" with o_span_group %}
+			{% endif %}
+
+			{% if c_link %}
+				{% include "@larva/components/c-link/c-link.twig" with c_link %}
+			{% endif %}
+
+			{% if c_timestamp %}
+				{% include "@larva/components/c-timestamp/c-timestamp.twig" with c_timestamp %}
+			{% endif %}
+
+			{% if c_dek %}
+				{% include "@larva/components/c-dek/c-dek.twig" with c_dek %}
+			{% endif %}
+		</div>
+
+		{% if c_lazy_image %}
+		<div class="o-tease__secondary {{ o_tease_secondary_classes }}">
+			{% include "@larva/components/c-lazy-image/c-lazy-image.twig" with c_lazy_image %}
+		</div>
+		{% endif %}
+
+	{% if o_tease_url %}
+		</a>
+	{% endif %}
+
+{% if is_single %}
+	</div>
+{% else %}
+	</article>
+{% endif %}

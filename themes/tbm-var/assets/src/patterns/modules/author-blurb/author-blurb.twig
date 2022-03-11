@@ -1,0 +1,25 @@
+<section class="author-blurb // a-author-blurb-grid lrv-u-margin-b-2">
+	<div class="author-blurb-grid__details">
+		{% if c_heading %}
+			{% include "@larva/components/c-heading/c-heading.twig" with c_heading %}
+		{% endif %}
+		<ul class="author-blurb-social-list // {{ author_blurb_social_list__classes }}">
+			{% if c_icon__twitter %}
+				<li class="social-list__item // {{ author_blurb_social_list_item__classes }}">
+					{% include "@larva/components/c-icon/c-icon.twig" with c_icon__twitter %}
+					{% include "@larva/components/c-link/c-link.twig" with c_link__twitter %}
+				</li>
+			{% endif %}
+			{% if c_link__email %}
+				<li class="social-list__item // {{ author_blurb_social_list_item__classes  }}">
+					{% include "@larva/components/c-link/c-link.twig" with c_link__email %}
+				</li>
+			{% endif %}
+		</ul>
+	</div>
+	<div class="a-author-blurb-grid__text">
+		{% if c_tagline %}
+			{% include "@larva/components/c-tagline/c-tagline.twig" with c_tagline %}
+		{% endif %}
+	</div>
+</section>

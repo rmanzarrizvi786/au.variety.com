@@ -1,0 +1,9 @@
+<div class="trending-menu // {{ trending_menu_classes }}">
+	<div class="trending-menu__inner // {{ trending_menu_inner_classes }}">
+		{% if c_span %}
+			{% include "@larva/components/c-span/c-span.twig" with c_span %}
+		{% endif %}
+
+		{% include "@larva/objects/o-nav/o-nav.twig" with o_nav %}
+	</div>
+</div>

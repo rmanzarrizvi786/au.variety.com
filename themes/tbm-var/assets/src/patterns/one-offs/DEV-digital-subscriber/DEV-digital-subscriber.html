@@ -1,0 +1,58 @@
+{#
+	Note:
+	This page is for prototyping only and is out of date. It would have been much smarter
+	to create it as a true module instead of a one-off. If there are any requested changes,
+	then it should be refactored into a module that can be written to PHP (prob would take 30 mins).
+#}
+<div class="lrv-a-wrapper lrv-u-margin-tb-2">
+	<div class="lrv-a-grid a-cols4@tablet lrv-u-align-items-center lrv-u-font-family-secondary">
+
+		<div class="a-span3@tablet">
+			{% include "@larva/components/c-heading/c-heading.twig" with c_heading %}
+
+			<div class="lrv-a-grid lrv-a-cols3@tablet lrv-u-align-items-center">
+				<section class="u-border-r-1 lrv-u-border-color-grey-light lrv-u-padding-r-1 lrv-u-height-100p">
+					{% include "@larva/components/c-title/c-title.twig" with c_title %}
+					<form name="loginform" id="loginform" action="#" method="post">
+						<input type="hidden" id="delete_session" name="delete_session" value="0">
+						<p class="login-username">
+							<label class="u-font-family-basic lrv-u-font-size-12 lrv-u-color-grey-dark lrv-u-text-transform-uppercase lrv-u-display-block lrv-u-margin-b-050" for="user_login">Username</label>
+							<input type="text" name="username" id="user_login" class="input lrv-u-padding-a-050 lrv-u-font-size-16 lrv-u-border-a-1 lrv-u-border-color-grey lrv-u-width-100p lrv-u-max-width-300" value="" size="20">
+						</p>
+						<p class="login-password">
+							<label class="u-font-family-basic lrv-u-font-size-12 lrv-u-color-grey-dark lrv-u-text-transform-uppercase lrv-u-display-block lrv-u-margin-b-050" for="user_pass">Password</label>
+							<input type="password" name="password" id="user_pass" class="input lrv-u-padding-a-050 lrv-u-font-size-16 lrv-u-border-a-1 lrv-u-border-color-grey lrv-u-width-100p lrv-u-max-width-300" value="" size="20">
+						</p>
+						<p class="login-remember">
+							<label class="u-font-family-basic lrv-u-font-size-12 lrv-u-color-grey-dark lrv-u-text-transform-uppercase"><input name="persist" type="checkbox" id="rememberme">Remember Me</label>
+						</p>
+						<p class="login-submit">
+							<input class="lrv-a-unstyle-button lrv-u-border-radius-5 lrv-u-background-color-black lrv-u-color-white lrv-u-padding-lr-1 lrv-u-padding-tb-050" id="login-submit" type="submit" name="login-submit" class="button-primary" value="<?php esc_html_e( 'Sign in', 'pmc-variety' ); ?>">
+							<input type="hidden" name="cmd" value="verify-credential"/>
+							<input type="hidden" name="action" value="variety_digital_subscriber"/>
+						</p>
+
+						<p class=" lrv-u-color-grey lrv-u-font-size-14">If you are having trouble logging in, please use Safari, Firefox or Chrome.</p>
+					</form>
+				</section>
+
+				<section class="u-border-r-1 lrv-u-border-color-grey-light lrv-u-padding-r-1 lrv-u-height-100p">
+					{% include "@larva/components/c-title/c-title.twig" with c_title_second %}
+					{% include "@larva/components/c-tagline/c-tagline.twig" with c_tagline %}
+
+				</section>
+
+				<section class="lrv-u-height-100p">
+					{% include "@larva/components/c-title/c-title.twig" with c_title_third %}
+					{% include "@larva/components/c-tagline/c-tagline.twig" with c_tagline_second %}
+				</section>
+			</div>
+
+		</div>
+
+		<div class="">
+			{% include "@larva/components/c-lazy-image/c-lazy-image.twig" with c_lazy_image %}
+		</div>
+	</div>
+
+</div>

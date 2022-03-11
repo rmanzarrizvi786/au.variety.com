@@ -1,0 +1,27 @@
+<div class="lrv-a-wrapper">
+	<div class="o-popular-videos // {{ o_popular_videos_classes }}">
+		<div class="o-popular-videos__inner // {{ o_popular_videos_inner_classes }}">
+			<div class="o-popular-videos__header // {{ o_popular_videos_header_classes }}">
+				{% include "@larva/components/c-heading/c-heading.twig" with c_heading %}
+
+				{% include "@project/objects/o-more-link/o-more-link.twig" with o_more_link %}
+			</div>
+
+			<div class="o-popular-videos__content // {{ o_popular_videos_content_classes }}">
+				<div class="o-popular-videos__primary // {{ o_popular_videos_primary_classes }}">
+					{% include "@project/objects/o-video-card/o-video-card.twig" with o_video_card_primary %}
+				</div>
+
+				<div class="o-popular-videos__secondary // {{ o_popular_videos_secondary_classes }}">
+					{% for item in o_popular_videos_items %}
+						{% include "@project/objects/o-video-card/o-video-card.twig" with item %}
+					{% endfor %}
+				</div>
+			</div>
+
+			{% if o_more_link_mobile %}
+				{% include "@project/objects/o-more-link/o-more-link.twig" with o_more_link_mobile %}
+			{% endif %}
+		</div>
+	</div>
+</div>

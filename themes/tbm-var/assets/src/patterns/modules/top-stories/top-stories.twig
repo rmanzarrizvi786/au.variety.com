@@ -1,0 +1,29 @@
+<section class="top-stories // u-background-color-white@mobile-max u-box-shadow-menu@mobile-max {{ top_stories_classes }}">
+	{% if c_heading %}
+		<div class="top-stories__heading a-hidden@tablet u-border-b-1@mobile-max u-border-color-brand-secondary-40@mobile-max">
+			{% include "@larva/components/c-heading/c-heading.twig" with c_heading %}
+		</div>
+	{% endif %}
+
+	<div class="top-stories__stories a-top-stories-grid@tablet // {{ top_stories_stories_classes }}">
+		{% include "@project/objects/o-story/o-story.twig" with o_story_first %}
+		{% include "@project/objects/o-story/o-story.twig" with o_story_second %}
+		{% include "@project/objects/o-story/o-story.twig" with o_story_third %}
+		{% include "@project/objects/o-story/o-story.twig" with o_story_fourth %}
+		{% include "@project/objects/o-story/o-story.twig" with o_story_fifth %}
+
+		{% if o_story_sixth %}
+			{% include "@project/objects/o-story/o-story.twig" with o_story_sixth %}
+		{% endif %}
+	</div>
+
+	{% if o_tease_ad %}
+		<div class="lrv-u-padding-b-1">
+			{% include "@project/objects/o-tease/o-tease.twig" with o_tease_ad %}
+		</div>
+	{% endif %}
+
+	{% if o_latest_news_link %}
+		{% include "@project/objects/o-latest-news-link/o-latest-news-link.twig" with o_latest_news_link %}
+	{% endif %}
+</section>

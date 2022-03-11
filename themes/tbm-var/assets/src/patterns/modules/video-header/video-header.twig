@@ -1,0 +1,13 @@
+<div class="video-header // {{ video_header_classes }}" {{ video_header_data_attrs }}>
+	<div class="lrv-a-wrapper // {{ video_header_wrapper_classes }}">
+		<div class="video-header__header // {{ video_header_header_classes }}">
+			{% include "@larva/components/c-heading/c-heading.twig" with c_heading %}
+
+			{% include "@project/modules/video-menu/video-menu.twig" with video_menu %}
+
+			{% include "@project/modules/video-menu-mobile/video-menu-mobile.twig" with video_menu_mobile %}
+		</div>
+
+		{% include "@project/modules/video-showcase/video-showcase.twig" with video_showcase %}
+	</div>
+</div>

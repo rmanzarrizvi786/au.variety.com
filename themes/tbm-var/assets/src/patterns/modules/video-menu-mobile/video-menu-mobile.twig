@@ -1,0 +1,9 @@
+<div class="video-menu-mobile // {{ video_menu_mobile_classes }}" data-collapsible="collapsed">
+	<a class="{{ video_menu_trigger_classes }}" href="#" data-collapsible-toggle="always-show">
+		{% include "@larva/components/c-span/c-span.twig" with c_span %}
+	</a>
+
+	<div class="{{ video_menu_list_classes }}" data-collapsible-panel>
+		{% include "@larva/objects/o-nav/o-nav.twig" with o_nav %}
+	</div>
+</div>

@@ -1,0 +1,29 @@
+<section class="iheart-widget // {{ iheart_widget_classes }}">
+	<div class="lrv-u-padding-lr-1">
+		<div class="iheart-widget__header-outer // {{ iheart_widget_header_outer_classes }}">
+			<h3 class="iheart-widget__header-title // {{ iheart_widget_header_title_classes }}">
+				{{ iheart_widget_header_title_text }}
+			</h3>
+			<div class="u-width-25">
+				{% include '../../build/svg/' ~ iheart_widget_svg ~ '.svg' %}
+			</div>
+		</div>
+
+		<div class="iheart-widget__header-subtitle // {{ iheart_widget_header_subtitle_classes }}">
+			{{ iheart_widget_header_subtitle_text }}
+		</div>
+
+		<iframe
+			gesture="media"
+			width="{{ iheart_widget_iframe_width_attr }}"
+			height="{{ iheart_widget_iframe_height_attr }}"
+			src="javascript:void(0);"
+			data-lazy-src="{{ iheart_widget_iframe_url }}"
+			frameborder="0"
+		></iframe>
+
+		<p class="iheart-widget__footer-subtitle // {{ iheart_widget_footer_classes }}">
+			{{ iheart_widget_footer_text }}
+		</p>
+	</div>
+</section>

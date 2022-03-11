@@ -1,0 +1,13 @@
+<section class="upcoming-events // {{ upcoming_events_classes }}">
+	{% include "@project/objects/o-more-from-heading/o-more-from-heading.twig" with o_more_heading %}
+
+	{% include "@larva/components/c-lazy-image/c-lazy-image.twig" with c_lazy_image %}
+
+	<div class="upcoming-events__inner // {{ upcoming_events_inner_classes }}">
+		{% include "@larva/components/c-title/c-title.twig" with c_title %}
+
+		{% include "@larva/components/c-dek/c-dek.twig" with c_dek %}
+
+		{% include "@project/objects/o-more-link/o-more-link.twig" with o_more_link %}
+	</div>
+</section>

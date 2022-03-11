@@ -1,0 +1,28 @@
+<div class="o-drop-menu {{ o_drop_menu_classes }}" data-collapsible="collapsed" {{ o_drop_data_attr }}
+	{% if o_drop_data_attr %}
+		{{ o_drop_data_attr }}
+	{% endif %}>
+	<a class="o-drop-menu__toggle {{ o_drop_menu_toggle_classes }}" href="#" data-collapsible-toggle="always-show">
+		{% if c_span %}
+			{% include "@larva/components/c-span/c-span.twig" with c_span %}
+		{% endif %}
+
+		{% if o_icon_button %}
+			{% include "@larva/objects/o-icon-button/o-icon-button.twig" with o_icon_button %}
+		{% endif %}
+	</a>
+
+	<div class="o-drop-menu__list {{ o_drop_menu_list_classes }}" data-collapsible-panel>
+		{% if c_span_user %}
+			{% include "@larva/components/c-span/c-span.twig" with c_span_user %}
+		{% endif %}
+
+		{% if c_tagline %}
+			{% include "@larva/components/c-tagline/c-tagline.twig" with c_tagline %}
+		{% endif %}
+
+		{% if o_nav %}
+			{% include "@larva/objects/o-nav/o-nav.twig" with o_nav %}
+		{% endif %}
+	</div>
+</div>

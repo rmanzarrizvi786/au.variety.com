@@ -1,0 +1,9 @@
+/* Scorecard Style */
+
+#variety_scorecard_settings_form input[type='text'] {
+	width: 600px;
+}
+
+#variety_scorecard_settings_form .form-table th {
+	width: 150px;
+}

@@ -1,0 +1,15 @@
+<header class="docs-header // {{ docs_header_classes }}">
+	<div class="lrv-u-flex lrv-u-flex-direction-column lrv-u-align-items-center">
+		{% if c_heading %}
+			{% include "@larva/components/c-heading/c-heading.twig" with c_heading %}
+		{% endif %}
+	</div>
+	<div class="inner-docs-header // {{ inner_docs_header_classes }}">
+		{% if o_sponsored_by %}
+			{% include "@larva/objects/o-sponsored-by/o-sponsored-by.twig" with o_sponsored_by %}
+		{% endif %}
+		{% if c_logo %}
+			{% include "@project/components/c-logo/c-logo.twig" with c_logo %}
+		{% endif %}
+	</div>
+</header>

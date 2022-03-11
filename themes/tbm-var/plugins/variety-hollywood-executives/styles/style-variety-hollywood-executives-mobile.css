@@ -1,0 +1,25 @@
+#celeb_page_title {
+	font-size: 24px;
+}
+#celeb_page_photo {
+	float: none;
+	width: 100%;
+}
+#celeb_page_latest h3 {
+	font-size: 18px;
+}
+#celeb_page_latest {
+	margin: 28px -5px 0 0;
+}
+#celeb_page_ad_topright {
+	float: right;
+	margin: 0 0 15px 10px;
+	position: relative;
+	width: 100%;
+}
+#celeb_index a {
+	height:auto;
+}
+#celeb_index a span {
+ height:30px;
+}

@@ -1,0 +1,9 @@
+{% if o_checks_list_text_items %}
+  <ul class="o-checks-list // {{ o_checks_list_classes }}">
+		{% for item in o_checks_list_text_items %}
+			<li class="o-checks-list__item // {{ o_checks_list_items_classes }}">
+				{% include "@project/objects/o-checks-list-item/o-checks-list-item.twig" with item %}
+			</li>
+		{% endfor %}
+	</ul>
+{% endif %}

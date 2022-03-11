@@ -1,0 +1,15 @@
+<section class="latest-from // {{ latest_from_classes }}">
+	{% if o_more_from_heading %}
+		{% include "@project/objects/o-more-from-heading/o-more-from-heading.twig" with o_more_from_heading %}
+	{% endif %}
+
+	<div class="latest-from__inner // {{ latest_from_inner_classes }}">
+		<div class="latest-from__primary // {{ latest_from_primary_classes }}">
+			{% include "@project/objects/o-tease/o-tease.twig" with o_tease_primary %}
+		</div>
+
+		{% include "@project/objects/o-tease-list/o-tease-list.twig" with o_tease_list %}
+
+		{% include "@project/objects/o-more-link/o-more-link.twig" with o_more_link %}
+	</div>
+</section>

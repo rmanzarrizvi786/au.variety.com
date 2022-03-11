@@ -1,0 +1,39 @@
+<div class="print-plus-shop-offer-vip // {{ print_plus_shop_offer_vip_classes }}" >
+	<div class = "print-plus-shop-offer-vip-header-grid // {{ print_plus_shop_offer_vip_header_grid_classes }}  ">
+		<div class="print-plus-shop-offer-vip-header-grid__col1 // {{ print_plus_shop_offer_vip_header_grid__col1_classes }}">
+			{% include "@larva/components/c-icon/c-icon.twig" with c_icon %}
+			{% include "@larva/components/c-span/c-span.twig" with c_span_tagline %}
+			{% include "@project/objects/o-checks-list/o-checks-list.twig" with o_checks_list %}
+		</div>
+		<div class="print-plus-shop-offer-vip-header-grid__col2 // {{ print_plus_shop_offer_vip_header_grid__col2_classes }}">
+			{% include "@larva/components/c-lazy-image/c-lazy-image.twig" with c_lazy_image %}
+		</div>
+	</div>
+	<div class = "print-plus-shop-offer-vip-offers // {{ print_plus_shop_offer_vip_offers_classes }}" >
+		<div class = "print-plus-shop-offer-vip-prompt //   {{ print_plus_shop_offer_vip_prompt_classes }} ">
+			{% include "@larva/components/c-icon/c-icon.twig" with c_icon_prompt %}
+			{% include "@larva/components/c-span/c-span.twig" with c_span_prompt_primary %}
+			{% include "@larva/components/c-span/c-span.twig" with c_span_prompt_secondary %}
+		</div>
+
+		<div class = "print-plus-shop-offer-vip-offer-grid // {{ print_plus_shop_offer_vip_offer_grid_classes }} ">
+			<div class="print-plus-shop-offer-vip-offer-grid__col1 //  {{ print_plus_shop_offer_vip_offer_grid__col1_classes }}">
+				{% include "@larva/components/c-span/c-span.twig" with c_span_offer_title_1 %}
+				{% include "@larva/components/c-span/c-span.twig" with c_span_offer_cost_1 %}
+				{% include "@larva/components/c-span/c-span.twig" with c_span_offer_discount_1 %}
+				{% include "@larva/components/c-button/c-button.twig" with c_button_offer_1 %}
+			</div>
+			<div class="print-plus-shop-offer-vip-offer-grid__col2  // {{ print_plus_shop_offer_vip_offer_grid__col2_classes }}">
+				{% include "@larva/components/c-lazy-image/c-lazy-image.twig" with c_lazy_image_banner_2 %}
+				{% include "@larva/components/c-span/c-span.twig" with c_span_offer_title_2 %}
+				{% include "@larva/components/c-span/c-span.twig" with c_span_offer_cost_2 %}
+				{% include "@larva/components/c-span/c-span.twig" with c_span_offer_discount_2 %}
+				{% include "@larva/components/c-button/c-button.twig" with c_button_offer_2 %}
+			</div>
+			<div class="print-plus-shop-offer-vip-offer-grid__col3 //  {{ print_plus_shop_offer_vip_offer_grid__col3_classes }}">
+				{% include "@larva/components/c-span/c-span.twig" with c_span_offer_title_3 %}
+				{% include "@larva/components/c-button/c-button.twig" with c_button_offer_3 %}
+			</div>
+		</div>
+	</div>
+</div>

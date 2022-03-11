@@ -1,0 +1,73 @@
+/* 
+Version 1.1
+*/
+
+#variety-print-issue-setting .variety-hint {
+	font-size: 10px;
+}
+
+#variety-print-issue-setting .variety-panel label {
+	font-weight: bold;
+	font-size: 14px;
+	display: block;
+}
+
+#variety-print-issue-setting .variety-panel {
+	border-radius: 3px 3px 3px 3px;
+	border-style: solid;
+	border-width: 1px;
+	padding: 5px;
+	margin-bottom: 10px;
+	margin-top: 10px;
+	display: inline-block;
+}
+
+#variety-print-issue-setting table.variety-volume-schedule {
+	border-collapse: collapse;
+	border: 1px solid silver;
+	margin-bottom: 5px;
+}
+
+#variety-print-issue-setting table.variety-volume-schedule td, table.variety-volume-schedule th {
+	border: 1px solid silver;
+	padding: 2px;
+}
+
+#variety-print-issue-setting table.variety-volume-schedule th {
+	text-align: left;
+}
+
+#variety-print-issue-setting .variety-panel textarea {
+	width: 100%;
+	min-height: 50px;
+}
+
+#variety-print-issue-setting .variety-panel .variety-buttons {
+	margin-top: 5px;
+	float: right;
+}
+
+#variety-print-issue-setting input.variety-error {
+	border: solid 1px red;
+}
+
+#variety-print-issue-setting input.variety-date {
+	width: 100px;
+}
+#variety-print-issue-setting input.variety-volume {
+	width: 50px;
+}
+#variety-print-issue-setting input.variety-issue {
+	width: 50px;
+}
+
+#variety-print-issue-setting .variety-hide {
+	display: none;
+}
+
+#variety-print-issue-setting #variety-date-hint {
+	position: absolute;
+	left: 15px;
+	margin-top: 2px;
+	color: silver;
+}

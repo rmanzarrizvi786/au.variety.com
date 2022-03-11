@@ -1,0 +1,65 @@
+<div class="o-drop-menu o-drop-menu-login {{ o_drop_menu_classes }}" data-collapsible="collapsed" {{ o_drop_data_attr }}
+	{% if o_drop_data_attr %}
+		{{ o_drop_data_attr }}
+	{% endif %}>
+	<div class="js-LoginStatus--hide-when-authenticated">
+		<a class="o-drop-menu__toggle {{ o_drop_menu_toggle_classes }}" href="#" data-collapsible-toggle="always-show">
+			{% if c_span %}
+				{% include "@larva/components/c-span/c-span.twig" with c_span %}
+			{% endif %}
+
+			{% if o_icon_button %}
+				{% include "@larva/objects/o-icon-button/o-icon-button.twig" with o_icon_button %}
+			{% endif %}
+		</a>
+	</div>
+	<div class="js-LoginStatus--show-when-authenticated">
+		<a class="o-drop-menu__toggle {{ o_drop_menu_toggle_classes_logged_in }}" href="#" data-collapsible-toggle="always-show">
+			{% if c_span_logged_in %}
+				{% include "@larva/components/c-span/c-span.twig" with c_span_logged_in %}
+			{% endif %}
+		</a>
+	</div>
+
+	<div class="o-drop-menu__list {{ o_drop_menu_list_classes }}" data-collapsible-panel>
+
+		{% if o_nav_not_logged_in_pp %}
+			<div class="o_nav_not_logged_in_pp js-LoginStatus--hide-when-authenticated-pp">
+				{% include "@larva/objects/o-nav/o-nav.twig" with o_nav_not_logged_in_pp %}
+			</div>
+		{% endif %}
+
+		{% if c_span_user or c_tagline or o_nav %}
+			<div class="o_nav_logged_in_pp js-LoginStatus--show-when-authenticated-pp">
+				{% if c_span_user %}
+					{% include "@larva/components/c-span/c-span.twig" with c_span_user %}
+				{% endif %}
+
+				{% if c_tagline %}
+					{% include "@larva/components/c-tagline/c-tagline.twig" with c_tagline %}
+				{% endif %}
+
+				{% if o_nav %}
+					{% include "@larva/objects/o-nav/o-nav.twig" with o_nav %}
+				{% endif %}
+			</div>
+		{% endif %}
+
+		{% if c_horizontal_rule_display %}
+			{% include "@project/components/c-horizontal-rule/c-horizontal-rule.twig" with c_horizontal_rule %}
+		{% endif %}
+
+		{% if o_nav_not_logged_in_vip %}
+			<div class="o_nav_not_logged_in_vip js-LoginStatus--hide-when-authenticated-vip">
+				{% include "@larva/objects/o-nav/o-nav.twig" with o_nav_not_logged_in_vip %}
+			</div>
+		{% endif %}
+
+		{% if o_nav_logged_in_vip %}
+			<div class="o_nav_logged_in_vip js-LoginStatus--show-when-authenticated-vip">
+				{% include "@larva/objects/o-nav/o-nav.twig" with o_nav_logged_in_vip %}
+			</div>
+		{% endif %}
+
+	</div>
+</div>

@@ -1,0 +1,20 @@
+<section class="big-video // {{ big_video_classes }}" data-video-showcase>
+	<div class="wide-video__background // {{ big_video_background_classes }}"></div>
+
+	<div class="big-video__video u-position-relative // {{ big_video_video_classes }}">
+		<div id="cx-paywall"></div>
+		{% include "@project/objects/o-video-card/o-video-card.twig" with o_video_card %}
+	</div>
+
+	{% if is_article %}
+		<div class="big-video__meta // {{ big_video_meta_classes }}">
+			{% include "@project/objects/o-indicator/o-indicator.twig" with o_indicator %}
+
+			{% include "@larva/components/c-heading/c-heading.twig" with c_heading %}
+
+			{% include "@larva/components/c-timestamp/c-timestamp.twig" with c_timestamp %}
+
+			{% include "@project/modules/social-share/social-share.twig" with social_share %}
+		</div>
+	{% endif %}
+</section>

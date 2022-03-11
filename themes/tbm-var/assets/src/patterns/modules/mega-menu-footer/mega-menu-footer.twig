@@ -1,0 +1,40 @@
+<footer class="mega-menu-footer // a-hidden@mobile-max u-background-color-brand-accent-100-b u-color-brand-secondary-30">
+	<div class="lrv-a-wrapper">
+
+		<section class="lrv-u-flex lrv-u-align-items-center lrv-u-justify-content-center u-padding-l-2@desktop lrv-u-padding-tb-075 u-flex-1 lrv-u-border-b-1 lrv-u-border-t-1 u-border-color-pale-sky-2">
+			<h3 class="u-font-size-19 lrv-u-width-50p lrv-u-text-align-right">{{ mega_menu_footer_alerts_text }}</h3>
+			<div class="lrv-u-flex-grow-1 lrv-u-padding-l-1 lrv-u-width-50p">
+				{% include "@larva/objects/o-email-capture-form/o-email-capture-form.twig" with o_email_capture_form %}
+			</div>
+		</section>
+
+		<div class="lrv-u-flex lrv-u-align-items-center lrv-u-justify-content-space-between u-padding-tb-175">
+			<div class="lrv-u-flex lrv-u-align-items-center">
+				<section class="lrv-u-flex u-flex-direction-column@desktop-max lrv-u-align-items-center u-margin-r-1@desktop">
+					<h3 class="lrv-u-font-size-20 lrv-u-font-size-24@desktop lrv-u-margin-b-050 lrv-u-display-none">{{ mega_menu_footer_follow_text }}</h3>
+
+					{% include "@larva/objects/o-social-list/o-social-list.twig" with o_social_list %}
+				</section>
+
+				<div class="subscribe-link // lrv-u-font-weight-bold lrv-u-font-family-secondary lrv-u-font-size-12 u-letter-spacing-2">
+					{% include "@larva/components/c-link/c-link.twig" with c_subscribe_link %}
+				</div>
+			</div>
+
+			<div class="lrv-u-flex lrv-u-align-items-center">
+				{% include "@larva/objects/o-nav/o-nav.twig" with o_nav_tips %}
+				{% include "@project/modules/region-selector/region-selector.twig" with region_selector %}
+			</div>
+		</div>
+
+		<div class="lrv-a-grid a-cols2@desktop u-grid-gap-0@desktop-max lrv-u-border-t-1 u-border-color-pale-sky-2">
+			<div class="lrv-u-padding-tb-075 lrv-u-overflow-auto">
+				{% include "@larva/objects/o-nav/o-nav.twig" with o_nav %}
+			</div>
+			<div class="lrv-u-flex lrv-u-align-items-center u-justify-content-end lrv-u-padding-a-050 lrv-u-height-100p">
+				{% include "@larva/components/c-icon/c-icon.twig" with c_icon %}
+				<small class="lrv-u-padding-l-1 lrv-u-font-family-secondary u-color-brand-secondary-30 lrv-u-font-weight-normal lrv-u-font-size-14">{{ mega_menu_footer_copyright_text }}</small>
+			</div>
+		</div>
+	</div>
+</footer>

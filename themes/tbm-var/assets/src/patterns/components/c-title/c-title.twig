@@ -1,0 +1,38 @@
+{% if c_title_tag_text %}
+<{{ c_title_tag_text }} id="{{ c_title_id_attr }}" class="c-title {{ modifier_class }} {{ c_title_classes }}">
+{% else %}
+<h3 id="{{ c_title_id_attr }}" class="c-title {{ modifier_class }} {{ c_title_classes }}">
+{% endif %}
+
+	{% if c_title_above_url %}
+		<a href="{{ c_title_above_url }}" class="{{ c_title_above_link_classes }}">
+			{{ c_title_above_text }}
+		</a>
+	{% endif %}
+
+	{% if c_title_url %}
+		<a href="{{ c_title_url }}" class="c-title__link {{ c_title_link_classes }}" 
+		{% if c_title_link_attr %} 
+		target="{{ c_title_link_attr }}"
+		{% endif %}  {{ c_title_link_data_attr }}>
+	{% endif %}
+
+		{% if c_title_before_text %}
+			<span class="c-title__before {{ c_title_before_classes }}">{{ c_title_before_text }}</span>
+		{% endif %}
+
+		{% if c_title_markup %}
+			{{ c_title_markup|raw }}
+		{% else %}
+			{{ c_title_text }}
+		{% endif %}
+
+	{% if c_title_url %}
+		</a>
+	{% endif %}
+
+{% if c_title_tag_text %}
+</{{ c_title_tag_text }}>
+{% else %}
+</h3>
+{% endif %}

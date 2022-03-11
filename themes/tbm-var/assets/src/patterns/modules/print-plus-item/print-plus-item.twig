@@ -1,0 +1,13 @@
+<div class="print-plus-item // {{ print_plus_item_classes }}" >
+	<div >
+		{% include "@larva/components/c-lazy-image/c-lazy-image.twig" with c_lazy_image %}
+	</div>
+	<div class="print-plus-item-col2 // {{ print_plus_item__col2_classes }}">
+		{% include "@larva/components/c-title/c-span.twig" with c_span_label %}
+		{% include "@larva/components/c-title/c-title.twig" with c_title %}
+		{% include "@larva/components/c-dek/c-dek.twig" with c_dek %}
+		{% include "@project/objects/o-checks-list/o-checks-list.twig" with o_checks_list %}
+		{% include "@project/objects/o-more-link/o-more-link.twig" with o_more_link %}
+	</div>
+</div>
+

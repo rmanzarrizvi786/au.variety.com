@@ -1,0 +1,19 @@
+<div class="related-articles__outer // {{ related_articles_outer_classes }}">
+	<div class="related-articles // {{ related_articles_classes }}">
+		<div class="related-articles__heading // {{ related_articles_heading_classes }}">
+			{% if c_icon %}
+				{% include "@larva/components/c-icon/c-icon.twig" with c_icon %}
+			{% endif %}
+
+			{% include "@larva/components/c-heading/c-heading.twig" with c_heading %}
+		</div>
+
+		<div class="related_articles__wrap // lrv-a-scrollable-grid@desktop-max {{ related_articles_wrap_classes }}">
+			<div class="related_articless__list // {{ related_articles_list_classes }}">
+				{% for item in related_articles %}
+					{% include "@project/modules/related-article/related-article.twig" with item %}
+				{% endfor %}
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,23 @@
+<a href="{{ linked_gallery_url }}" title="{{ linked_gallery_title_text }}" class="linked-gallery // lrv-a-unstyle-link">
+
+	{% include "@larva/components/c-lazy-image/c-lazy-image.twig" with c_lazy_image_primary %}
+
+	<div class="lrv-a-grid u-align-items-stretch a-cols5@tablet a-cols4@mobile-max u-grid-gap-50 lrv-u-margin-t-050">
+
+			<div class="lrv-u-flex u-align-items-flex-end u-background-color-pale-sky lrv-u-color-white lrv-u-padding-lr-050 lrv-u-padding-tb-025">
+				<div class="lrv-u-font-family-secondary lrv-u-font-size-12@mobile-max lrv-u-font-size-14 lrv-u-font-weight-bold">View<br>Gallery</div>
+			</div>
+
+			{% for item in linked_gallery_items %}
+					{% include "@larva/components/c-lazy-image/c-lazy-image.twig" with item %}
+			{% endfor %}
+
+			{% if linked_gallery_last_item %}
+				<div class="a-hidden@mobile-max">
+					{% include "@larva/components/c-lazy-image/c-lazy-image.twig" with linked_gallery_last_item %}
+				</div>
+			{% endif %}
+
+	</div>
+
+</a>

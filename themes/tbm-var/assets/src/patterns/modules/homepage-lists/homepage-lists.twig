@@ -1,0 +1,13 @@
+<section class="lists // {{ lists_classes }}">
+	{% include "@project/objects/o-more-from-heading/o-more-from-heading.twig" with o_more_from_heading %}
+
+	{% include "@larva/components/c-lazy-image/c-lazy-image.twig" with c_lazy_image %}
+
+	<div class="lists__inner // {{ lists_inner_classes }}">
+		{% include "@project/objects/o-more-from-heading/o-more-from-heading.twig" with o_more_from_heading_desktop %}
+
+		{% include "@larva/components/c-title/c-title.twig" with c_title %}
+
+		{% include "@project/objects/o-more-link/o-more-link.twig" with o_more_link %}
+	</div>
+</section>

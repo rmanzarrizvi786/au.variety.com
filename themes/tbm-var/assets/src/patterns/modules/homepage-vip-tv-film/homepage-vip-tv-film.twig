@@ -1,0 +1,9 @@
+<section class="homepage-vip-tv-film // u-margin-t-125 {{ homepage_vip_tv_film_classes }}">
+	<div class="homepage-vip-tv-film__curation-and-list // lrv-u-height-100p {{ homepage_vip_tv_classes }}">
+		{% include "@project/modules/vip-curated/vip-curated.twig" with vip_curated %}
+
+		{% include "@project/modules/homepage-vertical-list/homepage-vertical-list.twig" with homepage_vertical_list %}
+	</div>
+
+	{% include "@project/modules/homepage-vertical-list/homepage-vertical-list.twig" with homepage_vertical_list_horizontal %}
+</section>

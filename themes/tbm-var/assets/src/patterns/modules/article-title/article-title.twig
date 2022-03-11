@@ -1,0 +1,13 @@
+{% if article_title_outer %}
+	<div class="article-title__outer {{ article_title_outer_classes }}">
+{% endif %}
+	<h1 class="article-title // {{ article_title_classes }}">{{ article_title_markup|raw }}</h1>
+
+	{% if c_tagline %}
+		{% include "@larva/components/c-tagline/c-tagline.twig" with c_tagline %}
+	{% endif %}
+
+{% if article_title_outer %}
+	</div>
+{% endif %}
+

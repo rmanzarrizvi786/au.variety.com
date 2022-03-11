@@ -1,0 +1,43 @@
+<div class="article-header // {{ article_header_classes }}">
+	<div class="article-header__inner // {{ article_header_inner_classes }}">
+		{% include "@project/modules/article-meta/article-meta.twig" with article_meta %}
+
+		{% if c_sponsored %}
+			{% include "@project/components/c-sponsored/c-sponsored.twig" with c_sponsored %}
+		{% endif %}
+
+		{% if c_taxonomy_highlight %}
+			{% include "@project/components/c-taxonomy-highlight/c-taxonomy-highlight.twig" with c_taxonomy_highlight %}
+		{% endif %}
+
+		{% include "@project/objects/o-title/o-title.twig" with o_title %}
+
+		{% if o_custom_paragraph %}
+			{% include "@project/objects/o-custom-paragraph/o-custom-paragraph.twig" with o_custom_paragraph %}
+		{% endif %}
+
+		{% include "@project/modules/author-social/author-social.twig" with author_social %}
+	</div>
+
+	{% if o_figure %}
+		<div class="article-header__feature // {{ article_header_feature_classes }}">
+			{% include "@larva/objects/o-figure/o-figure.twig" with o_figure %}
+		</div>
+	{% endif %}
+
+	{% if dirt_details %}
+		{% include "@project/modules/dirt-details/dirt-details.twig" with dirt_details %}
+	{% endif %}
+
+	{% if linked_gallery %}
+		<div class="article-header__feature // {{ article_header_feature_classes }}">
+			{% include "@project/modules/linked-gallery/linked-gallery.twig" with linked_gallery %}
+		</div>
+	{% endif %}
+
+	{% if featured_video %}
+		<div class="article-header__feature // {{ article_header_feature_classes }}">
+			{% include "@project/modules/featured-video/featured-video.twig" with featured_video %}
+		</div>
+	{% endif %}
+</div>

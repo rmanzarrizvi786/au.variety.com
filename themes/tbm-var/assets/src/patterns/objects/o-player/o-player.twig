@@ -1,0 +1,21 @@
+<div class="o-player" data-video-showcase>
+	<div tabindex="0"
+	class="o-player__link // {{ o_player_link_classes }}" data-video-showcase-trigger="{{ o_player_trigger_data_attr }}" data-video-showcase-type="{{ o_player_type_data_attr }}">
+		<div class="o-player {{ modifier_class }} {{ o_player_classes }}" data-video-showcase-autoplay="{{ o_player_autoplay_data_attr }}" data-video-showcase-player>
+		{% if o_player_crop_class %}
+			<div class="{{ o_player_crop_class }}">
+		{% endif %}
+
+				<img class="o-player__image {{ o_player_image_classes }}" src="{{ o_player_image_url }}" alt="{{ o_player_alt_attr }}">
+				<iframe hidden frameborder="0" data-video-showcase-iframe></iframe>
+				<div hidden id="jwplayerContainer" data-video-showcase-jwplayer></div>
+				<div hidden data-video-showcase-oembed></div>
+
+				{% include "@project/components/c-play-badge/c-play-badge.twig" with c_play_icon %}
+
+		{% if o_player_crop_class %}
+			</div>
+		{% endif %}
+		</div>
+	</div>
+</div>

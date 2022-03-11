@@ -1,0 +1,9 @@
+<div class="related-videos // {{ related_videos_classes }}">
+	{% if o_more_from_heading %}
+		{% include "@project/objects/o-more-from-heading/o-more-from-heading.twig" with o_more_from_heading %}
+	{% endif %}
+
+	<div class="related-videos__wrap // {{ related_videos_wrap_classes }}">
+		{% include "@project/objects/o-video-card-list/o-video-card-list.twig" with o_video_card_list %}
+	</div>
+</div>

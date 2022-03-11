@@ -1,0 +1,13 @@
+<div class="lrv-a-wrapper">
+	{% include "@project/modules/read-on/read-on.twig" with read_on %}
+
+	<div id="cx-paywall" class="u-max-width-618 lrv-u-margin-lr-auto"></div>
+
+	{% if view_full %}
+		{% include "@project/modules/view-full/view-full.twig" with view_full %}
+	{% endif %}
+
+	{% if view_full_extended %}
+		{% include "@project/modules/view-full-extended/view-full-extended.twig" with view_full_extended %}
+	{% endif %}
+</div>

@@ -1,0 +1,7 @@
+<ul class="issue-item-list // {{ issue_item_list_classes }} lrv-a-unstyle-list">
+	{% for item in issue_item_list %}
+		<li>
+			{% include "@project/issue-item/issue-item.twig" with item %}
+		</li>
+	{% endfor %}
+</ul>

@@ -1,0 +1,20 @@
+<nav class="o-nav-breadcrumblist {{ modifier_class }} {{ o_nav_classes }}">
+
+	{% if o_nav_title_text %}
+		<h4 id="{{ o_nav_title_id_attr }}" class="o-nav-breadcrumblist__title {{ o_nav_title_classes }}">{{ o_nav_title_text }}</h4>
+	{% endif %}
+
+	<ol class="o-nav-breadcrumblist__list {{ o_nav_list_classes }}"
+		{% if o_structured_data %}
+			aria-labelledby="{{ o_nav_title_id_attr }}" itemscope itemtype="http://schema.org/BreadcrumbList"
+		{% endif %}>
+		{% for item in o_nav_list_items %}
+			<li class="o-nav-breadcrumblist__list-item {{ o_nav_list_item_classes }}"
+			{% if o_structured_data %}
+				itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"
+			{% endif %}>
+				{% include "@larva/components/c-link/c-link.twig" with item %}
+			</li>
+		{% endfor %}
+	</ol>
+</nav>

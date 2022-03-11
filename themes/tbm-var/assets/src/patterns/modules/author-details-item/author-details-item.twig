@@ -1,0 +1,7 @@
+<li class="author-details-item // {{ author_details_item_classes }}">
+	{% include "@larva/components/c-link/c-link.twig" with c_link %}
+
+	{% if c_timestamp %}
+		{% include "@larva/components/c-timestamp/c-timestamp.twig" with c_timestamp %}
+	{% endif %}
+</li>

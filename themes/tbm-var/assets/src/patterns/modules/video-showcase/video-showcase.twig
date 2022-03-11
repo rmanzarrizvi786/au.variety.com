@@ -1,0 +1,7 @@
+<div class="video_header__videos // {{ video_header_videos_classes }}">
+	<div class="video-header__article-player // {{ video_header_single_player_classes }}" {{ video_header_data_attrs }}>
+		{% include "@project/objects/o-video-card/o-video-card.twig" with o_video_card %}
+	</div>
+
+	{% include "@project/modules/related-videos/related-videos.twig" with related_videos %}
+</div>

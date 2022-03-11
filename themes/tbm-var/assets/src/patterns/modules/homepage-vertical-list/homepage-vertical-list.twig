@@ -1,0 +1,18 @@
+<section class="vertical-list // lrv-u-flex@tablet lrv-u-flex-direction-column lrv-u-height-100p {{ vertical_list_classes }}">
+
+	<div class="vertical-list__header // {{ vertical_list_header_classes }}">
+		{% include "@project/objects/o-more-from-heading/o-more-from-heading.twig" with o_more_from_heading %}
+
+		<b class="a-border-fancy--top"></b>
+		<b class="a-border-fancy--bottom"></b>
+
+	</div>
+
+	<div class="vertical-list__inner //  lrv-u-flex-grow-1 {{ vertical_list_inner_classes }}">
+		{% include "@project/objects/o-tease-list/o-tease-list.twig" with o_tease_list_primary %}
+
+		{% include "@project/objects/o-tease-list/o-tease-list.twig" with o_tease_list_secondary %}
+	</div>
+
+	{% include "@project/objects/o-more-link/o-more-link.twig" with o_more_link %}
+</section>

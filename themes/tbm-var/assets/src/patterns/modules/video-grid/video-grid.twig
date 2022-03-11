@@ -1,0 +1,17 @@
+<div class="video-grid // {{ video_grid_wrapper_classes }}">
+	<div class="lrv-a-wrapper">
+		<div class="lrv-a-grid {{ video_grid_classes }}">
+			{% for item in video_items %}
+				<div class="lrv-a-grid-item"
+					{% if play_in_place %} data-video-showcase {% endif %}
+				>
+					{% include "@project/objects/o-video-card/o-video-card.twig" with item %}
+				</div>
+			{% endfor %}
+		</div>
+
+		{% if o_more_link %}
+			{% include "@project/objects/o-more-link/o-more-link.twig" with o_more_link %}
+		{% endif %}
+	</div>
+</div>

@@ -1,18 +1,24 @@
-# ignore everything in the root except the "wp-content" directory.
-!wp-content/
+.DS_Store
 
-# ignore everything in the "wp-content" directory, except:
-# "mu-plugins", "plugins", "themes" directory
-wp-content/*
-!wp-content/mu-plugins/
-!wp-content/plugins/
-!wp-content/themes/
+plugins/*
+!plugins/tbm-shout-writer-beer
+!plugins/tbm-adm
+!plugins/brag-observer
+!plugins/theme-options
+!plugins/tbm-media-helper
 
-# ignore these plugins
-wp-content/plugins/hello.php
+languages
+
+!plugins/ssm-ga
+plugins/ssm-ga/*
+!plugins/ssm-ga/ssm-ga.php
+!plugins/tbm-amp
+!plugins/tbm-adm
+
+themes/musicnetwork_ORIGINAL
 
 # ignore specific themes
-wp-content/themes/twenty*/
+themes/twenty*/
 
 # ignore node dependency directories
 node_modules/

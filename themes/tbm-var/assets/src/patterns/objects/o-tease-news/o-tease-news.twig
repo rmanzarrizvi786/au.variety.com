@@ -1,0 +1,53 @@
+{#
+This is basically o-teasee, stripped and customized because it needed an extra wrapper
+#}
+
+<article class="o-tease {{ o_tease_classes }}" {{ o_tease_data_attributes }}>
+
+	{% if o_tease_url %}
+		<a href="{{ o_tease_url }}" class="{{ o_tease_link_classes }}">
+	{% endif %}
+		<div class="o-tease__primary {{ o_tease_primary_classes }}">
+			<div class="o-tease__meta // {{ o_tease_meta_classes }}">
+				{% if o_taxonomy_item %}
+					{% include "@project/objects/o-taxonomy-item/o-taxonomy-item.twig" with o_taxonomy_item %}
+				{% endif %}
+
+				{% if c_timestamp %}
+					{% include "@larva/components/c-timestamp/c-timestamp.twig" with c_timestamp %}
+				{% endif %}
+			</div>
+
+			{% if sponsored_homepage_river_ad_action %}
+				{{ sponsored_homepage_river_ad_action }}
+			{% endif %}
+
+			{% if c_title %}
+				{% include "@larva/components/c-title/c-title.twig" with c_title %}
+			{% endif %}
+
+			{% if c_dek %}
+				{% include "@larva/components/c-dek/c-dek.twig" with c_dek %}
+			{% endif %}
+		</div>
+
+		{% if c_lazy_image %}
+			<div class="o-tease__secondary {{ o_tease_secondary_classes }}">
+				{% include "@larva/components/c-lazy-image/c-lazy-image.twig" with c_lazy_image %}
+
+				{% if is_video %}
+					{% if video_permalink_url %}
+						<a href="{{ video_permalink_url }}" class="{{ c_play_badge_wrapper_classes }}">
+					{% endif %}
+						{% include "@project/components/c-play-badge/c-play-badge.twig" with c_play_badge %}
+					{% if video_permalink_url %}
+						</a>
+					{% endif %}
+				{% endif %}
+			</div>
+		{% endif %}
+
+	{% if o_tease_url %}
+		</a>
+	{% endif %}
+</article>

@@ -1,0 +1,23 @@
+<div class="o-slide // {{ o_slide_classes }}">
+	{% if c_lazy_image %}
+		{% include "@larva/components/c-lazy-image/c-lazy-image.twig" with c_lazy_image %}
+	{% endif %}
+
+	{% if o_indicator %}
+		{% include "@larva/objects/o-indicator/o-indicator.twig" with o_indicator %}
+	{% endif %}
+
+	{% if c_title %}
+		{% include "@larva/components/c-title/c-title.twig" with c_title %}
+	{% endif %}
+
+	<a class="o-slide__meta // {{ o_slide_meta_classes }}" href="{{ o_slide_link_url }}">
+		{% if c_heading %}
+			{% include "@larva/components/c-heading/c-heading.twig" with c_heading %}
+		{% endif %}
+
+		{% if c_timestamp %}
+			{% include "@larva/components/c-timestamp/c-timestamp.twig" with c_timestamp %}
+		{% endif %}
+	</a>
+</div>

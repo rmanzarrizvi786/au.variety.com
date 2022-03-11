@@ -1,0 +1,13 @@
+<section class="top-stories-vip // {{ top_stories_classes }}">
+	{% for item in top_stories %}
+		{% include "@project/objects/o-top-story/o-top-story.twig" with item %}
+
+		{% if item['is_primary'] %}
+			<div class="top-stories__secondary // {{ top_stories_secondary_classes }}">
+		{% endif %}
+	{% endfor %}
+
+	</div>
+
+	{% include "@project/objects/o-tease-list/o-tease-list.twig" with o_tease_list %}
+</section>

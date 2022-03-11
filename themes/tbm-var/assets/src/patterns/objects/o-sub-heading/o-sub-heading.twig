@@ -1,0 +1,7 @@
+{% if c_heading %}
+	<div class="o-sub-heading // {{ o_sub_heading_classes }}">
+		{% include "@larva/components/c-span/c-span.twig" with c_span %}
+		{% include "@larva/components/c-heading/c-heading.twig" with c_heading %}
+		{% include "@larva/components/c-dek/c-dek.twig" with c_dek %}
+	</div>
+{% endif %}

@@ -1,0 +1,25 @@
+<div class="docs-video__outer // {{ docs_video_outer_classes }}">
+	<div class="docs-video // {{ docs_video_classes }}">
+
+		{% if c_heading %}
+			{% include "@larva/components/c-heading/c-heading.twig" with c_heading %}
+		{% endif %}
+
+		<div class="docs-video__inner // {{ docs_video_inner_classes }}" data-video-showcase>
+
+			{% if o_video_card_top %}
+				{% include "@project/objects/o-video-card/o-video-card.twig" with o_video_card_top %}
+			{% endif %}
+
+		</div>
+
+		{% if o_video_card_list %}
+			{% include "@project/objects/o-video-card-list/o-video-card-list.twig" with o_video_card_list %}
+		{% endif %}
+
+		{% if o_more_link %}
+			{% include "@project/objects/o-more-link/o-more-link.twig" with o_more_link %}
+		{% endif %}
+
+	</div>
+</div>

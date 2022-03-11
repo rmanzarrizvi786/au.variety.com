@@ -1,0 +1,20 @@
+<div class="login-actions // {{ loginactions_classes }} lrv-u-flex lrv-u-align-items-center lrv-u-margin-r-050">
+	<div class="js-LoginStatus--hide-when-authenticated">
+		<div class="lrv-u-flex">
+			<div class="a-hidden@mobile-max lrv-u-flex lrv-u-margin-r-1">
+				{% if cxense_header_subscribe_widget %}
+					{% include "@project/modules/cxense-widget/cxense-widget.twig" with cxense_header_subscribe_widget %}
+				{% endif %}
+			</div>
+		</div>
+	</div>
+
+	<div class="{{ header_login_wrapper_classes }}">
+		<div class="a-hidden@mobile-max">
+			{% include "@project/objects/o-drop-menu-login/o-drop-menu-login.twig" with o_drop_menu %}
+		</div>
+		<div>
+			{% include "@project/objects/o-drop-menu-login/o-drop-menu-login.twig" with o_drop_menu_mobile_icon %}
+		</div>
+	</div>
+</div>

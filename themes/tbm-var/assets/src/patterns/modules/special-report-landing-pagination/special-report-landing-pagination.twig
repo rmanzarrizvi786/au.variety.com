@@ -1,0 +1,7 @@
+<div class="special-report-landing-pagination // lrv-a-wrapper lrv-u-flex lrv-u-justify-content-space-between lrv-u-padding-tb-1">
+	{% if special_report_landing_pagination_is_paged %}
+		{% include "@project/objects/o-more-link/o-more-link.twig" with o_more_link_previous %}
+	{% endif %}
+
+	{% include "@project/objects/o-more-link/o-more-link.twig" with o_more_link %}
+</div>

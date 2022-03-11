@@ -1,0 +1,41 @@
+{% set prefix = 'a-font' %}
+
+<div class="{{ prefix }} lrv-a-wrapper">
+
+	{% set variants = [
+		'primary-regular',
+		'secondary-bold',
+		'secondary-regular',
+		'accent',
+		'basic',
+		'body'
+	] %}
+
+	{% set sizes = [
+		'3xl',
+		'2xl',
+		'xl',
+		'l',
+		'm',
+		's',
+		'xs',
+		'2xs',
+		'3xs',
+		'4xs'
+	] %}
+
+	{% for variant in variants %}
+
+		<h2 style="background-color: azure;">{{ variant }}</h2>
+
+		{% for size in sizes %}
+			{% set class = prefix ~ '-' ~ variant ~ '-' ~ size  %}
+
+			<p class="{{ class }}">{{ class }}</p>
+		{% endfor %}
+
+		<hr>
+
+	{% endfor %}
+
+</div>

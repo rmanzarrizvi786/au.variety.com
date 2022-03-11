@@ -1,0 +1,16 @@
+{# Note: the mega-menu__parent-list-item and mega-menu__child-list classes are hooked up to custom CSS and will eventually be removed. #}
+<li class="mega-menu-item // mega-menu__parent-list-item // {{ mega_menu_parent_list_item_classes }}" data-collapsible="collapsed">
+	<div class="{{ mega_menu_parent_list_item_inner_classes }}">
+		<button class="{{ mega_menu_toggle_button_classes }}"><span class="lrv-a-screen-reader-only">Expand the sub menu</span></button>
+		{% include "@larva/components/c-link/c-link.twig" with c_link %}
+	</div>
+
+	<ul class="mega-menu__child-list // {{ mega_menu_children_list_classes }}" data-collapsible-panel="" data-collapsible-breakpoint="mobile-only">
+		{% for item in mega_menu_item_children %}
+			<li class="mega-menu__child-list-item // {{ mega_menu_children_list_item_classes }}">
+
+				{% include "@larva/components/c-link/c-link.twig" with item %}
+			</li>
+		{% endfor %}
+	</ul>
+</li>

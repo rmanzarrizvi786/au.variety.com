@@ -1,0 +1,35 @@
+<section class="author-details // u-margin-t-150@mobile-max u-padding-a-125 lrv-u-margin-b-1 {{ author_details_classes }}">
+	{% include "@larva/components/c-title/c-title.twig" with c_title %}
+
+	{% if c_tagline %}
+		{% include "@larva/components/c-tagline/c-tagline.twig" with c_tagline %}
+	{% endif %}
+
+	{% if c_link_twitter_profile %}
+		<div class="lrv-u-flex lrv-u-align-items-center">
+			{% include "@larva/components/c-link/c-link.twig" with c_link_twitter_profile %}
+		</div>
+	{% endif %}
+
+	<ul class="author-details__list lrv-a-unstyle-list u-margin-t-075">
+		{% if author_details_list_text %}
+			<h4 class="author-details-list__title {{ author_details_list_title_classes }}">{{ author_details_list_text }}</h4>
+		{% endif %}
+
+		{% for item in stories %}
+			{% include "@project/modules/author-details-item/author-details-item.twig" with item %}
+		{% endfor %}
+	</ul>
+
+	{% if c_link_view_all %}
+		<div class="lrv-u-flex lrv-u-align-items-center">
+			{% include "@larva/components/c-link/c-link.twig" with c_link_view_all %}
+		</div>
+	{% endif %}
+
+  {% if c_icon_close %}
+		<div data-collapsible-toggle="always-show">
+			{% include "@larva/components/c-icon/c-icon.twig" with c_icon_close %}
+		</div>
+  {% endif %}
+</section>

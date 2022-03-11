@@ -1,0 +1,9 @@
+{% if o_meta_list_items %}
+	<ul class="o-meta-list // {{ o_meta_list_classes }}">
+		{% for item in o_meta_list_items %}
+			<li class="o-meta-list__item // {{ o_meta_list_items_classes }}">
+				{% include "@project/components/c-meta-item/c-meta-item.twig" with item %}
+			</li>
+		{% endfor %}
+	</ul>
+{% endif %}

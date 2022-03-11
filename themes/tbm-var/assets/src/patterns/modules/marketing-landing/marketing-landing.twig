@@ -1,0 +1,123 @@
+<div class="marketing-landing__row1 // {{ marketing_landing__row1_classes }}" >
+	<div class="marketing-landing__row1_message // {{ marketing_landing__row1_message_classes }}" >
+		{% include "@larva/components/c-span/c-span.twig" with c_span__row1_message %}
+		{% include "@larva/components/c-span/c-span.twig" with c_span__row1_information %}
+		{% include "@larva/components/c-span/c-button.twig" with c_button__row1_button %}
+		{% include "@larva/components/c-span/c-span.twig" with c_span__row1_link %}
+	</div>
+	<div class="marketing-landing__video // {{ marketing_landing__row1_video_classes }}" data-video-showcase>
+		<div id='jwplayer_TTy91oNt_yHdpIsEW_div'></div>
+	</div>
+</div>
+<a name="explanation"></a>
+<div class="marketing-landing__explanation // {{ marketing_landing__explanation_classes }}" >
+	{% include "@larva/components/c-span/c-span.twig" with c_span_explanation__before %}
+	{% include "@larva/components/c-icon/c-icon.twig" with c_icon_vip %}
+	{% include "@larva/components/c-span/c-span.twig" with c_span_explanation__after %}
+</div>
+<div class="marketing-landing__row2 // {{ marketing_landing__row2_classes }}" >
+	<div class="marketing-landing__message // {{ marketing_landing__row2_message_classes }}" >
+		<div class="marketing-landing__message_column // lrv-u-padding-tb-1@mobile-max {{ marketing_landing__message_column_classes }}" >
+			{% include "@larva/components/c-span/c-span.twig" with c_span__row2_number %}
+			{% include "@larva/components/c-span/c-span.twig" with c_span__row2_information %}
+			<ul class="marketing-landing__row2_list // u-font-family-basic lrv-u-font-size-12 u-font-size-15@tablet u-border-none u-list-style-position-inside lrv-u-text-align-center">
+				<li class="marketing-landing__row2_list__item1 // lrv-u-padding-tb-050 u-font-family-secondary lrv-u-font-size-16 ">
+					{% include "@larva/components/c-span/c-span.twig" with c_span__row2_list__item1 %}
+					</li>
+				<li class="marketing-landing__row2_list__item2 // lrv-u-padding-tb-050 u-font-family-secondary lrv-u-font-size-16 ">
+					{% include "@larva/components/c-span/c-span.twig" with c_span__row2_list__item2 %}
+					{% include "@larva/components/c-link/c-link.twig" with c_link__row2_list__item2 %}
+				</li>
+			</ul>
+		</div>
+	</div>
+	<div class="marketing-landing__image // {{ marketing_landing__row2_image_classes }}" >
+		{% include "@larva/components/c-lazy-image/c-lazy-image.twig" with c_lazy_image__row2 %}
+	</div>
+</div>
+<div class="marketing-landing__row3 // {{ marketing_landing__row3_classes }}" >
+	<div class="marketing-landing__image // {{ marketing_landing__row3_image_classes }}" >
+		{% include "@larva/components/c-lazy-image/c-lazy-image.twig" with c_lazy_image__row3 %}
+	</div>
+	<div class="marketing-landing__message // {{ marketing_landing__row3_message_classes }}" >
+		<div class="marketing-landing__message_column // {{ marketing_landing__message_column_classes }}" >
+			{% include "@larva/components/c-span/c-span.twig" with c_span__row3_number %}
+			{% include "@larva/components/c-span/c-span.twig" with c_span__row3_information %}
+			{% include "@project/objects/o-checks-list/o-checks-list.twig" with o_checks_list__row3 %}
+		</div>
+	</div>
+</div>
+<div class="marketing-landing__row4 // {{ marketing_landing__row4_classes }}" >
+	<div class="marketing-landing__message // {{ marketing_landing__row4_message_classes }}" >
+		<div class="marketing-landing__message_column // {{ marketing_landing__message_column_classes }}" >
+			{% include "@larva/components/c-span/c-span.twig" with c_span__row4_number %}
+			{% include "@larva/components/c-span/c-span.twig" with c_span__row4_information %}
+			{% include "@larva/components/c-span/c-span.twig" with c_span__row4_message %}
+		</div>
+	</div>
+	<div class="marketing-landing__image // {{ marketing_landing__row4_image_classes }}" >
+		{% include "@larva/components/c-lazy-image/c-lazy-image.twig" with c_lazy_image__row4 %}
+	</div>
+</div>
+<div class="marketing-landing__row5 // {{ marketing_landing__row5_classes }}" >
+	<div class="marketing-landing__row5_heading // {{ marketing_landing__row5_heading_classes }}" >
+		{% include "@larva/components/c-span/c-span.twig" with c_span__row5_message %}
+	</div>
+	<div class="marketing-landing__row5_grid // {{ marketing_landing__row5_grid_classes }}" >
+		<div class="marketing-landing__team_member // {{ marketing_landing__team_member_classes }}" >
+			{% include "@larva/components/c-lazy-image/c-lazy-image.twig" with c_lazy_image__row5_image1 %}
+			{% include "@larva/components/c-span/c-span.twig" with c_span__row5_image1_name %}
+			{% include "@larva/components/c-span/c-span.twig" with c_span__row5_image1_title %}
+			{% include "@larva/components/c-span/c-span.twig" with c_lazy_image__row5_image_divider %}
+			{% include "@larva/components/c-span/c-span.twig" with c_span__row5_image1_description %}
+		</div>
+		<div class="marketing-landing__team_member // {{ marketing_landing__team_member_classes }}" >
+			{% include "@larva/components/c-lazy-image/c-lazy-image.twig" with c_lazy_image__row5_image2 %}
+			{% include "@larva/components/c-span/c-span.twig" with c_span__row5_image2_name %}
+			{% include "@larva/components/c-span/c-span.twig" with c_span__row5_image2_title %}
+			{% include "@larva/components/c-span/c-span.twig" with c_lazy_image__row5_image_divider %}
+			{% include "@larva/components/c-span/c-span.twig" with c_span__row5_image2_description %}
+		</div>
+		<div class="marketing-landing__team_member // {{ marketing_landing__team_member_classes }}" >
+			{% include "@larva/components/c-lazy-image/c-lazy-image.twig" with c_lazy_image__row5_image3 %}
+			{% include "@larva/components/c-span/c-span.twig" with c_span__row5_image3_name %}
+			{% include "@larva/components/c-span/c-span.twig" with c_span__row5_image3_title %}
+			{% include "@larva/components/c-span/c-span.twig" with c_lazy_image__row5_image_divider %}
+			{% include "@larva/components/c-span/c-span.twig" with c_span__row5_image3_description %}
+		</div>
+		<div class="marketing-landing__team_member // {{ marketing_landing__team_member_classes }}" >
+			{% include "@larva/components/c-lazy-image/c-lazy-image.twig" with c_lazy_image__row5_image4 %}
+			{% include "@larva/components/c-span/c-span.twig" with c_span__row5_image4_name %}
+			{% include "@larva/components/c-span/c-span.twig" with c_span__row5_image4_title %}
+			{% include "@larva/components/c-span/c-span.twig" with c_lazy_image__row5_image_divider %}
+			{% include "@larva/components/c-span/c-span.twig" with c_span__row5_image4_description %}
+		</div>
+</div>
+</div>
+<div class="marketing-landing__vip_offer // {{ marketing_landing__vip_offer_classes }}" >
+	<div class = "marketing-landing__vip_offer_prompt // {{ marketing_landing__vip_offer_prompt_classes }} ">
+		{% include "@larva/components/c-icon/c-icon.twig" with c_icon_prompt %}
+		{% include "@larva/components/c-span/c-span.twig" with c_span_prompt_primary %}
+		{% include "@larva/components/c-span/c-span.twig" with c_span_prompt_secondary %}
+	</div>
+	<a name="offers"></a>
+	<div class = "marketing-landing__vip_offer_grid // {{ marketing_landing__vip_offer_prompt_grid_classes }}">
+		<div class="marketing-landing__vip_offer_grid__col1 // lrv-u-order-100@mobile-max  {{ marketing_landing__vip_offer_prompt_grid__col_classes }}">
+			{% include "@larva/components/c-span/c-span.twig" with c_span_offer_title_1 %}
+			{% include "@larva/components/c-span/c-span.twig" with c_span_offer_cost_1 %}
+			{% include "@larva/components/c-span/c-span.twig" with c_span_offer_discount_1 %}
+			{% include "@larva/components/c-button/c-button.twig" with c_button_offer_1 %}
+		</div>
+		<div class="marketing-landing__vip_offer_grid__col2 // {{ marketing_landing__vip_offer_prompt_grid__col_classes }}">
+			{% include "@larva/components/c-lazy-image/c-lazy-image.twig" with c_lazy_image_banner_2 %}
+			{% include "@larva/components/c-span/c-span.twig" with c_span_offer_title_2 %}
+			{% include "@larva/components/c-span/c-span.twig" with c_span_offer_cost_2 %}
+			{% include "@larva/components/c-span/c-span.twig" with c_span_offer_discount_2 %}
+			{% include "@larva/components/c-button/c-button.twig" with c_button_offer_2 %}
+		</div>
+		<div class="marketing-landing__vip_offer_grid__col3 // lrv-u-order-100@mobile-max  {{ marketing_landing__vip_offer_prompt_grid__col_classes }}">
+			{% include "@larva/components/c-span/c-span.twig" with c_span_offer_title_3 %}
+			{% include "@larva/components/c-button/c-button.twig" with c_button_offer_3 %}
+		</div>
+	</div>
+</div>

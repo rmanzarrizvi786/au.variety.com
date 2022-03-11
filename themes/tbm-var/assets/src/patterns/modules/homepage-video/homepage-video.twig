@@ -1,0 +1,15 @@
+<div class="homepage-video__outer // lrv-a-wrapper a-wrapper-padding-unset@mobile-max {{ homepage_video_outer_classes }}">
+	<div class="homepage-video // {{ homepage_video_classes }}">
+		<div class="homepage-video__inner // {{ homepage_video_inner_classes }}" data-video-showcase>
+			{% if c_heading %}
+				{% include "@larva/components/c-heading/c-heading.twig" with c_heading %}
+			{% endif %}
+
+			{% include "@project/modules/video-showcase/video-showcase.twig" with video_showcase %}
+
+			{% if o_more_link %}
+				{% include "@project/objects/o-more-link/o-more-link.twig" with o_more_link %}
+			{% endif %}
+		</div>
+	</div>
+</div>

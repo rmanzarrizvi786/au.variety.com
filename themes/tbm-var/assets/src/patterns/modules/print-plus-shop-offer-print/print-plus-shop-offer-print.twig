@@ -1,0 +1,19 @@
+<div class="print-plus-shop-offer // {{ print_plus_shop_offer_classes }}" >
+	<div class="print-plus-shop-offer-title // {{ print_plus_shop_offer_title_classes }}" >
+		{% include "@larva/components/c-lazy-image/c-lazy-image.twig" with c_lazy_image_banner %}
+		{% include "@larva/components/c-span/c-span.twig" with c_span_name %}
+	</div>
+	{% include "@larva/components/c-lazy-image/c-lazy-image.twig" with c_lazy_image_offer %}
+	<div class="print-plus-shop-offer-body // {{ print_plus_shop_offer_body_classes }}" >
+		{% include "@larva/components/c-span/c-span.twig" with c_span_first_item %}
+		{% include "@project/objects/o-checks-list/o-checks-list.twig" with o_checks_list_first_item_details %}
+		{% if c_span_additional_offer_items %}
+			{% for item in c_span_additional_offer_items %}
+				{% include "@larva/components/c-span/c-span.twig" with item %}
+			{% endfor %}
+		{% endif %}
+		{% include "@larva/components/c-span/c-span.twig" with c_span_additional_item %}
+		{% include "@larva/components/c-span/c-span.twig" with c_span_offer_cost %}
+		{% include "@larva/components/c-button/c-button.twig" with c_button_offer %}
+	</div>
+</div>

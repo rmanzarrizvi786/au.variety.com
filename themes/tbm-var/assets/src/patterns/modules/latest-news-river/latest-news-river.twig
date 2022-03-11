@@ -1,0 +1,22 @@
+<section class="latest-news-river // js-LatestNewsButton-ScrollDestination lrv-u-flex lrv-u-flex-direction-column {{ latest_news_river_classes }}">
+
+	{% include "@project/objects/o-more-from-heading/o-more-from-heading.twig" with o_more_from_heading %}
+
+	{% include "@project/objects/o-tease-news-list/o-tease-news-list.twig" with o_tease_news_list_primary %}
+
+	{% if cxense_subscribe_widget %}
+		{% include "@project/modules/cxense-widget/cxense-widget.twig" with cxense_subscribe_widget %}
+	{% endif %}
+
+	{% if o_tease_news_list_secondary %}
+		{% include "@project/objects/o-tease-news-list/o-tease-news-list.twig" with o_tease_news_list_secondary %}
+	{% endif %}
+
+	<div class="lrv-u-flex lrv-u-justify-content-space-between lrv-u-padding-b-1 lrv-u-margin-t-auto">
+		{% if latest_news_river_is_paged %}
+			{% include "@project/objects/o-more-link/o-more-link.twig" with o_more_link_previous %}
+		{% endif %}
+
+		{% include "@project/objects/o-more-link/o-more-link.twig" with o_more_link %}
+	</div>
+</section>

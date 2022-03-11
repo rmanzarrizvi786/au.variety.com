@@ -1,0 +1,21 @@
+<section class="wth-stories-slider // {{ wth_stories_slider_classes }}"
+		{% if wth_stories_slider_id_attr %}
+			id="{{ wth_stories_slider_id_attr }}"
+		{% endif %}
+		{% if wth_stories_slider_offset_attr %}
+			data-scrollto-offset-top="{{ wth_stories_slider_offset_attr }}"
+		{% endif %}
+	>
+	<div class="lrv-a-wrapper // {{ wth_stories_slider_wrapper_classes }}">
+		<div class="wth-stories-slider__inner-wrapper // {{ special_reports_carousel_classes }}">
+			{% include "@project/objects/o-sub-heading/o-sub-heading.twig" with o_sub_heading %}
+			<div class="wth-stories-slider__inner js-Flickity vip-slider // {{ special_report_inner_classes }}">
+				{% for item in wth_stories_slider_items %}
+					<div class="wth-stories-slider__item js-Flickity-cell // {{ special_report_item_classes }}">
+						{% include "@project/objects/o-card/o-card.twig" with item %}
+					</div>
+				{% endfor %}
+			</div>
+		</div>
+	</div>
+</section>

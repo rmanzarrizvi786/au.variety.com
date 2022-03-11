@@ -1,0 +1,9 @@
+<section class="trending-topics // {{ trending_topics_classes }}">
+	{% include "@larva/components/c-heading/c-heading.twig" with c_heading %}
+
+	<div class="trending-topics__inner // {{ trending_topics_inner_classes }}">
+		{% for item in trending_topics %}
+			{% include "@project/objects/o-topic/o-topic.twig" with item %}
+		{% endfor %}
+	</div>
+</section>

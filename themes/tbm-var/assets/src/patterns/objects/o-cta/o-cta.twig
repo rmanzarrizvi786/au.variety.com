@@ -1,0 +1,8 @@
+{% if c_link %}
+	<div class="o-cta // {{ o_cta_classes }}">
+		{% if o_cta_text %}
+			<p class="o-cta__text // {{ o_cta_text_classes }}">{{ o_cta_text }}</p>
+		{% endif %}
+		{% include "@larva/components/c-link/c-link.twig" with c_link %}
+	</div>
+{% endif %}

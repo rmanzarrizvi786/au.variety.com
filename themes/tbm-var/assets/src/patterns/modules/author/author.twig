@@ -1,0 +1,34 @@
+<div class="author // {{ author_classes }}">
+	<div class="{{ author_inner_classes }}">
+		<div class="{{ author_wrapper_classes }}">
+			<div class="{{ author_content_classes }}">
+				{% if is_byline_only %}
+					<div class="{{ author_byline_classes }}">
+						By {% include "@larva/components/c-tagline/c-tagline.twig" with c_tagline %}
+					</div>
+				{% else %}
+					<button class="lrv-a-unstyle-button lrv-u-flex-grow-1 lrv-u-align-items-center lrv-u-width-100p" data-collapsible="collapsed">
+						<div class="author-toggle lrv-u-flex {{ author_toggle_classes }}">
+							<p class="lrv-u-margin-tb-00 {{ author_byline_classes }}">
+								By {% include "@larva/components/c-link/c-link.twig" with c_link %}
+							</p>
+
+							<div class="js-author__toggle // lrv-u-flex lrv-u-align-items-center lrv-u-cursor-pointer" data-collapsible-toggle="always-show">
+								{% include "@larva/components/c-icon/c-icon.twig" with c_icon %}
+							</div>
+						</div>
+
+						<div class="lrv-u-width-100p lrv-u-margin-t-1" data-collapsible-panel>
+							{% include "@project/modules/author-details/author-details.twig" with author_details %}
+						</div>
+					</button>
+				{% endif %}
+			</div>
+		</div>
+	</div>
+
+	{% if c_tagline_optional %}
+		{% include "@larva/components/c-tagline/c-tagline.twig" with c_tagline_optional %}
+	{% endif %}
+
+</div>

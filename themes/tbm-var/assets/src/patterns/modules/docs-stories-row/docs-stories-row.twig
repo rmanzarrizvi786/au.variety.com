@@ -1,0 +1,17 @@
+<section class="stories-row // {{ stories_row_classes }}">
+	<div class="{{ stories_row_wrapper_classes }}">
+		{% if c_span %}
+			{% include "@larva/components/c-span/c-span.twig" with c_span %}
+		{% endif %}
+
+		{% include "@project/objects/o-card/o-card.twig" with large_story %}
+
+		<div class="lrv-a-grid lrv-a-cols4@tablet u-grid-gap-175 u-grid-gap-125@tablet lrv-u-margin-b-1">
+			{% for item in stories_row_items %}
+				<div class="stories-row__item // {{ stories_row_item_classes }}">
+					{% include "@project/objects/o-card/o-card.twig" with item %}
+				</div>
+			{% endfor %}
+		</div>
+	</div>
+</section>

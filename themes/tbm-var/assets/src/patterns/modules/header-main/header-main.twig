@@ -1,0 +1,43 @@
+<div class="header-main // {{ header_sticky_classes }}">
+	<div class="lrv-a-wrapper {{ header_inner_classes }}">
+		<div class="header-sticky__menu lrv-u-flex lrv-u-align-items-center">
+			<div class="{{ header_menu_icons_classes }}">
+
+				<div class="lrv-u-margin-r-050">
+					{% include "@larva/objects/o-icon-button/o-icon-button.twig" with o_icon_button_menu %}
+				</div>
+
+				<div class="{{ expandable_search_wrapper_classes }}">
+					{% include "@project/modules/expandable-search/expandable-search.twig" with expandable_search %}
+				</div>
+			</div>
+
+			<div class="{{ header_navigation_classes }}">
+				{% include "@larva/objects/o-nav/o-nav.twig" with o_top_nav %}
+				{% include "@project/modules/region-selector/region-selector.twig" with region_selector %}
+			</div>
+		</div>
+
+		<div class="lrv-a-glue-parent">
+
+			{% if header_main_show_special_icon %}
+				<div class="header-main__special-icon // lrv-a-glue lrv-a-glue--l-0 lrv-u-height-100p u-transform-translateX-n100p lrv-u-flex lrv-u-align-items-center a-hidden@desktop-max {{ header_main_special_icon_classes }}">
+					{% include "@larva/components/c-icon/c-icon.twig" with c_icon %}
+				</div>
+			{% endif %}
+
+			<div class="header__logo // {{ header_sticky_logo_classes }}">
+				{% include "@project/components/c-logo/c-logo.twig" with c_logo %}
+			</div>
+		</div>
+
+		{% include "@project/modules/login-actions/login-actions.twig" with login_actions %}
+
+	</div>
+
+	<div class="js-Header-extra lrv-a-wrapper lrv-u-flex lrv-u-align-items-center lrv-u-justify-content-space-between lrv-u-padding-tb-025 a-hidden@tablet u-background-color-pale-sky">
+		<div class="header-sticky__user-menu">
+			{% include "@project/modules/login-actions-mobile/login-actions-mobile.twig" with login_actions_mobile %}
+		</div>
+	</div>
+</div>

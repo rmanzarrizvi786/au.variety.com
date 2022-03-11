@@ -1,0 +1,27 @@
+<p class="buy-now // {{ buy_now_classes }}">
+	<a
+		{% if guid_attr %}
+			data-pmc-sp-product="{{ guid_attr }}"
+		{% endif %}
+		class="pmc-buy-now-button // {{ buy_now_inner_classes }}"
+		rel="nofollow"
+		href="{{ link_url }}"
+		{{ wp_action( 'pmc_do_render_buy_now_ga_tracking_attr', variables ) }}
+		target="{{ target_attr }}"
+	>
+		<span class="pmc-buy-now-button__content">
+			<span class="pmc-buy-now-button__text">
+				{{ buy_now_product_text }}
+			</span>
+			<span class="pmc-buy-now-button__price">
+				{% if orig_price_text %}
+					<s>{{ orig_price_text }}</s>&nbsp;
+				{% endif %}
+				{{ price_text }}
+			</span>
+		</span>
+		<span class="pmc-buy-now-button__action // {{ buy_now_text_classes }}">
+			{{ buy_now_text }}
+		</span>
+	</a>
+</p>

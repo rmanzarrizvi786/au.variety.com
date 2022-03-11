@@ -1,0 +1,7 @@
+<ul class="o-video-card-list {{ modifier_class }} {{ o_video_card_list_classes }}">
+	{% for item in o_video_card_list_items %}
+		<li class="o-tease-list__item {{ o_video_card_list_item_classes }}">
+			{% include "@project/objects/o-video-card/o-video-card.twig" with item %}
+		</li>
+	{% endfor %}
+</ul>

@@ -1,0 +1,13 @@
+<div class="expandable-search // js-ExpandableSearch lrv-u-flex lrv-u-height-100p lrv-u-align-items-center lrv-u-width-100p lrv-u-justify-content-center {{ expandable_search_classes }}">
+
+	<div class="expandable-search__trigger // js-ExpandableSearch-trigger">
+		{% include "@larva/objects/o-icon-button/o-icon-button.twig" with o_icon_button_search %}
+	</div>
+
+	<div class="expandable-search__target // js-ExpandableSearch-target lrv-a-glue-parent js-fade js-fade-is-out lrv-u-width-100p u-max-width-500 {{ expandable_search_classes }}" hidden>
+		<div class="expandable-search__inner lrv-a-glue lrv-a-glue--t-0 lrv-u-height-100p lrv-u-width-100p u-max-width-500 {{ expandable_search_inner_classes }}" data-header-search-trigger="">
+			{% include "@project/modules/search-form/search-form.twig" with search_form %}
+		</div>
+	</div>
+
+</div>

@@ -1,0 +1,84 @@
+<div class="header-sticky // {{ header_sticky_classes }}">
+	{% if is_vip_header %}
+		<div class="js-Header"><div class="js-Header-contents lrv-u-background-color-white u-background-image-slash">
+	{% else %}
+		<div class="lrv-a-wrapper">
+	{% endif %}
+
+		<div class="{{ header_sticky_inner_classes }}">
+			<div class="header-sticky__menu // {{ header_sticky_menu_classes }}"
+				{% if is_vip_header %}
+					data-collapsible="collapsed"
+				{% endif %}>
+				{% if is_vip_header %}
+					<span data-collapsible-toggle="always-show">
+				{% endif %}
+					{% include "@larva/objects/o-icon-button/o-icon-button.twig" with o_icon_button_menu %}
+				{% if is_vip_header %}
+					</span>
+				{% endif %}
+
+				{% if is_vip_header %}
+					{% include "@project/modules/main-header-vip/main-header-vip.twig" with header_vip %}
+				{% endif %}
+			</div>
+
+			<div class="header-sticky__search {{ header_sticky_search_classes }}">
+				{% include "@project/modules/expandable-search/expandable-search.twig" with expandable_search %}
+			</div>
+
+			<div class="{{ header_sticky_logo_classes }}">
+				{% include "@project/components/c-logo/c-logo.twig" with c_logo %}
+
+				{% if is_vip_header_h1 %}
+					<h1>
+				{% endif %}
+
+				{% if o_icon_button_link %}
+					{% include "@larva/objects/o-icon-button/o-icon-button.twig" with o_icon_button_link %}
+				{% endif %}
+
+				{% if o_icon_button_backup %}
+					{% include "@larva/objects/o-icon-button/o-icon-button.twig" with o_icon_button_backup %}
+				{% endif %}
+
+				{% if is_vip_header_h1 %}
+					</h1>
+				{% endif %}
+			</div>
+
+			{% if is_vip_header %}
+				{% include "@project/modules/login-actions-vip/login-actions-vip.twig" with login_actions %}
+			{% else %}
+				{% include "@project/modules/login-actions/login-actions.twig" with login_actions %}
+			{% endif %}
+
+		</div>
+
+		{% if login_actions_mobile %}
+			<div class="{{ header_sticky_secondary_classes }}">
+				<div class="header-sticky__user-menu">
+					{% include "@project/modules/login-actions-mobile/login-actions-mobile.twig" with login_actions_mobile %}
+				</div>
+			</div>
+		{% endif %}
+
+		{% if o_nav %}
+			{% if is_vip_header %}
+				<div class="{{ header_sticky_secondary_classes }}">
+					<div class="header-sticky__user-menu">
+						{% include "@larva/objects/o-nav/o-nav.twig" with o_nav %}
+					</div>
+				</div>
+			{% endif %}
+		{% endif %}
+
+		{% if is_vip_header %}
+			{% if header_vip_navbar %}
+				{% include "@project/modules/header-vip-navbar/header-vip-navbar.twig" with header_vip_navbar %}
+			{% endif %}
+			</div></div>
+		{% else %}
+			</div>
+		{% endif %}
+</div>

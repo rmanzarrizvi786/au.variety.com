@@ -1,0 +1,10 @@
+<div class="print-plus-shop-offer-footer // {{ print_plus_shop_offer_footer_classes }}" >
+	{% include "@larva/components/c-span/c-span.twig" with c_span_footer_information %}
+	<ul class="print-plus-shop-offer-footer__list // {{ print_plus_shop_offer_footer_list_classes }}">
+		{% for item in print_plus_shop_offer_footer_items %}
+			<li class="print-plus-shop-offer-footer__list_item // {{ print_plus_shop_offer_footer_list_item_classes }}">
+				{% include "@larva/components/c-span/c-span.twig" with item %}
+			</li>
+		{% endfor %}
+	</ul>
+</div>

@@ -1,0 +1,17 @@
+<section class="article-related-links // a-pull-3@tablet lrv-u-text-align-center@tablet u-width-250@tablet lrv-u-padding-lr-050 lrv-a-floated-left@tablet lrv-u-margin-r-1 lrv-u-margin-b-1">
+	{% include "@larva/components/c-heading/c-heading.twig" with c_heading %}
+
+	<div class="{{ article_related_item_classes }} u-border-a-10@tablet u-padding-lr-1@tablet u-padding-b-1@tablet">
+		{% if c_lazy_image %}
+			{% include "@larva/components/c-lazy-image/c-lazy-image.twig" with c_lazy_image %}
+		{% endif %}
+
+		<div class="a-children-border--grey-light a-children-border-vertical lrv-u-font-family-primary">
+			{% for item in article_related_links %}
+				<h3 itemprop="headline" class="{{ article_related_links_classes }} lrv-u-font-size-16 lrv-u-line-height-small lrv-u-font-size-18@tablet lrv-u-font-weight-normal lrv-u-padding-tb-050">
+					{% include "@larva/components/c-link/c-link.twig" with item %}
+				</h3>
+			{% endfor %}
+		</div>
+	</div>
+</section>

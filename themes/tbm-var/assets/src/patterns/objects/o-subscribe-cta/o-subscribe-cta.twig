@@ -1,0 +1,15 @@
+<section class="subscribe-cta // {{ subscribe_cta_classes }}">
+	<div class="subscribe-cta__inner // {{ subscribe_cta_inner_classes }}">
+		{% if c_span %}
+			{% include "@larva/components/c-span/c-span.twig" with c_span %}
+		{% endif %}
+
+		{% if o_more_link %}
+			{% include "@project/objects/o-more-link/o-more-link.twig" with o_more_link %}
+		{% endif %}
+
+		{% if o_more_link_desktop %}
+			{% include "@project/objects/o-more-link/o-more-link.twig" with o_more_link_desktop %}
+		{% endif %}
+	</div>
+</section>

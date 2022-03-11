@@ -1,0 +1,5 @@
+<div class="special-report-landing-content // {{ special_report_landing_content_classes }}">
+	{% for item in special_report_landing_items %}
+		{% include "@project/objects/o-grid-story/o-grid-story.twig" with item %}
+	{% endfor %}
+</div>

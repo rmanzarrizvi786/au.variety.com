@@ -1,0 +1,27 @@
+{% if o_icon_button_url %}
+	<a href="{{ o_button_url }}" class="{{ o_icon_button_classes }}">
+{% else %}
+	<button class="o-icon-button {{ o_icon_button_classes }}">
+{% endif %}
+
+	{% if o_icon %}
+		{% if is_vip_plus_animated %}
+			{% include "@project/components/c-plus-animated/c-plus-animated.twig" with c_icon %}
+		{% else %}
+			{% include "@larva/components/c-icon/c-icon.twig" with c_icon %}
+		{% endif %}
+	{% endif %}
+
+	{% if o_icon_button_screen_reader_text %}
+		<span class="lrv-a-screen-reader-only">{{ o_icon_button_screen_reader_text }}</span>
+	{% endif %}
+
+	{% if c_span %}
+		{% include "@larva/components/c-span/c-span.twig" with c_span %}
+	{% endif %}
+
+{% if o_icon_button_url %}
+	</a>
+{% else %}
+	</button>
+{% endif %}

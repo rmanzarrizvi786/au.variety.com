@@ -1,0 +1,19 @@
+<section class="explore-playlists // {{ explore_playlists_classes }}">
+	<div class="lrv-a-wrapper // {{ explore_playlists_wrapper_classes }}">
+		<div class="explore-playlists__inner-wrapper // {{ special_reports_carousel_classes }}">
+			{% if c_heading %}
+				{% include "@larva/components/c-heading/c-heading.twig" with c_heading %}
+			{% endif %}
+
+			<div class="explore-playlists__inner js-Flickity vip-slider // {{ special_report_inner_classes }}">
+				{% for item in explore_playlists_items %}
+					<div class="explore-playlists__item js-Flickity-cell // {{ special_report_item_classes }}">
+						{% include "@project/objects/o-card/o-card.twig" with item %}
+					</div>
+				{% endfor %}
+			</div>
+		</div>
+
+		{% include "@project/objects/o-more-link/o-more-link.twig" with o_more_link %}
+	</div>
+</section>

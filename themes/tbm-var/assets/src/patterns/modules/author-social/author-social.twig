@@ -1,0 +1,25 @@
+<div class="author-social // {{ author_social_classes }}">
+	{% if c_sponsored_social %}
+		{% include "@project/components/c-sponsored/c-sponsored.twig" with c_sponsored_social %}
+	{% endif %}
+
+	{% if author %}
+		{% include "@project/modules/author/author.twig" with author %}
+	{% endif %}
+
+	<div class="author-social__share // {{ author_social_share_desktop_classes }}">
+		{% if o_comments_link %}
+			{% include "@project/objects/o-comments-link/o-comments-link.twig" with o_comments_link %}
+		{% endif %}
+		{% include "@project/modules/social-share/social-share.twig" with social_share %}
+	</div>
+
+	{% if c_timestamp %}
+		<div class="author-social__timestamp // {{ author_social_timestamp_classes }}">
+			{% include "@larva/components/c-timestamp/c-timestamp.twig" with c_timestamp %}
+		</div>
+		<div class="author-social__share // {{ author_social_share_mobile_classes }}">
+			{% include "@project/modules/social-share/social-share.twig" with social_share %}
+		</div>
+	{% endif %}
+</div>

@@ -1,0 +1,12 @@
+<section class="must-read-widget // u-border-t-6 lrv-u-background-color-white lrv-u-padding-b-1 lrv-u-padding-lr-1 {{ must_read_widget_classes }}">
+
+	<div class="must-read-widget__header // {{ must_read_widget_header_classes }}">
+		{% include "@larva/components/c-heading/c-heading.twig" with c_heading %}
+	</div>
+
+	<div class="must-read-widget__inner // {{ must_read_widget_inner_classes }}">
+		{% include "@project/objects/o-tease-list/o-tease-list.twig" with o_tease_list_primary %}
+
+		{% include "@project/objects/o-tease-list/o-tease-list.twig" with o_tease_list_secondary %}
+	</div>
+</section>

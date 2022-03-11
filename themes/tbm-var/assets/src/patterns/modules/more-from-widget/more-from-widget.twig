@@ -1,0 +1,15 @@
+<div class="more-from-widget // {{ more_from_widget_classes }}">
+	{% include "@project/objects/o-more-from-heading/o-more-from-heading.twig" with o_more_from_heading %}
+
+	{% include "@project/objects/o-tease-list/o-tease-list.twig" with o_tease_list %}
+
+	<div class="lrv-a-wrapper lrv-u-flex lrv-u-justify-content-space-between lrv-u-padding-tb-1">
+		{% if more_from_widget_is_paged %}
+			{% include "@project/objects/o-more-link/o-more-link.twig" with o_more_link_previous %}
+		{% endif %}
+
+		{% include "@project/objects/o-more-link/o-more-link.twig" with o_more_link %}
+	</div>
+
+
+</div>

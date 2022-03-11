@@ -1,0 +1,11 @@
+<aside class="cta-banner // {{ cta_banner_classes }}">
+	<div class="cta-banner__inner {{ cta_banner_inner_classes }}">
+		{% if c_tagline %}
+			{% include "@larva/components/c-tagline/c-tagline.twig" with c_tagline %}
+		{% endif %}
+
+		{% if c_button %}
+			{% include "@larva/components/c-button/c-button.twig" with c_button %}
+		{% endif %}
+	</div>
+</aside>

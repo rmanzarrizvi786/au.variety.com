@@ -1,0 +1,11 @@
+<div class="js-vip_menu {{ vip_menu_classes }}" data-collapsible-panel>
+	{% include "@project/modules/search-form/search-form.twig" with search_form %}
+
+	<div class="vip-menu__primary">
+		{% include "@larva/objects/o-nav/o-nav.twig" with o_nav_primary %}
+	</div>
+
+	<div class="vip-menu__secondary">
+		{% include "@larva/objects/o-nav/o-nav.twig" with o_nav_secondary %}
+	</div>
+</div>

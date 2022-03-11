@@ -1,0 +1,17 @@
+<section class="reviews__outer // {{ reviews_outer_classes }}">
+	<div class="reviews // {{ reviews_classes }}">
+		<div class="reviews__header // {{ reviews_header_classes }}">
+			{% include "@project/objects/o-more-from-heading/o-more-from-heading.twig" with o_more_from_heading %}
+
+			{% include "@larva/objects/o-nav/o-nav.twig" with o_nav %}
+		</div>
+
+		<div class="reviews__inner // {{ reviews_inner_classes }}">
+			{% for item in reviews_lists %}
+				{% include "@project/objects/o-tease-list/o-tease-list.twig" with item %}
+			{% endfor %}
+		</div>
+
+		{% include "@project/objects/o-more-link/o-more-link.twig" with o_more_link %}
+	</div>
+</section>

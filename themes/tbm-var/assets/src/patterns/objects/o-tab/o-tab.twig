@@ -1,0 +1,15 @@
+
+{% if o_tab_url %}
+	<a href="{{ o_tab_url }}" class="{{ o_tab_link_classes }}">
+{% endif %}
+	<div class="o-tab {{ o_tab_classes }}">
+		{% if c_span %}
+			{% include "@larva/components/c-span/c-span.twig" with c_span %}
+		{% endif %}
+		{% if c_icon %}
+			{% include "@larva/components/c-icon/c-icon.twig" with c_icon %}
+		{% endif %}
+	</div>
+{% if o_tab_url %}
+	</a>
+{% endif %}

@@ -1,0 +1,9 @@
+<div class="read-on // {{ read_on_classes }}">
+	{% include "@larva/components/c-heading/c-heading.twig" with c_heading %}
+
+	<div class="read-on__inner // {{ read_on_inner_classes }}">
+		{% for item in read_on_items %}
+			{% include "@project/objects/o-read-on-item/o-read-on-item.twig" with item %}
+		{% endfor %}
+	</div>
+</div>

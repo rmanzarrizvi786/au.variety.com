@@ -1,0 +1,49 @@
+<article class="o-story lrv-u-flex u-box-shadow-menu@tablet u-border-b-1@mobile-max u-height-100p@tablet // {{ o_story_classes }}">
+
+	{% if c_span_secondary %}
+		{% include "@larva/components/c-span/c-span.twig" with c_span_secondary %}
+	{% endif %}
+
+	<div class="o-story__primary lrv-u-flex lrv-u-flex-direction-column lrv-u-width-100p u-height-100p@tablet // {{ o_story_primary_classes }}">
+		{% if c_span %}
+			{% include "@larva/components/c-span/c-span.twig" with c_span %}
+		{% endif %}
+
+		{% if c_title %}
+			{% include "@larva/components/c-title/c-title.twig" with c_title %}
+		{% endif %}
+
+		{% if c_dek %}
+			{% include "@larva/components/c-dek/c-dek.twig" with c_dek %}
+		{% endif %}
+
+		<div class="o-story__meta lrv-u-flex@tablet u-align-items-baseline  // {{ o_story_meta_classes }}">
+			{% if c_link %}
+				<div class="lrv-u-margin-r-1@tablet u-margin-r-1@desktop">
+					{% include "@larva/components/c-link/c-link.twig" with c_link %}
+				</div>
+			{% endif %}
+
+			{% if c_timestamp %}
+				{% include "@larva/components/c-timestamp/c-timestamp.twig" with c_timestamp %}
+			{% endif %}
+		</div>
+	</div>
+
+	{% if c_lazy_image %}
+		<div class="o-story__secondary lrv-a-glue-parent // {{ o_story_secondary_classes }}">
+
+			{% if c_lazy_image %}
+				{% include "@larva/components/c-lazy-image/c-lazy-image.twig" with c_lazy_image %}
+
+				{% if video_permalink_url %}
+					<a href="{{ video_permalink_url }}" class="lrv-a-glue lrv-a-glue--b-0 lrv-u-width-100p lrv-u-height-100p // {{ c_lazy_image_badge_classes }}">
+						{% include "@project/components/c-play-badge/c-play-badge.twig" with c_play_badge %}
+					</a>
+				{% endif %}
+			{% endif %}
+
+		</div>
+	{% endif %}
+
+</article>

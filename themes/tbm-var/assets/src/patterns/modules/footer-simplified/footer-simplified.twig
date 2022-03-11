@@ -1,0 +1,19 @@
+<footer class="footer-simplified // {{ footer_simplified_classes }}">
+	<div class="lrv-a-wrapper lrv-u-flex lrv-u-flex-direction-column\@mobile-max">
+		<div class="lrv-u-flex lrv-u-flex-direction-column lrv-u-width-100p lrv-u-padding-tb-2 ">
+			{% if o_nav %}
+			<div class="footer-simplified__nav // {{ footer_nav_classes }}">
+				{% include "@project/objects/o-nav/o-nav.twig" with o_nav %}
+			</div>
+			{% endif %}
+
+			<div class="footer-simplified__meta // lrv-u-text-align-center">
+				{% if c_tagline_copyright %}
+					{% include "@larva/components/c-tagline/c-tagline.twig" with c_tagline_copyright %}
+				{% endif %}
+
+			</div>
+		</div>
+
+	</div>
+</footer>

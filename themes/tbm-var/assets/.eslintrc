@@ -1,0 +1,30 @@
+{
+	"extends": "@penskemediacorp/eslint-config",
+	"overrides": [{
+		"files": [
+			"**/*.js"
+		],
+		"rules": {
+			"jsdoc/check-tag-names": "off",
+			"jsdoc/require-returns-description": "off",
+			"import/no-unresolved": "off",
+			"@wordpress/no-global-event-listener": "off"
+		},
+		"globals": {
+			"jQuery": "readonly",
+			"tinymce": "readonly",
+			"_varietyFilmReviewAdminExports": "readonly",
+			"alert": "readonly",
+			"IntersectionObserver": "readonly",
+			"pmc": "readonly",
+			"Event": "readonly",
+			"cxpmc": "readonly",
+			"pmcReviewData": "readonly",
+			"requestAnimationFrame": "readonly",
+			"uls": "readonly",
+			"Waypoint": "readonly",
+			"cX": "readonly",
+			"Variety_Authentication": "readonly"
+		}
+	}]
+}

@@ -1,0 +1,29 @@
+<div id="cx-sticky-footer" class="a-sticky-footer"></div>
+<footer class="footer // {{ footer_classes }}">
+	<div class="lrv-a-wrapper lrv-u-flex lrv-u-flex-direction-column\@mobile-max">
+		{% include "@larva/components/c-lazy-image/c-lazy-image.twig" with c_lazy_image %}
+
+		<div class="lrv-u-flex lrv-u-flex-direction-column lrv-u-width-100p">
+			<div class="footer-menu">
+				{% include "@project/modules/footer-menus/footer-menus.twig" with footer_menus %}
+			</div>
+
+			<div class="footer-meta // lrv-u-text-align-center">
+				{% include "@project/components/c-logo/c-logo.twig" with c_logo %}
+
+				{% include "@larva/components/c-tagline/c-tagline.twig" with c_tagline %}
+
+				{% include "@larva/components/c-link/c-link.twig" with c_link_subscribe %}
+
+				{% include "@larva/components/c-tagline/c-tagline.twig" with c_tagline_copyright %}
+
+				{% include "@larva/components/c-tagline/c-tagline.twig" with c_tagline_tip %}
+			</div>
+		</div>
+
+	</div>
+
+	{% if cxense_interstitial_widget %}
+		{% include "@project/modules/cxense-widget/cxense-widget.twig" with cxense_interstitial_widget %}
+	{% endif %}
+</footer>

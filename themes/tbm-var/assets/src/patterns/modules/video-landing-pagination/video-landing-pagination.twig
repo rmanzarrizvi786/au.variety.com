@@ -1,0 +1,11 @@
+<div class="lrv-a-wrapper">
+	<div class="video-landing__pagination // {{ video_landing_pagination_classes }}">
+		{% if c_link_previous %}
+			{% include "@larva/components/c-link/c-link.twig" with c_link_previous %}
+		{% endif %}
+
+		{% if c_link_next %}
+			{% include "@larva/components/c-link/c-link.twig" with c_link_next %}
+		{% endif %}
+	</div>
+</div>

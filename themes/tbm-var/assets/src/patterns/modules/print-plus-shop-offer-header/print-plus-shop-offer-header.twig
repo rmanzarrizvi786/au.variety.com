@@ -1,0 +1,16 @@
+<header class='print-plus-offer-header // {{ print_plus_shop_offer_header_classes }} ' >
+	{% include "@larva/components/c-heading/c-heading.twig" with c_heading_primary %}
+	{% if c_span_secondary %}
+		{% include "@larva/components/c-span/c-span.twig" with c_span_secondary %}
+	{% endif %}
+	{% if o_tab_variety %}
+	<div class='print-plus-shop-header-tabs // {{ print_plus_shop_header_tabs_classes }}' >
+		{% include "@project/objects/o-tab/o-tab.twig" with o_tab_variety %}
+		{% include "@project/objects/o-tab/o-tab.twig" with o_tab_vip %}
+	</div>
+	<div class='print-plus-shop-header-tabs--mobile // {{ print_plus_shop_header_tabs_classes__mobile }}' >
+		{% include "@project/objects/o-tab/o-tab.twig" with o_tab_variety__mobile %}
+		{% include "@project/objects/o-tab/o-tab.twig" with o_tab_vip__mobile %}
+	</div>
+	{% endif %}
+</header>

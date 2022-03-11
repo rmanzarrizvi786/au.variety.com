@@ -1,0 +1,16 @@
+<section class="outbrain-widget // {{ outbrain_widget_classes }}">
+	<div class="heading-pmc // {{ heading_classes }}">
+		{% if c_pmc_icon %}
+			{% include "@larva/components/c-icon/c-icon.twig" with c_pmc_icon %}
+		{% endif %}
+		
+		{% include "@larva/components/c-heading/c-heading.twig" with c_heading %}
+	</div>
+	
+	<div class="OUTBRAIN" data-src="https://variety.com"
+		data-widget-id="{{ outbrain_widget_id_attr }}"
+		data-ob-template="{{ outbrain_ob_template_attr }}">
+	</div>
+
+	<script async src='{{ outbrain_script_url }}'></script>
+</section>

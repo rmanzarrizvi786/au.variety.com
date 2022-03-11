@@ -1,0 +1,15 @@
+<section class="top-stories-carousel // {{ top_stories_carousel_classes }}">
+
+	{% if cxense_carousel_widget %}
+		{% include "@project/modules/cxense-widget/cxense-widget.twig" with cxense_carousel_widget %}
+	{% endif %}
+
+	<div class="top-stories-carousel-flickity-outer js-Flickity vip-slider // {{ top_stories_carousel_flickity_outer_classes }}" data-flickity='{ "pageDots": true, "wrapAround": true, "autoPlay": 3000 }'>
+		{% for item in top_stories_carousel %}
+				{% include "@project/objects/o-top-story/o-top-story.twig" with item %}
+		{% endfor %}
+	</div>
+
+</section>
+
+

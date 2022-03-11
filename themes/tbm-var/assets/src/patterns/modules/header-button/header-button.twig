@@ -1,0 +1,6 @@
+<a id="{{ header_button_id_attr }}" href="{{ header_button_url }}" class="header-button // lrv-u-display-inline-block lrv-a-unstyle-button lrv-u-text-align-center lrv-u-line-height-normal lrv-u-cursor-pointer lrv-u-padding-tb-025 lrv-u-padding-lr-050 {{ header_button_classes }}">
+	{% include "@larva/components/c-span/c-span.twig" with c_span_main %}
+	{% if c_span_secondary %}
+		{% include "@larva/components/c-span/c-span.twig" with c_span_secondary %}
+	{% endif %}
+</a>

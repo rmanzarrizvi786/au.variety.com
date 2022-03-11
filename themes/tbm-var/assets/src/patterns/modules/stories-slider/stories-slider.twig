@@ -1,0 +1,23 @@
+<section class="stories-slider // {{ stories_slider_classes }}"
+		{% if stories_slider_id_attr %}
+			id="{{ stories_slider_id_attr }}"
+		{% endif %}
+		{% if stories_slider_offset_attr %}
+			data-scrollto-offset-top="{{ stories_slider_offset_attr }}"
+		{% endif %}
+	>
+	<div class="lrv-a-wrapper // {{ stories_slider_wrapper_classes }}">
+		<div class="stories-slider__inner-wrapper // {{ special_reports_carousel_classes }}">
+			{% if heading %}
+				{% include "@larva/components/c-heading/c-heading.twig" with heading %}
+			{% endif %}
+			<div class="stories-slider__inner js-Flickity vip-slider // {{ special_report_inner_classes }}">
+				{% for item in stories_slider_items %}
+					<div class="stories-slider__item js-Flickity-cell // {{ special_report_item_classes }}">
+						{% include "@project/objects/o-card/o-card.twig" with item %}
+					</div>
+				{% endfor %}
+			</div>
+		</div>
+	</div>
+</section>

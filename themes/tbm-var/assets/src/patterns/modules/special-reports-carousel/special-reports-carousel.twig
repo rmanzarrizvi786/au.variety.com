@@ -1,0 +1,19 @@
+<section class="special-reports-carousel // {{ special_reports_carousel_classes }}">
+	<div class="lrv-a-wrapper">
+		{% if o_more_from_heading %}
+			{% include "@project/objects/o-more-from-heading/o-more-from-heading.twig" with o_more_from_heading %}
+		{% endif %}
+	</div>
+
+	<div class="special-report__inner js-Flickity vip-slider // {{ special_report_inner_classes }}" data-flickity='{ "initialIndex": "1", "pageDots": false, "wrapAround": true }'>
+		{% for item in special_report_items %}
+			<div class="special-report__item js-Flickity-cell // {{ special_report_item_classes }}">
+				{% include "@project/objects/o-slide/o-slide.twig" with item %}
+			</div>
+		{% endfor %}
+	</div>
+
+	<div class="lrv-a-wrapper">
+		{% include "@project/objects/o-more-link/o-more-link.twig" with o_more_link %}
+	</div>
+</section>

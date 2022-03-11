@@ -1,0 +1,5 @@
+<section class="popular-videos // {{ popular_videos_classes }}">
+	{% for item in popular_videos_items %}
+		{% include "@project/objects/o-popular-videos/o-popular-videos.twig" with item %}
+	{% endfor %}
+</section>

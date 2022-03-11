@@ -1,0 +1,16 @@
+<a class="c-link-logo // {{ c_link_logo_classes }}" href="{{ c_link_logo_url }}"
+	{% if c_link_logo_target_attr %}
+		target="{{ c_link_logo_target_attr }}"
+	{% endif %}
+	{% if c_link_logo_calendar_attr %}
+		data-start="{{ data_start_attr }}"
+		data-title="{{ data_title_attr }}"
+		data-location="{{ data_location_attr }}"
+	{% endif %}
+	>
+	<span class="c-link-logo-text // {{ c_link_logo_text_classes }}" >{{ c_link_logo_text }}</span>
+	{% if c_link_logo_svg %}
+		{% include '../../build/svg/' ~ c_link_logo_svg ~ '.svg' %}
+		<span class="lrv-a-screen-reader-only">{{ c_logo_screen_reader_text }}</span>
+	{% endif %}
+</a>

@@ -1,0 +1,15 @@
+<section class="docs-classics // js-LatestNewsButton-ScrollDestination lrv-u-flex lrv-u-flex-direction-column {{ latest_news_river_classes }}">
+	{% if c_heading %}
+		{% include "@larva/components/c-heading/c-heading.twig" with c_heading %}
+	{% endif %}
+	{% if c_tagline %}
+		{% include "@larva/components/c-tagline/c-tagline.twig" with c_tagline %}
+	{% endif %}
+	<div class="lrv-a-grid lrv-a-cols4@tablet u-grid-gap-175 u-grid-gap-125@tablet u-margin-b-250 u-align-items-stretch">
+		{% for item in classics_row_items %}
+			<div class="classics-row__item // {{ classics_row_item_classes }}">
+				{% include "@project/objects/o-card/o-card.twig" with item %}
+			</div>
+		{% endfor %}
+	</div>
+</section>
