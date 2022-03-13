@@ -46,12 +46,36 @@ $bg_color_class = is_home() || (is_archive() && !is_author() && !is_tag('documen
 		.fuse-ad iframe {
 			margin: 0 auto !important;
 		}
+
+		#skin-ad-container {
+			width: 1680px;
+			height: 1200px;
+			top: 0;
+			left: 50%;
+			transform: translateX(-50%);
+
+			position: fixed;
+			cursor: pointer;
+			z-index: -1;
+			background-repeat: no-repeat;
+		}
+		#main-wrapper {
+			z-index: 3;
+		}
 	</style>
 </head>
 
 <body <?php body_class(); ?>>
 	<?php do_action('pmc-tags-top'); // @codingStandardsIgnoreLine 
 	?>
+
+	<div id="skin-ad-section">
+		<div id="skin-ad-container">
+			<a href="https://thebrag.media" target="_blank"><img src="https://tpc.googlesyndication.com/simgad/9077187720217542721?"></a>
+			<?php // ThemeSetup::render_ads('skin'); 
+			?>
+		</div>
+	</div>
 
 	<?php if (!\PMC\Gallery\View::is_standard_gallery()) : ?>
 
