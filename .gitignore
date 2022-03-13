@@ -18,6 +18,7 @@ plugins/ssm-ga/*
 plugins/pmc-plugins/*
 !plugins/pmc-plugins/pmc-global-functions
 !plugins/pmc-plugins/pmc-larva
+!plugins/pmc-plugins/pmc-vertical
 !plugins/cheezcap
 
 # ignore specific themes
