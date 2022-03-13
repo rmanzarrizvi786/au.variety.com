@@ -1,0 +1,13 @@
+
+.wp-list-table .column-in_sync { width: 5%; }
+.wp-list-table .column-title { width: 25%; }
+.wp-list-table .column-slug { width: 14%; }
+.wp-list-table .column-modified_at { width: 10%; }
+.wp-list-table .column-print_version { width: 8%; }
+.wp-list-table .column-import_version { width: 8%; }
+.wp-list-table .column-print_status { width: 10%; }
+.wp-list-table .column-print_section { width: 10%; }
+.wp-list-table .column-print_issue { width: 10%; }
+.tablenav.top { margin-bottom: 10px; }
+.search-box.ceo-search { margin-right: 10px; }
+.titletext { font-size: 15px; }

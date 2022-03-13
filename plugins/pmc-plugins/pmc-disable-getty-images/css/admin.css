@@ -1,0 +1,12 @@
+/**
+ * css to disable getty images
+ */
+.thumbnail.getty-content:before {
+	content: "Getty images are disabled";
+	color:red;
+	background: rgba(204, 204, 204, 0.7);
+	font-weight: bold;
+}
+.centered.getty-image {
+	opacity: .2;
+}

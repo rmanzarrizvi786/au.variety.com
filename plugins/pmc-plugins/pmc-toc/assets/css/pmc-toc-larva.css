@@ -1,0 +1,105 @@
+/**
+ * Temporary file until copied from Larva utilities.
+ * This will eventually be swapped for the Larva utility library.
+ *
+ * NOTE: Currently used to style AMP pages.
+ */
+.lrv-u-background-color-grey-lightest {
+	background-color: #f7f7f7;
+	background-color: var(--background-color-grey-lightest, #f7f7f7);
+}
+
+.lrv-u-background-color-black {
+	background-color: #000;
+	background-color: var(--background-color-black, #000);
+}
+
+.lrv-u-color-white {
+	color: #fff;
+	color: var(--color-white, #fff);
+}
+
+.lrv-u-font-size-12 {
+	font-size: .75rem;
+}
+
+.lrv-u-line-height-large {
+	line-height: 1.85;
+}
+
+.lrv-u-text-align-center {
+	text-align: center;
+}
+
+.lrv-u-text-align-right {
+	text-align: right;
+}
+
+.lrv-u-padding-a-050 {
+	padding: .5rem;
+	padding: var(--spacing-050, .5rem);
+}
+
+.lrv-u-margin-b-1 {
+	margin-bottom: 1rem;
+	margin-bottom: var(--spacing-1, 1rem);
+}
+
+.lrv-u-margin-b-00 {
+	margin-bottom: 0;
+	margin-bottom: var(--spacing-00, 0);
+}
+
+.lrv-u-width-50p {
+	width: 50%;
+}
+
+.lrv-u-whitespace-nowrap {
+	white-space: nowrap;
+}
+
+.lrv-u-position-relative {
+	position: relative;
+}
+
+.lrv-u-display-block {
+	display: block;
+}
+
+.lrv-u-flex {
+	display: flex;
+}
+
+.lrv-u-flex-wrap-wrap {
+	flex-wrap: wrap;
+}
+
+.lrv-u-overflow-hidden {
+	overflow: hidden;
+}
+
+.lrv-a-show-on-hover {
+	opacity: 0;
+	visibility: hidden;
+	position: absolute;
+	top: 100%;
+	left: 0;
+	transition: opacity .3s cubic-bezier(.19, 1, .22, 1);
+	display: inline-block;
+}
+
+.lrv-a-show-on-hover-parent:focus-within .lrv-a-show-on-hover,
+.lrv-a-show-on-hover-parent:hover .lrv-a-show-on-hover {
+	opacity: 1;
+	visibility: visible;
+}
+
+@media (max-width:47.999rem) {
+	.lrv-u-width-100p\@mobile-max {
+		width: 100%;
+	}
+
+	.lrv-u-text-align-center\@mobile-max {
+		text-align: center;
+	}
+}

@@ -1,0 +1,80 @@
+<script type="text/javascript" >
+	// Allow the following referring domains
+	var a = ['ads.vimg.net', 'ads-web.mail.com', 'ad.doubleclick.net', 'advertising.com', 'uac.advertising.com', 'r1.ace.advertising.com', 'ace.advertising.com', 'collective-media.net', 'a.collective-media.net', 'sharethrough.com' ];
+
+    var href = "";
+
+    // Check if the redirection url is passed using the ? or the # method
+    // based on that extract the redirection url
+    var dlocation  = document.location.toString();
+
+    if (dlocation.indexOf('#') != -1)
+    {
+        href = dlocation.split('#')[1].toString();
+    }
+    else
+    {
+        href = document.location.search;
+    }
+
+    // Check if the referrer is in the list of allowed domains within array 'a'
+    // remember to support both # and ?
+    var rdom = document.referrer.split("?")[0].toLowerCase();
+    rdom = rdom.split("#")[0];
+
+    var doredir = false;
+    for (var i=0;i<a.length;i++)
+    {
+            if(rdom.indexOf(a[i]) < 10)
+            {
+                doredir = true;
+                break;
+            }
+    }
+
+
+
+    // If referrer checks out proceed with redirection
+    if(doredir)
+    {
+            var queryString = {};
+
+            href.replace(new RegExp("([^?=&]+)(=([^&]*))?", "g"), function($0, $1, $2, $3) { queryString[$1] = $3; });
+
+            var size = queryString["size"];
+            var reurl = queryString["reurl"];
+
+            // we can't find size in original url, let's check inside reurl
+            if ( typeof size === 'undefined' && typeof reurl !== 'undefined' ) {
+               reurl.replace(new RegExp("([^?=&;]+)(=([^&;]*))?", "g"), function($0, $1, $2, $3) { queryString[$1] = $3; });
+               size = typeof queryString["size"] !== 'undefined' ? queryString["size"] : queryString["sz"];
+            }
+
+            if(size !=null && size !="")
+            {
+                var wd_ht = size.toLowerCase().split("x");
+                try{
+                this.frameElement.width = wd_ht[0];
+                this.frameElement.height = wd_ht[1];
+}
+catch(e)
+{}
+            }
+
+            if(reurl !=null && reurl !="")
+            {
+                if( reurl.search("ad.doubleclick.net") < 10)
+			    {
+			        if(typeof(location.replace) != 'undefined')
+                    {
+	                    document.location.replace(reurl);
+	                }
+	                else
+	                {
+	                    document.location.href= reurl;
+	                }
+	            }
+            }
+
+    }
+</script>

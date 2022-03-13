@@ -1,0 +1,47 @@
+/* Styles within the tinyMCE Editor */
+
+/* Hidden Text */
+@font-face {
+	font-family: 'PMC-Hide-Text';
+	src:url('../fonts/PMC-Hide-Text.eot');
+	src:url('../fonts/PMC-Hide-Text.eot?#iefix') format('embedded-opentype'),
+		url('../fonts/PMC-Hide-Text.woff') format('woff'),
+		url('../fonts/PMC-Hide-Text.ttf') format('truetype'),
+		url('../fonts/PMC-Hide-Text.svg#PMC-Hide-Text') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+.pmc-hidden-text {
+	border: 0;
+	font: 0/0 a;
+	text-shadow: none;
+	color: transparent;
+	cursor: pointer;
+	display: inline;
+}
+.pmc-hidden-text:before {
+	font-family: 'PMC-Hide-Text'; 
+	font-size: 14px;
+	line-height: 1;
+	color: #0074a2;
+	content: '\e000';
+	display: inline-block;
+	cursor: pointer;
+}
+.pmc-show-hidden {
+	/* Make it show */
+	color: inherit;
+	font-size: inherit;
+	line-height: inherit;
+	font-family: inherit;
+
+	/* Engage */
+	display: inline-block;
+	background: #bbe3ef;
+	padding: 0 5px;
+	margin: 0 0.3em;
+	outline: 1px solid #0074a2;
+}
+.pmc-show-hidden:before {
+	display: none;
+}

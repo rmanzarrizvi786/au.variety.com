@@ -1,0 +1,111 @@
+h1 {
+    -x-system-font: none;
+    font-family: Georgia, "Times New Roman", "Bitstream Charter", Times, serif;
+    font-size: 24px;
+    font-size-adjust: none;
+    font-stretch: normal;
+    font-style: italic;
+    font-variant: normal;
+    font-weight: normal;
+    line-height: 35px;
+    margin: 0;
+    padding: 14px 15px 3px 0;
+    text-shadow: 0 1px 0 #FFFFFF;
+}
+
+#icon_email {
+    -moz-background-clip: border;
+    -moz-background-inline-policy: continuous;
+    -moz-background-origin: padding;
+    background: transparent url(../email_icon.png) no-repeat scroll 0 0;
+}
+
+#stats_container {
+    position: relative;
+    width: 450px;
+    margin: 20px auto;
+    background-color: #F1F1F1;
+    border: 1px solid #E3E3E3;
+    padding: 0px;
+}
+
+#stats_container h3 {
+    position: relative;
+    text-align: center;
+    background-color: #6F6F6F;
+    padding: 10px;
+    margin: 0;
+    font-size: 14px;
+}
+
+.left {
+    float: left;
+    position: relative;
+    width: 150px;
+}
+
+.right {
+    float: right;
+    position: relative;
+    width: 250px;
+    text-align: right;
+}
+
+#stats_container dl {
+    position: relative;
+    margin: 20px;
+}
+
+#stats_container dt {
+    font-weight: bold;
+    text-align: center;
+    font-size: 14px;
+    text-decoration: underline;
+    margin-bottom: 15px;
+}
+
+#stats_container dd {
+    clear: left;
+    padding: 0;
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 4px;
+    padding-bottom: 4px;
+}
+
+.cf {
+    overflow: hidden;
+    zoom: 1;
+}
+
+/*ClearFix*/
+#stats_container dd.footnote {
+    font-size: 10px;
+}
+
+#mmc_breakingnews_edit_table td {
+    vertical-align: top;
+    border-bottom: 1px solid #ccc;
+    padding: 5px;
+}
+
+#mmc_breakingnews_edit_table tr.odd {
+    background-color: #fff;
+}
+
+#mmc_breakingnews_edit_table td.label {
+    width: 150px;
+}
+
+#mmc_breakingnews_edit_table td.control {
+    width: 400px;
+}
+
+#list_groupings {
+    margin-bottom: 5px;
+    height: 150px;
+    overflow-y: auto;
+}
+
+#list_groupings dt {
+    font-weight: bold;
+}

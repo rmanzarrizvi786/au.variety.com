@@ -1,0 +1,20 @@
+/**
+ * Styles for term add/edit pages for taxonomies on which PMC Term Meta plugin is enabled
+ */
+
+.edit-tags-php .form-table #description,
+.edit-tags-php .form-table .description,
+.edit-tags-php .form-table label[for=description] {
+	display: none;
+}
+
+.edit-tags-php #tag-description,
+.edit-tags-php #tag-description + p,
+.edit-tags-php label[for=tag-description] {
+	display: none;
+}
+
+.column-description {
+	display: none;
+}
+

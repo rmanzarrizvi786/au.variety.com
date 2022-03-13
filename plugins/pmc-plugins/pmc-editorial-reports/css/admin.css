@@ -1,0 +1,16 @@
+﻿/**
+ * CSS for admin UI of PMC Editorial Reports
+ *
+ * @author Amit Gupta
+ *
+ * @since 2013-06-17
+ * @version 2013-06-17
+ */
+
+.hasDatepicker {
+    font-size: 0.85em;
+}
+
+input.pmc-er-option {
+	width: 15.5em;
+}

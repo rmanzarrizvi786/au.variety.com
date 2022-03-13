@@ -1,0 +1,87 @@
+/**
+* This file is loaded across all the menu pages of this plugin.
+*.pmc-export-container class is common class which can be used to style common elements across all pages.
+* Check templates/posts-admin-ui.php for usage.
+*
+* <div class="wrap pmc-export-container" id="pmc-export-posts">
+*   <div id="poststuff">
+*       <div id="postbox-container-1" class="postbox-container">
+*           <div class="postbox">
+*               <!-- Your Markup Goes Here. -->
+*           </div>
+*       </div>
+*   </div>
+* </div>
+*/
+
+.pmc-export-container .ui-progressbar {
+	width: 20%;
+	height: 2em;
+}
+.pmc-export-container .ui-progressbar .ui-progressbar-value {
+	text-indent: 10px;
+	font-weight: normal;
+	white-space: nowrap;
+	padding-top: 0.25em;
+}
+
+.pmc-export-container .filter-section{
+	margin: 20px;
+	float: left;
+}
+.pmc-export-container .inside label{
+	font-weight: bold;
+}
+
+.pmc-export-container .spin-loader {
+	background: url('../images/ajax-loader.gif') no-repeat;
+	width: 17px;
+	height: 17px;
+	display: none;
+}
+
+.pmc-export-container .submit {
+	margin-top: 0 !important;  /* we need to overwrite the wp admin default form submit button style */
+	padding-top: 0;
+}
+
+.pmc-export-container .info {
+	font-size: 10px;
+	font-weight: 600;
+	font-style: italic;
+}
+
+
+/* templates/posts-admin-ui.php related styling */
+
+#pmc-export-posts .download-link{
+	margin: 10px;
+	float: left;
+	clear: left;
+}
+
+#pmc-export-posts .postbox {
+	z-index: 100;
+}
+
+#pmc-export-posts #reporting_fields_filter_chzn ul.chzn-choices {
+	min-height: 28px;
+	border-radius: 4px;
+}
+
+#pmc-export-posts #reporting_fields_filter_chzn ul.chzn-choices input {
+	height: 100%;
+}
+
+#pmc-export-posts #reporting_fields_filter_chzn ul.chzn-choices .search-choice {
+	margin: 3px 0 0 3px;
+	background: #f3f3f3;
+}
+
+#pmc-export-posts div.submit {
+	display: flex;
+}
+
+#pmc-export-posts div.submit > * {
+	margin-left: 10px;
+}

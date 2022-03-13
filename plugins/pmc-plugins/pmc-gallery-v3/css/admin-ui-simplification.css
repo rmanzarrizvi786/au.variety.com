@@ -1,0 +1,10 @@
+/* Hide description field in media manager pop-up */
+.attachment-details .setting[data-setting="description"] {
+	display: none;
+}
+
+/* Hide description field on media edit page */
+label[for="attachment_content"],
+#wp-attachment_content-wrap {
+	display: none;
+}

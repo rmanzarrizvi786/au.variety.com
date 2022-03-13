@@ -1,0 +1,59 @@
+.single-post .pin-buttons-parent,
+.single-attachment .pin-buttons-parent{
+    position:relative;
+    display:block
+}
+body.single.single-feed_page div.scpin-no.scpin-wrapper.scpin-detector a{
+    top:-43px;
+}
+body.single div.scpin-no.scpin-wrapper.scpin-detector a{
+    top:0;
+    border:0;
+}
+.sc-show-sharable-buttons div.scpin-no.scpin-wrapper.scpin-detector a{
+    top:0 !important;
+}
+div.scpin-no.scpin-wrapper.scpin-detector{
+    z-index:3;
+    position:absolute;
+}
+div.scpin-no.scpin-wrapper.scpin-detector a.sc-pinterest-image-share{
+    display:inline-block;
+    width:2rem;
+    height:2rem;
+}
+div.scpin-no.scpin-wrapper.scpin-detector{
+    width:2rem;
+    height:2rem;
+    overflow:hidden;
+    line-height:2rem;
+    margin:.625rem;
+}
+div.scpin-no.scpin-wrapper.scpin-detector a{
+    -webkit-transition:top .25s;
+    -moz-transition:top .25s;
+    -ms-transition:top .25s;
+    -o-transition:top .25s;
+    transition:top .25s;
+    top:-43px;
+    position:relative;
+}
+@media (max-width:767px){
+    div.scpin-no.scpin-wrapper.scpin-detector{
+        width:70px !important;
+        height:36px !important;
+        line-height:36px;
+    }
+    .touchDevice div.scpin-no.scpin-wrapper.scpin-detector a.tapped{
+        -webkit-animation:flash .5s;
+        -moz-animation:flash .5s;
+        -ms-animation:flash .5s;
+        animation:flash .5s
+    }
+    @-webkit-keyframes flash{0%{opacity:.5}100%{opacity:1}}
+    @-moz-keyframes flash{0%{opacity:.5}100%{opacity:1}}
+    @-ms-keyframes flash{
+        .touchDevice div.scpin-no.scpin-wrapper.scpin-detector a.tapped 0%{opacity:.5}
+        .touchDevice div.scpin-no.scpin-wrapper.scpin-detector a.tapped 100%{opacity:1}
+    }
+}

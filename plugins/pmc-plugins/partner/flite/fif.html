@@ -1,0 +1,48 @@
+
+<HTML>
+<HEAD>
+    <style type="text/css">
+        #widgetbox_widget_div_0, body{
+            margin:0px;
+            padding:0px;
+        }
+    </style>
+</HEAD>
+<BODY onLoad="go()">
+<SCRIPT type="text/javascript">
+
+	function getQueryParameter(name, url){
+		if(!url)url = window.location.href;
+		var regexS = "[\\?&]"+name+"=([^&#]*)";
+		var regex = new RegExp( regexS );
+		var results = regex.exec( url );
+		if( results == null ){
+			return "";
+		}else{
+			return decodeURIComponent(results[1]);
+		}
+	}
+
+    function buildScript(path) {
+        var scriptSrc = "http://cdn.widgetserver.com/syndication/platform/InsertWidget/fif/default/" + path;
+        var script = document.createElement("script");
+        script.type = "text/javascript";
+        script.src = scriptSrc;
+
+        setTimeout(document.body.appendChild(script), 1);
+	}
+
+    function go(){
+        var inFIFDisabled = getQueryParameter("f", location.href) == "false";
+        var inFIF = !inFIFDisabled;
+        var isAJAX = true;
+
+        var p = getQueryParameter("p", location.href);
+        if (p && p.length>0) {
+            buildScript(p);
+        }
+    }
+
+</SCRIPT>
+</BODY>
+</HTML>

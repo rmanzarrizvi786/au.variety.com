@@ -1,0 +1,28 @@
+#pmc-post-checklist-meta-box .to-do {
+	color: red ;
+}
+
+#pmc-post-checklist-meta-box li.to-do:before {
+	content: "";
+	display: inline-block ;
+	margin-right: 5px ;
+	width: 10px ;
+	height: 10px ;
+	background: red ;
+	-moz-border-radius: 10px ;
+	-webkit-border-radius: 10px ;
+	border-radius: 10px ;
+}
+
+#pmc-post-checklist-meta-box .completed {
+	color: green ;
+	text-decoration: line-through ;
+}
+
+#pmc-post-checklist-meta-box li.completed:before {
+	content: "\2713";
+	display: inline-block ;
+	margin-right: 5px ;
+	width: 10px ;
+	color: green;
+}

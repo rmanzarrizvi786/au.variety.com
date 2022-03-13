@@ -1,0 +1,17 @@
+.voices-author {
+	list-style-type: none;
+	margin: 0;
+	padding: 2.5em;
+	margin-right: 10px;
+	background: #ffffff;
+	width: 50%;
+
+}
+
+.voices-author li {
+	max-width: 50%;
+	margin: 0 5px 5px 5px;
+	padding: 5px;
+	font-size: 1em;
+	background-color: #fcefa1;
+}

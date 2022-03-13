@@ -1,0 +1,1 @@
+!function(){"use strict";var e=window.lodash,l=window.wp.hooks,r=window.wp.i18n;const i="blocks.registerBlockType",n="pmc-gutenberg/builtin/gallery";(0,l.addFilter)(i,n,((o,t)=>"core/gallery"!==t?o:((0,l.removeFilter)(i,n),(0,e.merge)({},o,{title:(0,r.__)("Inline Gallery","pmc-gutenberg")}))))}();

@@ -1,0 +1,17 @@
+/**
+ * Styles for the post screen
+ *
+ * @package PMC Genre 1.0
+ */
+
+#genre-tabs,
+#genre-pop,
+#genre-adder {
+	display: none !important;
+}
+
+#genre-all {
+	display: block !important;
+	margin-bottom: 15px;
+}
+

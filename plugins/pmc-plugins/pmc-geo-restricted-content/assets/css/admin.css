@@ -1,0 +1,23 @@
+/**
+ * Styles for the image restriction fields on attachment screen
+ *
+ * version: 1.0
+ */
+
+.attachment-details .restricted-single-use-notice, .attachment-details .site-restricted-notice {
+	padding: 4px 8px;
+	font-variant: all-small-caps;
+	font-weight: 500;
+	margin: 10px 0;
+	line-height: 1rem;
+}
+
+.attachment-details .restricted-single-use-notice {
+	color: #ffffff;
+	background: #BC0000;
+}
+
+.attachment-details .site-restricted-notice {
+	color: #000000;
+	background: #F1F124;
+}

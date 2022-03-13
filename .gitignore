@@ -15,23 +15,6 @@ plugins/ssm-ga/*
 !plugins/tbm-amp
 
 !plugins/pmc-plugins/
-plugins/pmc-plugins/*
-!plugins/pmc-plugins/pmc-global-functions
-!plugins/pmc-plugins/pmc-larva
-!plugins/pmc-plugins/pmc-vertical
-!plugins/pmc-plugins/pmc-ajax-pagination
-!plugins/pmc-plugins/fm-widgets
-
-!plugins/pmc-plugins/ig-custom-metaboxes
-!plugins/pmc-plugins/pmc-options
-!plugins/pmc-plugins/pmc-primary-taxonomy
-!plugins/pmc-plugins/pmc-social-share-bar
-!plugins/pmc-plugins/pmc-gallery-v4
-!plugins/pmc-plugins/pmc-linkcontent
-!plugins/pmc-plugins/pmc-field-overrides
-!plugins/pmc-plugins/pmc-featured-video-override
-!plugins/pmc-plugins/pmc-post-options
-!plugins/pmc-plugins/pmc-js-libraries
 
 !plugins/cheezcap
 

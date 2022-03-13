@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!DOCTYPE cross-domain-policy SYSTEM "http://www.macromedia.com/xml/dtds/cross-domain-policy.dtd">
+<cross-domain-policy>
+	<site-control permitted-cross-domain-policies="all"/>
+	<allow-access-from domain="deadline.com"/>
+	<allow-access-from domain="*.deadline.com"/>
+	<allow-access-from domain="hollywoodlife.com"/>
+	<allow-access-from domain="*.hollywoodlife.com"/>
+	<allow-access-from domain="tvline.com"/>
+	<allow-access-from domain="*.tvline.com"/>
+	<allow-access-from domain="variety.com"/>
+	<allow-access-from domain="*.variety.com"/>
+	<allow-access-from domain="varietylatino.com"/>
+	<allow-access-from domain="*.varietylatino.com"/>
+	<allow-access-from domain="bgr.com"/>
+	<allow-access-from domain="*.bgr.com"/>
+	<allow-access-from domain="movieline.com"/>
+	<allow-access-from domain="*.movieline.com"/>
+	<allow-access-from domain="awardsline.com"/>
+	<allow-access-from domain="*.awardsline.com"/>
+	<allow-access-from domain="pmc.com"/>
+	<allow-access-from domain="*.pmc.com"/>
+</cross-domain-policy>

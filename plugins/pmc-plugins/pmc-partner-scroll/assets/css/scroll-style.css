@@ -1,0 +1,7 @@
+html.scrolluser .ad-text::before,
+html.scrolluser .c-ad,
+html.scrolluser .admz,
+html.scrolluser .c-gallery-vertical__advert,
+html.scrolluser [id^="skm-boomerang-el-"] {
+    display: none !important;
+}

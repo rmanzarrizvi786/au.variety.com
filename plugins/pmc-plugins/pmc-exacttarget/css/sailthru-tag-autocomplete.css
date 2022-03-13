@@ -1,0 +1,14 @@
+/**
+ * extra styles for jquery-ui autocomplete implementation
+ * in sailthru plugin
+ *
+ * @author Amit Gupta
+ */
+
+.ui-autocomplete-loading {
+	background: white url('../images/ajax-loader.gif') right center no-repeat;
+}
+
+#sailthru-filter-tags {
+	width: 200px; height: 150px !important;
+}

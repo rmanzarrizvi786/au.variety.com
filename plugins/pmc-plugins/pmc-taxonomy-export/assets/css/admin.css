@@ -1,0 +1,51 @@
+.ui-progressbar {
+    position: absolute;
+    width: 20%;
+    top: 85px;
+    left: 250px;
+}
+.ui-progressbar .ui-progressbar-value {
+    background-color: #ccc;
+}
+.progress-label {
+    position: absolute;
+    left: 40%;
+    top: 4px;
+    font-weight: bold;
+    text-shadow: 1px 1px 0 #fff;
+
+}
+.taxonomy-section{
+    margin: 20px;
+    float: left;
+}
+.inside label{
+    font-weight: bold;
+}
+.inside {
+    height: 180px;
+}
+.report-type-section{
+    margin: 20px 0;
+}
+.spin-loader {
+    background: url('../images/ajax-loader.gif') no-repeat;
+    width: 17px;
+    height: 17px;
+    display: none;
+    position: absolute;
+    top: 90px;
+    left: 190px;
+}
+.submit{
+    margin: 20px;
+}
+#error-log-data{
+    color:red;
+    margin: 20px;
+}
+.download-link{
+    margin:10px;
+    float: left;
+    clear: left;
+}

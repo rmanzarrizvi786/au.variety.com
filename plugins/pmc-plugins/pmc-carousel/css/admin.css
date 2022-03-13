@@ -1,0 +1,12 @@
+#pmc-carousel-override-url {
+    width: 500px;
+    max-width: 100%;
+}
+
+.carousel-override-fields-apple-news {
+    display: none;
+}
+
+.carousel-override-fields-apple-news--preview {
+    margin: 6px 0;
+}

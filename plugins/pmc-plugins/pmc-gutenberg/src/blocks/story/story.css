@@ -1,0 +1,109 @@
+/*
+	Setup State
+*/
+
+.pmc-story-card-setup .pmc-story-card-search-results__fieldset {
+
+	/* Reset default styles */
+	border: unset;
+	padding: unset;
+}
+
+.pmc-story-card-setup .pmc-story-card-search-results__list,
+.pmc-story-card-setup .pmc-story-card-search-results__item {
+
+	/* Reset default styles */
+	list-style: none;
+	margin: unset;
+	padding: unset;
+}
+
+.pmc-story-card-setup .pmc-story-card-search-results__list {
+	margin-top: 4px; /* Same as space between labels and fields */
+}
+
+.pmc-story-card-setup .pmc-story-card-search-results__item {
+	margin-top: 8px; /* Sometimes used in Gutenberg for margins */
+}
+
+.pmc-story-card-setup .pmc-story-card-search-results__title-label {
+	color: darkred;
+	text-transform: uppercase;
+}
+
+.pmc-story-card-setup .pmc-story-card-search-results__button {
+
+	/* Restyle the built-in Gutenberg components-button */
+	display: flex;
+	width: 100%;
+	font-size: 16px;
+	font-weight: 700;
+
+	/* Reset default styles */
+	white-space: unset;
+	height: unset;
+	background-color: unset;
+	border-color: transparent;
+	text-align: unset;
+}
+
+.pmc-story-card-setup .pmc-story-card-search-results__image-container {
+	order: -1; /* Before the text */
+}
+
+.pmc-story-card-setup .pmc-story-card-search-results__image {
+	display: block;
+	height: 50px;
+	width: 50px;
+	object-fit: cover;
+	object-position: center;
+	margin: 8px 16px 8px 0;
+	border-radius: 3px; /* Same as component-button */
+	background-color: rgb(243, 245, 246); /* useful while the image is loading */
+
+	/* Reset default styles */
+	min-width: unset;
+	min-height: unset;
+	max-width: unset;
+	max-height: unset;
+}
+
+.pmc-story-card-setup .pmc-story-card-search-results__spinner {
+
+	/* Center and add a little space above */
+	display: flex;
+	justify-content: center;
+	margin: 24px auto 0 auto; /* Multiples of 8px are sometimes used in Gutenberg  */
+}
+
+.pmc-story-card-setup .pmc-story-card-search-results__note {
+	font-family: unset;
+	font-size: unset;
+}
+
+.pmc-story-card-setup .pmc-story-card-search-results__more-button {
+
+	/* Center and add a little space above */
+	display: block;
+	margin: 24px auto 0 auto;
+}
+
+/*
+	Edit State
+*/
+.pmc-story-card-edit .pmc-story-card-preview__title {
+	font-size: 1.25em; /* Make the title a bit larger than the excerpt */
+}
+
+.pmc-story-card-edit .pmc-story-card-preview__featured-image {
+	margin-top: 8px; /* Add a little more space between the title and image */
+}
+
+.pmc-story-card-edit .pmc-story-card-preview__excerpt > p {
+	margin-bottom: 0; /* Reduce space between excerpt and link */
+}
+
+.pmc-story-card-edit .pmc-story-card-preview__link {
+	margin-top: 0;  /* Reduce space between excerpt and link */
+	padding-bottom: 48px; /* Make space between this Story Card block and the next block */
+}

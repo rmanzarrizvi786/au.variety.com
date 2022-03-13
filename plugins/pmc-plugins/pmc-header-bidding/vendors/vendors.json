@@ -1,0 +1,11 @@
+[
+  "appnexusBidAdapter",
+  "ixBidAdapter",
+  "pubmaticBidAdapter",
+  "rubiconBidAdapter",
+  "sovrnBidAdapter",
+  "tripleliftBidAdapter",
+  "sharethroughBidAdapter",
+  "audienceNetworkBidAdapter",
+  "sonobiBidAdapter"
+]

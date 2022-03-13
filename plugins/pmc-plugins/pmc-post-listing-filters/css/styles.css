@@ -1,0 +1,20 @@
+/*
+ * Version 1.00
+ */
+
+.tablenav .actions {
+	overflow: visible;
+}
+.chzn-select{
+	min-width: 200px;
+}
+ul.chzn-choices li.search-field input {
+	padding: 0px !important;
+}
+form > p.search-box {
+	display: none;
+}
+#post-filter-search {
+	min-width: 200px;
+}
+

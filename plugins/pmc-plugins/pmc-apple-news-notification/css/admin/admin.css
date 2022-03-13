@@ -1,0 +1,34 @@
+#TB_ajaxContent label {
+  margin-top: 20px;
+}
+#TB_ajaxContent #notification-body {
+  width: 100%;
+  margin-top: 10px;
+}
+#TB_ajaxContent .button-line {
+  margin-top: 20px;
+  width: 100%;
+  height: 50px;
+}
+#TB_ajaxContent .button-line * {
+  vertical-align: top;
+}
+#TB_ajaxContent .button-line #notification-submit {
+  width: 50%;
+  display: inline-block;
+}
+#TB_ajaxContent .button-line #loading-img {
+  display: inline-block;
+  height: 30px;
+}
+#TB_ajaxContent p.error,
+#TB_ajaxContent p.success {
+  font-weight: bold;
+  margin: 10px 0;
+}
+#TB_ajaxContent p.error {
+  color: #c61605;
+}
+#TB_ajaxContent p.success {
+  color: #27ae60;
+}

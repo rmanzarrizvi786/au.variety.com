@@ -1,0 +1,1 @@
+!function(){"use strict";var e=window.lodash,t=window.wp.hooks;const o="blocks.registerBlockType",r="pmc-gutenberg/builtin/column";(0,t.addFilter)(o,r,((i,s)=>"core/column"!==s?i:((0,t.removeFilter)(o,r),(0,e.merge)({},i,{attributes:{className:{type:"string",default:"lrv-a-grid-item"}},supports:{color:{background:!1,text:!1}}}))))}();

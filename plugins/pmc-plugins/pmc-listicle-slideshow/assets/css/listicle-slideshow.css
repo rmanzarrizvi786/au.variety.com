@@ -1,0 +1,23 @@
+.pmc-listicle-slideshow.intro {
+  width: 100%;
+  margin: 0 auto; }
+.pmc-listicle-slideshow.gallery {
+  width: 77%;
+  margin: 0 auto; }
+.pmc-listicle-slideshow h1 {
+  text-align: center; }
+.pmc-listicle-slideshow .view-slideshow {
+  width: 100%;
+  background-color: #004A74;
+  text-align: center;
+  color: #ffffff;
+  font-size: 1.5em;
+  padding: 5px 0; }
+  .pmc-listicle-slideshow .view-slideshow:hover {
+    background-color: #670213; }
+
+@media only screen and (min-width: 769px) and (max-width: 1024px) {
+  .post-meta__author {
+    width: 60%; } }
+
+/*# sourceMappingURL=listicle-slideshow.css.map */

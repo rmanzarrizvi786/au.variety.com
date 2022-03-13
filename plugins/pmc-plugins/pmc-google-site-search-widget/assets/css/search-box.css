@@ -1,0 +1,28 @@
+/*
+    Document   : search-box.css
+    Created on : 25 Aug, 2014, 6:55:00 PM
+    Author     : Amit Gupta
+    Description:
+        Styles for Google Custom Site Search box
+*/
+
+.pmc-cgss-container {
+	display: inline-block;
+	height: 26px; max-height: 26px;
+	padding: 0; margin: 10px 0px 0px 0px;
+}
+
+.pmc-cgss-container .pmc-cgss-box {
+	border: 1px solid #CCCCCC;
+	outline: none;
+	padding: 0 5px;
+	font-size: 13px;
+	height: 23px; max-height: 23px;
+}
+
+.pmc-cgss-container .pmc-cgss-btn {
+	padding: 5px 10px;
+	margin: 0;
+	width: 13px; min-width: 13px;
+	height: 13px;
+}

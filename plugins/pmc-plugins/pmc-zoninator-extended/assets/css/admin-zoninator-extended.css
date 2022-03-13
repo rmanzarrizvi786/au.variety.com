@@ -1,0 +1,34 @@
+.post-editor .full-width {
+  width: 100%;
+  max-width: 100%;
+}
+.post-editor td.label {
+  vertical-align: top;
+}
+.post-editor .checklist-container {
+  border: 1px solid #DEDEDE;
+  border-radius: 5px;
+  padding: 10px;
+  box-sizing: border-box;
+}
+.post-editor .checklist.parent {
+  max-height: 200px;
+  overflow: auto;
+  margin: 0;
+}
+.post-editor .checklist.parent li, .post-editor .checklist.parent label {
+  margin-bottom: 5px;
+}
+.post-editor .checklist.parent .children {
+  padding-left: 25px;
+}
+
+.row-actions .lock-message {
+  color: #000;
+}
+
+.hide {
+  display: none;
+}
+
+/*# sourceMappingURL=admin-zoninator-extended.css.map */

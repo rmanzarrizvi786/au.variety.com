@@ -1,0 +1,1 @@
+var pmc_comscore=pmc_comscore||{pageview:function(e){try{"undefined"!=typeof jQuery&&"undefined"!=typeof pmc_comscore_options.pageview_candidate_url&&jQuery.ajax({url:pmc_comscore_options.pageview_candidate_url,type:"GET",cache:!0}),"function"==typeof e&&e()}catch(c){}}};

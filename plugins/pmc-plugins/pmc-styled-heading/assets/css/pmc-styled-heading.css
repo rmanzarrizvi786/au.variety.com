@@ -1,0 +1,66 @@
+/* Smooth out overlapping and inconsistent borders. */
+[id*="fm_meta_box_pmc_styled_heading"] .fm-text_lines-wrapper,
+[id*="fm_meta_box_pmc_styled_heading"] .fm-container_fields-wrapper {
+    border: 1px solid #ddd;
+    margin-bottom: 1rem;
+}
+
+[id*="fm_meta_box_pmc_styled_heading"] .fm-text_lines > .fm-group-label-wrapper,
+[id*="fm_meta_box_pmc_styled_heading"] .fm-container_fields > .fm-group-label-wrapper {
+    padding: 0.5rem;
+    border-width: 0 0 1px 0;
+}
+
+[id*="fm_meta_box_pmc_styled_heading"] .fm-text_lines > .fm-item-description,
+[id*="fm_meta_box_pmc_styled_heading"] .fm-container_fields > .fm-item-description {
+    padding: .75rem 1rem;
+}
+
+[id*="fm_meta_box_pmc_styled_heading"] .fm-text_lines > .fm-group-inner,
+[id*="fm_meta_box_pmc_styled_heading"] .fm-container_fields > .fm-group-inner {
+    border-width: 0;
+}
+
+/* Adjustments to group headings/labels. */
+[id*="fm_meta_box_pmc_styled_heading"] div.fm-group-label-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 0.5em;
+}
+
+[id*="fm_meta_box_pmc_styled_heading"] .fm-group-label-wrapper.fmjs-collapsible-handle .fmjs-remove {
+    display: block !important;
+}
+
+[id*="fm_meta_box_pmc_styled_heading"] div.fm-group-label-wrapper h4 {
+    margin-right: auto;
+}
+
+[id*="fm_meta_box_pmc_styled_heading"] div.fm-group-label-wrapper h3 {
+    margin-top: .5rem;
+    margin-bottom: .5rem;
+}
+
+/* Put elements in a grid to improve use of space. */
+[id*="fm_meta_box_pmc_styled_heading"] .fm-group-inner {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-gap: .75rem 2.25rem;
+}
+
+[id*="fm_meta_box_pmc_styled_heading"] .fm-text [type="text"] {
+    width: 100%;
+}
+
+[id*="fm_meta_box_pmc_styled_heading"] h5.fm-label,
+[id*="fm_meta_box_pmc_styled_heading"] h4.fm-label {
+    margin-bottom: 0;
+    font-size: 1em;
+    padding: 0;
+}
+
+/* Hidden elements shouldn't take up grid cells. */
+[id*="fm_meta_box_pmc_styled_heading"] .fm-display-wrapper {
+    display: none;
+}

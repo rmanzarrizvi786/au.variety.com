@@ -1,0 +1,1 @@
+<meta property="trueanthem.headline" content="<?php echo esc_attr( $social_headline ); ?>"/>

@@ -1,0 +1,75 @@
+/* Hidden Text */
+@font-face {
+	font-family: 'PMC-Hide-Text';
+	src:url('../fonts/PMC-Hide-Text.eot');
+	src:url('../fonts/PMC-Hide-Text.eot?#iefix') format('embedded-opentype'),
+		url('../fonts/PMC-Hide-Text.woff') format('woff'),
+		url('../fonts/PMC-Hide-Text.ttf') format('truetype'),
+		url('../fonts/PMC-Hide-Text.svg#PMC-Hide-Text') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+.mce_pmc-hidden-text {
+	display: block;
+	width: 20px;
+	height: 20px;
+}
+.mce_pmc-hidden-text .mceIcon {
+	text-align: center;
+	padding-top: 2px;
+	font-size: 18px;
+}
+.admin-color-mp6 .mce_pmc-hidden-text .mceIcon {
+	padding: 0;
+}
+.mce_pmc-hidden-text .mceIcon:before {
+	font-family: 'PMC-Hide-Text';
+	content: '\e000';
+}
+.pmc-hidden-text-buttons {
+	font-family: 'PMC-Hide-Text';
+	font-size: 16px;
+	position: absolute;
+	background: #eee;
+	border: 1px solid #999;
+	margin: -40px 0 0 -15px;
+	box-shadow: 1px -1px 2px #999;
+	border-radius: 2px;
+	padding: 2px;
+}
+.pmc-hidden-text-buttons:after {
+	content: '';
+	display: table;
+	clear: both;
+}
+.pmc-hidden-text-toggle,
+.pmc-hidden-text-remove{
+	border: 1px solid transparent;
+	float: left;
+	display: block;
+	height: 17px;
+	width: 17px;
+	cursor: pointer;
+}
+.pmc-hidden-text-toggle:before {
+	content: '\e001';
+	speak: none;
+}
+.pmc-hidden-text-remove:hover,
+.pmc-hidden-text-toggle:hover {
+	border-color: #CCC;
+	border-radius: 1px;
+}
+.pmc-hidden-text-toggle:hover {
+	color: #0074a2;
+}
+.pmc-hidden-text-remove:hover {
+	color: #C00;
+}
+.pmc-hidden-text-remove:before {
+	content: '\e003';
+	speak: none;
+}
+.pmc-make-hidden .pmc-hidden-text-toggle:before {
+	content: '\e002';
+}

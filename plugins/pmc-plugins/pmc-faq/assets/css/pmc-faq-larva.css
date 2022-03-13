@@ -1,0 +1,58 @@
+/**
+ * Temporary file until copied from Larva utilities.
+ * This will eventually be swapped for the Larva utility library.
+ *
+ * NOTE: Currently used to style AMP pages.
+ */
+.lrv-u-background-color-grey-lightest {
+	background-color: #f7f7f7;
+	background-color: var(--background-color-grey-lightest, #f7f7f7);
+}
+
+.lrv-u-padding-a-2 {
+	padding: 2rem;
+	padding: var(--spacing-2, 2rem)
+}
+
+.lrv-u-margin-b-075 {
+	margin-bottom: .75rem;
+	margin-bottom: var(--spacing-075, .75rem)
+}
+
+.lrv-u-margin-b-150 {
+	margin-bottom: 1.5rem;
+	margin-bottom: var(--spacing-150, 1.5rem)
+}
+
+.lrv-u-margin-l-150 {
+	margin-left: 1.5rem;
+	margin-left: var(--spacing-150, 1.5rem)
+}
+
+.lrv-u-font-size-24 {
+	font-size: 1.5rem
+}
+
+.lrv-u-font-size-18 {
+	font-size: 1.125rem
+}
+
+@media (max-width:47.999rem) {
+	.lrv-u-margin-l-00\@mobile-max {
+		margin-left: 0;
+		margin-left: var(--spacing-00, 0)
+	}
+}
+
+@media (max-width:47.999rem) {
+	.lrv-u-padding-a-125\@mobile-max {
+		padding: 1.25rem;
+		padding: var(--spacing-125, 1.25rem)
+	}
+}
+
+@media (max-width:47.999rem) {
+	.lrv-u-font-size-18\@mobile-max {
+		font-size: 1.125rem
+	}
+}

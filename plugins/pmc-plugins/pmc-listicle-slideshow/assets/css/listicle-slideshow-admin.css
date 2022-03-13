@@ -1,0 +1,12 @@
+.fm-galleries > .fm-group-inner {
+  border: solid 1px #afafaf !important; }
+
+.fm-tab.wp-tab-active {
+  border-top: solid 1px #afafaf !important;
+  border-right: solid 1px #afafaf !important;
+  border-left: solid 1px #afafaf !important; }
+
+.fm-image_caption-wrapper .wp-editor-tools {
+  display: none; }
+
+/*# sourceMappingURL=listicle-slideshow-admin.css.map */

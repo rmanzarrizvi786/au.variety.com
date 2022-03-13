@@ -1,0 +1,14 @@
+/**
+ * Styles for the settings page
+ *
+ * @package PMC Genre 1.0
+ */
+
+.pmc-genre-form .btn-select-list {
+	vertical-align: middle;
+}
+
+.pmc-genre-form .select-list {
+	min-width: 220px;
+	height: 100px;
+}
