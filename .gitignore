@@ -19,6 +19,7 @@ plugins/pmc-plugins/*
 !plugins/pmc-plugins/pmc-global-functions
 !plugins/pmc-plugins/pmc-larva
 !plugins/pmc-plugins/pmc-vertical
+!plugins/pmc-plugins/pmc-ajax-pagination
 !plugins/cheezcap
 
 # ignore specific themes
