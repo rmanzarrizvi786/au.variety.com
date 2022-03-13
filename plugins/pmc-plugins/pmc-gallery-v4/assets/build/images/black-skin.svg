@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="264" height="88" viewBox="0 0 264 88">
+	<title>Black Skin</title>
+	<defs>
+		<style>
+			.cls-1 {
+			filter: url(#filter);
+			}
+
+			.cls-2 {
+			fill: #ea0180;
+			fill-rule: evenodd;
+			filter: url(#filter-2);
+			}
+
+			.cls-3, .cls-4 {
+			fill: none;
+			stroke: #fff;
+			stroke-width: 1.5px;
+			}
+
+			.cls-3 {
+			filter: url(#filter-3);
+			}
+
+			.cls-4 {
+			filter: url(#filter-4);
+			}
+		</style>
+		<filter id="filter" filterUnits="userSpaceOnUse">
+			<feFlood result="flood"/>
+			<feComposite result="composite" operator="in" in2="SourceGraphic"/>
+			<feBlend result="blend" in2="SourceGraphic"/>
+		</filter>
+		<filter id="filter-2" x="58" y="62.688" width="10" height="11.313" filterUnits="userSpaceOnUse">
+			<feFlood result="flood"/>
+			<feComposite result="composite" operator="in" in2="SourceGraphic"/>
+			<feBlend result="blend" in2="SourceGraphic"/>
+		</filter>
+		<filter id="filter-3" x="102" y="15" width="13" height="13" filterUnits="userSpaceOnUse">
+			<feFlood result="flood"/>
+			<feComposite result="composite" operator="in" in2="SourceGraphic"/>
+			<feBlend result="blend" in2="SourceGraphic"/>
+		</filter>
+		<filter id="filter-4" x="146" y="15" width="13" height="13" filterUnits="userSpaceOnUse">
+			<feFlood result="flood"/>
+			<feComposite result="composite" operator="in" in2="SourceGraphic"/>
+			<feBlend result="blend" in2="SourceGraphic"/>
+		</filter>
+		<image id="image" width="5" height="5"
+		       xlink:href="data:img/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAAAAACoBHk5AAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAAnRSTlMAgJsrThgAAAACYktHRAAAqo0jMgAAAAlwSFlzAAALEgAACxIB0t1+/AAAAAd0SU1FB+MCEhYgMQAl9KIAAAAaSURBVAjXBcEBAQAACMMgbvJFF1YxREjhSA9P4AUFat6lxwAAAABJRU5ErkJggg=="/>
+	</defs>
+	<g id="_1x" class="cls-1">
+		<image id="arrow_left" x="147" y="53" width="14" height="12"
+		       xlink:href="data:img/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAMCAAAAAB369MGAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAAnRSTlMAgJsrThgAAAACYktHRAAAqo0jMgAAAAlwSFlzAAALEgAACxIB0t1+/AAAAAd0SU1FB+MCEhYgMQAl9KIAAAAwSURBVAjXhY65EQAwCMMEk2v0FGkMKeJOd/5KAOWqASRREoPoQR+Vw7yyT/PezVcHJA8LE4JpVaQAAAAASUVORK5CYII="/>
+		<image id="arrow_right" x="103" y="53" width="14" height="12"
+		       xlink:href="data:img/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAMCAAAAAB369MGAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAAnRSTlMAgJsrThgAAAACYktHRAAAqo0jMgAAAAlwSFlzAAALEgAACxIB0t1+/AAAAAd0SU1FB+MCEhYgMQAl9KIAAAAwSURBVAjXY2xggICGBgYGBgYmGI8BjcvQgMSF8uFcmDw+wNiAohpNLw6T0eyFugoA7gALE7jkJS0AAAAASUVORK5CYII="/>
+		<g id="share">
+			<path id="share-2" class="cls-2"
+			      d="M68.006,62.69C61.531,63.615,58.925,69.375,58,74c2.312-3.237,5.381-5.853,10.006-5.853"/>
+			<image x="68" y="60" width="6" height="11"
+			       xlink:href="data:img/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAYAAAALCAAAAAB5OaNKAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAAnRSTlMAgJsrThgAAAACYktHRAAAqo0jMgAAAAlwSFlzAAALEgAACxIB0t1+/AAAAAd0SU1FB+MCEhYgMQAl9KIAAAAnSURBVAjXTcuxDQAwDALB8+aMngJLcfWChxEYUkjR/nDTur/sL/AAv50FCWkXdcEAAAAASUVORK5CYII="/>
+		</g>
+		<image id="close" x="15" y="59" width="14" height="14"
+		       xlink:href="data:img/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAOCAAAAAA6I3INAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAAnRSTlMAgJsrThgAAAACYktHRAAAqo0jMgAAAAlwSFlzAAALEgAACxIB0t1+/AAAAAd0SU1FB+MCEhYgMQAl9KIAAABASURBVAjXbY/BDcAwCAMPT36j99GA0qQWAixkA6XS0AKaC3GoYGguSFZdUY5YIN28KXzwMxV0tLvzsfc+cl4QH1jtFhmO4OpMAAAAAElFTkSuQmCC"/>
+		<g id="zoom-in">
+			<image x="106" y="19" width="5" height="5"
+			       xlink:href="data:img/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAAAAACoBHk5AAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAAnRSTlMAgJsrThgAAAACYktHRAAAqo0jMgAAAAlwSFlzAAALEgAACxIB0t1+/AAAAAd0SU1FB+MCEhYgMQAl9KIAAAAUSURBVAjXY2xgaGhgYGJAAEYkEQA3hAMHwuUM5AAAAABJRU5ErkJggg=="/>
+			<use x="112" y="25" xlink:href="#image"/>
+			<g style="fill: none; filter: url(#filter-3)">
+				<circle id="circle-2" class="cls-3" cx="108.5" cy="21.5" r="6.5"
+				        style="stroke: inherit; filter: none; fill: inherit"/>
+			</g>
+			<use xlink:href="#circle-2" style="stroke: #fff; filter: none; fill: none"/>
+		</g>
+		<g id="zoom-out">
+			<image x="150" y="21" width="5" height="1"
+			       xlink:href="data:img/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAABAQAAAAA+hVleAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAAmJLR0QAAKqNIzIAAAAJcEhZcwAACxIAAAsSAdLdfvwAAAAHdElNRQfjAhIWIDEAJfSiAAAACklEQVQI12NgAAAAAgAB4iG8MwAAAABJRU5ErkJggg=="/>
+			<use x="156" y="25" xlink:href="#image"/>
+			<g style="fill: none; filter: url(#filter-4)">
+				<circle id="circle" class="cls-4" cx="152.5" cy="21.5" r="6.5"
+				        style="stroke: inherit; filter: none; fill: inherit"/>
+			</g>
+			<use xlink:href="#circle" style="stroke: #fff; filter: none; fill: none"/>
+		</g>
+		<image id="fullscreen_exit" x="57" y="15" width="18" height="14"
+		       xlink:href="data:img/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAAOCAQAAACI04Q8AAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAAmJLR0QAAKqNIzIAAAAJcEhZcwAACxIAAAsSAdLdfvwAAAAHdElNRQfjAhIWIDEAJfSiAAAAPElEQVQoz2NkgID/DAwMjAyo4D8DAwNjAwMDAxMDEYAoRYwM/5HYmNaRYhIBQF2H09l3LFD9/3HIUzlaAHzSCJrN7jLjAAAAAElFTkSuQmCC"/>
+		<image id="fullscreen_enter" x="13" y="15" width="18" height="14"
+		       xlink:href="data:img/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAAOCAQAAACI04Q8AAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAAmJLR0QAAKqNIzIAAAAJcEhZcwAACxIAAAsSAdLdfvwAAAAHdElNRQfjAhIWIDEAJfSiAAAAMUlEQVQoz2Nk+M8AA4wMqAAuw8RABGBk+I/FDDTziDKJSOsIgAZiTaKmm+gcBNSKOwCycAiU5Y4X6gAAAABJRU5ErkJggg=="/>
+	</g>
+</svg>

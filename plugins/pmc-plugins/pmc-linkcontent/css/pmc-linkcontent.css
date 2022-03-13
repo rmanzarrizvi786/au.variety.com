@@ -1,0 +1,65 @@
+/** Autocomplete **/
+.pmclinkcontent-post-search.ui-autocomplete-input.ui-autocomplete-loading.loading {
+	background-image: url(../images/loading.gif);
+	background-repeat: no-repeat;
+	background-position: right center;
+}
+.ui-autocomplete {
+	min-width: 330px;
+	max-width: 600px;
+	font-size: 13px;
+	line-height: 17px;
+}
+.ui-autocomplete .ui-corner-all {
+	padding-top: 5px;
+	padding-bottom: 5px;
+	border-bottom: 1px dotted #eee;
+	cursor: pointer;
+	overflow: hidden;
+}
+.ui-autocomplete .title {
+	display: block;
+	width: 80%;
+	float: left;
+}
+.ui-autocomplete .date {
+	text-transform: uppercase;
+	color: #666;
+	font-size: 11px;
+	clear: both;
+	float: left;
+}
+.ui-autocomplete .type {
+	text-transform: uppercase;
+	color: #666;
+	font-size: 11px;
+	width: 19%;
+	margin-left: 1%;
+	float: right;
+	text-align: right;
+}
+.ui-autocomplete .status {
+	font-size: 10px;
+	width: 19%;
+	margin-left: 1%;
+	float: right;
+	text-align: right;
+}
+.pmclinkcontent-remove {
+	font-size: 9px;
+	padding-left: 10px;
+}
+a.pmclinkcontent-post {
+	font-weight: bold;
+}
+.pmclinkcontent-post-result {
+	display:block;
+}
+.pmclinkcontent-search-wrapper input[type="text"].ui-autocomplete-loading {
+    background-image: url(../images/loading.gif);
+    background-repeat: no-repeat;
+    background-position: right center;
+}
+.clear {
+	clear: both;
+}

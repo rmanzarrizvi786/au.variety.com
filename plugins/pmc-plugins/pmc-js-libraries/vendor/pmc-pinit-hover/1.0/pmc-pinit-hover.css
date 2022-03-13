@@ -1,0 +1,18 @@
+#pmc-pinit-hover-btn {
+	position: absolute;
+	cursor: pointer;
+	background-image: url(https://s-passets.pinimg.com/images/pidgets/pinit_bg_en_rect_red_28_1.png);
+	background-repeat: none;
+	background-size: 56px 84px;
+	height: 28px;
+	padding: 0;
+	vertical-align: baseline;
+	text-decoration: none;
+	width: 56px;
+	background-position: 0 -28px;
+	display: none;
+}
+#pmc-pinit-hover-btn:hover {
+	background-position: 0 0px;
+	display: block;
+}
