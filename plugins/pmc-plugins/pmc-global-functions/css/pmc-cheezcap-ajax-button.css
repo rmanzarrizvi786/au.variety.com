@@ -1,0 +1,21 @@
+tr.pmc-cheezcap-ajax-button th, tr.pmc-cheezcap-ajax-button td {
+	vertical-align: top;
+}
+tr.pmc-cheezcap-ajax-button small {
+	font-weight: normal ;
+}
+tr.pmc-cheezcap-ajax-button button {
+	float: left ;
+}
+tr.pmc-cheezcap-ajax-button div.waiting {
+	background-image: url(/wp-admin/images/spinner.gif);
+    float: left;
+	height: 20px;
+	margin-left: 10px;
+	width: 20px;
+}
+	tr.pmc-cheezcap-ajax-button div.waiting.hideme {
+		visibility: hidden;
+	}
+tr.pmc-cheezcap-ajax-button div.output {
+}

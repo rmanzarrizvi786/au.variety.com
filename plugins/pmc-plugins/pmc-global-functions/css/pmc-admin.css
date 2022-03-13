@@ -1,0 +1,25 @@
+/**
+ * Css for Admin section.
+ */
+
+/*
+* To create minified version of pmc-admin.min.css.
+*
+* - npm install uglify -g (to install uglify)
+* - uglify -s pmc-admin.css -o pmc-admin.min.css -c
+*/
+
+.attachment-details .required {
+    float: none;
+    color: #ff0000;
+    font-size: 14px;
+    display: none;
+}
+
+form.compat-item .compat-field-image_credit .label span::after {
+    content: ' *';
+    color: #ff0000;
+}
+form.compat-item .compat-field-image_credit .field .error {
+    border: 2px solid #ff0000;
+}

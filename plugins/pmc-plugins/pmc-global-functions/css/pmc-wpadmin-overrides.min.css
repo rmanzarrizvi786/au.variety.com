@@ -1,0 +1,12 @@
+/**
+ * Global admin styles that are on all sites.
+ * Use for emergencies and temporary fixes only - this should almost always be empty.
+ *
+ * Every entry in here must include a description of the issue, with links
+ * to any PMC and VIP tickets, an `@since` tag with your name and date, and
+ * an `@deprecated` tag with your name, and the date that the fix should be removed by.
+ * See the example below.
+ *
+ * @since 2015-04-29 Corey Gilmore
+ *
+ */

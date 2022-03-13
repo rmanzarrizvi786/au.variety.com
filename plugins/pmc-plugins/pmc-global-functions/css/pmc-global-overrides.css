@@ -1,0 +1,11 @@
+/**
+ * Global CSS styles for all PMC sites
+ */
+
+/*
+ * Hiding WP.com stats smiley due to advertiser complaints
+ */
+img#wpstats {
+	width: 0px; height: 0px;
+	overflow: hidden; display: block;
+}

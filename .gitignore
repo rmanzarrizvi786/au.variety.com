@@ -13,7 +13,10 @@ languages
 plugins/ssm-ga/*
 !plugins/ssm-ga/ssm-ga.php
 !plugins/tbm-amp
-!plugins/tbm-adm
+
+!plugins/pmc-plugins/
+plugins/pmc-plugins/*
+!plugins/pmc-plugins/pmc-global-functions
 
 # ignore specific themes
 themes/twenty*/
