@@ -84,6 +84,8 @@ if (!empty($footer_menus)) {
 	$footer['footer_menus']['o_navs'] = $footer_menus['o_navs'];
 }
 
+$footer['footer_menus']['footer_menu_classes'] = str_replace('cols5', 'cols3', $footer['footer_menus']['footer_menu_classes']);
+
 // translators: %1$s current year.
 $copy_text = sprintf(esc_html__('Variety is a part of Penske Media Corporation. &copy; %1$s Variety Media, LLC. All Rights Reserved. Variety and the Flying V logos are trademarks of Variety Media, LLC.', 'pmc-variety'), gmdate('Y'));
 
