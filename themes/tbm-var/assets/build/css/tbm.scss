@@ -1,28 +1,3 @@
-@media (min-width: 62.5rem) {
-  html:not(.is-sticky) header .lrv-a-wrapper {
-    justify-content: space-between;
-    .header-sticky__menu,
-    .lrv-a-glue-parent,
-    .login-actions {
-      flex: 1;
-    }
-    .u-margin-l-n60\@desktop {
-      margin-left: 0 !important;
-    }
-    .login-actions {
-      justify-content: flex-end;
-    }
-
-    .lrv-a-glue-parent {
-      justify-content: center;
-      display: flex;
-      .header__logo {
-        margin-left: 0 !important;
-      }
-    }
-  }
-}
-
 .d-none {
   display: none;
 }
@@ -46,16 +21,30 @@
 .justify-content-between {
   justify-content: space-between;
 }
+
+.newsletter__inner .success {
+  text-align: center;
+  margin: -0.25rem 0.25rem 0.25rem 0.25rem;
+  background-color: #fff;
+  padding: 0.5rem;
+  font-family: var(--font-family-secondary, Helvetica, serif);
+}
+
+.col-12 {
+  width: 100%;
+}
+
 @media (min-width: 48rem) {
+  .col-md-6 {
+    width: 50%;
+  }
   .flex-md-row {
     flex-direction: row;
   }
   .flex-md-column {
     flex-direction: column;
   }
-}
 
-@media (min-width: 48rem) {
   .brag-jobs-grid\@tablet {
     display: grid;
     grid-template-columns: minmax(13.75rem, 50%) 1fr minmax(13.75rem, 50%);
@@ -84,10 +73,27 @@
   }
 }
 
-.newsletter__inner .success {
-  text-align: center;
-  margin: -0.25rem 0.25rem 0.25rem 0.25rem;
-  background-color: #fff;
-  padding: 0.5rem;
-  font-family: var(--font-family-secondary, Helvetica, serif);
+@media (min-width: 62.5rem) {
+  html:not(.is-sticky) header .lrv-a-wrapper {
+    justify-content: space-between;
+    .header-sticky__menu,
+    .lrv-a-glue-parent,
+    .login-actions {
+      flex: 1;
+    }
+    .u-margin-l-n60\@desktop {
+      margin-left: 0 !important;
+    }
+    .login-actions {
+      justify-content: flex-end;
+    }
+
+    .lrv-a-glue-parent {
+      justify-content: center;
+      display: flex;
+      .header__logo {
+        margin-left: 0 !important;
+      }
+    }
+  }
 }

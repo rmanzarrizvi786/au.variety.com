@@ -57,7 +57,10 @@ while (have_posts()) :
 
 					</div>
 
-					<?php if (\Variety\Inc\Article::get_instance()->is_article_vip(get_the_ID())) { ?>
+					<?php
+					// if (\Variety\Inc\Article::get_instance()->is_article_vip(get_the_ID())) {
+					if (0) {
+					?>
 						<div id="cx-paywall" class="u-max-width-618 lrv-u-margin-lr-auto"></div>
 					<?php } ?>
 
@@ -92,12 +95,21 @@ while (have_posts()) :
 				?>
 
 				<?php
-				\PMC::render_template(
+				/* \PMC::render_template(
 					sprintf('%s/template-parts/ads/outbrain.php', untrailingslashit(CHILD_THEME_PATH)),
 					[],
 					true
+				); */
+				?>
+
+				<?php
+				\PMC::render_template(
+					sprintf('%s/template-parts/widgets/brag-jobs.php', untrailingslashit(CHILD_THEME_PATH)),
+					['size' => 4, 'pos' => 'article-bottom'],
+					true
 				);
 				?>
+
 				<?php
 				if (!\PMC::is_mobile()) {
 					get_template_part('template-parts/ads/article-page-bottom');
