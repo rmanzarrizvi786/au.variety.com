@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Config file for pmc-gallery-v4 plugin from pmc-plugins
  *
@@ -12,7 +13,8 @@ namespace Variety\Plugins\Config;
 use PMC\Global_Functions\Traits\Singleton;
 use Variety\Plugins\Sponsored_Content\Sponsored_Content;
 
-class PMC_Gallery {
+class PMC_Gallery
+{
 
 	use Singleton;
 
@@ -20,7 +22,8 @@ class PMC_Gallery {
 	 * Construct Method.
 	 *
 	 */
-	protected function __construct() {
+	protected function __construct()
+	{
 		$this->_setup_hooks();
 	}
 
@@ -31,14 +34,14 @@ class PMC_Gallery {
 	 *
 	 * @return void
 	 */
-	protected function _setup_hooks() {
+	protected function _setup_hooks()
+	{
 
 		/**
 		 * Filters
 		 */
-		add_filter( 'pmc_gallery_v4_config', [ $this, 'filter_gallery_settings' ] );
-		add_filter( 'pmc_list_v4_config', [ $this, 'filter_list_settings' ] );
-
+		add_filter('pmc_gallery_v4_config', [$this, 'filter_gallery_settings']);
+		add_filter('pmc_list_v4_config', [$this, 'filter_list_settings']);
 	}
 
 	/**
@@ -48,15 +51,16 @@ class PMC_Gallery {
 	 *
 	 * @return array
 	 */
-	public function filter_gallery_settings( $settings ) {
+	public function filter_gallery_settings($settings)
+	{
 
 		$settings['logo'] = array(
-			'src'    => get_stylesheet_directory_uri() . '/assets/build/svg/variety-logo.svg',
+			'src'    => get_stylesheet_directory_uri() . '/assets/build/svg/brand-logo.svg',
 			'width'  => 140,
 			'height' => 41,
 		);
 
-		$settings['sponsored']      = Sponsored_Content::get_instance()->get_sponsored_flag_text( get_the_ID(), __( 'PARTNER CONTENT', 'pmc-variety' ) );
+		$settings['sponsored']      = Sponsored_Content::get_instance()->get_sponsored_flag_text(get_the_ID(), __('PARTNER CONTENT', 'pmc-variety'));
 		$settings['sponsoredStyle'] = [
 			'fontFamily'      => '"IBM Plex Mono", monospace',
 			'color'           => 'rgb(244, 126, 55)',
@@ -138,7 +142,8 @@ class PMC_Gallery {
 	 *
 	 * @return array
 	 */
-	public function filter_list_settings( $settings ) {
+	public function filter_list_settings($settings)
+	{
 
 		$settings['listNavBar']['parentElementQuerySelector']                               = '.header-sticky .lrv-a-wrapper';
 		$settings['listNavBar']['parentElementStyle']['marginBottom']                       = '0';
@@ -162,7 +167,5 @@ class PMC_Gallery {
 		$settings['adsProvider'] = 'boomerang';
 
 		return $settings;
-
 	}
-
 }
