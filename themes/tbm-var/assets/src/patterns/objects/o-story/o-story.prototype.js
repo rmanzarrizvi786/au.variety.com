@@ -13,12 +13,12 @@ c_span.c_span_classes = 'a-font-basic-s lrv-u-padding-b-050 lrv-u-text-transform
 c_span.c_span_link_classes += ' lrv-a-unstyle-link';
 c_span.c_span_url = '#tax';
 
-c_title.c_title_text = 'CBS Evening News Readies for The Streaming Wars';
+c_title.c_title_text = '';
 c_title.c_title_classes = 'a-font-secondary-bold-m';
 c_title.c_title_link_classes += ' lrv-u-color-black u-color-brand-accent-80:hover lrv-u-display-block';
 
 c_dek.c_dek_classes = 'lrv-u-color-black a-font-secondary-m u-margin-t-025 lrv-u-margin-b-050 a-hidden@mobile-max';
-c_dek.c_dek_text = 'Norah O’Donnell and Susan Zirinsky Are Out To Remake CBS’ Flagship Newscast at a Time When Journalism is Under Seige';
+c_dek.c_dek_text = '';
 
 c_link.c_link_text = 'By Cynthia Littleton';
 c_link.c_link_classes = 'a-font-secondary-bold-4xs u-color-pale-sky-2 u-color-brand-accent-80:hover';
