@@ -8,10 +8,10 @@ License: PMC Proprietary.  All rights reserved.
 
 // phpcs:disable Squiz.PHP.CommentedOutCode.Found
 
-define( 'PMC_GLOBAL_VERSION', '2021.4' );
+define('PMC_GLOBAL_VERSION', '2021.4');
 
-define( 'PMC_GLOBAL_FUNCTIONS_PATH', __DIR__ );
-define( 'PMC_GLOBAL_FUNCTIONS_URL', untrailingslashit( plugins_url( '', __FILE__ ) ) );
+define('PMC_GLOBAL_FUNCTIONS_PATH', __DIR__);
+define('PMC_GLOBAL_FUNCTIONS_URL', untrailingslashit(plugins_url('', __FILE__)));
 
 /**
  * If a site is not running on Go, explicitly declare PMC_IS_VIP_GO_SITE false.
@@ -21,13 +21,13 @@ define( 'PMC_GLOBAL_FUNCTIONS_URL', untrailingslashit( plugins_url( '', __FILE__
  * @see https://wordpressvip.zendesk.com/hc/en-us/requests/52510
  *
  */
-if ( ! defined( 'PMC_IS_VIP_GO_SITE' ) ) {
+if (!defined('PMC_IS_VIP_GO_SITE')) {
 	// VIP_GO_ENV is set to the environment name (develop, staging, production) for Go sites,
 	// and set to false for non-Go sites.
-	if ( defined( 'VIP_GO_ENV' ) && false !== VIP_GO_ENV ) {
-		define( 'PMC_IS_VIP_GO_SITE', true );
+	if (defined('VIP_GO_ENV') && false !== VIP_GO_ENV) {
+		define('PMC_IS_VIP_GO_SITE', true);
 	} else {
-		define( 'PMC_IS_VIP_GO_SITE', false );
+		define('PMC_IS_VIP_GO_SITE', false);
 	}
 }
 
@@ -37,9 +37,9 @@ if ( ! defined( 'PMC_IS_VIP_GO_SITE' ) ) {
  *
  * @codeCoverageIgnoreStart
  */
-if ( defined( 'WPCOM_IS_VIP_ENV' ) && true === WPCOM_IS_VIP_ENV ) {
-	if ( ! defined( 'WPCOM_DISABLE_ASYNC_REMOTE_LOGIN' ) ) {
-		define( 'WPCOM_DISABLE_ASYNC_REMOTE_LOGIN', true );
+if (defined('WPCOM_IS_VIP_ENV') && true === WPCOM_IS_VIP_ENV) {
+	if (!defined('WPCOM_DISABLE_ASYNC_REMOTE_LOGIN')) {
+		define('WPCOM_DISABLE_ASYNC_REMOTE_LOGIN', true);
 	}
 }
 // @codeCoverageIgnoreEnd
@@ -53,30 +53,31 @@ if ( defined( 'WPCOM_IS_VIP_ENV' ) && true === WPCOM_IS_VIP_ENV ) {
  * @param  string $version The version in VIP environment, does not apply in VIPGO
  * @return bool
  */
-function pmc_load_plugin( $plugin, $folder = false, $version = false ) {
+function pmc_load_plugin($plugin, $folder = false, $version = false)
+{
 	global $pmc_loaded_plugins;
 	global $vip_loaded_plugins;
 
-	if ( ! isset( $pmc_loaded_plugins ) ) {
+	if (!isset($pmc_loaded_plugins)) {
 		$pmc_loaded_plugins = [];
 	}
 
-	if ( ! isset( $vip_loaded_plugins ) ) {
+	if (!isset($vip_loaded_plugins)) {
 		$vip_loaded_plugins = array();
 	}
 
 	// allow disabling plugin via filter
-	if ( apply_filters( 'pmc_do_not_load_plugin', false, $plugin, $folder, $version ) ) {
+	if (apply_filters('pmc_do_not_load_plugin', false, $plugin, $folder, $version)) {
 		return false;
 	}
 
-	$plugin_key = sprintf( '%s/%s', empty( $folder ) ? 'plugins' : $folder, $plugin );
+	$plugin_key = sprintf('%s/%s', empty($folder) ? 'plugins' : $folder, $plugin);
 
-	if ( isset( $pmc_loaded_plugins[ $plugin_key ] ) ) {
+	if (isset($pmc_loaded_plugins[$plugin_key])) {
 		return false;
 	}
 
-	$pmc_loaded_plugins[ $plugin_key ] = $version;
+	$pmc_loaded_plugins[$plugin_key] = $version;
 	$plugin_directory_name             = $plugin;
 
 	// If a version is specified, $vip_loaded_plugins will
@@ -88,14 +89,14 @@ function pmc_load_plugin( $plugin, $folder = false, $version = false ) {
 	// However, if you instead do:
 	// wpcom_vip_load_plugin( 'fieldmanager', false, '1.1' );
 	// the entry will be 'plugins/fieldmanager-1.1'
-	if ( false !== $version ) {
+	if (false !== $version) {
 		$plugin_directory_name .= '-' . $version;
 	}
 
 	// if folder is specified and has pmc- prefix, bypass auto lookup
-	if ( $folder && preg_match( '/^pmc-/', $plugin ) ) {
+	if ($folder && preg_match('/^pmc-/', $plugin)) {
 
-		if ( defined( 'PMC_IS_VIP_GO_SITE' ) && PMC_IS_VIP_GO_SITE && ! empty( $version ) ) {
+		if (defined('PMC_IS_VIP_GO_SITE') && PMC_IS_VIP_GO_SITE && !empty($version)) {
 			/*
 			 * The plugin loader function on VIP Go sites does not support versions
 			 * like its counterpart on VIP sites. This is a workaround for VIP Go
@@ -103,40 +104,39 @@ function pmc_load_plugin( $plugin, $folder = false, $version = false ) {
 			 * instead of 'plugin-name-version' so that we can keep code sanity while
 			 * still being able to load a specific plugin version on VIP Go sites.
 			 */
-			$plugin  = sprintf( '%s/%s.php', untrailingslashit( $plugin_directory_name ), trim( $plugin, '/' ) );
+			$plugin  = sprintf('%s/%s.php', untrailingslashit($plugin_directory_name), trim($plugin, '/'));
 			$version = false;
 		}
 
-		return wpcom_vip_load_plugin( $plugin, $folder, $version );
+		return wpcom_vip_load_plugin($plugin, $folder, $version);
 	}
 
 	// check if plugin already loaded, plugin name should be unique whether it's in vip or vipgo environment
-	$folders_to_check = array( 'plugins', 'shared-plugins', 'pmc-plugins' );
-	foreach( $folders_to_check as $item ) {
-		if ( in_array( "{$item}/{$plugin_directory_name}", $vip_loaded_plugins ) ) {
+	$folders_to_check = array('plugins', 'shared-plugins', 'pmc-plugins');
+	foreach ($folders_to_check as $item) {
+		if (in_array("{$item}/{$plugin_directory_name}", $vip_loaded_plugins)) {
 			return false;
 		}
 	}
 
 	// set default folder if not passed
-	if ( empty( $folder ) ) {
+	if (empty($folder)) {
 
-		if ( defined( 'PMC_LOAD_PLUGIN' ) ) {
-			if ( file_exists( dirname( __DIR__ ) . "/{$plugin_directory_name}" ) ) {
+		if (defined('PMC_LOAD_PLUGIN')) {
+			if (file_exists(dirname(__DIR__) . "/{$plugin_directory_name}")) {
 				$folder = 'pmc-plugins';
 			}
 		}
-
 	}
 
-	if ( defined( 'PMC_IS_VIP_GO_SITE' ) && PMC_IS_VIP_GO_SITE ) {
+	if (defined('PMC_IS_VIP_GO_SITE') && PMC_IS_VIP_GO_SITE) {
 
 		// We're on VIP GO env, default plugins folder must not pass, this indicate wp plugins location: themes/plugins
-		if ( 'plugins' === $folder ) {
+		if ('plugins' === $folder) {
 			$folder = false;
 		}
 
-		if ( ! empty( $version ) && version_compare( $version, '0.0.1', '>=' ) ) {
+		if (!empty($version) && version_compare($version, '0.0.1', '>=')) {
 			/*
 			 * The plugin loader function on VIP Go sites does not support versions
 			 * like its counterpart on VIP sites. This is a workaround for VIP Go
@@ -144,20 +144,18 @@ function pmc_load_plugin( $plugin, $folder = false, $version = false ) {
 			 * instead of 'plugin-name-version' so that we can keep code sanity while
 			 * still being able to load a specific plugin version on VIP Go sites.
 			 */
-			$plugin = sprintf( '%s/%s.php', untrailingslashit( $plugin_directory_name ), trim( $plugin, '/' ) );
+			$plugin = sprintf('%s/%s.php', untrailingslashit($plugin_directory_name), trim($plugin, '/'));
 		}
-
 	} else {
 
 		// We're on VIP env, default folder must be 'plugins', this indicate VIP plugins location: themes/vip/plugins
-		if ( empty( $folder ) ) {
+		if (empty($folder)) {
 			$folder = 'plugins';
 		}
-
 	}
 
 	// catch all
-	return wpcom_vip_load_plugin( $plugin, $folder, $version );
+	return wpcom_vip_load_plugin($plugin, $folder, $version);
 }
 
 /**
@@ -165,18 +163,18 @@ function pmc_load_plugin( $plugin, $folder = false, $version = false ) {
  * @param string $plugin_or_path             Reserved for future use
  */
 function pmc_init_plugin(
-		$namespace_class_or_callable,
-		string $plugin_or_path // phpcs:ignore VariableAnalysis.CodeAnalysis.VariableAnalysis.UnusedVariable
-	) : void {
-	if ( is_string( $namespace_class_or_callable ) ) {
-		if ( class_exists( $namespace_class_or_callable ) ) {
-			$namespace_class_or_callable = [ $namespace_class_or_callable, 'get_instance' ];
-		} elseif ( function_exists( $namespace_class_or_callable . '\init_plugin' ) ) {
+	$namespace_class_or_callable,
+	string $plugin_or_path // phpcs:ignore VariableAnalysis.CodeAnalysis.VariableAnalysis.UnusedVariable
+): void {
+	if (is_string($namespace_class_or_callable)) {
+		if (class_exists($namespace_class_or_callable)) {
+			$namespace_class_or_callable = [$namespace_class_or_callable, 'get_instance'];
+		} elseif (function_exists($namespace_class_or_callable . '\init_plugin')) {
 			$namespace_class_or_callable .= '\init_plugin';
 		}
 	}
-	if ( is_callable( $namespace_class_or_callable ) ) {
-		add_action( 'after_setup_theme', $namespace_class_or_callable );
+	if (is_callable($namespace_class_or_callable)) {
+		add_action('after_setup_theme', $namespace_class_or_callable);
 	}
 }
 
@@ -204,16 +202,18 @@ require PMC_GLOBAL_FUNCTIONS_PATH . '/classes/class-nonce.php';
  * @param  string $path Optional path to append to the url
  * @return string       The ssl friendly full url
  */
-function pmc_global_functions_url( $path = '' ) {
-	$url = PMC::ssl_friendly_url( plugins_url( '', __FILE__ ) );
-	if ( !empty( $path ) && is_string( $path ) )  {
-		$url = untrailingslashit( $url ) . '/' . PMC::unleadingslashit( $path );
+function pmc_global_functions_url($path = '')
+{
+	$url = PMC::ssl_friendly_url(plugins_url('', __FILE__));
+	if (!empty($path) && is_string($path)) {
+		$url = untrailingslashit($url) . '/' . PMC::unleadingslashit($path);
 	}
 	return $url;
 }
 
-function __pmc_return_is_wpcom_vip() {
-	return defined( 'WPCOM_IS_VIP_ENV' ) && true === WPCOM_IS_VIP_ENV;
+function __pmc_return_is_wpcom_vip()
+{
+	return defined('WPCOM_IS_VIP_ENV') && true === WPCOM_IS_VIP_ENV;
 }
 
 // IMPORTANT: We need to load all VIP must have plugins before we load our PMC plugins
@@ -286,16 +286,16 @@ PMC_Must_Have_Plugins::load_pmc_plugins();  // @codeCoverageIgnore
 \PMC_Global::get_instance();
 
 // Load NDN everywhere except Go
-if( (defined( 'WPCOM_IS_VIP_ENV' ) && true === WPCOM_IS_VIP_ENV) && ( ! defined( 'PMC_IS_VIP_GO_SITE' ) || ! PMC_IS_VIP_GO_SITE ) ) {
-	pmc_load_plugin( 'pmc-ndn', 'pmc-plugins' );
+if ((defined('WPCOM_IS_VIP_ENV') && true === WPCOM_IS_VIP_ENV) && (!defined('PMC_IS_VIP_GO_SITE') || !PMC_IS_VIP_GO_SITE)) {
+	pmc_load_plugin('pmc-ndn', 'pmc-plugins');
 }
 
-if( is_admin() ) {
-	require( PMC_GLOBAL_FUNCTIONS_PATH . '/classes/class-pmc-admin-utilities.php' );
+if (is_admin()) {
+	require(PMC_GLOBAL_FUNCTIONS_PATH . '/classes/class-pmc-admin-utilities.php');
 
-	add_action( 'admin_enqueue_scripts', function() {
-		wp_enqueue_style( 'pmc-wpadmin-overrides', plugins_url( 'css/pmc-wpadmin-overrides.css', __FILE__ ) );
-	} );
+	add_action('admin_enqueue_scripts', function () {
+		wp_enqueue_style('pmc-wpadmin-overrides', plugins_url('css/pmc-wpadmin-overrides.css', __FILE__));
+	});
 }
 
 /**
@@ -306,68 +306,84 @@ if( is_admin() ) {
  * @todo Use PMC_Groups to opt-in PMC staff, continue to avoid annoying editorial staff.
  *
  */
-if( is_admin() ) {
+if (is_admin()) {
 
-	add_action( 'admin_head', function() {
-		?>
-		<style>.notice.notice-warning.vip-php-warning { display: none; } .notice.notice-warning { display: none; }</style>
-		<?php
-	}, 100 );
+	add_action('admin_head', function () {
+?>
+		<style>
+			.notice.notice-warning.vip-php-warning {
+				display: none;
+			}
 
-	add_action( 'admin_print_footer_scripts', function() {
-		?>
-		<script>if( window.jQuery ) { jQuery(".notice.notice-warning:contains('PHP errors or warnings')").addClass('vip-php-warning'); }</script>
-		<style>.notice.notice-warning { display: block; }</style>
-		<?php
-	}, 100 );
+			.notice.notice-warning {
+				display: none;
+			}
+		</style>
+	<?php
+	}, 100);
+
+	add_action('admin_print_footer_scripts', function () {
+	?>
+		<script>
+			if (window.jQuery) {
+				jQuery(".notice.notice-warning:contains('PHP errors or warnings')").addClass('vip-php-warning');
+			}
+		</script>
+		<style>
+			.notice.notice-warning {
+				display: block;
+			}
+		</style>
+<?php
+	}, 100);
 }
 
 // Enable the PMC XMLRPC Server for all sites
-if( defined('XMLRPC_REQUEST') && XMLRPC_REQUEST === true ) {
-	pmc_load_plugin( 'pmc-xmlrpc-server', 'pmc-plugins' );
+if (defined('XMLRPC_REQUEST') && XMLRPC_REQUEST === true) {
+	pmc_load_plugin('pmc-xmlrpc-server', 'pmc-plugins');
 }
 
 // 4.2 terms spliting fix / migration - need to load after pmc-wp-cli.php
-if( ! defined ('PMC_IS_VIP_GO_SITE' ) || PMC_IS_VIP_GO_SITE !== true ) {
-	pmc_load_plugin('pmc-term-split','pmc-plugins');
+if (!defined('PMC_IS_VIP_GO_SITE') || PMC_IS_VIP_GO_SITE !== true) {
+	pmc_load_plugin('pmc-term-split', 'pmc-plugins');
 }
 
 // supress attachment's description from rendering
-add_filter( 'the_content', function( $content ) {
-	if ( is_attachment() ) {
+add_filter('the_content', function ($content) {
+	if (is_attachment()) {
 		return '';
 	}
 	return $content;
-}, 1 );
+}, 1);
 
 // any functions call that need to execute in init action should append to the list.below
-add_action( 'init', function() {
+add_action('init', function () {
 
 	// prevent shortcode [source] from applying to fix var[source] issue in template
 	// https://wordpressvip.zendesk.com/requests/21761
-	remove_shortcode( 'source' );
+	remove_shortcode('source');
 
 	// Restore Open Graph's original behavior of showing images instead of video snapshots
 	// https://wordpressvip.zendesk.com/requests/23328
-	remove_filter( 'jetpack_open_graph_tags', 'enhanced_og_video' );
-	remove_filter( 'jetpack_open_graph_tags', 'enhanced_og_image' );
-	remove_filter( 'jetpack_open_graph_tags', 'enhanced_og_gallery' );
+	remove_filter('jetpack_open_graph_tags', 'enhanced_og_video');
+	remove_filter('jetpack_open_graph_tags', 'enhanced_og_image');
+	remove_filter('jetpack_open_graph_tags', 'enhanced_og_gallery');
 
 	/**
 	 * Disable global terms on WordPress.com.  Affecting term split if not disabled
 	 */
-	if ( function_exists( 'wpcom_vip_disable_global_terms' ) ) {
-		if ( 'no' == PMC_Cheezcap::get_instance()->get_option( 'pmc_global_terms' ) ) {
+	if (function_exists('wpcom_vip_disable_global_terms')) {
+		if ('no' == PMC_Cheezcap::get_instance()->get_option('pmc_global_terms')) {
 			wpcom_vip_disable_global_terms();
 		}
 	}
 
 	// Enable VIP Performance Tweaks
 	// View the function for a list of the gains it accomplishes
-	if ( function_exists( 'wpcom_vip_enable_performance_tweaks' ) ){
+	if (function_exists('wpcom_vip_enable_performance_tweaks')) {
 		wpcom_vip_enable_performance_tweaks();
 	}
-} );
+});
 
 /**
  * Load PMC and/or WPCOM plugins
@@ -396,42 +412,43 @@ add_action( 'init', function() {
  * ) );
  *
  */
-function load_pmc_plugins( $plugins ) {
+function load_pmc_plugins($plugins)
+{
 
-	if ( ! is_array( $plugins ) ) {
+	if (!is_array($plugins)) {
 		$plugins = array();
 	}
 
-	$plugins = apply_filters( 'load_pmc_plugins', $plugins );
-	$plugins_include = apply_filters( 'load_pmc_plugins_include', array() );
-	$plugins_exclude = apply_filters( 'load_pmc_plugins_exclude', array() );
+	$plugins = apply_filters('load_pmc_plugins', $plugins);
+	$plugins_include = apply_filters('load_pmc_plugins_include', array());
+	$plugins_exclude = apply_filters('load_pmc_plugins_exclude', array());
 
-	if ( ! empty( $plugins_include ) || ! empty( $plugins_exclude ) ) {
-		$plugins = load_pmc_plugins_filter( $plugins, $plugins_include, $plugins_exclude );
-		unset ( $plugins_include );
-		unset ( $plugins_exclude );
+	if (!empty($plugins_include) || !empty($plugins_exclude)) {
+		$plugins = load_pmc_plugins_filter($plugins, $plugins_include, $plugins_exclude);
+		unset($plugins_include);
+		unset($plugins_exclude);
 	}
 
-	if ( empty( $plugins ) ) {
+	if (empty($plugins)) {
 		return;
 	}
 
-	foreach ( $plugins as $folder => $list ) {
-		if ( empty( $list ) || empty( $folder ) ) {
+	foreach ($plugins as $folder => $list) {
+		if (empty($list) || empty($folder)) {
 			continue;
 		}
-		foreach ( $list as $key => $value ) {
+		foreach ($list as $key => $value) {
 
 			$plugin = $plugin_folder = $version = false;
 
-			if ( is_numeric( $key ) ) {
+			if (is_numeric($key)) {
 				$plugin = $value;
 			} else {
 				$plugin = $key;
 				$version = $value;
 			}
 
-			if ( empty( $plugin ) ) {
+			if (empty($plugin)) {
 				continue;
 			}
 
@@ -443,71 +460,73 @@ function load_pmc_plugins( $plugins ) {
 			 * with VIPGO which expects to find VIP shared plugins in WP_PLUGINS_DIR
 			 */
 			$plugin_folder = $folder;
-			if( $folder === 'plugins' ) {
+			if ($folder === 'plugins') {
 				$plugin_folder = false;
 			}
 
-			pmc_load_plugin( $plugin, $plugin_folder, $version );
+			pmc_load_plugin($plugin, $plugin_folder, $version);
 		}
 	}
 
-	do_action( 'load_pmc_plugins_loaded' );
+	do_action('load_pmc_plugins_loaded');
 } // load_pmc_plugins
 
 // helper function to apply $include & $exclude to $plugins list
-function load_pmc_plugins_filter( $plugins, $include = array(), $exclude = array() ) {
+function load_pmc_plugins_filter($plugins, $include = array(), $exclude = array())
+{
 
 	$return_plugins = array();
 
 	// $plugins need to be an array
-	if ( ! is_array( $plugins ) ) {
+	if (!is_array($plugins)) {
 		$plugins = array();
 	}
 
-	$keys = array_merge( array_keys( $include ), array_keys( $exclude ) );
-	$keys = array_merge( $keys, array_keys( $plugins ) );
-	$keys = array_unique( $keys );
+	$keys = array_merge(array_keys($include), array_keys($exclude));
+	$keys = array_merge($keys, array_keys($plugins));
+	$keys = array_unique($keys);
 
-	foreach ( $keys as $key ) {
+	foreach ($keys as $key) {
 
 		$list = array();
 
-		if ( isset( $plugins[ $key ] ) && is_array( $plugins[ $key ] ) ) {
+		if (isset($plugins[$key]) && is_array($plugins[$key])) {
 
-			$list = $plugins[ $key ];
+			$list = $plugins[$key];
 
-			if ( isset( $exclude[$key] ) && is_array( $exclude[$key] ) ) {
-				$list = array_diff( $list, $exclude[$key] );
+			if (isset($exclude[$key]) && is_array($exclude[$key])) {
+				$list = array_diff($list, $exclude[$key]);
 			}
-
 		}
 
-		if ( isset( $include[ $key ] ) && is_array( $include[ $key ] ) ) {
-			$list = array_merge( $list, $include[ $key ] );
+		if (isset($include[$key]) && is_array($include[$key])) {
+			$list = array_merge($list, $include[$key]);
 		}
 
-		$list = array_filter( array_unique( $list ) );
+		$list = array_filter(array_unique($list));
 
-		if ( !empty( $list ) ) {
-			$return_plugins[ $key ] = $list;
+		if (!empty($list)) {
+			$return_plugins[$key] = $list;
 		}
-
 	}
 
 	return $return_plugins;
 } // function load_pmc_plugins_filter
 
-function pmc_add_body_class( $class ) {
-	PMC_Global::get_instance()->add_body_class( $class );
+function pmc_add_body_class($class)
+{
+	PMC_Global::get_instance()->add_body_class($class);
 }
 
-function pmc_remove_body_class( $class ) {
-	PMC_Global::get_instance()->remove_body_class( $class );
+function pmc_remove_body_class($class)
+{
+	PMC_Global::get_instance()->remove_body_class($class);
 }
 
-function pmc_set_body_class ( $add_class, $remove_class = array() ) {
-	pmc_add_body_class( $add_class );
-	pmc_remove_body_class( $remove_class );
+function pmc_set_body_class($add_class, $remove_class = array())
+{
+	pmc_add_body_class($add_class);
+	pmc_remove_body_class($remove_class);
 }
 
 
@@ -528,12 +547,13 @@ function pmc_set_body_class ( $add_class, $remove_class = array() ) {
  *      Defaults to an empty string.
  * @return string The sanitized value
  */
-function pmc_sanitize_html_attribute_name( $attr_name, $fallback = '' ) {
+function pmc_sanitize_html_attribute_name($attr_name, $fallback = '')
+{
 	//Strip out any % encoded octets
-	$sanitized = preg_replace( '|%[a-fA-F0-9][a-fA-F0-9]|', '', $attr_name );
+	$sanitized = preg_replace('|%[a-fA-F0-9][a-fA-F0-9]|', '', $attr_name);
 	//Limit to A-Z,a-z,0-9,_,-
-	$sanitized = preg_replace( '/[^A-Za-z0-9_-]/', '', $sanitized );
-	if ( '' == $sanitized ) {
+	$sanitized = preg_replace('/[^A-Za-z0-9_-]/', '', $sanitized);
+	if ('' == $sanitized) {
 		$sanitized = $fallback;
 	}
 	return $sanitized;
@@ -552,24 +572,25 @@ function pmc_sanitize_html_attribute_name( $attr_name, $fallback = '' ) {
  * @see http://codex.wordpress.org/Function_Reference/get_shortcode_regex
  *
  */
-function pmc_find_all_shortcode( $content, $shortcode ) {
+function pmc_find_all_shortcode($content, $shortcode)
+{
 	$pattern = get_shortcode_regex();
 	$shortcodes = array();
 
-	if( preg_match_all( '/'. $pattern .'/s', $content, $matches, PREG_SET_ORDER ) ) {
-		foreach( $matches as $m	 ) {
+	if (preg_match_all('/' . $pattern . '/s', $content, $matches, PREG_SET_ORDER)) {
+		foreach ($matches as $m) {
 			// [[foo]] syntax for escaping a tag; this isn't a match
-			if ( $m[1] == '[' && $m[6] == ']' ) {
+			if ($m[1] == '[' && $m[6] == ']') {
 				$x++;
 				continue;
 			}
 
-			if( $m[2] == $shortcode ) {
+			if ($m[2] == $shortcode) {
 				$shortcodes[] = array(
 					'shortcode'  => $m[0],
 					'tag'        => $m[2],
 					'content'    => $m[5],
-					'attr'       => shortcode_parse_atts( $m[3] ),
+					'attr'       => shortcode_parse_atts($m[3]),
 				);
 			}
 		}
@@ -594,14 +615,16 @@ function pmc_find_all_shortcode( $content, $shortcode ) {
  * @see pmc_find_all_shortcode()
  *
  */
-function pmc_find_shortcode( $content, $shortcode, $matches=null, $index=null) {
+function pmc_find_shortcode($content, $shortcode, $matches = null, $index = null)
+{
 	$pattern = get_shortcode_regex();
-	if( preg_match_all( '/'. $pattern .'/s', $content, $matches )
-			&& array_key_exists( 2, $matches )
-			&& in_array( $shortcode, $matches[2] )
+	if (
+		preg_match_all('/' . $pattern . '/s', $content, $matches)
+		&& array_key_exists(2, $matches)
+		&& in_array($shortcode, $matches[2])
 	) {
-		$index = array_search( $shortcode, $matches[2] );
-		if( $index !== FALSE ) {
+		$index = array_search($shortcode, $matches[2]);
+		if ($index !== FALSE) {
 			return $matches[0][$index];
 		}
 	}
@@ -618,17 +641,18 @@ function pmc_find_shortcode( $content, $shortcode, $matches=null, $index=null) {
  * @param  string  $format     The time format
  * @return string              The time
  */
-function pmc_human_time( $time, $human_hour = 8, $format = 'M j, Y g:i a' ) {
-	$to = current_time( 'timestamp' );
+function pmc_human_time($time, $human_hour = 8, $format = 'M j, Y g:i a')
+{
+	$to = current_time('timestamp');
 	$time_diff = $to - $time;
 
 	//If time difference is less then $human_hour hours then show human time diff
-	if ( $time_diff > 0 && $time_diff < $human_hour * HOUR_IN_SECONDS ) {
-		return sprintf( __( '%s ago' ), human_time_diff( $time, $to ) );
+	if ($time_diff > 0 && $time_diff < $human_hour * HOUR_IN_SECONDS) {
+		return sprintf(__('%s ago'), human_time_diff($time, $to));
 	}
 
 	// otherwise return time as $format
-	return date( $format, $time );
+	return date($format, $time);
 }
 
 /**
@@ -638,8 +662,9 @@ function pmc_human_time( $time, $human_hour = 8, $format = 'M j, Y g:i a' ) {
  *
  * @return array
  */
-function pmc_get_intermediate_image_sizes() {
-   return \PMC\Image\get_intermediate_image_sizes();
+function pmc_get_intermediate_image_sizes()
+{
+	return \PMC\Image\get_intermediate_image_sizes();
 }
 
 /**
@@ -658,16 +683,17 @@ function pmc_get_intermediate_image_sizes() {
  *                        Typically this is done by passing `__FILE__` as the argument.
  * @return string Plugins URL link with optional paths appended.
  */
-function pmc_maybe_minify_url( $path = '', $plugin = '' ) {
+function pmc_maybe_minify_url($path = '', $plugin = '')
+{
 
-	if ( PMC::is_production() && ( ! defined( 'SCRIPT_DEBUG' ) || ! SCRIPT_DEBUG ) ) {
-		if ( ! preg_match( '/.min./', $path ) ) {
-			$path = str_replace( [ '.js', '.css' ], [ '.min.js', '.min.css' ], $path );
-			$path = apply_filters( 'pmc_maybe_minify_url', $path );
+	if (PMC::is_production() && (!defined('SCRIPT_DEBUG') || !SCRIPT_DEBUG)) {
+		if (!preg_match('/.min./', $path)) {
+			$path = str_replace(['.js', '.css'], ['.min.js', '.min.css'], $path);
+			$path = apply_filters('pmc_maybe_minify_url', $path);
 		}
 	}
 
-	return plugins_url( $path, $plugin );
+	return plugins_url($path, $plugin);
 }
 
 /**
@@ -679,12 +705,13 @@ function pmc_maybe_minify_url( $path = '', $plugin = '' ) {
  * }
  *
  */
-function pmc_load_theme_international_override() {
-	if ( ! defined('PMC_THEME_INTERNATIONAL_OVERRIDE_PATH') ) {
+function pmc_load_theme_international_override()
+{
+	if (!defined('PMC_THEME_INTERNATIONAL_OVERRIDE_PATH')) {
 		return;
 	}
 	$theme_international_override_file = PMC_THEME_INTERNATIONAL_OVERRIDE_PATH . '/functions.php';
-	if ( file_exists( $theme_international_override_file ) && validate_file( $theme_international_override_file ) === 0 ) {
+	if (file_exists($theme_international_override_file) && validate_file($theme_international_override_file) === 0) {
 		require_once $theme_international_override_file;
 	}
 }
@@ -699,11 +726,12 @@ function pmc_load_theme_international_override() {
  * @param array  $args       Optional. Array containing each separate argument to pass to the hook's callback function.
  * @return bool
  */
-function pmc_schedule_event( int $timestamp, string $recurrence, string $hook, array $args = [] ) : bool {
-	if ( empty( $timestamp ) || empty( $recurrence ) || empty( $hook ) ) {
+function pmc_schedule_event(int $timestamp, string $recurrence, string $hook, array $args = []): bool
+{
+	if (empty($timestamp) || empty($recurrence) || empty($hook)) {
 		return false;
 	}
-	if ( ! wp_next_scheduled( $hook, $args ) ) {
+	if (!wp_next_scheduled($hook, $args)) {
 		return (bool) wp_schedule_event(
 			$timestamp,
 			$recurrence,

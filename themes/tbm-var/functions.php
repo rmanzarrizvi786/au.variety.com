@@ -64,7 +64,7 @@ if (!defined('VIP_GO_APP_ENVIRONMENT') || false === VIP_GO_APP_ENVIRONMENT) {
  * Load up the class autoloader
  */
 
-// require_once(WP_PLUGIN_DIR . '/cheezcap/cheezcap.php');
+require_once(WP_PLUGIN_DIR . '/cheezcap/cheezcap.php');
 
 
 // require_once PMC_CORE_PATH . '/pmc/inc/helpers/autoloader.php';
@@ -383,8 +383,8 @@ function _wpcom_vip_load_plugin_sanitizer($folder)
 function pmc_adm_render_ads($ad_location, $ad_title = '', $echo = true, $provider = '')
 {
 	$ads = TBMAds::get_instance();
-    echo $ads->get_ad($ad_location);
-    return;
+	echo $ads->get_ad($ad_location);
+	return;
 }
 
 /**

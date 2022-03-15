@@ -1,5 +1,7 @@
 .DS_Store
 
+uploads/*
+
 plugins/*
 !plugins/tbm-shout-writer-beer
 !plugins/tbm-adm
@@ -17,11 +19,6 @@ plugins/ssm-ga/*
 
 !plugins/pmc-plugins/
 plugins/pmc-plugins/*
-!plugins/pmc-plugins/pmc-global-functions
-!plugins/pmc-plugins/pmc-larva
-!plugins/pmc-plugins/pmc-vertical
-!plugins/pmc-plugins/pmc-ajax-pagination
-!plugins/pmc-plugins/fm-widgets
 
 !plugins/cheezcap
 

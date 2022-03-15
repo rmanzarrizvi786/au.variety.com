@@ -8,7 +8,7 @@
 
 $current_term = get_queried_object();
 
-$menu_location = $current_term ?  $current_term->slug . '-' . $current_term->taxonomy . '-menu' : '';
+$menu_location = $current_term && isset($current_term->slug) ?  $current_term->slug . '-' . $current_term->taxonomy . '-menu' : '';
 
 $menu_items = PMC\Core\Inc\Menu::get_instance()->get_menu_data($menu_location);
 

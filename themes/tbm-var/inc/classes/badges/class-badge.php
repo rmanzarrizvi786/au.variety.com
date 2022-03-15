@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Badge,
  * Handler for Badge functionality.
@@ -17,14 +18,16 @@ use PMC\Global_Functions\Traits\Singleton;
 /**
  * Class Badge.
  */
-abstract class Badge {
+abstract class Badge
+{
 
 	use Singleton;
 
 	/**
 	 * Construct method.
 	 */
-	protected function __construct() {
+	protected function __construct()
+	{
 
 		/**
 		 * Setting up late.
@@ -32,8 +35,7 @@ abstract class Badge {
 		 * with default (10) priority. So we won't be able detect
 		 * If 'editorial' taxonomy is registerd or not before that.
 		 */
-		add_action( 'init', array( $this, 'setup_hooks' ), 15 );
-
+		add_action('init', array($this, 'setup_hooks'), 15);
 	}
 
 	/**
@@ -41,8 +43,9 @@ abstract class Badge {
 	 *
 	 * @return bool TRUE if badge taxonomy is exists otherwise FALSE
 	 */
-	protected function _is_taxonomy_exists() {
-		return taxonomy_exists( $this::TAXONOMY_SLUG );
+	protected function _is_taxonomy_exists()
+	{
+		return taxonomy_exists($this::TAXONOMY_SLUG);
 	}
 
 	/**
@@ -50,14 +53,14 @@ abstract class Badge {
 	 *
 	 * @return void
 	 */
-	public function setup_hooks() {
+	public function setup_hooks()
+	{
 
-		if ( ! $this->_is_taxonomy_exists() ) {
+		if (!$this->_is_taxonomy_exists()) {
 			return;
 		}
 
 		$this->_maybe_insert_term();
-
 	}
 
 	/**
@@ -65,20 +68,23 @@ abstract class Badge {
 	 *
 	 * @return array|bool Term data if create other will FALSE
 	 */
-	protected function _maybe_insert_term() {
+	protected function _maybe_insert_term()
+	{
 
 		$term = false;
 
-		if ( ! wpcom_vip_term_exists( $this::TERM_SLUG, $this::TAXONOMY_SLUG ) ) {
+		$term_exists = (function_exists('wpcom_vip_term_exists')) ? 'wpcom_vip_term_exists' : 'term_exists';
+
+		if (!$term_exists($this::TERM_SLUG, $this::TAXONOMY_SLUG)) {
 
 			$term = wp_insert_term(
 				$this::TERM_NAME,
-				$this::TAXONOMY_SLUG, array(
+				$this::TAXONOMY_SLUG,
+				array(
 					'slug'        => $this::TERM_SLUG,
 					'description' => 'Badge Term',
 				)
 			);
-
 		}
 
 		return $term;
@@ -91,19 +97,20 @@ abstract class Badge {
 	 *
 	 * @return bool
 	 */
-	public function exists_on_post( $post ) {
+	public function exists_on_post($post)
+	{
 
-		if ( empty( $post ) || ( ! is_object( $post ) && ! is_numeric( $post ) ) ) {
+		if (empty($post) || (!is_object($post) && !is_numeric($post))) {
 			return false;
 		}
 
-		$post = get_post( $post );
+		$post = get_post($post);
 
-		if ( ! is_a( $post, 'WP_Post' ) ) {
+		if (!is_a($post, 'WP_Post')) {
 			return false;
 		}
 
-		return has_term( $this::TERM_SLUG, $this::TAXONOMY_SLUG, $post );
+		return has_term($this::TERM_SLUG, $this::TAXONOMY_SLUG, $post);
 	}
 
 	/**
@@ -111,15 +118,15 @@ abstract class Badge {
 	 *
 	 * @return bool|string Link of badge.
 	 */
-	public function get_link() {
+	public function get_link()
+	{
 
-		$link = get_term_link( $this::TERM_SLUG, $this::TAXONOMY_SLUG );
+		$link = get_term_link($this::TERM_SLUG, $this::TAXONOMY_SLUG);
 
-		if ( ! empty( $link ) && ! is_wp_error( $link ) ) {
+		if (!empty($link) && !is_wp_error($link)) {
 			return $link;
 		}
 
 		return false;
 	}
-
 }
