@@ -223,10 +223,10 @@ class BragObserver
 
       $formData['list'] = 16; // Film & TV ( ID in Brag Observer Lists)
 
-      if (is_user_logged_in()) :
+      /* if (is_user_logged_in()) :
         $current_user = wp_get_current_user();
         $formData['email'] = $current_user->user_email;
-      endif;
+      endif; */
 
       error_log(print_r($formData, true));
 
