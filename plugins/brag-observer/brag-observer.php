@@ -228,8 +228,6 @@ class BragObserver
         $formData['email'] = $current_user->user_email;
       endif; */
 
-      error_log(print_r($formData, true));
-
       $brag_api_url = 'https://thebrag.com/wp-json/brag_observer/v1/sub_unsub/';
 
       $response = wp_remote_post(
