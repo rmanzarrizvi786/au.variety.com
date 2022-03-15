@@ -12,7 +12,7 @@ $current_url = home_url(add_query_arg([], $GLOBALS['wp']->request));
 				<?php } ?>
 			</a>
 		<?php } else { ?>
-			<a class="o-drop-menu__toggle <?php echo esc_attr($o_drop_menu_toggle_classes ?? ''); ?>" href="<?php echo esc_url(wp_logout_url($current_url)); ?>">
+			<a class="a-hidden@desktop-xl-max o-drop-menu__toggle <?php echo esc_attr($o_drop_menu_toggle_classes ?? ''); ?>" href="<?php echo esc_url(wp_logout_url($current_url)); ?>">
 				<?php if (!empty($c_span)) {
 					$c_span['c_span_text'] = 'Logout';?>
 					<?php \PMC::render_template(PMC_CORE_PATH . '/template-parts/patterns/components/c-span.php', $c_span, true); ?>
@@ -25,6 +25,8 @@ $current_url = home_url(add_query_arg([], $GLOBALS['wp']->request));
 <?php
 return;
 ?>
+
+
 <div class="o-drop-menu o-drop-menu-login <?php echo esc_attr($o_drop_menu_classes ?? ''); ?>" data-collapsible="collapsed" <?php echo esc_attr($o_drop_data_attr ?? ''); ?> <?php if (!empty($o_drop_data_attr)) { ?> <?php echo esc_attr($o_drop_data_attr ?? ''); ?> <?php } ?>>
 	<div class="js-LoginStatus--hide-when-authenticated">
 		<a class="o-drop-menu__toggle <?php echo esc_attr($o_drop_menu_toggle_classes ?? ''); ?>" href="#" data-collapsible-toggle="always-show">

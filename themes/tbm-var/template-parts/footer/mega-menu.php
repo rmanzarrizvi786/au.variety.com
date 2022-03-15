@@ -106,15 +106,23 @@ $menu_items = [
 		'label' => __('Have a News Tip?', 'pmc-variety'),
 		'url'   => 'https://thebrag.com/media/submit-a-tip/',
 	],
-	[
-		'label' => __('Subscribe', 'pmc-variety'),
-		'url'   => '/subscribe-us/?utm_source=site&utm_medium=Mega',
-	],
+	// [
+	// 	'label' => __('Subscribe', 'pmc-variety'),
+	// 	'url'   => '/subscribe-us/?utm_source=site&utm_medium=Mega',
+	// ],
 	[
 		'label' => __('Newsletters', 'pmc-variety'),
 		'url'   => 'https://thebrag.com/observer/',
 	],
 ];
+if (is_user_logged_in()) {
+	$current_url = home_url(add_query_arg([], $GLOBALS['wp']->request));
+	$menu_items[] =
+		[
+			'label' => __('Logout', 'pmc-variety'),
+			'url'   => esc_url(wp_logout_url($current_url)),
+		];
+}
 
 foreach ($menu_items as $menu_item) {
 	$item = $template;
