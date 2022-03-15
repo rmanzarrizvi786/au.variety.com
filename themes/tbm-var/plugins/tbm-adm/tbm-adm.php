@@ -34,12 +34,6 @@ class TBMAds
   */
   public function action_wp_enqueue_scripts()
   {
-    if (
-      is_page_template('page-templates/brag-observer.php') ||
-      is_page_template('page-templates/brag-client-club.php') ||
-      is_page_template('page-templates/brag-client-rsvp-event.php')
-    )
-      return;
     wp_enqueue_script('adm-fuse', 'https://cdn.fuseplatform.net/publift/tags/2/2745/fuse.js', [], '1');
   }
 
@@ -48,21 +42,18 @@ class TBMAds
   */
   public function action_wp_head()
   {
-    // if (!is_home() && !is_front_page()) 
-    {
 ?>
-      <script type="text/javascript">
-        const fusetag = window.fusetag || (window.fusetag = {
-          que: []
-        });
+    <script type="text/javascript">
+      const fusetag = window.fusetag || (window.fusetag = {
+        que: []
+      });
 
-        fusetag.que.push(function() {
-          googletag.pubads().enableSingleRequest();
-          googletag.enableServices();
-        });
-      </script>
+      fusetag.que.push(function() {
+        googletag.pubads().enableSingleRequest();
+        googletag.enableServices();
+      });
+    </script>
 <?php
-    }
   }
 
   /*
@@ -84,7 +75,7 @@ class TBMAds
     if ('' == $ad_location)
       return;
 
-    $html = '<div class="fuse-ad">' . $ad_location . '</div>'; // '';
+    $html = '<div class="fuse-ad"><h1>' . $ad_location . '</h1></div>'; // '';
     $fuse_tags = self::fuse_tags();
 
     if (isset($_GET['screenshot'])) {

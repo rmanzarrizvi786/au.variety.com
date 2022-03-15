@@ -112,9 +112,9 @@ while (have_posts()) :
 				?>
 
 				<?php
-				if (!\PMC::is_mobile()) {
-					get_template_part('template-parts/ads/article-page-bottom');
-				}
+				// if (!\PMC::is_mobile()) {
+				get_template_part('template-parts/ads/article-page-bottom');
+				// }
 				?>
 				<?php
 				/* \PMC::render_template(

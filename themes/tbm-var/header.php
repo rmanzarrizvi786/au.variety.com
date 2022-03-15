@@ -111,9 +111,9 @@ $bg_color_class = is_home() || (is_archive() && !is_author() && !is_tag('documen
 				<div class="vy-leaderboard-ad"></div> <!-- marker for pmc-sticky-ad (aka Mobile Adhesion Ads) -->
 				<?php
 
-				if (PMC::is_mobile()) {
+				/* if (PMC::is_mobile()) {
 					pmc_adm_render_ads('leaderboard');
-				}
+				} */
 
 				\PMC::render_template(
 					sprintf('%s/template-parts/header/menu.php', untrailingslashit(CHILD_THEME_PATH)),

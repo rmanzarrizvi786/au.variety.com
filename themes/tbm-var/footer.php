@@ -18,7 +18,7 @@
 
 <?php
 
-\pmc_adm_render_ads('mobile-footer');
+// \pmc_adm_render_ads('mobile-footer');
 
 get_template_part('template-parts/footer/main');
 

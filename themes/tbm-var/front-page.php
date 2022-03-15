@@ -15,7 +15,10 @@ get_header();
 	if (is_active_sidebar('homepage-top')) {
 		dynamic_sidebar('homepage-top');
 	}
+
+	pmc_adm_render_ads('incontent_1');
 	?>
+
 
 	<div class="lrv-a-wrapper lrv-u-flex@tablet lrv-u-margin-t-1">
 
@@ -41,15 +44,17 @@ get_header();
 		true
 	);
 
-	pmc_adm_render_ads('incontent_1');
+	pmc_adm_render_ads('incontent_2');
 
-	if (!\PMC::is_mobile()) {
-		pmc_adm_render_ads('homepage-bottom-river', '');
-	}
+	// if (!\PMC::is_mobile()) {
+	// 	pmc_adm_render_ads('homepage-bottom-river', '');
+	// }
 
 	if (is_active_sidebar('homepage-bottom')) {
 		dynamic_sidebar('homepage-bottom');
 	}
+
+	pmc_adm_render_ads('incontent_3');
 	?>
 
 </section>

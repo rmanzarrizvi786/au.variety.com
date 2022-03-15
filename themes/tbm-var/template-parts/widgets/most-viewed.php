@@ -48,7 +48,7 @@ foreach ($data['articles'] as $_post) {
 // Remove banner by default
 $most_viewed['cxense_subscribe_widget'] = false;
 
-if (PMC::is_mobile()) {
+/* if (PMC::is_mobile()) {
 
 	// Add banner if is mobile homepage
 	if (is_home()) {
@@ -60,7 +60,7 @@ if (PMC::is_mobile()) {
 			'o_tease_primary_classes'          => 'lrv-u-padding-tb-1@mobile-max',
 		];
 	}
-}
+} */
 
 
 \PMC::render_template(

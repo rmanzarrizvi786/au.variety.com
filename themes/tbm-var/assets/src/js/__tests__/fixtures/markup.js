@@ -84,13 +84,13 @@ module.exports = {
 										<img class="c-lazy-image__img lrv-u-background-color-grey-lightest lrv-u-width-100p lrv-u-display-block lrv-u-height-auto"
 											src="https://source.unsplash.com/random/605x413"
 											data-lazy-src=""
-											alt="Lazy loaded image"
+											alt=""
 											data-lazy-srcset="https://farm5.staticflickr.com/4078/5441060528_31db7838ba_m.jpg 240w,https://farm5.staticflickr.com/4078/5441060528_31db7838ba_n.jpg 320w,https://farm5.staticflickr.com/4078/5441060528_31db7838ba.jpg 500w, 640w,https://farm5.staticflickr.com/4078/5441060528_31db7838ba_b.jpg 1024w"
 											data-lazy-sizes="auto" width="" height="">
 										<noscript><img
 												class=" u-border-color-brand-secondary-50 u-margin-lr-n075@mobile-max"
 												src=""
-												alt="Lazy loaded image"
+												alt=""
 												srcset="https://farm5.staticflickr.com/4078/5441060528_31db7838ba_m.jpg 240w,https://farm5.staticflickr.com/4078/5441060528_31db7838ba_n.jpg 320w,https://farm5.staticflickr.com/4078/5441060528_31db7838ba.jpg 500w, 640w,https://farm5.staticflickr.com/4078/5441060528_31db7838ba_b.jpg 1024w"
 												sizes="auto" height="" width=""></noscript>
 
@@ -169,12 +169,12 @@ module.exports = {
 												<img class="c-lazy-image__img lrv-u-background-color-grey-lightest lrv-u-width-100p lrv-u-display-block lrv-u-height-auto"
 													src="https://source.unsplash.com/random/327x184"
 													data-lazy-src=""
-													alt="Lazy loaded image"
+													alt=""
 													data-lazy-srcset="https://farm5.staticflickr.com/4078/5441060528_31db7838ba_m.jpg 240w,https://farm5.staticflickr.com/4078/5441060528_31db7838ba_n.jpg 320w,https://farm5.staticflickr.com/4078/5441060528_31db7838ba.jpg 500w, 640w,https://farm5.staticflickr.com/4078/5441060528_31db7838ba_b.jpg 1024w"
 													data-lazy-sizes="auto" width="" height="">
 												<noscript><img class=""
 														src=""
-														alt="Lazy loaded image"
+														alt=""
 														srcset="https://farm5.staticflickr.com/4078/5441060528_31db7838ba_m.jpg 240w,https://farm5.staticflickr.com/4078/5441060528_31db7838ba_n.jpg 320w,https://farm5.staticflickr.com/4078/5441060528_31db7838ba.jpg 500w, 640w,https://farm5.staticflickr.com/4078/5441060528_31db7838ba_b.jpg 1024w"
 														sizes="auto" height="" width=""></noscript>
 
@@ -251,12 +251,12 @@ module.exports = {
 												<img class="c-lazy-image__img lrv-u-background-color-grey-lightest lrv-u-width-100p lrv-u-display-block lrv-u-height-auto"
 													src="https://source.unsplash.com/random/327x184"
 													data-lazy-src=""
-													alt="Lazy loaded image"
+													alt=""
 													data-lazy-srcset="https://farm5.staticflickr.com/4078/5441060528_31db7838ba_m.jpg 240w,https://farm5.staticflickr.com/4078/5441060528_31db7838ba_n.jpg 320w,https://farm5.staticflickr.com/4078/5441060528_31db7838ba.jpg 500w, 640w,https://farm5.staticflickr.com/4078/5441060528_31db7838ba_b.jpg 1024w"
 													data-lazy-sizes="auto" width="" height="">
 												<noscript><img class=""
 														src=""
-														alt="Lazy loaded image"
+														alt=""
 														srcset="https://farm5.staticflickr.com/4078/5441060528_31db7838ba_m.jpg 240w,https://farm5.staticflickr.com/4078/5441060528_31db7838ba_n.jpg 320w,https://farm5.staticflickr.com/4078/5441060528_31db7838ba.jpg 500w, 640w,https://farm5.staticflickr.com/4078/5441060528_31db7838ba_b.jpg 1024w"
 														sizes="auto" height="" width=""></noscript>
 
@@ -355,13 +355,13 @@ module.exports = {
 												<img class="c-lazy-image__img lrv-u-background-color-grey-lightest lrv-u-width-100p lrv-u-display-block lrv-u-height-auto"
 													src="https://source.unsplash.com/random/605x413"
 													data-lazy-src=""
-													alt="Lazy loaded image"
+													alt=""
 													data-lazy-srcset="https://farm5.staticflickr.com/4078/5441060528_31db7838ba_m.jpg 240w,https://farm5.staticflickr.com/4078/5441060528_31db7838ba_n.jpg 320w,https://farm5.staticflickr.com/4078/5441060528_31db7838ba.jpg 500w, 640w,https://farm5.staticflickr.com/4078/5441060528_31db7838ba_b.jpg 1024w"
 													data-lazy-sizes="auto" width="" height="">
 												<noscript><img
 														class=" u-border-color-brand-secondary-50 u-margin-lr-n075@mobile-max"
 														src=""
-														alt="Lazy loaded image"
+														alt=""
 														srcset="https://farm5.staticflickr.com/4078/5441060528_31db7838ba_m.jpg 240w,https://farm5.staticflickr.com/4078/5441060528_31db7838ba_n.jpg 320w,https://farm5.staticflickr.com/4078/5441060528_31db7838ba.jpg 500w, 640w,https://farm5.staticflickr.com/4078/5441060528_31db7838ba_b.jpg 1024w"
 														sizes="auto" height="" width=""></noscript>
 
@@ -409,12 +409,12 @@ module.exports = {
 												<img class="c-lazy-image__img lrv-u-background-color-grey-lightest lrv-u-width-100p lrv-u-display-block lrv-u-height-auto"
 													src="https://source.unsplash.com/random/327x184"
 													data-lazy-src=""
-													alt="Lazy loaded image"
+													alt=""
 													data-lazy-srcset="https://farm5.staticflickr.com/4078/5441060528_31db7838ba_m.jpg 240w,https://farm5.staticflickr.com/4078/5441060528_31db7838ba_n.jpg 320w,https://farm5.staticflickr.com/4078/5441060528_31db7838ba.jpg 500w, 640w,https://farm5.staticflickr.com/4078/5441060528_31db7838ba_b.jpg 1024w"
 													data-lazy-sizes="auto" width="" height="">
 												<noscript><img class=""
 														src=""
-														alt="Lazy loaded image"
+														alt=""
 														srcset="https://farm5.staticflickr.com/4078/5441060528_31db7838ba_m.jpg 240w,https://farm5.staticflickr.com/4078/5441060528_31db7838ba_n.jpg 320w,https://farm5.staticflickr.com/4078/5441060528_31db7838ba.jpg 500w, 640w,https://farm5.staticflickr.com/4078/5441060528_31db7838ba_b.jpg 1024w"
 														sizes="auto" height="" width=""></noscript>
 
@@ -465,12 +465,12 @@ module.exports = {
 												<img class="c-lazy-image__img lrv-u-background-color-grey-lightest lrv-u-width-100p lrv-u-display-block lrv-u-height-auto"
 													src="https://source.unsplash.com/random/327x184"
 													data-lazy-src=""
-													alt="Lazy loaded image"
+													alt=""
 													data-lazy-srcset="https://farm5.staticflickr.com/4078/5441060528_31db7838ba_m.jpg 240w,https://farm5.staticflickr.com/4078/5441060528_31db7838ba_n.jpg 320w,https://farm5.staticflickr.com/4078/5441060528_31db7838ba.jpg 500w, 640w,https://farm5.staticflickr.com/4078/5441060528_31db7838ba_b.jpg 1024w"
 													data-lazy-sizes="auto" width="" height="">
 												<noscript><img class=""
 														src=""
-														alt="Lazy loaded image"
+														alt=""
 														srcset="https://farm5.staticflickr.com/4078/5441060528_31db7838ba_m.jpg 240w,https://farm5.staticflickr.com/4078/5441060528_31db7838ba_n.jpg 320w,https://farm5.staticflickr.com/4078/5441060528_31db7838ba.jpg 500w, 640w,https://farm5.staticflickr.com/4078/5441060528_31db7838ba_b.jpg 1024w"
 														sizes="auto" height="" width=""></noscript>
 
@@ -518,12 +518,12 @@ module.exports = {
 												<img class="c-lazy-image__img lrv-u-background-color-grey-lightest lrv-u-width-100p lrv-u-display-block lrv-u-height-auto"
 													src="https://source.unsplash.com/random/327x184"
 													data-lazy-src=""
-													alt="Lazy loaded image"
+													alt=""
 													data-lazy-srcset="https://farm5.staticflickr.com/4078/5441060528_31db7838ba_m.jpg 240w,https://farm5.staticflickr.com/4078/5441060528_31db7838ba_n.jpg 320w,https://farm5.staticflickr.com/4078/5441060528_31db7838ba.jpg 500w, 640w,https://farm5.staticflickr.com/4078/5441060528_31db7838ba_b.jpg 1024w"
 													data-lazy-sizes="auto" width="" height="">
 												<noscript><img class=""
 														src=""
-														alt="Lazy loaded image"
+														alt=""
 														srcset="https://farm5.staticflickr.com/4078/5441060528_31db7838ba_m.jpg 240w,https://farm5.staticflickr.com/4078/5441060528_31db7838ba_n.jpg 320w,https://farm5.staticflickr.com/4078/5441060528_31db7838ba.jpg 500w, 640w,https://farm5.staticflickr.com/4078/5441060528_31db7838ba_b.jpg 1024w"
 														sizes="auto" height="" width=""></noscript>
 
@@ -571,12 +571,12 @@ module.exports = {
 												<img class="c-lazy-image__img lrv-u-background-color-grey-lightest lrv-u-width-100p lrv-u-display-block lrv-u-height-auto"
 													src="https://source.unsplash.com/random/327x184"
 													data-lazy-src=""
-													alt="Lazy loaded image"
+													alt=""
 													data-lazy-srcset="https://farm5.staticflickr.com/4078/5441060528_31db7838ba_m.jpg 240w,https://farm5.staticflickr.com/4078/5441060528_31db7838ba_n.jpg 320w,https://farm5.staticflickr.com/4078/5441060528_31db7838ba.jpg 500w, 640w,https://farm5.staticflickr.com/4078/5441060528_31db7838ba_b.jpg 1024w"
 													data-lazy-sizes="auto" width="" height="">
 												<noscript><img class=""
 														src=""
-														alt="Lazy loaded image"
+														alt=""
 														srcset="https://farm5.staticflickr.com/4078/5441060528_31db7838ba_m.jpg 240w,https://farm5.staticflickr.com/4078/5441060528_31db7838ba_n.jpg 320w,https://farm5.staticflickr.com/4078/5441060528_31db7838ba.jpg 500w, 640w,https://farm5.staticflickr.com/4078/5441060528_31db7838ba_b.jpg 1024w"
 														sizes="auto" height="" width=""></noscript>
 
@@ -679,13 +679,13 @@ module.exports = {
 											<img class="c-lazy-image__img lrv-u-background-color-grey-lightest lrv-u-width-100p lrv-u-display-block lrv-u-height-auto"
 												src="https://source.unsplash.com/random/605x413"
 												data-lazy-src=""
-												alt="Lazy loaded image"
+												alt=""
 												data-lazy-srcset="https://farm5.staticflickr.com/4078/5441060528_31db7838ba_m.jpg 240w,https://farm5.staticflickr.com/4078/5441060528_31db7838ba_n.jpg 320w,https://farm5.staticflickr.com/4078/5441060528_31db7838ba.jpg 500w, 640w,https://farm5.staticflickr.com/4078/5441060528_31db7838ba_b.jpg 1024w"
 												data-lazy-sizes="auto" width="" height="">
 											<noscript><img
 													class=" u-border-color-brand-secondary-50 u-margin-lr-n075@mobile-max"
 													src=""
-													alt="Lazy loaded image"
+													alt=""
 													srcset="https://farm5.staticflickr.com/4078/5441060528_31db7838ba_m.jpg 240w,https://farm5.staticflickr.com/4078/5441060528_31db7838ba_n.jpg 320w,https://farm5.staticflickr.com/4078/5441060528_31db7838ba.jpg 500w, 640w,https://farm5.staticflickr.com/4078/5441060528_31db7838ba_b.jpg 1024w"
 													sizes="auto" height="" width=""></noscript>
 
@@ -738,12 +738,12 @@ module.exports = {
 											<img class="c-lazy-image__img lrv-u-background-color-grey-lightest lrv-u-width-100p lrv-u-display-block lrv-u-height-auto"
 												src="https://source.unsplash.com/random/327x184"
 												data-lazy-src=""
-												alt="Lazy loaded image"
+												alt=""
 												data-lazy-srcset="https://farm5.staticflickr.com/4078/5441060528_31db7838ba_m.jpg 240w,https://farm5.staticflickr.com/4078/5441060528_31db7838ba_n.jpg 320w,https://farm5.staticflickr.com/4078/5441060528_31db7838ba.jpg 500w, 640w,https://farm5.staticflickr.com/4078/5441060528_31db7838ba_b.jpg 1024w"
 												data-lazy-sizes="auto" width="" height="">
 											<noscript><img class=""
 													src=""
-													alt="Lazy loaded image"
+													alt=""
 													srcset="https://farm5.staticflickr.com/4078/5441060528_31db7838ba_m.jpg 240w,https://farm5.staticflickr.com/4078/5441060528_31db7838ba_n.jpg 320w,https://farm5.staticflickr.com/4078/5441060528_31db7838ba.jpg 500w, 640w,https://farm5.staticflickr.com/4078/5441060528_31db7838ba_b.jpg 1024w"
 													sizes="auto" height="" width=""></noscript>
 
@@ -792,12 +792,12 @@ module.exports = {
 											<img class="c-lazy-image__img lrv-u-background-color-grey-lightest lrv-u-width-100p lrv-u-display-block lrv-u-height-auto"
 												src="https://source.unsplash.com/random/327x184"
 												data-lazy-src=""
-												alt="Lazy loaded image"
+												alt=""
 												data-lazy-srcset="https://farm5.staticflickr.com/4078/5441060528_31db7838ba_m.jpg 240w,https://farm5.staticflickr.com/4078/5441060528_31db7838ba_n.jpg 320w,https://farm5.staticflickr.com/4078/5441060528_31db7838ba.jpg 500w, 640w,https://farm5.staticflickr.com/4078/5441060528_31db7838ba_b.jpg 1024w"
 												data-lazy-sizes="auto" width="" height="">
 											<noscript><img class=""
 													src=""
-													alt="Lazy loaded image"
+													alt=""
 													srcset="https://farm5.staticflickr.com/4078/5441060528_31db7838ba_m.jpg 240w,https://farm5.staticflickr.com/4078/5441060528_31db7838ba_n.jpg 320w,https://farm5.staticflickr.com/4078/5441060528_31db7838ba.jpg 500w, 640w,https://farm5.staticflickr.com/4078/5441060528_31db7838ba_b.jpg 1024w"
 													sizes="auto" height="" width=""></noscript>
 
@@ -846,12 +846,12 @@ module.exports = {
 											<img class="c-lazy-image__img lrv-u-background-color-grey-lightest lrv-u-width-100p lrv-u-display-block lrv-u-height-auto"
 												src="https://source.unsplash.com/random/327x184"
 												data-lazy-src=""
-												alt="Lazy loaded image"
+												alt=""
 												data-lazy-srcset="https://farm5.staticflickr.com/4078/5441060528_31db7838ba_m.jpg 240w,https://farm5.staticflickr.com/4078/5441060528_31db7838ba_n.jpg 320w,https://farm5.staticflickr.com/4078/5441060528_31db7838ba.jpg 500w, 640w,https://farm5.staticflickr.com/4078/5441060528_31db7838ba_b.jpg 1024w"
 												data-lazy-sizes="auto" width="" height="">
 											<noscript><img class=""
 													src=""
-													alt="Lazy loaded image"
+													alt=""
 													srcset="https://farm5.staticflickr.com/4078/5441060528_31db7838ba_m.jpg 240w,https://farm5.staticflickr.com/4078/5441060528_31db7838ba_n.jpg 320w,https://farm5.staticflickr.com/4078/5441060528_31db7838ba.jpg 500w, 640w,https://farm5.staticflickr.com/4078/5441060528_31db7838ba_b.jpg 1024w"
 													sizes="auto" height="" width=""></noscript>
 
@@ -900,12 +900,12 @@ module.exports = {
 											<img class="c-lazy-image__img lrv-u-background-color-grey-lightest lrv-u-width-100p lrv-u-display-block lrv-u-height-auto"
 												src="https://source.unsplash.com/random/327x184"
 												data-lazy-src=""
-												alt="Lazy loaded image"
+												alt=""
 												data-lazy-srcset="https://farm5.staticflickr.com/4078/5441060528_31db7838ba_m.jpg 240w,https://farm5.staticflickr.com/4078/5441060528_31db7838ba_n.jpg 320w,https://farm5.staticflickr.com/4078/5441060528_31db7838ba.jpg 500w, 640w,https://farm5.staticflickr.com/4078/5441060528_31db7838ba_b.jpg 1024w"
 												data-lazy-sizes="auto" width="" height="">
 											<noscript><img class=""
 													src=""
-													alt="Lazy loaded image"
+													alt=""
 													srcset="https://farm5.staticflickr.com/4078/5441060528_31db7838ba_m.jpg 240w,https://farm5.staticflickr.com/4078/5441060528_31db7838ba_n.jpg 320w,https://farm5.staticflickr.com/4078/5441060528_31db7838ba.jpg 500w, 640w,https://farm5.staticflickr.com/4078/5441060528_31db7838ba_b.jpg 1024w"
 													sizes="auto" height="" width=""></noscript>
 
