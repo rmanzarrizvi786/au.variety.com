@@ -1,4 +1,5 @@
 <?php
+
 /**
  * PMC Social Share Bar configuration
  *
@@ -17,29 +18,30 @@ use \PMC\Global_Functions\Traits\Singleton;
  * @since 2017.1.0
  * @see \PMC\Global_Functions\Traits\Singleton
  */
-class PMC_Social_Share_Bar {
+class PMC_Social_Share_Bar
+{
 
 	use Singleton;
 
-	const FB_APP_ID = '278816682243900';
+	const FB_APP_ID = '';
 
 	/**
 	 * Class constructor.
 	 */
-	protected function __construct() {
+	protected function __construct()
+	{
 
 		$this->_setup_hooks();
-
 	}
 
 	/**
 	 * Initialize actions and filters.
 	 */
-	protected function _setup_hooks() {
+	protected function _setup_hooks()
+	{
 
-		add_filter( 'pmc_social_share_bar_primary_list_count', array( $this, 'primary_count' ) );
-		add_filter( 'pmc_social_share_bar_facebook_app_id', array( $this, 'get_facebook_app_id' ) );
-
+		add_filter('pmc_social_share_bar_primary_list_count', array($this, 'primary_count'));
+		add_filter('pmc_social_share_bar_facebook_app_id', array($this, 'get_facebook_app_id'));
 	}
 
 	/**
@@ -47,10 +49,10 @@ class PMC_Social_Share_Bar {
 	 *
 	 * @return int
 	 */
-	public function primary_count() {
+	public function primary_count()
+	{
 
 		return 5;
-
 	}
 
 	/**
@@ -58,10 +60,10 @@ class PMC_Social_Share_Bar {
 	 *
 	 * @return string
 	 */
-	public function get_facebook_app_id() {
+	public function get_facebook_app_id()
+	{
 		return self::FB_APP_ID;
 	}
-
 }
 
 //EOF
