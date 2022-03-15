@@ -56,6 +56,9 @@ class Theme
 		// register_widget('\PMC\Core\Inc\Widgets\Social_Profiles');
 		// register_widget('\PMC\Core\Inc\Widgets\Newsletter');
 		// register_widget('\PMC\Core\Inc\Widgets\Trending_Now');
+
+		require_once CHILD_THEME_PATH . '/widgets/class-jobs.php';
+		register_widget('\TBM\Jobs');
 	}
 
 	/**
