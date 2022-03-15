@@ -216,6 +216,16 @@ class Assets
 			);
 		}
 
+		$fmtime = filemtime(CHILD_THEME_PATH . '/assets/build/css/tbm.css');
+		wp_register_style(
+			'tbm',
+			CHILD_THEME_URL . '/assets/build/css/tbm.css',
+			[],
+			$fmtime,
+			'all'
+		);
+		wp_enqueue_style('tbm');
+
 		// VIP Classic comments script
 		if (is_singular() && get_option('thread_comments') && !is_singular(\PMC\Gallery\Defaults::NAME)) {
 			wp_enqueue_script('comment-reply');

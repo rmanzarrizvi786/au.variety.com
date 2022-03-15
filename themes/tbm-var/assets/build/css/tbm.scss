@@ -1,0 +1,16 @@
+@media (min-width: 62.5rem) {
+  html:not(.is-sticky) header .lrv-a-wrapper {
+    justify-content: space-between;
+    .header-sticky__menu,
+    .lrv-a-glue-parent,
+    .login-actions {
+      flex: 1;
+    }
+    .u-margin-l-n60\@desktop {
+      margin-left: 0 !important;
+    }
+    .login-actions {
+      justify-content: flex-end;
+    }
+  }
+}
