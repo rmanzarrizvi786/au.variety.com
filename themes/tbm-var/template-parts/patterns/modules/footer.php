@@ -19,15 +19,11 @@
 
 				<?php \PMC::render_template(PMC_CORE_PATH . '/template-parts/patterns/components/c-link.php', $c_link_subscribe, true); ?>
 
-				<?php \PMC::render_template(PMC_CORE_PATH . '/template-parts/patterns/components/c-tagline.php', $c_tagline_copyright, true); ?>
+				<?php // \PMC::render_template(PMC_CORE_PATH . '/template-parts/patterns/components/c-tagline.php', $c_tagline_copyright, true); ?>
 
-				<?php \PMC::render_template(PMC_CORE_PATH . '/template-parts/patterns/components/c-tagline.php', $c_tagline_tip, true); ?>
+				<?php // \PMC::render_template(PMC_CORE_PATH . '/template-parts/patterns/components/c-tagline.php', $c_tagline_tip, true); ?>
 			</div>
 		</div>
 
 	</div>
-
-	<?php if (!empty($cxense_interstitial_widget)) { ?>
-		<?php \PMC::render_template(CHILD_THEME_PATH . '/template-parts/patterns/modules/cxense-widget.php', $cxense_interstitial_widget, true); ?>
-	<?php } ?>
 </footer>

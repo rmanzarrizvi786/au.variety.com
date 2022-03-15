@@ -2843,7 +2843,8 @@
         (window.pmc_side_skin_classes_removed = !0)),
         window.dispatchEvent(new Event("resize"));
     }
-    p();
+    if (screen.width >= 1200) p();
+
 
     var g = i(3);
     class f {
@@ -2972,6 +2973,7 @@
     }),
       window.addEventListener("resize", function () {
         S();
+        p();
       }),
       window.addEventListener("load", function () {
         !(function () {

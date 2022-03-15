@@ -1,12 +1,20 @@
 <?php
 // This is a generated file. Refer to the relevant Twig file for adjusting this markup.
+$current_url = home_url(add_query_arg([], $GLOBALS['wp']->request));
 ?>
 
 <div class="o-drop-menu o-drop-menu-login <?php echo esc_attr($o_drop_menu_classes ?? ''); ?>" data-collapsible="collapsed" <?php echo esc_attr($o_drop_data_attr ?? ''); ?> <?php if (!empty($o_drop_data_attr)) { ?> <?php echo esc_attr($o_drop_data_attr ?? ''); ?> <?php } ?>>
 	<div class="js-LoginStatus--hide-when-authenticated">
 		<?php if (!is_user_logged_in()) { ?>
-			<a class="o-drop-menu__toggle <?php echo esc_attr($o_drop_menu_toggle_classes ?? ''); ?>" href="<?php echo wp_login_url(); ?>">
+			<a class="o-drop-menu__toggle <?php echo esc_attr($o_drop_menu_toggle_classes ?? ''); ?>" href="<?php echo esc_url(wp_login_url($current_url)); ?>">
 				<?php if (!empty($c_span)) { ?>
+					<?php \PMC::render_template(PMC_CORE_PATH . '/template-parts/patterns/components/c-span.php', $c_span, true); ?>
+				<?php } ?>
+			</a>
+		<?php } else { ?>
+			<a class="o-drop-menu__toggle <?php echo esc_attr($o_drop_menu_toggle_classes ?? ''); ?>" href="<?php echo esc_url(wp_logout_url($current_url)); ?>">
+				<?php if (!empty($c_span)) {
+					$c_span['c_span_text'] = 'Logout';?>
 					<?php \PMC::render_template(PMC_CORE_PATH . '/template-parts/patterns/components/c-span.php', $c_span, true); ?>
 				<?php } ?>
 			</a>

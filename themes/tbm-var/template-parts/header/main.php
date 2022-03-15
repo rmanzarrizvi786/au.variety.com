@@ -173,7 +173,7 @@ $data['header_main']['o_top_nav']['o_nav_list_items'] = [];
 $menu_items = [
 	[
 		'label' => __('Have a News Tip?', 'pmc-variety'),
-		'url'   => '/tips',
+		'url'   => 'https://thebrag.com/media/submit-a-tip/',
 	],
 	[
 		'label' => __('Newsletters', 'pmc-variety'),
@@ -198,6 +198,8 @@ $data['header_main']['region_selector']['region_selector']['asia_url']          
 $data['header_main']['region_selector_mobile']['region_selector']['asia_url']   = '/c/asia/';
 $data['header_main']['region_selector']['region_selector']['global_url']        = '/c/global/';
 $data['header_main']['region_selector_mobile']['region_selector']['global_url'] = '/c/global/';
+
+$data['header_main']['header_menu_icons_classes'] = str_replace(' u-margin-r-3@tablet', '', $data['header_main']['header_menu_icons_classes']);
 
 \PMC::render_template(
 	sprintf('%s/template-parts/patterns/modules/header.php', untrailingslashit(CHILD_THEME_PATH)),

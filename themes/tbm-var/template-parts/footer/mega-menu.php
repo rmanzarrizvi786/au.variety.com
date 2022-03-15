@@ -104,7 +104,7 @@ $data['mobile_navigation']['o_nav_list_items'] = [];
 $menu_items = [
 	[
 		'label' => __('Have a News Tip?', 'pmc-variety'),
-		'url'   => '/tips',
+		'url'   => 'https://thebrag.com/media/submit-a-tip/',
 	],
 	[
 		'label' => __('Subscribe', 'pmc-variety'),

@@ -19,7 +19,8 @@ if (!empty($issue)) {
 }
 
 // Subscribe Link
-$footer['c_link_subscribe']['c_link_url'] = 'https://subscribe.variety.com/site/magazine-subscribe-choice';
+// $footer['c_link_subscribe']['c_link_url'] = 'https://subscribe.variety.com/site/magazine-subscribe-choice';
+$footer['c_link_subscribe']['c_link_url'] = 'https://thebrag.com/observer/';
 
 // Logo URL.
 $footer['c_logo']['c_logo_url'] = '/';
@@ -90,9 +91,10 @@ $footer['footer_menus']['footer_menu_classes'] = str_replace('cols5', 'cols3', $
 $copy_text = sprintf(esc_html__('Variety is a part of Penske Media Corporation. &copy; %1$s Variety Media, LLC. All Rights Reserved. Variety and the Flying V logos are trademarks of Variety Media, LLC.', 'pmc-variety'), gmdate('Y'));
 
 // translators: %1$s WordPress.com VIP URL.
-$powered_text = sprintf(esc_html__('Powered by %1$s', 'pmc-variety'), '<a href="https://vip.wordpress.com/?utm_source=vip_powered_wpcom&amp;utm_medium=web&amp;utm_campaign=VIP%20Footer%20Credit" class="lrv-u-color-white lrv-u-color-brand-primary:hover">WordPress.com VIP</a>');
+// $powered_text = sprintf(esc_html__('Powered by %1$s', 'pmc-variety'), '<a href="https://vip.wordpress.com/?utm_source=vip_powered_wpcom&amp;utm_medium=web&amp;utm_campaign=VIP%20Footer%20Credit" class="lrv-u-color-white lrv-u-color-brand-primary:hover">WordPress.com VIP</a>');
 
-$footer['c_tagline_copyright']['c_tagline_markup'] = sprintf('%1$s<br>%2$s', $copy_text, $powered_text);
+// $footer['c_tagline_copyright']['c_tagline_markup'] = sprintf('%1$s<br>%2$s', $copy_text, $powered_text);
+$footer['c_tagline_copyright']['c_tagline_markup'] = sprintf('%1$s', $copy_text);
 
 \PMC::render_template(
 	sprintf('%s/template-parts/patterns/modules/footer.php', untrailingslashit(CHILD_THEME_PATH)),
