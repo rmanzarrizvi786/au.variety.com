@@ -41,8 +41,33 @@ class Theme
 		add_filter('script_loader_tag', [$this, 'async_scripts'], 11, 3); // <-- Notice priority 11 for VIP environment
 		add_filter('document_title_parts', [$this, 'get_single_page_post_title']); // hook sets aside title from SEO meta box.
 
+		// Hide Admin Bar
+		add_filter('show_admin_bar', [$this, '_show_admin_bar']);
+		remove_action('wp_head', '_admin_bar_bump_cb');
+
+		add_action('admin_init', [$this, '_admin_init']);
+
 		// Setting this at priority 9 to allow child themes to override if needed
 		add_filter('pmc_fieldmanager_version', [$this, 'get_fieldmanager_version'], 9);
+	}
+
+	/*
+	* Show admin bar only for admins and editors
+	*/
+	public function _show_admin_bar()
+	{
+		return current_user_can('edit_posts');
+	}
+
+	/**
+	 * Redirect non-admin users to home page
+	 */
+	public function _admin_init()
+	{
+		if (!current_user_can('edit_posts') && !current_user_can('snaps') && ('/wp-admin/admin-ajax.php' != $_SERVER['PHP_SELF'])) {
+			wp_redirect(home_url());
+			exit;
+		}
 	}
 
 	private function _instantiate_singletons()
