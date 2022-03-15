@@ -105,7 +105,7 @@ while (have_posts()) :
 				<?php
 				\PMC::render_template(
 					sprintf('%s/template-parts/widgets/brag-jobs.php', untrailingslashit(CHILD_THEME_PATH)),
-					['size' => 4, 'pos' => 'article-bottom'],
+					['size' => 4, 'pos' => 'article-bottom', 'order_by' => 'rand'],
 					true
 				);
 				?>

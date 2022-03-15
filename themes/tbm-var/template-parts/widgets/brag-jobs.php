@@ -9,8 +9,11 @@ if (!isset($size)) {
 if (!isset($pos)) {
     $pos = 'sidebar';
 }
+if (!isset($order_by)) {
+    $order_by = 'desc';
+}
 
-$url = $base_url . "wp-json/api/v1/jobs?order=desc&size={$size}";
+$url = $base_url . "wp-json/api/v1/jobs?order={$order_by}&size={$size}";
 $jobs_res = wp_remote_get($url);
 $jobs = json_decode(wp_remote_retrieve_body($jobs_res));
 if ($jobs && is_array($jobs) && !empty($jobs)) {
