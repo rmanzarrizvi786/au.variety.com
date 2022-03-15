@@ -350,7 +350,7 @@
     object-fit: cover;
   }
 }
-@media (min-width: 78.75rem) {
+@media (min-width: 62.5rem) {
   .a-crop-3x2\@desktop-xl {
     position: relative;
     padding-bottom: 66.66667%;
@@ -362,7 +362,7 @@
     object-fit: cover;
   }
 }
-@media (min-width: 78.75rem) {
+@media (min-width: 62.5rem) {
   .a-crop-1x1\@desktop-xl {
     position: relative;
     padding-bottom: 100%;
@@ -374,7 +374,7 @@
     object-fit: cover;
   }
 }
-@media (min-width: 78.75rem) {
+@media (min-width: 62.5rem) {
   .a-crop-16x9\@desktop-xl {
     position: relative;
     padding-bottom: 56.25%;
@@ -386,7 +386,7 @@
     object-fit: cover;
   }
 }
-@media (min-width: 78.75rem) {
+@media (min-width: 62.5rem) {
   .a-crop-605x413\@desktop-xl {
     position: relative;
     padding-bottom: 68.26446%;
@@ -704,12 +704,12 @@
     --a-pull-size: 7;
   }
 }
-@media (min-width: 78.75rem) {
+@media (min-width: 62.5rem) {
   .a-pull-125\@desktop-xl {
     --a-pull-size: 1.25;
   }
 }
-@media (min-width: 78.75rem) {
+@media (min-width: 62.5rem) {
   .a-pull-2\@desktop-xl {
     --a-pull-size: 2;
   }
@@ -906,7 +906,7 @@
     margin-left: 0;
   }
 }
-@media (min-width: 78.75rem) {
+@media (min-width: 62.5rem) {
   .a-separator-r-1\@desktop-xl > * {
     border-right-style: solid;
     border-right-width: 0.0625rem;
@@ -942,13 +942,13 @@
     --a-separator-margin-left: 1rem;
   }
 }
-@media (min-width: 78.75rem) {
+@media (min-width: 62.5rem) {
   .a-separator-spacing--r-1\@desktop-xl {
     --a-separator-padding-right: 1rem;
     --a-separator-margin-left: 1rem;
   }
 }
-@media (min-width: 78.75rem) {
+@media (min-width: 62.5rem) {
   .a-separator-spacing--r-0\@desktop-xl {
     --a-separator-padding-right: 0;
     --a-separator-margin-left: 0;
@@ -1495,12 +1495,12 @@
 .u-border-dotted-b {
   border-bottom-style: dotted;
 }
-@media (min-width: 78.75rem) {
+@media (min-width: 62.5rem) {
   .u-border-b-0\@desktop-xl {
     border-bottom-width: 0;
   }
 }
-@media (min-width: 78.75rem) {
+@media (min-width: 62.5rem) {
   .u-border-b-1\@desktop-xl {
     border-bottom-width: 1px;
     border-bottom-style: solid;
@@ -1867,7 +1867,7 @@
     font-family: "IBM Plex Serif", serif;
   }
 }
-@media (min-width: 78.75rem) {
+@media (min-width: 62.5rem) {
   .u-font-family-primary\@desktop-xl {
     font-family: Georgia, serif;
   }
@@ -1940,7 +1940,7 @@
     font-size: 2.9375rem;
   }
 }
-@media (min-width: 78.75rem) {
+@media (min-width: 62.5rem) {
   .u-font-size-48\@desktop-xl {
     font-size: 3rem;
   }
@@ -1965,47 +1965,47 @@
     font-size: 3.75rem;
   }
 }
-@media (min-width: 78.75rem) {
+@media (min-width: 62.5rem) {
   .u-font-size-16\@desktop-xl {
     font-size: 1rem;
   }
 }
-@media (min-width: 78.75rem) {
+@media (min-width: 62.5rem) {
   .u-font-size-17\@desktop-xl {
     font-size: 1.0625rem;
   }
 }
-@media (min-width: 78.75rem) {
+@media (min-width: 62.5rem) {
   .u-font-size-18\@desktop-xl {
     font-size: 1.125rem;
   }
 }
-@media (min-width: 78.75rem) {
+@media (min-width: 62.5rem) {
   .u-font-size-19\@desktop-xl {
     font-size: 1.1875rem;
   }
 }
-@media (min-width: 78.75rem) {
+@media (min-width: 62.5rem) {
   .u-font-size-21\@desktop-xl {
     font-size: 1.3125rem;
   }
 }
-@media (min-width: 78.75rem) {
+@media (min-width: 62.5rem) {
   .u-font-size-24\@desktop-xl {
     font-size: 1.5rem;
   }
 }
-@media (min-width: 78.75rem) {
+@media (min-width: 62.5rem) {
   .u-font-size-28\@desktop-xl {
     font-size: 1.75rem;
   }
 }
-@media (min-width: 78.75rem) {
+@media (min-width: 62.5rem) {
   .u-font-size-36\@desktop-xl {
     font-size: 2.25rem;
   }
 }
-@media (min-width: 78.75rem) {
+@media (min-width: 62.5rem) {
   .u-font-size-70\@desktop-xl {
     font-size: 4.375rem;
   }
@@ -2025,7 +2025,7 @@
     font-weight: 700;
   }
 }
-@media (min-width: 78.75rem) {
+@media (min-width: 62.5rem) {
   .u-font-weight-normal\@desktop-xl {
     font-weight: 400;
   }
@@ -2065,27 +2065,27 @@
     grid-gap: 0 1.75rem;
   }
 }
-@media (min-width: 78.75rem) {
+@media (min-width: 62.5rem) {
   .u-grid-gap-0\@desktop-xl {
     grid-gap: 0;
   }
 }
-@media (min-width: 78.75rem) {
+@media (min-width: 62.5rem) {
   .u-grid-gap-075\@desktop-xl {
     grid-gap: 0.75rem;
   }
 }
-@media (min-width: 78.75rem) {
+@media (min-width: 62.5rem) {
   .u-grid-gap-1\@desktop-xl {
     grid-gap: 1rem;
   }
 }
-@media (min-width: 78.75rem) {
+@media (min-width: 62.5rem) {
   .u-grid-gap-050x3\@desktop-xl {
     grid-gap: 0.5rem 3rem;
   }
 }
-@media (min-width: 78.75rem) {
+@media (min-width: 62.5rem) {
   .u-grid-gap-0x3\@desktop-xl {
     grid-gap: 0 3rem;
   }
@@ -2356,47 +2356,47 @@
     margin-right: 3.25rem;
   }
 }
-@media (min-width: 78.75rem) {
+@media (min-width: 62.5rem) {
   .u-margin-r-00\@desktop-xl {
     margin-right: 0;
   }
 }
-@media (min-width: 78.75rem) {
+@media (min-width: 62.5rem) {
   .u-margin-t-00\@desktop-xl {
     margin-top: 0;
   }
 }
-@media (min-width: 78.75rem) {
+@media (min-width: 62.5rem) {
   .u-margin-t-025\@desktop-xl {
     margin-top: 0.25rem;
   }
 }
-@media (min-width: 78.75rem) {
+@media (min-width: 62.5rem) {
   .u-margin-l-025\@desktop-xl {
     margin-left: 0.25rem;
   }
 }
-@media (min-width: 78.75rem) {
+@media (min-width: 62.5rem) {
   .u-margin-l-1\@desktop-xl {
     margin-left: 1rem;
   }
 }
-@media (min-width: 78.75rem) {
+@media (min-width: 62.5rem) {
   .u-margin-t-1\@desktop-xl {
     margin-top: 1rem;
   }
 }
-@media (min-width: 78.75rem) {
+@media (min-width: 62.5rem) {
   .u-margin-r-125\@desktop-xl {
     margin-right: 1.25rem;
   }
 }
-@media (min-width: 78.75rem) {
+@media (min-width: 62.5rem) {
   .u-margin-t-150\@desktop-xl {
     margin-top: 1.5rem;
   }
 }
-@media (min-width: 78.75rem) {
+@media (min-width: 62.5rem) {
   .u-margin-r-350\@desktop-xl {
     margin-right: 3.5rem;
   }
@@ -2447,13 +2447,13 @@
     margin-right: -1rem;
   }
 }
-@media (min-width: 78.75rem) {
+@media (min-width: 62.5rem) {
   .u-margin-lr-n1\@desktop-xl {
     margin-left: -1rem;
     margin-right: -1rem;
   }
 }
-@media (min-width: 78.75rem) {
+@media (min-width: 62.5rem) {
   .u-margin-lr-n175\@desktop-xl {
     margin-left: -1.75rem;
     margin-right: -1.75rem;
@@ -2572,7 +2572,7 @@
     padding-top: 0.25rem;
   }
 }
-@media (min-width: 78.75rem) {
+@media (min-width: 62.5rem) {
   .u-padding-b-025\@desktop-xl {
     padding-bottom: 0.25rem;
   }
@@ -2674,75 +2674,75 @@
     padding-top: 1.25rem;
   }
 }
-@media (min-width: 78.75rem) {
+@media (min-width: 62.5rem) {
   .u-padding-lr-175\@desktop-xl {
     padding-left: 1.75rem;
     padding-right: 1.75rem;
   }
 }
-@media (min-width: 78.75rem) {
+@media (min-width: 62.5rem) {
   .u-padding-b-075\@desktop-xl {
     padding-bottom: 0.75rem;
   }
 }
-@media (min-width: 78.75rem) {
+@media (min-width: 62.5rem) {
   .u-padding-b-00\@desktop-xl {
     padding-bottom: 0;
   }
 }
-@media (min-width: 78.75rem) {
+@media (min-width: 62.5rem) {
   .u-padding-b-125\@desktop-xl {
     padding-bottom: 1.25rem;
   }
 }
-@media (min-width: 78.75rem) {
+@media (min-width: 62.5rem) {
   .u-padding-b-150\@desktop-xl {
     padding-bottom: 1.5rem;
   }
 }
-@media (min-width: 78.75rem) {
+@media (min-width: 62.5rem) {
   .u-padding-b-175\@desktop-xl {
     padding-bottom: 1.75rem;
   }
 }
-@media (min-width: 78.75rem) {
+@media (min-width: 62.5rem) {
   .u-padding-l-1\@desktop-xl {
     padding-left: 1rem;
   }
 }
-@media (min-width: 78.75rem) {
+@media (min-width: 62.5rem) {
   .u-padding-t-00\@desktop-xl {
     padding-top: 0;
   }
 }
-@media (min-width: 78.75rem) {
+@media (min-width: 62.5rem) {
   .u-padding-r-00\@desktop-xl {
     padding-right: 0;
   }
 }
-@media (min-width: 78.75rem) {
+@media (min-width: 62.5rem) {
   .u-padding-r-1\@desktop-xl {
     padding-right: 1rem;
   }
 }
-@media (min-width: 78.75rem) {
+@media (min-width: 62.5rem) {
   .u-padding-lr-050\@desktop-xl {
     padding-left: 0.5rem;
     padding-right: 0.5rem;
   }
 }
-@media (min-width: 78.75rem) {
+@media (min-width: 62.5rem) {
   .u-padding-tb-075\@desktop-xl {
     padding-bottom: 0.75rem;
     padding-top: 0.75rem;
   }
 }
-@media (min-width: 78.75rem) {
+@media (min-width: 62.5rem) {
   .u-padding-b-1\@desktop-xl {
     padding-bottom: 1rem;
   }
 }
-@media (min-width: 78.75rem) {
+@media (min-width: 62.5rem) {
   .u-padding-lr-1\@desktop-xl {
     padding-left: 1rem;
     padding-right: 1rem;
@@ -2899,27 +2899,27 @@
     width: 13.4375rem;
   }
 }
-@media (min-width: 78.75rem) {
+@media (min-width: 62.5rem) {
   .u-width-205\@desktop-xl {
     width: 12.8125rem;
   }
 }
-@media (min-width: 78.75rem) {
+@media (min-width: 62.5rem) {
   .u-width-240\@desktop-xl {
     width: 15rem;
   }
 }
-@media (min-width: 78.75rem) {
+@media (min-width: 62.5rem) {
   .u-width-245\@desktop-xl {
     width: 15.3125rem;
   }
 }
-@media (min-width: 78.75rem) {
+@media (min-width: 62.5rem) {
   .u-width-250\@desktop-xl {
     width: 15.625rem;
   }
 }
-@media (min-width: 78.75rem) {
+@media (min-width: 62.5rem) {
   .u-width-265\@desktop-xl {
     width: 16.5625rem;
   }
@@ -2949,12 +2949,12 @@
     width: 45%;
   }
 }
-@media (min-width: 78.75rem) {
+@media (min-width: 62.5rem) {
   .u-width-50\@desktop-xl {
     width: 3.125rem;
   }
 }
-@media (min-width: 78.75rem) {
+@media (min-width: 62.5rem) {
   .u-width-390\@desktop-xl {
     width: 24.375rem;
   }
@@ -2964,7 +2964,7 @@
     width: 80%;
   }
 }
-@media (min-width: 78.75rem) {
+@media (min-width: 62.5rem) {
   .u-width-100p\@desktop-xl {
     width: 100%;
   }
@@ -3019,47 +3019,47 @@
     max-width: 70%;
   }
 }
-@media (min-width: 78.75rem) {
+@media (min-width: 62.5rem) {
   .u-max-width-140\@desktop-xl {
     max-width: 8.75rem;
   }
 }
-@media (min-width: 78.75rem) {
+@media (min-width: 62.5rem) {
   .u-max-width-225\@desktop-xl {
     max-width: 14.0625rem;
   }
 }
-@media (min-width: 78.75rem) {
+@media (min-width: 62.5rem) {
   .u-max-width-280\@desktop-xl {
     max-width: 17.5rem;
   }
 }
-@media (min-width: 78.75rem) {
+@media (min-width: 62.5rem) {
   .u-max-width-310\@desktop-xl {
     max-width: 19.375rem;
   }
 }
-@media (min-width: 78.75rem) {
+@media (min-width: 62.5rem) {
   .u-max-width-330\@desktop-xl {
     max-width: 20.625rem;
   }
 }
-@media (min-width: 78.75rem) {
+@media (min-width: 62.5rem) {
   .u-max-width-1260\@desktop-xl {
-    max-width: 78.75rem;
+    max-width: 62.5rem;
   }
 }
-@media (min-width: 78.75rem) {
+@media (min-width: 62.5rem) {
   .u-max-width-45p\@desktop-xl {
     max-width: 45%;
   }
 }
-@media (min-width: 78.75rem) {
+@media (min-width: 62.5rem) {
   .u-max-width-70p\@desktop-xl {
     max-width: 70%;
   }
 }
-@media (min-width: 78.75rem) {
+@media (min-width: 62.5rem) {
   .u-max-width-75p\@desktop-xl {
     max-width: 75%;
   }
