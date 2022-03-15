@@ -84,11 +84,11 @@ $data['mega_menu_footer']['c_icon']['c_icon_url']            = 'https://pmc.com/
 $data['mega_menu_footer']['mega_menu_footer_copyright_text'] = sprintf('Variety is a part of Penske Media Corporation. &copy; %1$s Variety Media, LLC. All Rights Reserved.', gmdate('Y'));
 
 // Mega subscribe link.
-$data['mega_menu_footer']['c_subscribe_link']['c_link_url']     = '/subscribe-us/?utm_source=site&utm_medium=Mega';
+$data['mega_menu_footer']['c_subscribe_link']['c_link_url']     = 'https://thebrag.com/observer/?utm_source=varietyau&utm_medium=Mega';
 $data['mega_menu_footer']['c_subscribe_link']['modifier_class'] = 'cx-module-header-link-vy';
 
 // Mega Regions + tips.
-$data['mega_menu_footer']['o_nav_tips']['o_nav_list_items'][0]['c_link_url']  = '/tips';
+$data['mega_menu_footer']['o_nav_tips']['o_nav_list_items'][0]['c_link_url']  = 'https://thebrag.com/media/submit-a-tip/';
 $data['mega_menu_footer']['region_selector']['region_selector']['us_url']     = '/';
 $data['region_selector_mobile']['region_selector']['us_url']                  = '/';
 $data['mega_menu_footer']['region_selector']['region_selector']['asia_url']   = '/c/asia/';

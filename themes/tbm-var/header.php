@@ -59,6 +59,7 @@ $bg_color_class = is_home() || (is_archive() && !is_author() && !is_tag('documen
 			z-index: -1;
 			background-repeat: no-repeat;
 		}
+
 		#main-wrapper {
 			z-index: 3;
 		}
@@ -68,6 +69,9 @@ $bg_color_class = is_home() || (is_archive() && !is_author() && !is_tag('documen
 <body <?php body_class(); ?>>
 	<?php do_action('pmc-tags-top'); // @codingStandardsIgnoreLine 
 	?>
+	<!-- Google Tag Manager (noscript) -->
+	<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WKG6893" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+	<!-- End Google Tag Manager (noscript) -->
 
 	<div id="skin-ad-section">
 		<div id="skin-ad-container">

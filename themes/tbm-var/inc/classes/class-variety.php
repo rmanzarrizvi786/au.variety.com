@@ -292,7 +292,6 @@ class Variety
 	 */
 	public function add_tags_in_head(): void
 	{
-
 		PMC::render_template(CHILD_THEME_PATH . '/template-parts/tags/head-tags.php', [], true);
 	}
 
