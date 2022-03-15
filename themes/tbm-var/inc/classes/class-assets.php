@@ -94,7 +94,7 @@ class Assets
 			true
 		);
 		wp_enqueue_script('tbm-js');
-		wp_localize_script( 'tbm-js', 'tbm', ['ajaxurl' => admin_url( 'admin-ajax.php' )]);
+		wp_localize_script('tbm-js', 'tbm', ['ajaxurl' => admin_url('admin-ajax.php')]);
 
 		// Inline, critical CSS.
 		\PMC\Core\Inc\Assets::get_instance()->inline_style('common.inline', CHILD_THEME_PATH);
@@ -238,9 +238,9 @@ class Assets
 		wp_enqueue_style('tbm');
 
 		// VIP Classic comments script
-		if (is_singular() && get_option('thread_comments') && !is_singular(\PMC\Gallery\Defaults::NAME)) {
+		/* if (is_singular() && get_option('thread_comments') && !is_singular(\PMC\Gallery\Defaults::NAME)) {
 			wp_enqueue_script('comment-reply');
-		}
+		} */
 
 		if (is_singular()) {
 			//Dequeue this script since there is already js that pmc-outbrain widget enqueues this

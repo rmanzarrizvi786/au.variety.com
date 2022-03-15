@@ -20,7 +20,7 @@ final class PMC_Global {
 		add_action( 'parse_query', [ $this, 'fix_is_home' ], 1 );
 
 		// Add to very top of the page markup
-		add_action( 'wp_head', [ $this, 'recruiting_promotion' ], 0 );
+		// add_action( 'wp_head', [ $this, 'recruiting_promotion' ], 0 );
 
 		add_filter( 'rewrite_rules_array', [ $this, 'filter_fix_feed_rewrite_rules' ] );
 	}
