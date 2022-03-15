@@ -30,4 +30,25 @@ class Jobs extends \Variety\Inc\Widgets\Variety_Base_Widget
             true
         );
     }
+
+    /**
+     * Back-end widget form.
+     *
+     * @param array $instance Previously saved values from database.
+     *
+     * @return string|void
+     * @throws \Exception
+     * @since 2017.1.0
+     * @see   WP_Widget::form()
+     *
+     */
+    public function form($instance)
+    {
+?>
+        <p class="no-options-widget">
+            <?php esc_html_e('There are no options for this widget.', 'pmc-variety'); ?>
+        </p>
+<?php
+        return 'noform';
+    }
 }
