@@ -85,6 +85,17 @@ class Assets
 		);
 		wp_enqueue_script('variety-common-js');
 
+		$fmtime = filemtime(CHILD_THEME_PATH . '/assets/build/js/tbm.js');
+		wp_register_script(
+			'tbm-js',
+			CHILD_THEME_URL . '/assets/build/js/tbm.js',
+			['jquery'],
+			$fmtime,
+			true
+		);
+		wp_enqueue_script('tbm-js');
+		wp_localize_script( 'tbm-js', 'tbm', ['ajaxurl' => admin_url( 'admin-ajax.php' )]);
+
 		// Inline, critical CSS.
 		\PMC\Core\Inc\Assets::get_instance()->inline_style('common.inline', CHILD_THEME_PATH);
 

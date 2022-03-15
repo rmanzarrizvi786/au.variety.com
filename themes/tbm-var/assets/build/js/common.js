@@ -2845,7 +2845,6 @@
     }
     if (screen.width >= 1200) p();
 
-
     var g = i(3);
     class f {
       constructor(t) {
@@ -2973,7 +2972,7 @@
     }),
       window.addEventListener("resize", function () {
         S();
-        p();
+        // p();
       }),
       window.addEventListener("load", function () {
         !(function () {
