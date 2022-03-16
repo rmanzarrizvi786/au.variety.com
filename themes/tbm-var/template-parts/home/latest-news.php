@@ -140,7 +140,7 @@ if (have_posts()) {
 			$item['c_timestamp']['c_timestamp_text'] = variety_human_time_diff(get_the_ID());
 		}
 
-		if (3 === $count && !empty($item_ad)) {
+		/* if (3 === $count && !empty($item_ad)) {
 			$river['o_tease_news_list_primary']['o_tease_list_items'][] = $item_ad;
 		}
 
@@ -148,7 +148,7 @@ if (have_posts()) {
 			$river['o_tease_news_list_primary']['o_tease_list_items'][] = $item;
 		} else {
 			$river['o_tease_news_list_secondary']['o_tease_list_items'][] = $item;
-		}
+		} */
 
 		$count++;
 	}
