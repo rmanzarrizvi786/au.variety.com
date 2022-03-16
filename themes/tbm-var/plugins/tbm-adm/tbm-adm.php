@@ -9,6 +9,8 @@
  * Author URI:
  */
 
+namespace TBM;
+
 class TBMAds
 {
 

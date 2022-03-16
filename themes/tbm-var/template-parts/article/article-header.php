@@ -45,9 +45,10 @@ if (!empty($breadcrumb)) {
 }
 
 // Author.
-$author_data = PMC\Core\Inc\Author::get_instance()->authors_data();
+$custom_author = get_post_meta(get_the_ID(), 'author', true);
 
-if (!empty($author_data['single_author'])) {
+$author_data = PMC\Core\Inc\Author::get_instance()->authors_data();
+if (!$custom_author && !empty($author_data['single_author'])) {
 
 	$author_url = get_author_posts_url($author_data['single_author']['author']->ID, $author_data['single_author']['author']->user_nicename);
 
@@ -97,8 +98,12 @@ if (!empty($author_data['single_author'])) {
 
 	$data['author_social']['author']['author_details']['c_link_view_all']['c_link_url'] = $author_url;
 } else {
+	if ($custom_author) {
+		$data['author_social']['author']['c_tagline']['c_tagline_markup'] = $custom_author;
+	} else {
+		$data['author_social']['author']['c_tagline']['c_tagline_markup'] = $author_data['byline'];
+	}
 	$data['author_social']['author']['is_byline_only']                = true;
-	$data['author_social']['author']['c_tagline']['c_tagline_markup'] = $author_data['byline'];
 }
 
 // Comment count.

@@ -58,8 +58,6 @@ if (!defined('VIP_GO_APP_ENVIRONMENT') || false === VIP_GO_APP_ENVIRONMENT) {
 	add_filter('deprecated_function_trigger_error', '__return_false');
 }
 
-
-
 /**
  * Load up the class autoloader
  */
@@ -382,7 +380,7 @@ function _wpcom_vip_load_plugin_sanitizer($folder)
 
 function pmc_adm_render_ads($ad_location, $ad_title = '', $echo = true, $provider = '')
 {
-	$ads = TBMAds::get_instance();
+	$ads = \TBM\TBMAds::get_instance();
 	echo $ads->get_ad($ad_location);
 	return;
 }

@@ -101,7 +101,7 @@ class Theme
 
 		$count_articles = isset($_POST['count_articles']) ? (int) $_POST['count_articles'] : 1;
 
-		$after_para = function_exists('get_field') && get_field('ads_after') ? get_field('ads_after') : 1;
+		$after_para = function_exists('get_field') && get_field('ads_after') ? get_field('ads_after') : 3;
 
 		ob_start();
 		pmc_adm_render_ads('incontent_1');

@@ -54,5 +54,6 @@ class Plugins
 		// require_once( CHILD_THEME_PATH . '/plugins/variety-vip/variety-vip.php' );
 
 		require_once(CHILD_THEME_PATH . '/plugins/tbm-adm/tbm-adm.php');
+		require_once(CHILD_THEME_PATH . '/plugins/tbm-download-pmc-article/tbm-download-pmc-article.php');
 	}
 }
