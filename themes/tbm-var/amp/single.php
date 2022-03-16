@@ -34,7 +34,7 @@ $amp_post_id = $this->get('post_id'); ?>
 
 	<?php $this->load_parts(array('header-bar')); ?>
 	<article class="amp-wp-article" style="margin-top: 35px; margin-bottom: 15px;">
-		<div class="amp-ad" style="text-align: center; margin: auto;">
+		<div class="ad-slot amp-ad" style="text-align: center; margin: auto;">
 			<?php echo pmc_adm_render_ads('header'); ?>
 		</div>
 
@@ -77,7 +77,7 @@ $amp_post_id = $this->get('post_id'); ?>
 			for ($i = 0; $i < count($content); $i++) :
 				if (count($content) > 2 && $i == 2) :
 			?>
-					<div class="amp-ad" style="text-align: center; margin: auto;">
+					<div class="ad-slot amp-ad" style="text-align: center; margin: auto;">
 						<?php echo pmc_adm_render_ads('mrec_1'); ?>
 					</div>
 			<?php
@@ -87,131 +87,18 @@ $amp_post_id = $this->get('post_id'); ?>
 			?>
 		</div>
 
-		<div class="amp-ad" style="text-align: center; margin: auto;">
+		<div class="ad-slot amp-ad" style="text-align: center; margin: auto;">
 			<?php echo pmc_adm_render_ads('mrec_2'); ?>
 		</div>
 
-		<div class="amp-ad" style="text-align: center; margin: auto;">
+		<div class="ad-slot amp-ad" style="text-align: center; margin: auto;">
 			<?php echo pmc_adm_render_ads('sticky_footer'); ?>
 		</div>
 
 		<footer class="amp-wp-article-footer">
-			<?php $this->load_parts(apply_filters('amp_post_article_footer_meta', array('meta-taxonomy'))); ?>
+			<?php // $this->load_parts(apply_filters('amp_post_article_footer_meta', array('meta-taxonomy'))); 
+			?>
 		</footer>
-
-		<?php
-		/**
-		 * Hidden because infinite scroll has been added
-		 * 12 Oct, 2021
-		 */
-		if (0) :
-		?>
-			<div class="related-stories-wrap">
-				<h2 class="title">You may also like</h2>
-				<?php
-				$post_id = get_the_ID();
-				// Related Posts from tags
-				$tags = wp_get_post_tags($post_id);
-				$arg_tags = array();
-				foreach ($tags as $tag) {
-					array_push($arg_tags, $tag->term_id);
-				}
-				$args = array(
-					'post_status' => 'publish',
-					'tag__in' => $arg_tags,
-					'post__not_in' => array($post_id),
-					'posts_per_page' => 2,
-					'orderby' => 'rand',
-					'date_query' => array(
-						'column' => 'post_date',
-						'after' => '-60 days'
-					)
-				);
-				$related_posts_query = new WP_Query($args);
-				if ($related_posts_query->have_posts()) :
-					while ($related_posts_query->have_posts()) :
-						$related_posts_query->the_post();
-				?>
-						<div class="related-story">
-							<div class="post-thumbnail">
-								<?php if ('' !== get_the_post_thumbnail()) : ?>
-									<a href="<?php echo get_permalink() . 'amp'; ?>">
-										<?php // the_post_thumbnail( 'thumbnail' ); 
-										?>
-										<?php
-										$thumbnail = wp_get_attachment_image_src(get_post_thumbnail_id(), 'thumbnail');
-										?>
-										<figure class="amp-wp-article-featured-image wp-caption">
-											<amp-img src="<?php echo $thumbnail[0]; ?>" class="attachment-large size-large wp-post-image amp-wp-enforced-sizes" width="75" height="75"></amp-img>
-										</figure>
-									</a>
-								<?php endif; ?>
-							</div><!-- .post-thumbnail -->
-							<div class="post-content">
-								<h2><a href="<?php echo get_permalink() . 'amp'; ?>"><?php the_title(); ?></a></h2>
-								<p class="excerpt"><?php echo get_the_excerpt(); ?></p>
-							</div>
-						</div>
-					<?php
-					endwhile;
-					wp_reset_query();
-				endif;
-
-				// Related Posts from Categories
-				$cats = wp_get_post_categories($post_id);
-				$arg_tags = array();
-				foreach ($tags as $tag) {
-					array_push($arg_tags, $tag->term_id);
-				}
-				$args = array(
-					'post_status' => 'publish',
-					'category__in' => $cats,
-					'post__not_in' => array($post_id),
-					'posts_per_page' => 2,
-					'orderby' => 'rand',
-					'date_query' => array(
-						'column' => 'post_date',
-						'after' => '-30 days'
-					)
-				);
-				$related_posts_query = new WP_Query($args);
-				if ($related_posts_query->have_posts()) :
-					while ($related_posts_query->have_posts()) :
-						$related_posts_query->the_post();
-					?>
-						<div class="related-story">
-							<div class="post-thumbnail">
-								<?php if ('' !== get_the_post_thumbnail()) : ?>
-									<a href="<?php echo get_permalink() . 'amp'; ?>">
-										<?php // the_post_thumbnail( 'thumbnail' ); 
-										?>
-										<?php
-										$thumbnail = wp_get_attachment_image_src(get_post_thumbnail_id(), 'thumbnail');
-										?>
-										<figure class="amp-wp-article-featured-image wp-caption">
-											<amp-img src="<?php echo $thumbnail[0]; ?>" class="attachment-large size-large wp-post-image amp-wp-enforced-sizes" width="75" height="75"></amp-img>
-										</figure>
-									</a>
-								<?php endif; ?>
-							</div><!-- .post-thumbnail -->
-							<div class="post-content">
-								<h2><a href="<?php echo get_permalink() . 'amp'; ?>"><?php the_title(); ?></a></h2>
-								<p class="excerpt"><?php echo get_the_excerpt(); ?></p>
-							</div>
-						</div>
-				<?php
-					endwhile;
-					wp_reset_query();
-				endif;
-				?>
-				<div class="clear">&nbsp;</div>
-
-				<?php
-				//        remove_all_filters( 'posts_where', 'filter_where2' );
-				?>
-			</div>
-			<div class="clear"></div>
-		<?php endif; ?>
 
 	</article>
 
