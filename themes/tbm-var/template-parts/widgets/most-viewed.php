@@ -39,9 +39,9 @@ foreach ($data['articles'] as $_post) {
 	$most_viewed['o_tease_list']['o_tease_list_items'][] = $item;
 
 	if (2 === $i++) {
-		$most_viewed['o_tease_list']['o_tease_list_items'][] = [
+		/* $most_viewed['o_tease_list']['o_tease_list_items'][] = [
 			'sponsored_most_popular_ad_action' => empty($data['sponsored_most_popular_ad_action']) ? 'sponsored-most-popular' : $data['sponsored_most_popular_ad_action'],
-		];
+		]; */
 	}
 }
 
