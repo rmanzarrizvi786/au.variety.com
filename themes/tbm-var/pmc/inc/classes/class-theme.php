@@ -49,6 +49,9 @@ class Theme
 
 		// Setting this at priority 9 to allow child themes to override if needed
 		add_filter('pmc_fieldmanager_version', [$this, 'get_fieldmanager_version'], 9);
+
+		// Ad in content
+		add_filter('the_content', array($this, 'inject_ads'));
 	}
 
 	/*
@@ -68,6 +71,67 @@ class Theme
 			wp_redirect(home_url());
 			exit;
 		}
+	}
+
+	/*
+	* Inject Ads in content
+	*/
+	public function inject_ads($content)
+	{
+
+		if (function_exists('get_field') && (get_field('disable_ads') || get_field('disable_ads_in_content'))) :
+			return $content;
+		endif;
+
+		if (function_exists('amp_is_request') && amp_is_request()) {
+			return $content;
+		}
+
+		if (is_singular('page')) {
+			return $content;
+		}
+
+		if (
+			(function_exists('get_field') && get_field('paid_content'))
+			|| is_page_template('single-template-featured.php')
+			|| 'post' != get_post_type()
+		) :
+			return $content;
+		endif;
+
+		$count_articles = isset($_POST['count_articles']) ? (int) $_POST['count_articles'] : 1;
+
+		$after_para = function_exists('get_field') && get_field('ads_after') ? get_field('ads_after') : 1;
+
+		ob_start();
+		pmc_adm_render_ads('incontent_1');
+		$content_ad_tag = ob_get_contents();
+		ob_end_clean();
+		if ($after_para == 0) {
+			$content = '<div class="ad-mrec" id="ad-incontent-' . $count_articles . '">' . $content_ad_tag . '</div>' . $content;
+		} else {
+			$content = $this->insert_after_paragraph('<div class="ad-mrec" id="ad-incontent-' . $count_articles . '">' . $content_ad_tag . '</div>', $after_para, $content);
+		}
+
+		return $content;
+	}
+
+	public function insert_after_paragraph($insertion, $paragraph_id, $content)
+	{
+		$closing_p = '</p>';
+		$paragraphs = explode($closing_p, $content);
+		if (count($paragraphs) <= ($paragraph_id + 1)) :
+			return $content;
+		endif;
+		foreach ($paragraphs as $index => $paragraph) {
+			if (trim($paragraph)) {
+				$paragraphs[$index] .= $closing_p;
+			}
+			if ($paragraph_id == $index + 1) {
+				$paragraphs[$index] .= $insertion;
+			}
+		}
+		return implode('', $paragraphs);
 	}
 
 	private function _instantiate_singletons()
