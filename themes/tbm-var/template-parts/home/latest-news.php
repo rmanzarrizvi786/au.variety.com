@@ -149,6 +149,7 @@ if (have_posts()) {
 		} else {
 			$river['o_tease_news_list_secondary']['o_tease_list_items'][] = $item;
 		} */
+		$river['o_tease_news_list_secondary']['o_tease_list_items'][] = $item;
 
 		$count++;
 	}

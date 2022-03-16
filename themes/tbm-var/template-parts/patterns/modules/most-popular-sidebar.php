@@ -11,9 +11,12 @@
 		</div>
 	</div>
 
-	<?php if (!empty($cxense_subscribe_widget)) { ?>
-		<?php \PMC::render_template(CHILD_THEME_PATH . '/template-parts/patterns/modules/cxense-widget.php', $cxense_subscribe_widget, true); ?>
-	<?php } ?>
+	<?php // if (!empty($cxense_subscribe_widget)) { 
+	?>
+	<?php // \PMC::render_template(CHILD_THEME_PATH . '/template-parts/patterns/modules/cxense-widget.php', $cxense_subscribe_widget, true); 
+	?>
+	<?php // } 
+	?>
 </section>
 <div class="a-hidden@mobile-max">
 	<div class="lrv-u-padding-tb-1@mobile-max ">
