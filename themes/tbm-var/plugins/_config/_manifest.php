@@ -59,7 +59,7 @@ use Variety\Plugins\Config;
 \Variety\Plugins\Config\PMC_Video_Player::get_instance();
 \Variety\Plugins\Config\PMC_Video_Playlist_Manager::get_instance();
 \Variety\Plugins\Config\PMC_Post_Options::get_instance();
-\Variety\Plugins\Config\PMC_Related_Link::get_instance();
+// \Variety\Plugins\Config\PMC_Related_Link::get_instance();
 \Variety\Plugins\Config\WPCOM_Legacy_Redirector::get_instance();
 \Variety\Plugins\Config\Zoninator::get_instance();
 \Variety\Plugins\Config\PMC_Subscription_V2::get_instance();
