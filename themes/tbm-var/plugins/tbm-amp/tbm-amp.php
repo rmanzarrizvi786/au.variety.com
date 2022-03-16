@@ -377,7 +377,7 @@ class TBMAMP
     }
 
     .amp-mode-mouse nav.amp-wp-title-bar a, .amp-mode-touch nav.amp-wp-title-bar a {
-    background-image: url( <?php echo esc_url($logo_img_url); ?> );
+
     background-repeat: no-repeat;
     background-position: center;
     background-size: auto 30px;
