@@ -321,11 +321,16 @@ div.main-menu span {
   height: 50px;
 }
 @media (min-width: 62.5rem) {
-  .fuse-ad.homepage {
-    &.incontent_1,
-    &.incontent_2,
-    &.incontent_3,
-    &.incontent_4,
+  .fuse-ad {
+    &.homepage {
+      &.incontent_1,
+      &.incontent_2,
+      &.incontent_3,
+      &.incontent_4{
+        width: 970px;
+        height: 250px;
+      }
+    }
     &.leaderboard {
       width: 970px;
       height: 250px;
