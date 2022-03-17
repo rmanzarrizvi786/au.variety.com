@@ -113,13 +113,7 @@ div.main-menu span {
   cursor: pointer;
   display: none;
 }
-#main-wrapper.freeze {
-  max-height: 880px;
-  height: 880px;
-  overflow: hidden;
-  z-index: 2;
-  position: absolute;
-}
+
 .brands__sub-menu {
   position: absolute !important;
   width: 100%;
@@ -133,13 +127,16 @@ div.main-menu span {
   z-index: 101;
   position: relative;
   background: #2d2d2d;
-  overflow: hidden;
-  height: calc(100vh - 4rem);
+  overflow: scroll;
+  height: calc(100vh - 1.35rem);
+  @media (min-width: 62.5rem) {
+    overflow: hidden;
+    height: calc(100vh - 4rem);
+  }
   border-left: 1px solid #2b2b2b;
 }
 .brands__wrap .brands-box {
   width: 16.6666%;
-  /* height: 18%; */
   height: 90px;
   border-right: 1px solid #2b2b2b;
   border-bottom: 1px solid #2b2b2b;
@@ -150,12 +147,8 @@ div.main-menu span {
   justify-content: center;
   overflow: hidden;
 }
-.brands__wrap.our-brands {
-  /* height: 130px !important; */
-}
 .brands__wrap.our-brands .brands-box {
   width: 16.6666%;
-  /* height: 100% !important; */
 }
 .brands__wrap .brands-box a {
   cursor: pointer;
@@ -210,7 +203,21 @@ div.main-menu span {
     background-color: #fff;
   }
 }
+
+#main-wrapper.freeze {
+  max-height: 100vh;
+  height: 100vh;
+  overflow: hidden;
+  position: fixed;
+}
 @media (min-width: 48rem) {
+  #main-wrapper.freeze {
+    position: relative;
+    max-height: 55rem;
+    height: 100%;
+    z-index: 2;
+  }
+
   .col-md-6 {
     width: 50%;
   }

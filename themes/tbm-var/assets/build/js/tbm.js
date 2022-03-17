@@ -23,6 +23,9 @@ jQuery(document).ready(function ($) {
     });
   });
 
+  /**
+ * Toggle Brands menu
+ */
   $(".l_toggle_menu_network").on("click", function (e) {
     e.preventDefault();
     $("#menu-network").toggle();
@@ -36,10 +39,5 @@ jQuery(document).ready(function ($) {
   $("#body-overlay").on("click", function () {
     $(".l_toggle_menu_network").trigger("click");
   });
+  $(".l_toggle_menu_network").trigger("click");
 });
-
-/**
- * Toggle Brands menu
- */
-// jQuery("#main-wrapper").addClass("freeze");
-// jQuery("body").addClass("network-open");

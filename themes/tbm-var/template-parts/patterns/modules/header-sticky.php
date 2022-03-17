@@ -21,9 +21,9 @@
 					</span>
 				<?php } ?>
 
-				<?php if ( ! empty( $is_vip_header ) ) { ?>
-					<?php \PMC::render_template( CHILD_THEME_PATH . '/template-parts/patterns/modules/main-header-vip.php', $header_vip, true ); ?>
-				<?php } ?>
+				<?php // if ( ! empty( $is_vip_header ) ) { ?>
+					<?php // \PMC::render_template( CHILD_THEME_PATH . '/template-parts/patterns/modules/main-header-vip.php', $header_vip, true ); ?>
+				<?php // } ?>
 			</div>
 
 			<div class="header-sticky__search <?php echo esc_attr( $header_sticky_search_classes ?? '' ); ?>">
