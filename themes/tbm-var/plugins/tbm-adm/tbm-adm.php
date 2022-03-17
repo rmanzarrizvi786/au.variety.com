@@ -77,7 +77,8 @@ class TBMAds
     if ('' == $ad_location)
       return;
 
-    $html = '<div class="fuse-ad"><h1>' . $ad_location . '</h1></div>'; // '';
+    $html = '';
+
     $fuse_tags = self::fuse_tags();
 
     if (isset($_GET['screenshot'])) {
@@ -158,6 +159,26 @@ class TBMAds
       } else {
         $fuse_id = $fuse_tags[$ad_location];
       }
+      /**
+       * Temporary Placeholders
+       */
+      $width = 300;
+      $height = 250;
+
+      if (
+        'leaderboard' == $ad_location
+        ||
+        (strpos($ad_location, 'incontent') !== FALSE and 'homepage' == $section)
+      ) {
+        $width = 970;
+      } elseif ('vrec_2' == $ad_location) {
+        $height = 600;
+      }
+      $html = '<div class="fuse-ad d-flex" style="width: ' . $width . 'px; height: ' . $height . 'px; background-color: #ccc;"><h1>Ad: ' . $ad_location . '</h1></div>';
+      /**
+       * Temporary Placeholders
+       */
+
       // $html .= '<!--' . $post_id . ' | '  . $section . ' | ' . $ad_location . ' | ' . $slot_no . '-->';
       $html .= '<div data-fuse="' . $fuse_id . '" class="fuse-ad"></div>';
 

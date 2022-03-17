@@ -9,15 +9,52 @@
 	<?php } ?>
 
 	<div class="top-stories__stories a-top-stories-grid@tablet // <?php echo esc_attr($top_stories_stories_classes ?? ''); ?>">
-		<?php \PMC::render_template(CHILD_THEME_PATH . '/template-parts/patterns/objects/o-story.php', $o_story_first, true); ?>
-		<?php \PMC::render_template(CHILD_THEME_PATH . '/template-parts/patterns/objects/o-story.php', $o_story_second, true); ?>
-		<?php \PMC::render_template(CHILD_THEME_PATH . '/template-parts/patterns/objects/o-story.php', $o_story_third, true); ?>
-		<?php \PMC::render_template(CHILD_THEME_PATH . '/template-parts/patterns/objects/o-story.php', $o_story_fourth, true); ?>
-		<?php \PMC::render_template(CHILD_THEME_PATH . '/template-parts/patterns/objects/o-story.php', $o_story_fifth, true); ?>
+		<?php
+		if (
+			isset($o_story_first['c_title']['c_title_markup']) && '' != trim($o_story_first['c_title']['c_title_markup'])
+			||
+			isset($o_story_first['c_title']['c_title_text']) && '' != trim($o_story_first['c_title']['c_title_text'])
+		)
+			\PMC::render_template(CHILD_THEME_PATH . '/template-parts/patterns/objects/o-story.php', $o_story_first, true);
 
-		<?php if (!empty($o_story_sixth)) { ?>
-			<?php \PMC::render_template(CHILD_THEME_PATH . '/template-parts/patterns/objects/o-story.php', $o_story_sixth, true); ?>
-		<?php } ?>
+		if (
+			isset($o_story_second['c_title']['c_title_markup']) && '' != trim($o_story_second['c_title']['c_title_markup'])
+			||
+			isset($o_story_second['c_title']['c_title_text']) && '' != trim($o_story_second['c_title']['c_title_text'])
+		)
+			\PMC::render_template(CHILD_THEME_PATH . '/template-parts/patterns/objects/o-story.php', $o_story_second, true);
+
+		if (
+			isset($o_story_third['c_title']['c_title_markup']) && '' != trim($o_story_third['c_title']['c_title_markup'])
+			||
+			isset($o_story_third['c_title']['c_title_text']) && '' != trim($o_story_third['c_title']['c_title_text'])
+		)
+			\PMC::render_template(CHILD_THEME_PATH . '/template-parts/patterns/objects/o-story.php', $o_story_third, true);
+
+		if (
+			isset($o_story_fourth['c_title']['c_title_markup']) && '' != trim($o_story_fourth['c_title']['c_title_markup'])
+			||
+			isset($o_story_fourth['c_title']['c_title_text']) && '' != trim($o_story_fourth['c_title']['c_title_text'])
+		)
+			\PMC::render_template(CHILD_THEME_PATH . '/template-parts/patterns/objects/o-story.php', $o_story_fourth, true);
+
+		if (
+			isset($o_story_fifth['c_title']['c_title_markup']) && '' != trim($o_story_fifth['c_title']['c_title_markup'])
+			||
+			isset($o_story_fifth['c_title']['c_title_text']) && '' != trim($o_story_fifth['c_title']['c_title_text'])
+		)
+			\PMC::render_template(CHILD_THEME_PATH . '/template-parts/patterns/objects/o-story.php', $o_story_fifth, true);
+		?>
+
+		<?php
+		if (!empty($o_story_sixth)) {
+			if (
+				isset($o_story_sixth['c_title']['c_title_markup']) && '' != trim($o_story_sixth['c_title']['c_title_markup'])
+				||
+				isset($o_story_sixth['c_title']['c_title_text']) && '' != trim($o_story_sixth['c_title']['c_title_text'])
+			)
+				\PMC::render_template(CHILD_THEME_PATH . '/template-parts/patterns/objects/o-story.php', $o_story_sixth, true);
+		} ?>
 	</div>
 
 	<?php if (!empty($o_tease_ad)) { ?>

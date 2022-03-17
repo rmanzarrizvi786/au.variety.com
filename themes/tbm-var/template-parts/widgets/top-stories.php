@@ -54,7 +54,7 @@ foreach ($data['articles'] as $story_data_item) {
 		// Show hard coded text for the first story vertical
 		$template['c_span']['c_span_text'] = __('Top Story', 'pmc-variety');
 	} else {
-		if (
+		/* if (
 			in_array(
 				get_post_type($story_data_item),
 				[Content::VIP_POST_TYPE, Content::VIP_VIDEO_POST_TYPE],
@@ -66,7 +66,8 @@ foreach ($data['articles'] as $story_data_item) {
 			$template['c_span']['c_span_link_classes'] .= ' u-color-brand-vip-primary ';
 		} else {
 			$template['c_span'] = $larva_populate->c_span_vertical($story_data_item, $template);
-		}
+		} */
+		$template['c_span'] = $larva_populate->c_span_vertical($story_data_item, $template);
 	}
 
 	$template['c_link']      = $larva_populate->c_link_author($story_data_item->ID, $template);
@@ -109,14 +110,14 @@ $popular_posts = \PMC\Core\Inc\Top_Posts::get_posts($count, $days, $period, 'mos
 
 // 3. Ad Widgets
 
-$top_ad    = PMC\Core\Inc\Larva::get_instance()->get_json('modules/vip-banner.300x250');
-$bottom_ad = PMC\Core\Inc\Larva::get_instance()->get_json('modules/cxense-widget.300x250');
+// $top_ad    = PMC\Core\Inc\Larva::get_instance()->get_json('modules/vip-banner.300x250');
+// $bottom_ad = PMC\Core\Inc\Larva::get_instance()->get_json('modules/cxense-widget.300x250');
 
 // vip-banner.300x250 - top
-$top_ad['homepage_top_stories_ad_action'] = 'homepage-top-stories';
+// $top_ad['homepage_top_stories_ad_action'] = 'homepage-top-stories';
 
 // cxense widget 300x250 - bottom
-$bottom_ad['cxense_id_attr'] = 'cx-module-300x250';
+// $bottom_ad['cxense_id_attr'] = 'cx-module-300x250';
 
 ?>
 

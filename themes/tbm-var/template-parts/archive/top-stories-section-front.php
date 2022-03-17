@@ -27,8 +27,7 @@ $featured_story_data = PMC\Core\Inc\Carousels::get_instance()->get_posts(
 	false
 );
 
-
-if (!is_array($featured_story_data) || empty($featured_story_data) || 5 > count($featured_story_data)) {
+if (!is_array($featured_story_data) || empty($featured_story_data)) { // || 5 > count($featured_story_data)) {
 	return;
 }
 
