@@ -147,9 +147,6 @@ class DownloadVarietyComArticle
           @$doc->loadHTML($content);
           $imgs = $doc->getElementsbyTagName('img');
 
-          // wp_send_json_error(['result' => '<pre>' . print_r($imgs, true)]);
-          // die();
-
           if ($imgs && isset($imgs->item)) {
             $image = $imgs->item(0)->getAttribute('src');
           } else {
@@ -219,9 +216,14 @@ class DownloadVarietyComArticle
     $content = isset($article['content']) ?  $article['content'] . '<p><em>From <a href="' . $article['url'] . '" target="_blank">Variety US</a></em></p>' : '';
 
     $parsed_url = parse_url($article['url']);
+
     $post_name_e = explode('/', $parsed_url['path']);
     $post_name_e = array_map('trim', $post_name_e);
     $post_name_e = array_filter($post_name_e);
+
+    // wp_send_json_error(['result' => '<pre>' . print_r($article['url'], true)]);
+    // die();
+
     $post_name = preg_replace('|((.*))-(\d+)$|', '$1', end($post_name_e));
 
     $html = file_get_contents($article['url']);
@@ -260,6 +262,12 @@ class DownloadVarietyComArticle
       $metas['thumbnail_ext_url'] = $article['image'];
     } */
 
+    // Set Primary Category
+    if (isset($post_name_e[3])) {
+      $primary_category =  $post_name_e[3];
+      $metas['_yoast_wpseo_primary_category'] = get_cat_ID($primary_category);
+    }
+
     $new_article_args = [
       'post_name' => $post_name,
       'post_content' => $content,
@@ -277,6 +285,12 @@ class DownloadVarietyComArticle
     if (!isset($new_article_id) || is_wp_error($new_article_id)) {
       wp_send_json_error(['result' => 'Error creating the article']);
       die();
+    }
+
+    // Set Vertical Taxonomy
+    if (isset($post_name_e[2])) {
+      $vertical =  $post_name_e[2];
+      wp_set_object_terms($new_article_id, $vertical, 'vertical');
     }
 
     $wpdb->insert(
