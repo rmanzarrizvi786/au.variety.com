@@ -57,8 +57,8 @@ foreach ($featured_story_data as $story_data_item) {
 	$featured_story_item['c_lazy_image']['c_lazy_image_src_url']            = $story_data_item['image'] ?? '';
 	$featured_story_item['c_lazy_image']['c_lazy_image_screen_reader_text'] = $story_data_item['image_alt'] ?? '';
 	$featured_story_item['c_lazy_image']['c_lazy_image_alt_attr']           = $story_data_item['image_alt'] ?? '';
-	$featured_story_item['c_lazy_image']['c_lazy_image_srcset_attr']        = \wp_get_attachment_image_srcset($story_data_item['image_id']) ?? false;
-	$featured_story_item['c_lazy_image']['c_lazy_image_sizes_attr']         = \wp_get_attachment_image_sizes($story_data_item['image_id']) ?? false;
+	$featured_story_item['c_lazy_image']['c_lazy_image_srcset_attr']        = isset($story_data_item['image_id']) ? \wp_get_attachment_image_srcset($story_data_item['image_id']) : false;
+	$featured_story_item['c_lazy_image']['c_lazy_image_sizes_attr']         = isset($story_data_item['image_id']) ? \wp_get_attachment_image_sizes($story_data_item['image_id']) : false;
 
 	$primary_category = \PMC_Primary_Taxonomy::get_instance()->get_primary_taxonomy(
 		$story_data_item['ID'],
@@ -79,20 +79,27 @@ foreach ($featured_story_data as $story_data_item) {
 		$featured_story_item['c_span'] = false;
 	}
 
-	$author = \PMC\Core\Inc\Author::get_instance()->authors_data($story_data_item['ID']);
+	$custom_author = get_post_meta(get_the_ID(), 'author', true);
 
-	if (!empty($author['byline'])) {
-		$featured_story_item['c_link']['c_link_text'] = wp_strip_all_tags(sprintf('By %1$s', $author['byline']));
-
-		if (!empty($author['single_author'])) {
-			$featured_story_item['c_link']['c_link_url'] = get_author_posts_url(
-				$author['single_author']['author']->ID,
-				$author['single_author']['author']->user_nicename
-			);
-		}
+	if ($custom_author) {
+		$featured_story_item['c_link']['c_link_text'] = wp_strip_all_tags(sprintf('By %1$s', $custom_author));
+		$featured_story_item['c_link']['c_link_url'] = '#undefined';
 	} else {
-		$featured_story_item['c_link']['c_link_text'] = '';
-		$featured_story_item['c_link']['c_link_url']  = '';
+		$author = \PMC\Core\Inc\Author::get_instance()->authors_data($story_data_item['ID']);
+
+		if (!empty($author['byline'])) {
+			$featured_story_item['c_link']['c_link_text'] = wp_strip_all_tags(sprintf('By %1$s', $author['byline']));
+
+			if (!empty($author['single_author'])) {
+				$featured_story_item['c_link']['c_link_url'] = get_author_posts_url(
+					$author['single_author']['author']->ID,
+					$author['single_author']['author']->user_nicename
+				);
+			}
+		} else {
+			$featured_story_item['c_link']['c_link_text'] = '';
+			$featured_story_item['c_link']['c_link_url']  = '';
+		}
 	}
 
 	$featured_story_item['c_timestamp']['c_timestamp_text'] = variety_human_time_diff($story_data_item['ID']);
