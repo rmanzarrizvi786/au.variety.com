@@ -55,7 +55,7 @@ class Theme
 
 		// Add Vertical column to Posts list
 		add_filter('manage_post_posts_columns', [$this, 'manage_post_posts_columns']);
-		add_action('manage_posts_custom_column', [$this, 'manage_posts_custom_column'], 10, 2);
+		add_action('manage_posts_custom_column', [$this, 'manage_posts_custom_column'], 99, 2);
 	}
 
 	public function manage_post_posts_columns($columns)
@@ -83,8 +83,10 @@ class Theme
 				$terms = get_the_term_list($post_id, 'vertical', '', ', ', '');
 				if (is_string($terms))
 					echo $terms;
-				else
-					_e('Unable to get vertical(s)', 'pmc-variety');
+				break;
+			case 'coauthors':
+				$custom_author = get_post_meta($post_id, 'author', true);
+				echo $custom_author ? '(' . $custom_author . ')' : '';
 				break;
 		}
 	}
