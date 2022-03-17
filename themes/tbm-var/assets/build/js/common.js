@@ -2843,7 +2843,7 @@
         (window.pmc_side_skin_classes_removed = !0)),
         window.dispatchEvent(new Event("resize"));
     }
-    // if (screen.width >= 1200) 
+    // if (screen.width >= 1200)
     p();
 
     var g = i(3);
@@ -3057,7 +3057,7 @@
         !(function () {
           const t = [...document.querySelectorAll(".js-MegaMenu")],
             e = [...document.querySelectorAll(".js-MegaMenu-Trigger")];
-          let i;
+          /* let i;
           function s() {
             let t = document.documentElement.classList.contains("is-mega-open");
             const e = [
@@ -3074,11 +3074,11 @@
                     e[0].focus();
                   }, 100),
                 (i = document.activeElement));
-          }
+          } */
           t.forEach((t) => (t.pmcMegaMenu = new n(t))),
-            e.forEach((t) => {
+            /* e.forEach((t) => {
               t.addEventListener("click", s);
-            }),
+            }), */
             document.addEventListener("keydown", (t) => {
               "Escape" === t.key &&
                 document.documentElement.classList.remove("is-mega-open");
