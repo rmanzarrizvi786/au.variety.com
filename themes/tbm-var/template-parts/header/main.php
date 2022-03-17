@@ -148,11 +148,11 @@ $data['header_main']['o_nav']['o_nav_list_items'] = [];
 $menu_items = [
 	[
 		'label' => __('Subscribe', 'pmc-variety'),
-		'url'   => '/subscribe-us/',
+		'url'   => 'https://thebrag.com/observer/',
 	],
 	[
 		'label' => __('Login', 'pmc-variety'),
-		'url'   => '/digital-subscriber-access/#r=/print-plus/',
+		'url'   => wp_login_url(),
 	],
 ];
 
@@ -174,6 +174,7 @@ $menu_items = [
 	[
 		'label' => __('Have a News Tip?', 'pmc-variety'),
 		'url'   => 'https://thebrag.com/media/submit-a-tip/',
+		'target' => '_blank',
 	],
 	[
 		'label' => __('Newsletters', 'pmc-variety'),
@@ -187,6 +188,7 @@ foreach ($menu_items as $menu_item) {
 
 	$item['c_link_text'] = $menu_item['label'];
 	$item['c_link_url']  = $menu_item['url'];
+	$item['c_link_target_attr']  = $menu_item['target'];
 
 	$data['header_main']['o_top_nav']['o_nav_list_items'][] = $item;
 }
