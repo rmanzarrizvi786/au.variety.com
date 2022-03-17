@@ -1,7 +1,7 @@
-/**
- * Newsletter Subscribe to Observer
- */
 jQuery(document).ready(function ($) {
+  /**
+   * Newsletter Subscribe to Observer
+   */
   $(".o-email-capture-form").on("submit", function (e) {
     e.preventDefault();
     var theForm = $(this);
@@ -24,8 +24,8 @@ jQuery(document).ready(function ($) {
   });
 
   /**
- * Toggle Brands menu
- */
+   * Toggle Brands menu
+   */
   $(".l_toggle_menu_network").on("click", function (e) {
     e.preventDefault();
     $("#menu-network").toggle();
@@ -36,5 +36,9 @@ jQuery(document).ready(function ($) {
 
   $("#body-overlay").on("click", function () {
     $(".l_toggle_menu_network").trigger("click");
+  });
+
+  $(".js-MegaMenu-Trigger").on("click", function () {
+    $("html").toggleClass("is-mega-open");
   });
 });
