@@ -2843,7 +2843,8 @@
         (window.pmc_side_skin_classes_removed = !0)),
         window.dispatchEvent(new Event("resize"));
     }
-    if (screen.width >= 1200) p();
+    // if (screen.width >= 1200) 
+    p();
 
     var g = i(3);
     class f {
