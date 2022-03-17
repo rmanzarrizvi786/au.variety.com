@@ -34,6 +34,7 @@ get_template_part('template-parts/footer/main');
 	</div><!-- /#main-wrapper -->
 <?php endif; ?>
 
+<div id="body-overlay" style="display: none;"></div>
 </body>
 
 </html>

@@ -22,4 +22,24 @@ jQuery(document).ready(function ($) {
       }
     });
   });
+
+  $(".l_toggle_menu_network").on("click", function (e) {
+    e.preventDefault();
+    $("#menu-network").toggle();
+    $("#main-wrapper").toggleClass("freeze");
+    // $("body").toggleClass("network-open");
+    $("#body-overlay").toggle();
+    // $(".is-header-sticky .l-header__search").toggle();
+    $(this).toggleClass("expanded");
+  });
+
+  $("#body-overlay").on("click", function () {
+    $(".l_toggle_menu_network").trigger("click");
+  });
 });
+
+/**
+ * Toggle Brands menu
+ */
+// jQuery("#main-wrapper").addClass("freeze");
+// jQuery("body").addClass("network-open");

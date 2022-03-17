@@ -3,7 +3,7 @@
 {
 	// Need this markup to show Video Wall only on desktop/tablet.
 ?>
-	<div id="leaderboard-no-padding" class="l-header__leaderboard-no-padding u-margin-a-1@desktop-xl lrv-u-padding-tb-075">
+	<div id="leaderboard-no-padding" class="l-header__leaderboard-no-padding u-margin-a-1@desktop-xl lrv-u-padding-tb-075 sticky-bottom-mobile">
 		<?php pmc_adm_render_ads('leaderboard'); ?>
 	</div>
 <?php

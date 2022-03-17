@@ -38,31 +38,7 @@ $bg_color_class = is_home() || (is_archive() && !is_author() && !is_tag('documen
 	<?php do_action('pmc_tags_head'); ?>
 
 	<style>
-		.fuse-ad {
-			margin: auto;
-			text-align: center;
-		}
 
-		.fuse-ad iframe {
-			margin: 0 auto !important;
-		}
-
-		#skin-ad-container {
-			width: 1680px;
-			height: 1200px;
-			top: 0;
-			left: 50%;
-			transform: translateX(-50%);
-
-			position: fixed;
-			cursor: pointer;
-			z-index: -1;
-			background-repeat: no-repeat;
-		}
-
-		#main-wrapper {
-			z-index: 3;
-		}
 	</style>
 </head>
 
@@ -110,11 +86,6 @@ $bg_color_class = is_home() || (is_archive() && !is_author() && !is_tag('documen
 				?>
 				<div class="vy-leaderboard-ad"></div> <!-- marker for pmc-sticky-ad (aka Mobile Adhesion Ads) -->
 				<?php
-
-				/* if (PMC::is_mobile()) {
-					pmc_adm_render_ads('leaderboard');
-				} */
-
 				\PMC::render_template(
 					sprintf('%s/template-parts/header/menu.php', untrailingslashit(CHILD_THEME_PATH)),
 					[],

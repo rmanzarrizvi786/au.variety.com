@@ -380,6 +380,8 @@ function _wpcom_vip_load_plugin_sanitizer($folder)
 
 function pmc_adm_render_ads($ad_location, $ad_title = '', $echo = true, $provider = '')
 {
+	if (!class_exists('\TBM\TBMAds'))
+		return;
 	$ads = \TBM\TBMAds::get_instance();
 	echo $ads->get_ad($ad_location);
 	return;
@@ -403,3 +405,198 @@ function wpcom_vip_theme_dir($theme = '')
 
 	return sprintf('%s/themes/vip/%s', WP_CONTENT_DIR, $theme);
 }
+
+function brands()
+{
+	$pub_logos = [
+		'the-brag' => [
+			'title' => 'The Brag',
+			'link' => 'https://thebrag.com/',
+			'logo_name' => 'The-Brag_combo',
+			'ext' => 'svg',
+		],
+		'brag-jobs' => [
+			'title' => 'The Brag Jobs',
+			'link' => 'https://thebrag.com/jobs',
+			'logo_name' => 'The-Brag-Jobs',
+			'width' => 80,
+			'ext' => 'png',
+		],
+		'dbu' => [
+			'title' => 'Don\'t Bore Us',
+			'link' => 'https://dontboreus.thebrag.com/',
+			'logo_name' => 'Dont-Bore-Us',
+			'ext' => 'svg',
+		],
+		'tio' => [
+			'title' => 'The Industry Observer',
+			'link' => 'https://theindustryobserver.thebrag.com/',
+			'logo_name' => 'The-Industry-Observer',
+			'ext' => 'svg',
+		],
+		'rolling-stone-australia' => [
+			'title' => 'Rolling Stone Australia',
+			'link' => 'https://au.rollingstone.com/',
+			'logo_name' => 'Rolling-Stone-Australia',
+			'ext' => 'png',
+		],
+		'tone-deaf' => [
+			'title' => 'Tone Deaf',
+			'link' => 'https://tonedeaf.thebrag.com/',
+			'logo_name' => 'Tone-Deaf',
+			'ext' => 'svg',
+			'width' => 80
+		],
+		'tmn' => [
+			'title' => 'The Music Network',
+			'link' => 'https://themusicnetwork.com/',
+			'logo_name' => 'TMN',
+			'ext' => 'svg',
+			'width' => 80
+		],
+	];
+	return $pub_logos;
+} // brands()
+
+function brands_network()
+{
+	$pub_logos = [
+		/**
+		 * EPIC
+		 */
+		'lwa' => [
+			'title' => 'Life Without Andy',
+			'link' => 'https://lifewithoutandy.com/',
+			'logo_name' => 'lwa',
+			'ext' => 'png',
+			'width' => 60
+		],
+		'hypebeast' => [
+			'title' => 'Hypebeast',
+			'link' => 'https://hypebeast.com/',
+			'logo_name' => 'Hypebeast',
+			'ext' => 'png',
+		],
+		'funimation' => [
+			'title' => 'Funimation',
+			'link' => 'https://www.funimation.com/',
+			'logo_name' => 'Funimation',
+			'ext' => 'png',
+		],
+		'crunchyroll' => [
+			'title' => 'Crunchyroll',
+			'link' => 'https://www.crunchyroll.com/en-gb',
+			'logo_name' => 'Crunchyroll',
+			'ext' => 'png',
+		],
+		'enthusiast' => [
+			'title' => 'Enthusiast Gaming',
+			'link' => 'https://www.enthusiastgaming.com/',
+			'logo_name' => 'enthusiast',
+			'ext' => 'png',
+		],
+		'gamelancer' => [
+			'title' => 'Gamelancer',
+			'link' => 'https://gamelancer.com/',
+			'logo_name' => 'Gamelancer',
+			'ext' => 'png',
+		],
+
+		/**
+		 * PMC
+		 */
+		'artnews' => [
+			'title' => 'ARTnews',
+			'link' => 'https://www.artnews.com/',
+			'logo_name' => 'ARTnews',
+		],
+		'bgr' => [
+			'title' => 'BGR',
+			'link' => 'https://bgr.com/',
+			'logo_name' => 'bgr',
+			'width' => 80
+		],
+		'billboard' => [
+			'title' => 'Billboard',
+			'link' => 'https://billboard.com/',
+			'logo_name' => 'billboard',
+		],
+		'deadline' => [
+			'title' => 'Deadline',
+			'link' => 'https://deadline.com/',
+			'logo_name' => 'DEADLINE',
+		],
+		'dirt' => [
+			'title' => 'Dirt',
+			'link' => 'https://www.dirt.com/',
+			'logo_name' => 'Dirt',
+			'width' => 80
+		],
+		'footwear' => [
+			'title' => 'Footwear News',
+			'link' => 'https://footwearnews.com/',
+			'logo_name' => 'FootwearNews',
+			'width' => 60
+		],
+		'gold-derby' => [
+			'title' => 'Gold Derby',
+			'link' => 'https://www.goldderby.com/',
+			'logo_name' => 'GoldDerby',
+		],
+		'indiewire' => [
+			'title' => 'IndieWire',
+			'link' => 'https://www.indiewire.com/',
+			'logo_name' => 'IndieWire',
+		],
+		'sheknows' => [
+			'title' => 'SheKnows',
+			'link' => 'https://www.sheknows.com/',
+			'logo_name' => 'SheKnows',
+		],
+		'sourcing-journal' => [
+			'title' => 'Sourcing Journal',
+			'link' => 'https://sourcingjournal.com/',
+			'logo_name' => 'SourcingJournal',
+		],
+		'sportico' => [
+			'title' => 'Sportico',
+			'link' => 'https://www.sportico.com/',
+			'logo_name' => 'Sportico',
+		],
+		'spy' => [
+			'title' => 'Spy',
+			'link' => 'https://spy.com/',
+			'logo_name' => 'Spy',
+			'width' => 120,
+		],
+		'stylecaster' => [
+			'title' => 'Stylecaster',
+			'link' => 'https://stylecaster.com/',
+			'logo_name' => 'Stylecaster',
+		],
+		'the-hollywood-reporter' => [
+			'title' => 'The Hollywood Reporter',
+			'link' => 'https://www.hollywoodreporter.com/',
+			'logo_name' => 'The-Hollywood-Reporter',
+		],
+		'tvline' => [
+			'title' => 'TVLine',
+			'link' => 'https://tvline.com/',
+			'logo_name' => 'TVLine',
+			'width' => 120,
+		],
+		'variety' => [
+			'title' => 'Variety',
+			'link' => 'https://variety.com/',
+			'logo_name' => 'Variety',
+			'width' => 120,
+		],
+		'vibe' => [
+			'title' => 'VIBE',
+			'link' => 'https://www.vibe.com/',
+			'logo_name' => 'Vibe',
+			'width' => 120,
+		],
+	];
+	return $pub_logos;
+} // brands_network()
