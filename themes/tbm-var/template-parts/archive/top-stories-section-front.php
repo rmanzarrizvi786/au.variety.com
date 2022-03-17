@@ -79,7 +79,7 @@ foreach ($featured_story_data as $story_data_item) {
 		$featured_story_item['c_span'] = false;
 	}
 
-	$custom_author = get_post_meta(get_the_ID(), 'author', true);
+	$custom_author = get_post_meta($story_data_item['ID'], 'author', true);
 
 	if ($custom_author) {
 		$featured_story_item['c_link']['c_link_text'] = wp_strip_all_tags(sprintf('By %1$s', $custom_author));
