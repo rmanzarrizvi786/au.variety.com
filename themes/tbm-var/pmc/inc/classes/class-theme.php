@@ -52,6 +52,39 @@ class Theme
 
 		// Ad in content
 		add_filter('the_content', array($this, 'inject_ads'));
+
+		// Add Vertical column to Posts list
+		add_filter('manage_post_posts_columns', [$this, 'manage_post_posts_columns']);
+		add_action('manage_posts_custom_column', [$this, 'manage_posts_custom_column'], 10, 2);
+	}
+
+	public function manage_post_posts_columns($columns)
+	{
+		$columns['vertical'] = __('Vertical', 'pmc-variety');
+		// return $columns;
+
+		$n_columns = array();
+		$move = 'vertical';
+		$before = 'categories';
+		foreach ($columns as $key => $value) {
+			if ($key == $before) {
+				$n_columns[$move] = $move;
+			}
+			$n_columns[$key] = $value;
+		}
+		return $n_columns;
+	}
+	function manage_posts_custom_column($column, $post_id)
+	{
+		switch ($column) {
+			case 'vertical':
+				$terms = get_the_term_list($post_id, 'vertical', '', ', ', '');
+				if (is_string($terms))
+					echo $terms;
+				else
+					_e('Unable to get vertical(s)', 'pmc-variety');
+				break;
+		}
 	}
 
 	/*
