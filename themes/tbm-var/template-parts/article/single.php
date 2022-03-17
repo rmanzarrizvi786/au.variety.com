@@ -129,7 +129,7 @@ while (have_posts()) :
 			<aside class="u-width-320@tablet lrv-u-flex-shrink-0 lrv-u-flex@tablet lrv-u-flex-direction-column lrv-a-space-children-vertical lrv-a-space-children--1">
 				<div class="a-hidden@mobile-max">
 					<div class="lrv-u-padding-tb-1@mobile-max ">
-						<section class="u-width-300 u-height-300 lrv-u-text-align-center lrv-u-flex lrv-u-align-items-center lrv-u-justify-content-center">
+						<section>
 							<div class="admz">
 								<?php pmc_adm_render_ads('mrec'); ?>
 							</div>
@@ -141,7 +141,7 @@ while (have_posts()) :
 				<?php endif; ?>
 				<div class="a-hidden@mobile-max">
 					<div class="lrv-u-padding-tb-1@mobile-max ">
-						<section class="u-width-300 lrv-u-text-align-center lrv-u-flex lrv-u-align-items-center lrv-u-justify-content-center">
+						<section>
 							<div class="admz">
 								<?php pmc_adm_render_ads('vrec'); ?>
 							</div>

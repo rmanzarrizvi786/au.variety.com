@@ -3,7 +3,7 @@
 ?>
 <div class="a-hidden@mobile-max">
 	<div class="lrv-u-padding-tb-1@mobile-max ">
-		<section class="cxense-widget-div lrv-u-width-100p lrv-u-height-100p">
+		<section>
 			<div class="admz">
 				<?php pmc_adm_render_ads('vrec_1'); ?>
 			</div>
@@ -29,7 +29,7 @@
 </section>
 <div class="a-hidden@mobile-max">
 	<div class="lrv-u-padding-tb-1@mobile-max ">
-		<section class="cxense-widget-div lrv-u-width-100p lrv-u-height-100p">
+		<section>
 			<div class="admz">
 				<?php pmc_adm_render_ads('vrec_2'); ?>
 			</div>

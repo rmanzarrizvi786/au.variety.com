@@ -171,7 +171,10 @@ class TBMAds
         (strpos($ad_location, 'incontent') !== FALSE and 'homepage' == $section)
       ) {
         $width = 970;
-      } elseif ('vrec_2' == $ad_location) {
+      } elseif (
+        'vrec_2' == $ad_location
+        || ('vrec' == $ad_location && 'article' == $section)
+      ) {
         $height = 600;
       }
       $html = '<div class="fuse-ad d-flex" style="width: ' . $width . 'px; height: ' . $height . 'px; background-color: #ccc;"><h1>Ad: ' . $ad_location . '</h1></div>';
@@ -250,7 +253,9 @@ class TBMAds
         'skin' =>   '22693233889',
         'leaderboard' =>   '22693233907',
         'mrec' => '22693555511',
+        'vrec_1' => '22693555511',
         'vrec' =>   '22693233895',
+        'vrec_2' =>   '22693233895',
       ],
       'homepage' => [
         'skin' => '22693233868',
