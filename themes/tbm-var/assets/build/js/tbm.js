@@ -30,14 +30,11 @@ jQuery(document).ready(function ($) {
     e.preventDefault();
     $("#menu-network").toggle();
     $("#main-wrapper").toggleClass("freeze");
-    // $("body").toggleClass("network-open");
     $("#body-overlay").toggle();
-    // $(".is-header-sticky .l-header__search").toggle();
     $(this).toggleClass("expanded");
   });
 
   $("#body-overlay").on("click", function () {
     $(".l_toggle_menu_network").trigger("click");
   });
-  $(".l_toggle_menu_network").trigger("click");
 });
