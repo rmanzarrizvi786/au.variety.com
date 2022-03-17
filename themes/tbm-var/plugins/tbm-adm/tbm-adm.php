@@ -177,7 +177,33 @@ class TBMAds
       ) {
         $height = 600;
       }
-      $html = '<div class="fuse-ad d-flex" style="width: ' . $width . 'px; height: ' . $height . 'px; background-color: #ccc;"><h1>Ad: ' . $ad_location . '</h1></div>';
+      $html = '<div class="fuse-ad d-flex ' . $ad_location . '" style="background-color: #ccc;"><h2>Ad: ' . $ad_location . '</h2></div>';
+      $html .= '<style>
+      .fuse-ad.vrec, .fuse-ad.vrec_1, .fuse-ad.mrec, .fuse-ad.vrec_2 {
+        width: 300px;
+        height: 250px;
+      }.fuse-ad.vrec_2 {
+        height: 600px;
+      }
+      .fuse-ad.incontent_1,
+      .fuse-ad.incontent_2,
+      .fuse-ad.incontent_3,
+      .fuse-ad.incontent_4,
+      .fuse-ad.leaderboard {
+        width: 320px;
+        height: 50px;
+      }
+      @media (min-width: 62.5rem) {
+        .fuse-ad.incontent_1,
+      .fuse-ad.incontent_2,
+      .fuse-ad.incontent_3,
+      .fuse-ad.incontent_4,
+      .fuse-ad.leaderboard {
+          width: 970px;
+          height: 250px;
+        }
+      }
+      </style>';
       /**
        * Temporary Placeholders
        */

@@ -25,7 +25,7 @@ $bg_color_class = is_home() || (is_archive() && !is_author() && !is_tag('documen
 <html id="ie8" <?php language_attributes(); ?>>
 <![endif]-->
 <!--[if !(IE 6) | !(IE 7) | !(IE 8) ]><!-->
-<html <?php language_attributes(); ?> class="has-side-skins">
+<html <?php language_attributes(); ?>>
 <!--<![endif]-->
 
 <head>
