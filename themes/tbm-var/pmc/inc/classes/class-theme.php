@@ -63,6 +63,7 @@ class Theme
 		$columns['vertical'] = __('Vertical', 'pmc-variety');
 		// return $columns;
 
+		unset($columns['coauthors'], $columns['comments']);
 		$n_columns = array();
 		$move = 'vertical';
 		$before = 'categories';
@@ -72,6 +73,7 @@ class Theme
 			}
 			$n_columns[$key] = $value;
 		}
+		$n_columns['coauthors'] = 'Authors';
 		return $n_columns;
 	}
 	function manage_posts_custom_column($column, $post_id)
