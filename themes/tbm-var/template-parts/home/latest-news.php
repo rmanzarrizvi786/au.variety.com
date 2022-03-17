@@ -184,10 +184,6 @@ if (!empty($prev_post_link)) {
 	$river['o_more_link_previous']['c_link'] = false;
 }
 
-/* if (\PMC::is_mobile()) {
-	$river['o_tease_news_list_secondary']['o_tease_list_items'][] = ['sponsored_homepage_river_ad_action' => 'sponsored-homepage-river'];
-} */
-
 $river = apply_filters('variety_river', $river, $template);
 
 \PMC::render_template(

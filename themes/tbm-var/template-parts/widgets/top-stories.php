@@ -85,14 +85,6 @@ foreach ($data['articles'] as $story_data_item) {
 	$i++;
 }
 
-/* if (is_home()) {
-	if (\PMC::is_mobile()) {
-		$top_stories['o_tease_ad'] = [
-			'c_markup' => pmc_adm_render_ads('widget', 'mob-hp-mid', false),
-		];
-	}
-} */
-
 // 2. Most Popular / Most Viewed Widget
 
 $count = !empty($data['popular_count']) ? (int) $data['popular_count'] : 8;

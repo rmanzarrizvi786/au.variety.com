@@ -31,9 +31,5 @@ $back_to_linked_post = pmc_gallery_back_to_linked_post();
 	</div>
 </header>
 <div class="ad--horizontal">
-	<?php // if (\PMC::is_mobile()) : 
-	?>
 	<?php pmc_adm_render_ads('header-leaderboard'); ?>
-	<?php // endif; 
-	?>
 </div>

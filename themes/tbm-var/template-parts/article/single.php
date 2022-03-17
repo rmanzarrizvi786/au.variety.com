@@ -111,19 +111,8 @@ while (have_posts()) :
 				);
 				?>
 
-				<?php
-				// if (!\PMC::is_mobile()) {
-				get_template_part('template-parts/ads/article-page-bottom');
-				// }
-				?>
-				<?php
-				/* \PMC::render_template(
-					sprintf('%s/template-parts/article/comments.php', untrailingslashit(CHILD_THEME_PATH)),
-					[],
-					true
-				); */
-				?>
-
+				<?php get_template_part('template-parts/ads/article-page-bottom'); ?>
+				
 			</article>
 
 			<aside class="u-width-320@tablet lrv-u-flex-shrink-0 lrv-u-flex@tablet lrv-u-flex-direction-column lrv-a-space-children-vertical lrv-a-space-children--1">
@@ -139,7 +128,7 @@ while (have_posts()) :
 				<?php if (is_active_sidebar('global-sidebar')) : ?>
 					<?php dynamic_sidebar('global-sidebar'); ?>
 				<?php endif; ?>
-				<div class="a-hidden@mobile-max">
+				<div id="tbm-sticky-rail-ad"  class="a-hidden@mobile-max">
 					<div class="lrv-u-padding-tb-1@mobile-max ">
 						<section>
 							<div class="admz">

@@ -52,10 +52,6 @@ get_header();
 	</div>
 
 	<?php
-	// if (!\PMC::is_mobile()) {
-	// pmc_adm_render_ads('homepage-bottom-river', '');
-	// }
-
 	if (is_active_sidebar('homepage-bottom')) {
 		dynamic_sidebar('homepage-bottom');
 	}
