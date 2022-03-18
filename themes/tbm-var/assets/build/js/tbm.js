@@ -42,3 +42,9 @@ jQuery(document).ready(function ($) {
     $("html").toggleClass("is-mega-open");
   });
 });
+
+
+document.addEventListener("keydown", (t) => {
+  "Escape" === t.key &&
+    document.documentElement.classList.remove("is-mega-open");
+});
