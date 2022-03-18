@@ -34,7 +34,7 @@
 						<?php \PMC::render_template(CHILD_THEME_PATH . '/template-parts/patterns/modules/expandable-search.php', $expandable_search, true); ?>
 					</div>
 
-					<div class="<?php echo esc_attr($header_sticky_logo_classes ?? ''); ?>">
+					<div class="tbm center-logo <?php echo esc_attr($header_sticky_logo_classes ?? ''); ?>">
 						<?php \PMC::render_template(CHILD_THEME_PATH . '/template-parts/patterns/components/c-logo.php', $c_logo, true); ?>
 
 						<?php if (!empty($is_vip_header_h1)) { ?>

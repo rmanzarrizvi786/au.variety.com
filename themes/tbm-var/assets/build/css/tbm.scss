@@ -327,7 +327,7 @@ div.main-menu span {
       &.incontent_1,
       &.incontent_2,
       &.incontent_3,
-      &.incontent_4{
+      &.incontent_4 {
         width: 970px;
         height: 250px;
       }
@@ -351,8 +351,8 @@ div.main-menu span {
   padding-top: 10px;
 }
 
-.tbm.lrv-a-glue-parent {
+.tbm.center-logo {
   position: absolute;
   left: 50%;
-  transform: translateX(-50%)
+  transform: translateX(-50%);
 }
