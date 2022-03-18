@@ -350,3 +350,9 @@ div.main-menu span {
   top: 45px;
   padding-top: 10px;
 }
+
+.tbm.lrv-a-glue-parent {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%)
+}

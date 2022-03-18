@@ -22,7 +22,7 @@
 			</div>
 		</div>
 
-		<div class="lrv-a-glue-parent">
+		<div class="tbm lrv-a-glue-parent">
 
 			<?php if (!empty($header_main_show_special_icon)) { ?>
 				<div class="header-main__special-icon // lrv-a-glue lrv-a-glue--l-0 lrv-u-height-100p u-transform-translateX-n100p lrv-u-flex lrv-u-align-items-center a-hidden@desktop-max <?php echo esc_attr($header_main_special_icon_classes ?? ''); ?>">
