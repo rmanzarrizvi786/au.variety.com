@@ -148,7 +148,7 @@ $data['header_main']['o_nav']['o_nav_list_items'] = [];
 $menu_items = [
 	[
 		'label' => __('Subscribe', 'pmc-variety'),
-		'url'   => 'https://thebrag.com/observer/',
+		'url'   => 'https://thebrag.com/observer/film-tv/',
 	],
 	[
 		'label' => __('Login', 'pmc-variety'),
@@ -178,7 +178,7 @@ $menu_items = [
 	],
 	[
 		'label' => __('Newsletters', 'pmc-variety'),
-		'url'   => 'https://thebrag.com/observer/',
+		'url'   => 'https://thebrag.com/observer/film-tv/',
 		'target' => '_blank',
 	],
 ];

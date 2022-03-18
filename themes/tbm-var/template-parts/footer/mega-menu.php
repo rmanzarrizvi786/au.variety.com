@@ -84,7 +84,7 @@ $data['mega_menu_footer']['c_icon']['c_icon_url']            = 'https://pmc.com/
 $data['mega_menu_footer']['mega_menu_footer_copyright_text'] = ''; // sprintf('Variety is a part of Penske Media Corporation. &copy; %1$s Variety Media, LLC. All Rights Reserved.', gmdate('Y'));
 
 // Mega subscribe link.
-$data['mega_menu_footer']['c_subscribe_link']['c_link_url']     = 'https://thebrag.com/observer/?utm_source=varietyau&utm_medium=Mega';
+$data['mega_menu_footer']['c_subscribe_link']['c_link_url']     = 'https://thebrag.com/observer/film-tv/?utm_source=varietyau&utm_medium=Mega';
 $data['mega_menu_footer']['c_subscribe_link']['modifier_class'] = 'cx-module-header-link-vy';
 
 // Mega Regions + tips.
@@ -112,7 +112,7 @@ $menu_items = [
 	// ],
 	[
 		'label' => __('Newsletters', 'pmc-variety'),
-		'url'   => 'https://thebrag.com/observer/',
+		'url'   => 'https://thebrag.com/observer/film-tv/',
 	],
 ];
 if (is_user_logged_in()) {
