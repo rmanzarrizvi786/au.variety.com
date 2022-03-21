@@ -62,7 +62,7 @@ class Assets
 			return;
 		}
 
-		$path = CHILD_THEME_URL . '/assets/build/';
+		$path = CDN_URL; // CHILD_THEME_URL . '/assets/build/';
 
 		// JS
 		$fmtime = filemtime(CHILD_THEME_PATH . '/assets/public/webfontloader.js');
@@ -78,7 +78,7 @@ class Assets
 		$fmtime = filemtime(CHILD_THEME_PATH . '/assets/build/js/common.js');
 		wp_register_script(
 			'variety-common-js',
-			CHILD_THEME_URL . '/assets/build/js/common.js',
+			CDN_URL . 'js/common.js',
 			['jquery'],
 			$fmtime,
 			true
@@ -88,7 +88,7 @@ class Assets
 		$fmtime = filemtime(CHILD_THEME_PATH . '/assets/build/js/tbm.js');
 		wp_register_script(
 			'tbm-js',
-			CHILD_THEME_URL . '/assets/build/js/tbm.js',
+			CDN_URL . 'js/tbm.js',
 			['jquery'],
 			$fmtime,
 			true
@@ -139,7 +139,7 @@ class Assets
 			$fmtime = filemtime(CHILD_THEME_PATH . '/assets/build/js/page.js');
 			wp_register_script(
 				'variety-page-js',
-				CHILD_THEME_URL . '/assets/build/js/page.js',
+				CDN_URL . 'js/page.js',
 				['jquery'],
 				$fmtime,
 				true
