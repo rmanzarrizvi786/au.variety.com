@@ -103,7 +103,7 @@ class Assets
 		$fmtime = filemtime(CHILD_THEME_PATH . '/assets/build/css/common.async.css');
 		wp_register_style(
 			'common.async',
-			CHILD_THEME_URL . '/assets/build/css/common.async.css',
+			CDN_URL . 'css/common.async.css',
 			[],
 			$fmtime,
 			'all'
@@ -118,7 +118,7 @@ class Assets
 			$fmtime = filemtime(CHILD_THEME_PATH . '/assets/build/css/frontpage.async.css');
 			wp_register_style(
 				'frontpage.async',
-				CHILD_THEME_URL . '/assets/build/css/frontpage.async.css',
+				CDN_URL . 'css/frontpage.async.css',
 				[],
 				$fmtime,
 				'all'
@@ -157,7 +157,7 @@ class Assets
 			$fmtime = filemtime(CHILD_THEME_PATH . '/assets/build/css/single.async.css');
 			wp_register_style(
 				'single.async',
-				CHILD_THEME_URL . '/assets/build/css/single.async.css',
+				CDN_URL . 'css/single.async.css',
 				[],
 				$fmtime,
 				'all'
@@ -177,7 +177,7 @@ class Assets
 			$fmtime = filemtime(CHILD_THEME_PATH . '/assets/build/css/author.async.css');
 			wp_register_style(
 				'author.async',
-				CHILD_THEME_URL . '/assets/build/css/author.async.css',
+				CDN_URL . 'css/author.async.css',
 				[],
 				$fmtime,
 				'all'
@@ -192,7 +192,7 @@ class Assets
 			$fmtime = filemtime(CHILD_THEME_PATH . '/assets/build/css/featured-article.async.css');
 			wp_register_style(
 				'featured-article.async',
-				CHILD_THEME_URL . '/assets/build/css/featured-article.async.css',
+				CDN_URL . 'css/featured-article.async.css',
 				[],
 				$fmtime,
 				'all'
@@ -208,7 +208,7 @@ class Assets
 			$fmtime = filemtime(CHILD_THEME_PATH . '/assets/build/css/search-results.async.css');
 			wp_register_style(
 				'search-results.async',
-				CHILD_THEME_URL . '/assets/build/css/search-results.async.css',
+				CDN_URL . 'css/search-results.async.css',
 				[],
 				$fmtime,
 				'all'
@@ -230,7 +230,7 @@ class Assets
 		$fmtime = filemtime(CHILD_THEME_PATH . '/assets/build/css/tbm.css');
 		wp_register_style(
 			'tbm',
-			CHILD_THEME_URL . '/assets/build/css/tbm.css',
+			CDN_URL . 'css/tbm.css',
 			[],
 			$fmtime,
 			'all'
