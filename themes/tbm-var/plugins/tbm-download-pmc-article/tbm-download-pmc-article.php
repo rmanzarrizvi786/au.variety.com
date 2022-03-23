@@ -175,28 +175,120 @@ class DownloadVarietyComArticle
         }
       }
 
+      // Not found in feed, try the other way
+      return $this->downloadArticleFromUrl($article_url);
+
       wp_send_json_error(['result' => 'Empty feed!']);
       die();
     endif; // If nonce validated
   }
 
-  /*
-  function getImgSrc( $node ) {
-    $children = $node->childNodes;
-    if ( $children->length > 0 ) {
-      foreach ($children as $child) {
-        $children2 = $child->childNodes;
-        if ( $children2->length > 0 ) {
-          foreach ($children2 as $child2) {
-            if ( 'img' == $child2->tagName ) {
-              return $child2->getAttribute( 'data-src' );
+  private function downloadArticleFromUrl($article_url)
+  {
+    if (!is_null($article_url)) :
+
+      $html = file_get_contents($article_url);
+      $html = preg_replace('/<!--(.|\s)*?-->/', '', $html);
+
+      $doc = new \DOMDocument();
+      @$doc->loadHTML($html);
+      $doc->preserveWhiteSpace = false;
+
+      $meta_og_description = '';
+      foreach ($doc->getElementsByTagName('meta') as $meta) {
+        if ($meta->getAttribute('property') == 'og:description') {
+          $meta_og_description = $meta->getAttribute('content');
+        }
+        if ($meta->getAttribute('property') == 'og:title') {
+          $article_title = $meta->getAttribute('content');
+        }
+        if ($meta->getAttribute('property') == 'og:image') {
+          $featured_img = $meta->getAttribute('content');
+        }
+      }
+
+      $dom_xpath = new \DOMXpath($doc);
+
+      $content = '';
+      $content_elements = $dom_xpath->query("//*[contains(concat(' ', @class, ' '),'vy-cx-page-content ')]");
+      foreach ($content_elements as $element) {
+
+        $children = $element->childNodes;
+
+        if ($children->length > 0) {
+          foreach ($children as $child) {
+            if (!isset($child->tagName))
+              continue;
+
+            // p
+            if ('p' == $child->tagName && trim($child->nodeValue) != '') {
+              $content .= '<p>' . $this->get_inner_html($child) . '</p>';
             }
+
+            // blockquote
+            if ('blockquote' == $child->tagName && trim($child->nodeValue) != '') {
+              $content .= '<blockquote>' . $this->get_inner_html($child) . '</blockquote>';
+            }
+
+            // iframe
+            if ('iframe' == $child->tagName) {
+              $iframe_attr = '';
+              foreach ($child->attributes as $key => $value) {
+                $iframe_attr .= ' ' . $key . '="' . $child->getAttribute($key) . '"';
+              }
+              $content .= '<iframe' . $iframe_attr . '>' . $child->nodeValue . '</iframe>';
+            }
+
+            // script
+            if ('script' == $child->tagName) {
+              $script_attr = '';
+              foreach ($child->attributes as $key => $value) {
+                $script_attr .= ' ' . $key . '="' . $child->getAttribute($key) . '"';
+              }
+              // $content .= '<script' . $script_attr . '>' . $child->nodeValue . '</script>';
+            }
+
+            // div
+            if ('div' == $child->tagName) {
+              $div_attr = '';
+              foreach ($child->attributes as $key => $value) {
+                if (
+                  $key == 'class' &&
+                  (in_array($child->getAttribute($key), array('admz', 'c-featured-article__tags', 'c-featured-article__post-actions'))
+                    ||
+                    strpos($child->getAttribute($key), 'l-article-content__pull') !== FALSE)
+                ) {
+                  continue (2);
+                }
+                $div_attr .= ' ' . $key . '="' . $child->getAttribute($key)  . '"';
+              }
+              $content .= '<div' . $div_attr . '>' . $this->get_inner_html($child) . '</div>';
+            }
+
+            // img
+            $content = str_replace('data-lazy-', '', $content);
           }
         }
       }
-    }
+
+      if ('' != $content) {
+        $the_article = [
+          'title' => $article_title,
+          'categories' => [],
+          'tags' => [],
+          'author' => '',
+          'image' => '',
+          'content' => $content,
+          'url' => $article_url,
+        ];
+
+        return $this->createArticle($the_article);
+      }
+
+    endif;
+    wp_send_json_error(['result' => 'Unable to download!']);
+    die();
   }
-  */
 
   private function createArticle($article = [])
   {
