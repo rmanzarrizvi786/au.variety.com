@@ -18,7 +18,11 @@ define('PMC_LARVA', true);
 define('PMC_CORE_PERMALINK_DISABLE', true);
 define('PMC_PLUGINS_DIR', WP_PLUGIN_DIR . '/pmc-plugins/');
 
-define('CDN_URL', 'https://cdn.thebrag.com/var/');
+if(isset($_ENV) && isset($_ENV['ENVIRONMENT']) && 'sandbox' == $_ENV['ENVIRONMENT']) {
+	define('CDN_URL', CHILD_THEME_URL . '/assets/build/');
+} else {
+	define('CDN_URL', 'https://cdn.thebrag.com/var/');
+}
 
 
 if (!defined('PMC_SITE_NAME')) {

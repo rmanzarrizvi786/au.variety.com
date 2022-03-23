@@ -17,7 +17,7 @@
 
 			<div class="<?php echo esc_attr($header_navigation_classes ?? ''); ?>">
 				<?php \PMC::render_template(PMC_CORE_PATH . '/template-parts/patterns/objects/o-nav.php', $o_top_nav, true); ?>
-				<?php // \PMC::render_template( CHILD_THEME_PATH . '/template-parts/patterns/modules/region-selector.php', $region_selector, true ); 
+				<?php \PMC::render_template(CHILD_THEME_PATH . '/template-parts/patterns/modules/region-selector.php', $region_selector, true);
 				?>
 			</div>
 		</div>

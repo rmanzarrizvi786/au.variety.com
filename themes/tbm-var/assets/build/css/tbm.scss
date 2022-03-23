@@ -283,7 +283,7 @@ div.main-menu span {
       justify-content: flex-end;
     }
 
-    .lrv-a-glue-parent {
+    .lrv-a-glue-parent:not(.lrv-u-display-inline-block) {
       justify-content: center;
       display: flex;
       .header__logo {

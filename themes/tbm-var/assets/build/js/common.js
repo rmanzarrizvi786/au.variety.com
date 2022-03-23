@@ -2843,8 +2843,7 @@
         (window.pmc_side_skin_classes_removed = !0)),
         window.dispatchEvent(new Event("resize"));
     }
-    // if (screen.width >= 1200) 
-    p();
+    // p();
 
     var g = i(3);
     class f {
@@ -2964,16 +2963,21 @@
       !(function (t) {
         let e = "";
         "string" == typeof t.data &&
+          "tbmadm:dfp:skinad" ===
+            t.data.substring(0, "tbmadm:dfp:skinad".length) &&
+          ((e = t.data.substring("tbmadm:dfp:skinad".length)),
+          e && (p()));
+        /* let e = "";
+        "string" == typeof t.data &&
           "object" == typeof window.pmc.skinAds &&
           "pmcadm:dfp:skinad:parameters" ===
             t.data.substring(0, "pmcadm:dfp:skinad:parameters".length) &&
           ((e = t.data.substring("pmcadm:dfp:skinad:parameters".length)),
-          e && (p(), window.pmc.skinAds.refresh_skin_rails()));
+          e && (p(), window.pmc.skinAds.refresh_skin_rails())); */
       })(t);
     }),
       window.addEventListener("resize", function () {
         S();
-        // p();
       }),
       window.addEventListener("load", function () {
         !(function () {

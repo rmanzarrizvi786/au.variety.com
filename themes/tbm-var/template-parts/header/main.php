@@ -194,14 +194,17 @@ foreach ($menu_items as $menu_item) {
 }
 
 // Regions.
-$data['header_main']['region_selector']['region_selector']['us_url']            = '/';
-$data['header_main']['region_selector_mobile']['region_selector']['us_url']     = '/';
-$data['header_main']['region_selector']['region_selector']['asia_url']          = '/c/asia/';
-$data['header_main']['region_selector_mobile']['region_selector']['asia_url']   = '/c/asia/';
-$data['header_main']['region_selector']['region_selector']['global_url']        = '/c/global/';
-$data['header_main']['region_selector_mobile']['region_selector']['global_url'] = '/c/global/';
+// $data['header_main']['region_selector']['region_selector']['us_url']            = '/';
+// $data['header_main']['region_selector_mobile']['region_selector']['us_url']     = '/';
+// $data['header_main']['region_selector']['region_selector']['asia_url']          = '/c/asia/';
+// $data['header_main']['region_selector_mobile']['region_selector']['asia_url']   = '/c/asia/';
+// $data['header_main']['region_selector']['region_selector']['global_url']        = '/c/global/';
+// $data['header_main']['region_selector_mobile']['region_selector']['global_url'] = '/c/global/';
 
-$data['header_main']['header_menu_icons_classes'] = str_replace(' u-margin-r-3@tablet', '', $data['header_main']['header_menu_icons_classes']);
+$data['header_main']['region_selector']['region_selector']['us_url']            = 'https://variety.com/';
+$data['header_main']['region_selector']['region_selector']['us_url_target']     = '_blank';
+$data['header_main']['region_selector_mobile']['region_selector']['us_url']     = 'https://variety.com/';
+$data['header_main']['region_selector_mobile']['region_selector']['us_url_target']     = '_blank';
 
 \PMC::render_template(
 	sprintf('%s/template-parts/patterns/modules/header.php', untrailingslashit(CHILD_THEME_PATH)),

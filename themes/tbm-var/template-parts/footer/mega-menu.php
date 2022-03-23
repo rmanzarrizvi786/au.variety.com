@@ -89,12 +89,20 @@ $data['mega_menu_footer']['c_subscribe_link']['modifier_class'] = 'cx-module-hea
 
 // Mega Regions + tips.
 $data['mega_menu_footer']['o_nav_tips']['o_nav_list_items'][0]['c_link_url']  = 'https://thebrag.com/media/submit-a-tip/';
-$data['mega_menu_footer']['region_selector']['region_selector']['us_url']     = '/';
-$data['region_selector_mobile']['region_selector']['us_url']                  = '/';
-$data['mega_menu_footer']['region_selector']['region_selector']['asia_url']   = '/c/asia/';
-$data['region_selector_mobile']['region_selector']['asia_url']                = '/c/asia/';
-$data['mega_menu_footer']['region_selector']['region_selector']['global_url'] = '/c/global/';
-$data['region_selector_mobile']['region_selector']['global_url']              = '/c/global/';
+
+// $data['mega_menu_footer']['region_selector']['region_selector']['us_url']     = '/';
+// $data['region_selector_mobile']['region_selector']['us_url']                  = '/';
+// $data['mega_menu_footer']['region_selector']['region_selector']['asia_url']   = '/c/asia/';
+// $data['region_selector_mobile']['region_selector']['asia_url']                = '/c/asia/';
+// $data['mega_menu_footer']['region_selector']['region_selector']['global_url'] = '/c/global/';
+// $data['region_selector_mobile']['region_selector']['global_url']              = '/c/global/';
+
+
+$data['region_selector_mobile']['region_selector']['us_url']                  = 'https://variety.com/';
+$data['region_selector_mobile']['region_selector']['us_url_target']     = '_blank';
+$data['mega_menu_footer']['region_selector']['region_selector']['us_url']                  = 'https://variety.com/';
+$data['mega_menu_footer']['region_selector']['region_selector']['us_url_target']     = '_blank';
+
 
 // Mega mobile nav.
 $template = $data['mobile_navigation']['o_nav_list_items'][0];
