@@ -293,7 +293,8 @@ class DownloadVarietyContent
                   $key == 'class' &&
                   (in_array($child->getAttribute($key), array('admz', 'article-tags', 'c-featured-article__post-actions'))
                     || strpos($child->getAttribute($key), 'article-tags') !== FALSE
-                    || strpos($child->getAttribute($key), 'article-tags') !== FALSE
+                    || strpos($child->getAttribute($key), 'o-comments-link') !== FALSE
+                    || strpos($child->getAttribute($key), 'widget_cxense') !== FALSE
                   )
                 ) {
                   continue (2);
