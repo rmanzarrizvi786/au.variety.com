@@ -231,7 +231,8 @@ class DownloadVarietyContent
       @$doc->loadHTML($html);
       $doc->preserveWhiteSpace = false;
 
-      $meta_og_description = '';
+      $author = $meta_og_description = '';
+      $categories = $tags = [];
       foreach ($doc->getElementsByTagName('meta') as $meta) {
         if ($meta->getAttribute('property') == 'og:description') {
           $meta_og_description = $meta->getAttribute('content');
@@ -241,6 +242,17 @@ class DownloadVarietyContent
         }
         if ($meta->getAttribute('property') == 'og:image') {
           $featured_img = $meta->getAttribute('content');
+        }
+        if ($meta->getAttribute('class') == 'swiftype') {
+          if ($meta->getAttribute('name') == 'tags') {
+            array_push($tags, $meta->getAttribute('content'));
+          }
+          if ($meta->getAttribute('name') == 'topics') {
+            array_push($categories, $meta->getAttribute('content'));
+          }
+        }
+        if ($meta->getAttribute('name') == 'author') {
+          $author = $meta->getAttribute('content');
         }
       }
 
@@ -320,9 +332,9 @@ class DownloadVarietyContent
       if ('' != $content) {
         $the_article = [
           'title' => $article_title,
-          'categories' => [],
-          'tags' => [],
-          'author' => '',
+          'categories' => $categories,
+          'tags' => $tags,
+          'author' => $author,
           'image' => '',
           'content' => $content,
           'url' => $article_url,
