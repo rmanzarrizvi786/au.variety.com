@@ -244,6 +244,13 @@ class DownloadVarietyContent
         }
       }
 
+      // Image Credit
+      foreach ($doc->getElementsByTagName('figcaption') as $figcaption) {
+        if ($figcaption->nodeValue) {
+          $featured_img_credit = $figcaption->nodeValue;
+        }
+      }
+
       $dom_xpath = new \DOMXpath($doc);
 
       $content = '';
@@ -320,6 +327,9 @@ class DownloadVarietyContent
           'content' => $content,
           'url' => $article_url,
         ];
+        if (isset($featured_img_credit)) {
+          $the_article['featured_img_credit'] = $featured_img_credit;
+        }
 
         return $this->createArticle($the_article);
       }
@@ -447,8 +457,11 @@ class DownloadVarietyContent
       $attachments = get_posts(['numberposts' => '1', 'post_parent' => $new_article_id, 'post_type' => 'attachment', 'post_mime_type' => 'image', 'order' => 'ASC']);
 
       if (sizeof($attachments) > 0) {
+        $attachment_id = $attachments[0]->ID;
+        if (isset($article['featured_img_credit']))
+          update_post_meta($attachment_id, '_image_credit', trim($article['featured_img_credit']));
         // set image as the post thumbnail
-        set_post_thumbnail($new_article_id, $attachments[0]->ID);
+        set_post_thumbnail($new_article_id, $attachment_id);
       }
     }
 
