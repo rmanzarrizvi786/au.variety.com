@@ -77,13 +77,13 @@ class Plugin
 		// try to search the post tag as is, term_exists will do name & slug search
 		$tag = urldecode(get_query_var('tag'));
 		// note: must use cached function
-		$term = wpcom_vip_term_exists($tag, 'post_tag');
+		$term = term_exists($tag, 'post_tag');
 
 		if (empty($term)) {
 			// try to reverse the translation and search for tag name if different
 			$tag_name = ucwords(str_replace('-', ' ', $tag));
 			if ($tag_name !== $tag) {
-				$term = wpcom_vip_term_exists($tag_name, 'post_tag');
+				$term = term_exists($tag_name, 'post_tag');
 			}
 		}
 

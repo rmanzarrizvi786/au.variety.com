@@ -171,7 +171,7 @@ class Defaults
 	{
 
 		// Only add the Exclusion term to new galleries if
-		$term_exists_func = (function_exists('wpcom_vip_term_exists')) ? 'wpcom_vip_term_exists' : 'term_exists';
+		$term_exists_func = (function_exists('term_exists')) ? 'term_exists' : 'term_exists';
 		$term_exists = $term_exists_func('exclude-from-section-fronts', '_post-options');
 
 		// Filter to change behavior in theme. Defaults to true.

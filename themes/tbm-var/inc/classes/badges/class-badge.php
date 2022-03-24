@@ -73,7 +73,7 @@ abstract class Badge
 
 		$term = false;
 
-		$term_exists = (function_exists('wpcom_vip_term_exists')) ? 'wpcom_vip_term_exists' : 'term_exists';
+		$term_exists = (function_exists('term_exists')) ? 'term_exists' : 'term_exists';
 
 		if (!$term_exists($this::TERM_SLUG, $this::TAXONOMY_SLUG)) {
 

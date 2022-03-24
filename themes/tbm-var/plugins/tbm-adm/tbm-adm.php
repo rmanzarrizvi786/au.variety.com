@@ -136,7 +136,7 @@ class TBMAds
         $section = 'category';
       } elseif (is_archive()) {
         $section = 'category';
-      } elseif (in_array($post_type, ['post', 'snaps', 'photo_gallery'])) {
+      } elseif (in_array($post_type, ['post', 'pmc_list'])) {
         $section = 'article';
         if ($slot_no == 2) {
           $section = 'second_article';

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Lists functionality for PMC properties.
  *
@@ -12,7 +13,8 @@ use \PMC\Global_Functions\Traits\Singleton;
 /**
  * Class Lists.
  */
-class List_Post {
+class List_Post
+{
 
 	use Singleton;
 
@@ -84,52 +86,54 @@ class List_Post {
 	 *
 	 * @codeCoverageIgnore
 	 */
-	protected function __construct() {
+	protected function __construct()
+	{
 
-		add_action( 'template_redirect', [ $this, 'set_up' ] );
-		add_action( 'wp_head', [ $this, 'add_head_links' ] );
-		add_action( 'pmc_adm_custom_keywords', [ $this, 'add_adm_custom_keywords' ] );
+		add_action('template_redirect', [$this, 'set_up']);
+		add_action('wp_head', [$this, 'add_head_links']);
+		add_action('pmc_adm_custom_keywords', [$this, 'add_adm_custom_keywords']);
 
-		add_filter( 'pmc_seo_tweaks_googlebot_news_override', [ $this, 'maybe_exclude_googlebot_news_tag' ] );
-		add_filter( 'pmc_adm_google_publisher_slot', [ $this, 'filter_pmc_adm_google_publisher_slot' ] );
-		add_filter( 'pmc_adm_topic_keywords', [ $this, 'filter_adm_topic_keywords' ], 10, 3 );
-		add_filter( 'pmc_page_meta_expose_authors', [ $this, 'whitelist_post_type_for_page_meta_authors' ] );
-		add_filter( 'pmc_page_meta', [ $this, 'update_page_meta_for_list_item' ] );
+		add_filter('pmc_seo_tweaks_googlebot_news_override', [$this, 'maybe_exclude_googlebot_news_tag']);
+		add_filter('pmc_adm_google_publisher_slot', [$this, 'filter_pmc_adm_google_publisher_slot']);
+		add_filter('pmc_adm_topic_keywords', [$this, 'filter_adm_topic_keywords'], 10, 3);
+		add_filter('pmc_page_meta_expose_authors', [$this, 'whitelist_post_type_for_page_meta_authors']);
+		add_filter('pmc_page_meta', [$this, 'update_page_meta_for_list_item']);
 	}
 
 	/**
 	 * Sets up data.
 	 */
-	public function set_up() {
-		if ( ! ( is_singular( [ Lists::LIST_POST_TYPE, Lists::LIST_ITEM_POST_TYPE ] ) ) ) {
+	public function set_up()
+	{
+		if (!(is_singular([Lists::LIST_POST_TYPE, Lists::LIST_ITEM_POST_TYPE]))) {
 			return;
 		}
 
 		$this->set_up_list();
 
-		if ( empty( $this->get_list() ) || ! is_a( $this->get_list(), '\WP_Post' ) ) {
+		if (empty($this->get_list()) || !is_a($this->get_list(), '\WP_Post')) {
 			return;
 		}
 
 		$this->set_up_order();
 		$this->set_up_pagination();
 		$this->set_up_list_items();
-
 	}
 
 	/**
 	 * Gets the current list.
 	 */
-	public function set_up_list() {
+	public function set_up_list()
+	{
 
 		$this->_term             = null;
 		$this->_list_items_count = 0;
 		$this->_list             = null;
 
-		if ( is_singular( Lists::LIST_POST_TYPE ) ) {
-			$this->_term = get_term_by( 'slug', strval( get_queried_object_id() ), Lists::LIST_RELATION_TAXONOMY );
+		if (is_singular(Lists::LIST_POST_TYPE)) {
+			$this->_term = get_term_by('slug', strval(get_queried_object_id()), Lists::LIST_RELATION_TAXONOMY);
 
-			if ( ! empty( $this->_term ) ) {
+			if (!empty($this->_term)) {
 				$term_count = $this->_term->count;
 			} else {
 				$term_count = 0;
@@ -137,11 +141,9 @@ class List_Post {
 
 			$this->_list_items_count = $term_count;
 			$this->_list             = get_queried_object();
-
-		} elseif ( is_singular( Lists::LIST_ITEM_POST_TYPE ) ) {
+		} elseif (is_singular(Lists::LIST_ITEM_POST_TYPE)) {
 			$this->set_up_list_by_linked_list_item();
 		}
-
 	}
 
 	/**
@@ -150,28 +152,28 @@ class List_Post {
 	 * @param int|string $list A list slug or ID.
 	 * @return string The order: 'asc' or 'desc'.
 	 */
-	public function set_up_order() {
-
+	public function set_up_order()
+	{
 		$this->_order     = 'asc';
 		$this->_numbering = 'asc';
 
-		$numbering = get_post_meta( $this->_list->ID, Lists::NUMBERING_OPT_KEY, true );
+		$numbering = get_post_meta($this->_list->ID, Lists::NUMBERING_OPT_KEY, true);
 
-		if ( 'desc' === $numbering ) {
+		if ('desc' === $numbering) {
 			$this->_order     = 'desc';
 			$this->_numbering = 'desc';
 		}
 
-		if ( 'none' === $numbering ) {
+		if ('none' === $numbering) {
 			$this->_numbering = 'none';
 		}
-
 	}
 
 	/**
 	 * Gets the current list items.
 	 */
-	public function set_up_list_items() {
+	public function set_up_list_items()
+	{
 
 		$this->_list_items       = [];
 		$this->_list_items_count = 0;
@@ -192,17 +194,16 @@ class List_Post {
 			],
 		];
 
-		$pmc_cache = new \PMC_Cache( wp_json_encode( $items_query_args ) );  // passing the array as cache key
+		$pmc_cache = new \PMC_Cache(wp_json_encode($items_query_args));  // passing the array as cache key
 
-		$query_data = $pmc_cache->expires_in( 900 )    // 15 minutes
-								->updates_with( [ $this, 'set_up_list_items_uncached' ], [ $items_query_args ] )
-								->get();
+		$query_data = $pmc_cache->expires_in(900)    // 15 minutes
+			->updates_with([$this, 'set_up_list_items_uncached'], [$items_query_args])
+			->get();
 
-		if ( ! empty( $query_data ) ) {
+		if (!empty($query_data)) {
 			$this->_list_items       = $query_data['list_items'];
 			$this->_list_items_count = $query_data['list_items_count'];
 		}
-
 	}
 
 	/**
@@ -211,15 +212,16 @@ class List_Post {
 	 * @param array $items_query_args \WP_Query args.
 	 * @return \WP_Query
 	 */
-	public function set_up_list_items_uncached( $items_query_args = [] ) {
+	public function set_up_list_items_uncached($items_query_args = [])
+	{
 
-		if ( empty( $items_query_args ) ) {
+		if (empty($items_query_args)) {
 			return [];
 		}
 
-		$items_query = new \WP_Query( $items_query_args );
+		$items_query = new \WP_Query($items_query_args);
 
-		if ( is_wp_error( $items_query ) || ! $items_query->have_posts() ) {
+		if (is_wp_error($items_query) || !$items_query->have_posts()) {
 			return [];
 		}
 
@@ -227,13 +229,13 @@ class List_Post {
 			'list_items'       => $items_query->posts,
 			'list_items_count' => $items_query->found_posts,
 		];
-
 	}
 
 	/**
 	 * Sets up variables related to list pagination.
 	 */
-	public function set_up_pagination() {
+	public function set_up_pagination()
+	{
 
 		$this->_posts_per_page = $this->set_up_posts_per_page();
 
@@ -242,12 +244,12 @@ class List_Post {
 		$this->_queried_item_index = -1;
 		$this->_current_page       = 1;
 
-		if ( get_query_var( 'list_page' ) ) {
-			$this->_current_page = intval( get_query_var( 'list_page' ) );
+		if (get_query_var('list_page')) {
+			$this->_current_page = intval(get_query_var('list_page'));
 			return;
 		}
 
-		if ( get_query_var( 'post_type' ) === Lists::LIST_ITEM_POST_TYPE ) {
+		if (get_query_var('post_type') === Lists::LIST_ITEM_POST_TYPE) {
 
 			// List items should have a unique menu order number, which we can use to get the current page.
 			// If menu order numbers are not unique, there could be cases where the wrong page is retrieved
@@ -259,7 +261,7 @@ class List_Post {
 
 			// If we have an item at first position we should stick to default values
 			// for $this->_queried_item_index and $this->_current_page
-			if ( intval( $position ) > 1 ) {
+			if (intval($position) > 1) {
 				// Get the index of the queried item within the current page.
 				// If it is the last item on the page, the % expression will return 0
 				// since the index is one more than the programmatic order on the page.
@@ -268,39 +270,38 @@ class List_Post {
 				// E.g., when posts_per_page is 50, the _queried_item_index of a list item
 				// with menu_order 56 should be 5, and for menu_item of 100, the
 				// _queried_item_index should be 49 since it is the last item on the page of 50.
-				if ( 0 === ( $position % $this->_posts_per_page ) ) {
+				if (0 === ($position % $this->_posts_per_page)) {
 					$this->_queried_item_index = $this->_posts_per_page - 1;
 				} else {
-					$this->_queried_item_index = ( $position % $this->_posts_per_page ) - 1;
+					$this->_queried_item_index = ($position % $this->_posts_per_page) - 1;
 				}
 
 				// Calculate the current page. E.g., 56 in a 50-item-per-page list is 2, 106 is 3.
-				$this->_current_page = intval( ( $position - 1 ) / $this->_posts_per_page ) + 1;
+				$this->_current_page = intval(($position - 1) / $this->_posts_per_page) + 1;
 			}
-
 		}
-
 	}
 
 	/**
 	 * Gets the number of posts per page for the current list.
 	 */
-	public function set_up_posts_per_page( $item_count = null ) {
+	public function set_up_posts_per_page($item_count = null)
+	{
 
 		/**
 		 * Filters the number of list items to show per page.
 		 *
 		 * @param int
 		 */
-		$per_page = intval( apply_filters( 'pmc_lists_per_page', 50 ) );
+		$per_page = intval(apply_filters('pmc_lists_per_page', 50));
 
 		// Upper limit.
-		if ( 100 < $per_page ) {
+		if (100 < $per_page) {
 			$per_page = 100;
 		}
 
 		// Lower limit.
-		if ( 1 > $per_page ) {
+		if (1 > $per_page) {
 			$per_page = 1;
 		}
 
@@ -312,16 +313,17 @@ class List_Post {
 	 *
 	 * @return \WP_Post The list post.
 	 */
-	public function set_up_list_by_linked_list_item() {
+	public function set_up_list_by_linked_list_item()
+	{
 
-		$list_terms = get_the_terms( get_queried_object_id(), Lists::LIST_RELATION_TAXONOMY );
+		$list_terms = get_the_terms(get_queried_object_id(), Lists::LIST_RELATION_TAXONOMY);
 
-		if ( empty( $list_terms ) || ! is_array( $list_terms ) ) {
+		if (empty($list_terms) || !is_array($list_terms)) {
 			$this->_list = null;
 			return;
 		}
 
-		$this->_term             = reset( $list_terms );
+		$this->_term             = reset($list_terms);
 		$this->_list_items_count = $this->_term->count;
 
 		$list_query_args = [
@@ -330,12 +332,11 @@ class List_Post {
 			'post_type'   => Lists::LIST_POST_TYPE,
 		];
 
-		$pmc_cache = new \PMC_Cache( wp_json_encode( $list_query_args ) );  // passing the array as cache key
+		$pmc_cache = new \PMC_Cache(wp_json_encode($list_query_args));  // passing the array as cache key
 
-		$this->_list = $pmc_cache->expires_in( 900 )    // 15 minutes
-						->updates_with( [ $this, 'get_post_uncached' ], [ $list_query_args ] )
-						->get();
-
+		$this->_list = $pmc_cache->expires_in(900)    // 15 minutes
+			->updates_with([$this, 'get_post_uncached'], [$list_query_args])
+			->get();
 	}
 
 	/**
@@ -344,20 +345,20 @@ class List_Post {
 	 * @param array $args \WP_Query args.
 	 * @return \WP_Post|array The found post or an empty array.
 	 */
-	public function get_post_uncached( array $args = [] ) {
+	public function get_post_uncached(array $args = [])
+	{
 
-		if ( empty( $args ) ) {
+		if (empty($args)) {
 			return [];
 		}
 
-		$query = new \WP_Query( $args );
+		$query = new \WP_Query($args);
 
-		if ( ! is_wp_error( $query ) && $query->have_posts() ) {
-			return reset( $query->posts );
+		if (!is_wp_error($query) && $query->have_posts()) {
+			return reset($query->posts);
 		}
 
 		return [];
-
 	}
 
 
@@ -366,7 +367,8 @@ class List_Post {
 	 *
 	 * @return \WP_Post A list post.
 	 */
-	public function get_list() {
+	public function get_list()
+	{
 		return $this->_list;
 	}
 
@@ -376,7 +378,8 @@ class List_Post {
 	 *
 	 * @return array List of posts found.
 	 */
-	public function get_list_items() {
+	public function get_list_items()
+	{
 		return $this->_list_items;
 	}
 
@@ -385,7 +388,8 @@ class List_Post {
 	 *
 	 * @return \WP_Term The term object.
 	 */
-	public function get_term() {
+	public function get_term()
+	{
 		return $this->_term;
 	}
 
@@ -394,7 +398,8 @@ class List_Post {
 	 *
 	 * @return int The number of list items.
 	 */
-	public function get_list_items_count() {
+	public function get_list_items_count()
+	{
 		return $this->_list_items_count;
 	}
 
@@ -403,7 +408,8 @@ class List_Post {
 	 *
 	 * @return string Either 'asc' or 'desc'.
 	 */
-	public function get_order() {
+	public function get_order()
+	{
 		return $this->_order;
 	}
 
@@ -412,7 +418,8 @@ class List_Post {
 	 *
 	 * @return int
 	 */
-	public function get_posts_per_page() {
+	public function get_posts_per_page()
+	{
 		return $this->_posts_per_page;
 	}
 
@@ -421,7 +428,8 @@ class List_Post {
 	 *
 	 * @return int
 	 */
-	public function get_queried_item_index() {
+	public function get_queried_item_index()
+	{
 		return $this->_queried_item_index;
 	}
 
@@ -430,7 +438,8 @@ class List_Post {
 	 *
 	 * @return int
 	 */
-	public function get_current_page() {
+	public function get_current_page()
+	{
 		return $this->_current_page;
 	}
 
@@ -439,7 +448,8 @@ class List_Post {
 	 *
 	 * @return boolean
 	 */
-	public function has_next_page() {
+	public function has_next_page()
+	{
 		return $this->get_current_page() * $this->get_posts_per_page() < $this->get_list_items_count();
 	}
 
@@ -448,7 +458,8 @@ class List_Post {
 	 *
 	 * @return int
 	 */
-	public function get_next_page_number() {
+	public function get_next_page_number()
+	{
 		return $this->get_current_page() + 1;
 	}
 
@@ -457,8 +468,9 @@ class List_Post {
 	 *
 	 * @return string A URL.
 	 */
-	public function get_list_url() {
-		return get_permalink( $this->_list->ID );
+	public function get_list_url()
+	{
+		return get_permalink($this->_list->ID);
 	}
 
 	/**
@@ -466,7 +478,8 @@ class List_Post {
 	 *
 	 * @return string
 	 */
-	public function get_numbering() {
+	public function get_numbering()
+	{
 		return $this->_numbering;
 	}
 
@@ -476,33 +489,34 @@ class List_Post {
 	 * @param int $item_id An item ID.
 	 * @return mixed A list item or false on failure.
 	 */
-	public function get_previous_item( $item_id ) {
+	public function get_previous_item($item_id)
+	{
 
 		$list_items = $this->get_list_items();
 
 		$item_index = false;
 
-		foreach ( $list_items as $index => $list_item ) {
+		foreach ($list_items as $index => $list_item) {
 
-			if ( $item_id === $list_item->ID ) {
+			if ($item_id === $list_item->ID) {
 				$item_index = $index;
 				break;
 			}
 		}
 
-		if ( false === $item_index ) {
+		if (false === $item_index) {
 			return false;
 		}
 
-		$item = $list_items[ $item_index ];
+		$item = $list_items[$item_index];
 
 		// The first item in a list has no previous item.
-		if ( 0 === $item_index && 2 > $item->menu_order ) {
+		if (0 === $item_index && 2 > $item->menu_order) {
 			return false;
 		}
 
 		// If the item is not the first in the list but is the first on its page, get the previous post by menu order.
-		if ( 0 === $item_index && 1 < $item->menu_order ) {
+		if (0 === $item_index && 1 < $item->menu_order) {
 			$query_args = [
 				'post_type'      => Lists::LIST_ITEM_POST_TYPE,
 				'menu_order'     => $item->menu_order - 1,
@@ -516,16 +530,14 @@ class List_Post {
 				],
 			];
 
-			$pmc_cache = new \PMC_Cache( wp_json_encode( $query_args ) );  // passing the array as cache key
+			$pmc_cache = new \PMC_Cache(wp_json_encode($query_args));  // passing the array as cache key
 
-			return $pmc_cache->expires_in( 900 )    // 15 minutes
-								->updates_with( [ $this, 'get_post_uncached' ], [ $query_args ] )
-								->get();
-
+			return $pmc_cache->expires_in(900)    // 15 minutes
+				->updates_with([$this, 'get_post_uncached'], [$query_args])
+				->get();
 		}
 
-		return $list_items[ $item_index - 1 ];
-
+		return $list_items[$item_index - 1];
 	}
 
 	/**
@@ -534,34 +546,35 @@ class List_Post {
 	 * @param int $item_id An item ID.
 	 * @return mixed A list item or false on failure.
 	 */
-	public function get_next_item( $item_id ) {
+	public function get_next_item($item_id)
+	{
 
 		$list_items = $this->get_list_items();
 		$item_index = false;
 
-		foreach ( $list_items as $index => $list_item ) {
+		foreach ($list_items as $index => $list_item) {
 
-			if ( $item_id === $list_item->ID ) {
+			if ($item_id === $list_item->ID) {
 				$item_index = $index;
 				break;
 			}
 		}
 
-		if ( false === $item_index ) {
+		if (false === $item_index) {
 			return false;
 		}
 
-		$item = $list_items[ $item_index ];
+		$item = $list_items[$item_index];
 
 		$posts_per_page = $this->get_posts_per_page();
 
 		// The last item in a list has no next item.
-		if ( $item->menu_order === $this->get_term()->count ) {
+		if ($item->menu_order === $this->get_term()->count) {
 			return false;
 		}
 
 		// If the item is not the last in the list but is the last on its page, get the next post by menu order.
-		if ( $item_index === $posts_per_page - 1 && $this->get_term()->count > $post->menu_order ) {
+		if ($item_index === $posts_per_page - 1 && $this->get_term()->count > $post->menu_order) {
 			$query_args = [
 				'post_type'      => Lists::LIST_ITEM_POST_TYPE,
 				'menu_order'     => $item->menu_order + 1,
@@ -575,66 +588,67 @@ class List_Post {
 				],
 			];
 
-			$pmc_cache = new \PMC_Cache( wp_json_encode( $query_args ) );  // passing the array as cache key
+			$pmc_cache = new \PMC_Cache(wp_json_encode($query_args));  // passing the array as cache key
 
-			return $pmc_cache->expires_in( 900 )    // 15 minutes
-								->updates_with( [ $this, 'get_post_uncached' ], [ $query_args ] )
-								->get();
-
+			return $pmc_cache->expires_in(900)    // 15 minutes
+				->updates_with([$this, 'get_post_uncached'], [$query_args])
+				->get();
 		}
 
-		return $list_items[ $item_index + 1 ];
-
+		return $list_items[$item_index + 1];
 	}
 
 	/**
 	 * Add link elements to the head to indicate previous and next posts for SEO purposes.
 	 */
-	public function add_head_links( $post = null ) {
+	public function add_head_links($post = null)
+	{
 
-		if ( is_singular( [ Lists::LIST_POST_TYPE, Lists::LIST_ITEM_POST_TYPE ] ) ) {
+		if (is_singular([Lists::LIST_POST_TYPE, Lists::LIST_ITEM_POST_TYPE])) {
 			$prev_url = '';
 			$next_url = '';
 
-			if ( empty( $post ) ) {
+			if (empty($post)) {
 				$post = get_queried_object();
 			}
 
 			$list_items = $this->get_list_items();
 
-			if ( Lists::LIST_POST_TYPE === $post->post_type ) {
+			if (Lists::LIST_POST_TYPE === $post->post_type) {
 
-				$first_item = $list_items[ reset( array_keys( (array) $list_items ) ) ];
-
-				if ( ! empty( $first_item ) ) {
-					$next_url = get_permalink( $first_item );
+				if (!empty($list_items)) {
+					$list_items_array_keys = array_keys((array) $list_items);
+					$first_item = $list_items[reset($list_items_array_keys)];
+				} else {
+					$first_item = [];
 				}
 
-			} elseif ( Lists::LIST_ITEM_POST_TYPE === $post->post_type ) {
+				if (!empty($first_item)) {
+					$next_url = get_permalink($first_item);
+				}
+			} elseif (Lists::LIST_ITEM_POST_TYPE === $post->post_type) {
 
-				$prev_item = $this->get_previous_item( $post->ID );
+				$prev_item = $this->get_previous_item($post->ID);
 
-				if ( ! empty( $prev_item ) ) {
-					$prev_url = get_permalink( $prev_item );
+				if (!empty($prev_item)) {
+					$prev_url = get_permalink($prev_item);
 				}
 
-				$next_item = $this->get_next_item( $post->ID );
+				$next_item = $this->get_next_item($post->ID);
 
-				if ( ! empty( $next_item ) ) {
-					$next_url = get_permalink( $next_item );
+				if (!empty($next_item)) {
+					$next_url = get_permalink($next_item);
 				}
-
 			}
 
-			if ( ! empty( $prev_url ) || ! empty( $next_url ) ) {
+			if (!empty($prev_url) || !empty($next_url)) {
 				\PMC::render_template(
 					PMC_LISTS_PATH . '/templates/head-links.php',
-					compact( 'prev_url', 'next_url' ),
+					compact('prev_url', 'next_url'),
 					true
 				);
 			}
 		}
-
 	}
 
 	/**
@@ -644,38 +658,36 @@ class List_Post {
 	 *
 	 * @return array
 	 */
-	public function add_adm_custom_keywords( $keywords = [] ) {
+	public function add_adm_custom_keywords($keywords = [])
+	{
 
 		if (
-			! empty( $this->_list )
-			&& is_a( $this->_list, '\WP_Post' )
-			&& is_singular( [ Lists::LIST_ITEM_POST_TYPE ] )
+			!empty($this->_list)
+			&& is_a($this->_list, '\WP_Post')
+			&& is_singular([Lists::LIST_ITEM_POST_TYPE])
 		) {
 
-			$list_id  = ( ! empty( $this->_list->ID ) ) ? intval( $this->_list->ID ) : 0;
-			$keywords = ( is_array( $keywords ) ) ? $keywords : [];
+			$list_id  = (!empty($this->_list->ID)) ? intval($this->_list->ID) : 0;
+			$keywords = (is_array($keywords)) ? $keywords : [];
 
-			if ( ! empty( $list_id ) ) {
+			if (!empty($list_id)) {
 
-				$keywords_taxonomies = [ 'category', 'post_tag' ];
+				$keywords_taxonomies = ['category', 'post_tag'];
 
-				foreach ( $keywords_taxonomies as $taxonomy ) {
+				foreach ($keywords_taxonomies as $taxonomy) {
 
-					$terms = get_the_terms( $list_id, $taxonomy );
+					$terms = get_the_terms($list_id, $taxonomy);
 
-					if ( empty( $terms ) || is_wp_error( $terms ) ) {
+					if (empty($terms) || is_wp_error($terms)) {
 						continue;
 					}
 
-					$keywords = array_merge( $keywords, wp_list_pluck( array_values( $terms ), 'slug' ) );
+					$keywords = array_merge($keywords, wp_list_pluck(array_values($terms), 'slug'));
 				}
-
 			}
-
 		}
 
 		return $keywords;
-
 	}
 
 	/**
@@ -687,16 +699,15 @@ class List_Post {
 	 *
 	 * @return bool
 	 */
-	public function maybe_exclude_googlebot_news_tag( $gn_exclude ) {
+	public function maybe_exclude_googlebot_news_tag($gn_exclude)
+	{
 
-		if ( is_singular( [ Lists::LIST_POST_TYPE, Lists::LIST_ITEM_POST_TYPE ] ) ) {
+		if (is_singular([Lists::LIST_POST_TYPE, Lists::LIST_ITEM_POST_TYPE])) {
 
 			$gn_exclude = true;
-
 		}
 
 		return $gn_exclude;
-
 	}
 
 	/**
@@ -706,43 +717,43 @@ class List_Post {
 	 *
 	 * @return mixed
 	 */
-	public function filter_pmc_adm_google_publisher_slot( $slot ) {
+	public function filter_pmc_adm_google_publisher_slot($slot)
+	{
 
 		if (
-			! empty( $slot )
-			&& ! empty( $this->_list )
-			&& is_a( $this->_list, '\WP_Post' )
-			&& is_singular( [ Lists::LIST_ITEM_POST_TYPE ] )
+			!empty($slot)
+			&& !empty($this->_list)
+			&& is_a($this->_list, '\WP_Post')
+			&& is_singular([Lists::LIST_ITEM_POST_TYPE])
 		) {
 
-			$list_id    = ( ! empty( $this->_list->ID ) ) ? intval( $this->_list->ID ) : 0;
-			$categories = get_the_category( $list_id );
+			$list_id    = (!empty($this->_list->ID)) ? intval($this->_list->ID) : 0;
+			$categories = get_the_category($list_id);
 
-			if ( ! empty( $categories ) && ! is_wp_error( $categories ) && is_array( $categories ) ) {
-				$category      = array_shift( $categories );
+			if (!empty($categories) && !is_wp_error($categories) && is_array($categories)) {
+				$category      = array_shift($categories);
 				$category_id   = $category->term_id;
 				$category_slug = $category->slug;
-				$ancestors     = get_ancestors( $category_id, 'category' );
+				$ancestors     = get_ancestors($category_id, 'category');
 
-				if ( ! empty( $ancestors ) && is_array( $ancestors ) ) {
-					$category_id  = end( $ancestors );
-					$top_category = get_category( $category_id );
+				if (!empty($ancestors) && is_array($ancestors)) {
+					$category_id  = end($ancestors);
+					$top_category = get_category($category_id);
 
-					if ( ! is_wp_error( $top_category ) & ! empty( $top_category ) ) {
+					if (!is_wp_error($top_category) & !empty($top_category)) {
 						$category_slug = $top_category->slug;
 					}
 				}
 
-				$slot = str_replace( '/list/',
-					sprintf( '/%s/list/', $category_slug ),
+				$slot = str_replace(
+					'/list/',
+					sprintf('/%s/list/', $category_slug),
 					$slot
 				);
-
 			}
 		}
 
 		return $slot;
-
 	}
 
 	/**
@@ -754,34 +765,33 @@ class List_Post {
 	 *
 	 * @return array List of taxonomies terms from pmc_list for pmc_list_items.
 	 */
-	public function filter_adm_topic_keywords( $keywords, $keywords_taxonomies, $keywords_post_types ) {
+	public function filter_adm_topic_keywords($keywords, $keywords_taxonomies, $keywords_post_types)
+	{
 
-		$keywords = ( empty( $keywords ) || ! is_array( $keywords ) ) ? [] : $keywords;
+		$keywords = (empty($keywords) || !is_array($keywords)) ? [] : $keywords;
 
 		if (
-			! empty( $keywords_taxonomies )
-			&& is_array( $keywords_taxonomies )
-			&& ! empty( $this->_list )
-			&& is_a( $this->_list, '\WP_Post' )
-			&& is_singular( [ Lists::LIST_ITEM_POST_TYPE ] )
+			!empty($keywords_taxonomies)
+			&& is_array($keywords_taxonomies)
+			&& !empty($this->_list)
+			&& is_a($this->_list, '\WP_Post')
+			&& is_singular([Lists::LIST_ITEM_POST_TYPE])
 		) {
 
-			$list_id = ( ! empty( $this->_list->ID ) ) ? intval( $this->_list->ID ) : 0;
+			$list_id = (!empty($this->_list->ID)) ? intval($this->_list->ID) : 0;
 
-			foreach ( $keywords_taxonomies as $taxonomy ) {
+			foreach ($keywords_taxonomies as $taxonomy) {
 
-				$terms = get_the_terms( $list_id, $taxonomy );
+				$terms = get_the_terms($list_id, $taxonomy);
 
-				if ( ! empty( $terms ) && ! is_wp_error( $terms ) ) {
+				if (!empty($terms) && !is_wp_error($terms)) {
 
-					$keywords = array_merge( $keywords, wp_list_pluck( array_values( $terms ), 'slug' ) );
-
+					$keywords = array_merge($keywords, wp_list_pluck(array_values($terms), 'slug'));
 				}
 			}
 		}
 
-		return array_filter( array_unique( (array) $keywords ) );
-
+		return array_filter(array_unique((array) $keywords));
 	}
 
 	/**
@@ -791,10 +801,11 @@ class List_Post {
 	 *
 	 * @return array
 	 */
-	public function whitelist_post_type_for_page_meta_authors( $post_types = [] ) {
+	public function whitelist_post_type_for_page_meta_authors($post_types = [])
+	{
 
-		if ( is_array( $post_types ) ) {
-			$post_types = array_merge( $post_types, [ Lists::LIST_POST_TYPE, Lists::LIST_ITEM_POST_TYPE ] );
+		if (is_array($post_types)) {
+			$post_types = array_merge($post_types, [Lists::LIST_POST_TYPE, Lists::LIST_ITEM_POST_TYPE]);
 		}
 
 		return $post_types;
@@ -808,77 +819,73 @@ class List_Post {
 	 *
 	 * @return array Updated PMC page meta data for pmc-list-item
 	 */
-	public function update_page_meta_for_list_item( $meta = [] ) {
+	public function update_page_meta_for_list_item($meta = [])
+	{
 
-		if ( is_singular( Lists::LIST_ITEM_POST_TYPE ) ) {
+		if (is_singular(Lists::LIST_ITEM_POST_TYPE)) {
 
 			// check if parent list is set up if not call it here
-			if ( empty( $this->_list->ID ) ) {
+			if (empty($this->_list->ID)) {
 				$this->set_up_list_by_linked_list_item();
 			}
 
 			// if sill not set up bail out
-			if ( ! empty( $this->_list->ID ) ) {
+			if (!empty($this->_list->ID)) {
 
 				// will process taxonomies registered for pmc_list
-				$object_taxonomies = get_object_taxonomies( Lists::LIST_POST_TYPE );
+				$object_taxonomies = get_object_taxonomies(Lists::LIST_POST_TYPE);
 
 				// tags
-				if ( in_array( 'post_tag', (array) $object_taxonomies, true ) ) {
+				if (in_array('post_tag', (array) $object_taxonomies, true)) {
 
-					$tags = get_the_tags( $this->_list->ID );
+					$tags = get_the_tags($this->_list->ID);
 
-					if ( is_array( $tags ) ) {
+					if (is_array($tags)) {
 
-						$tags = wp_list_pluck( array_values( $tags ), 'name' );
+						$tags = wp_list_pluck(array_values($tags), 'name');
 
-						if ( is_array( $tags ) ) {
+						if (is_array($tags)) {
 
-							$tags = array_values( $tags );
-
+							$tags = array_values($tags);
 						}
 
 						$meta['tag'] = $tags;
-
 					}
 				}
 
 				// list of taxonomies that need `primary` value.
-				$other_taxonomies = [ 'vertical', 'category' ];
+				$other_taxonomies = ['vertical', 'category'];
 
 				// Other taxonomies
-				foreach ( $other_taxonomies as $taxonomy ) {
+				foreach ($other_taxonomies as $taxonomy) {
 
 					// will process taxonomies registered for pmc_list
-					if ( in_array( $taxonomy, (array) $object_taxonomies, true ) ) {
+					if (in_array($taxonomy, (array) $object_taxonomies, true)) {
 
-						$terms = get_the_terms( $this->_list->ID, $taxonomy );
+						$terms = get_the_terms($this->_list->ID, $taxonomy);
 
-						if ( is_array( $terms ) ) {
+						if (is_array($terms)) {
 
-							$terms_names                    = wp_list_pluck( array_values( $terms ), 'name' );
-							$meta[ $taxonomy ]              = $terms_names;
-							$meta[ 'primary-' . $taxonomy ] = reset( $terms_names ); // set default first as primary as of now
+							$terms_names                    = wp_list_pluck(array_values($terms), 'name');
+							$meta[$taxonomy]              = $terms_names;
+							$meta['primary-' . $taxonomy] = reset($terms_names); // set default first as primary as of now
 
 						}
 
 						// get primary taxonomy value from PMC_Primary_Taxonomy if class exist
-						if ( class_exists( 'PMC_Primary_Taxonomy' ) ) {
+						if (class_exists('PMC_Primary_Taxonomy')) {
 
-							$primary_tax = \PMC_Primary_Taxonomy::get_instance()->get_primary_taxonomy( $this->_list->ID, $taxonomy );
+							$primary_tax = \PMC_Primary_Taxonomy::get_instance()->get_primary_taxonomy($this->_list->ID, $taxonomy);
 
-							if ( is_object( $primary_tax ) && ! empty( $primary_tax->name ) ) {
-								$meta[ 'primary-' . $taxonomy ] = $primary_tax->name;
+							if (is_object($primary_tax) && !empty($primary_tax->name)) {
+								$meta['primary-' . $taxonomy] = $primary_tax->name;
 							}
 						}
-
 					}
 				}
 			}
-
 		}
 
 		return $meta;
 	}
-
 }

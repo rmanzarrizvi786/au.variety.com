@@ -1266,6 +1266,7 @@ class View extends View_Legacy
 	 */
 	public static function process_ads(array &$gallery_data): void
 	{
+		return;
 		$provider = PMC_Ads::get_instance()->get_provider('boomerang');
 		array_walk(
 			$gallery_data,

@@ -18,7 +18,7 @@ define('PMC_LARVA', true);
 define('PMC_CORE_PERMALINK_DISABLE', true);
 define('PMC_PLUGINS_DIR', WP_PLUGIN_DIR . '/pmc-plugins/');
 
-if(isset($_ENV) && isset($_ENV['ENVIRONMENT']) && 'sandbox' == $_ENV['ENVIRONMENT']) {
+if (isset($_ENV) && isset($_ENV['ENVIRONMENT']) && 'sandbox' == $_ENV['ENVIRONMENT']) {
 	define('CDN_URL', CHILD_THEME_URL . '/assets/build/');
 } else {
 	define('CDN_URL', 'https://cdn.thebrag.com/var/');
@@ -102,7 +102,7 @@ require_once PMC_PLUGINS_DIR . '/pmc-guest-authors/pmc-guest-authors.php';
 // require_once PMC_PLUGINS_DIR . '/pmc-geo-uniques/pmc-geo-uniques.php';
 // require_once PMC_PLUGINS_DIR . '/pmc-adm-v2/pmc-adm-v2.php';
 
-// require_once PMC_PLUGINS_DIR . '/pmc-swiftype/pmc-swiftype.php';
+require_once PMC_PLUGINS_DIR . '/pmc-lists/pmc-lists.php';
 
 require_once PMC_CORE_PATH . '/inc/classes/class-admin.php';
 require_once PMC_CORE_PATH . '/inc/classes/class-theme.php';

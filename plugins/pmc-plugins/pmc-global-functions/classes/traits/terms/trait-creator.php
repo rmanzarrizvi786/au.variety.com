@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Trait to add functionality to any class to allow for automatic
  * creation of terms for one or multiple taxonomies if those
@@ -13,7 +14,8 @@
 
 namespace PMC\Global_Functions\Traits\Terms;
 
-trait Creator {
+trait Creator
+{
 
 	/**
 	 * Method to add taxonomy terms if they don't already exist
@@ -48,26 +50,27 @@ trait Creator {
 	 *
 	 * @return bool
 	 */
-	public function maybe_add_terms( array $terms = [] ) : bool {
+	public function maybe_add_terms(array $terms = []): bool
+	{
 
-		if ( empty( $terms ) ) {
+		if (empty($terms)) {
 			return false;
 		}
 
 		$counter     = 0;
-		$term_exists = ( function_exists( 'wpcom_vip_term_exists' ) ) ? 'wpcom_vip_term_exists' : 'term_exists';
+		$term_exists = (function_exists('term_exists')) ? 'term_exists' : 'term_exists';
 
-		foreach ( $terms as $taxonomy => $taxonomy_terms ) {
+		foreach ($terms as $taxonomy => $taxonomy_terms) {
 
-			foreach ( $taxonomy_terms as $taxonomy_term ) {
+			foreach ($taxonomy_terms as $taxonomy_term) {
 
-				$does_term_exist = $term_exists( $taxonomy_term['term'], $taxonomy );
+				$does_term_exist = $term_exists($taxonomy_term['term'], $taxonomy);
 
-				if ( ! empty( $does_term_exist ) ) {
+				if (!empty($does_term_exist)) {
 					continue;
 				}
 
-				$args = ( empty( $taxonomy_term['args'] ) ) ? [] : $taxonomy_term['args'];
+				$args = (empty($taxonomy_term['args'])) ? [] : $taxonomy_term['args'];
 
 				wp_insert_term(
 					$taxonomy_term['term'],
@@ -77,16 +80,12 @@ trait Creator {
 
 				$counter++;
 
-				unset( $args, $does_term_exist );
-
+				unset($args, $does_term_exist);
 			}
-
 		}
 
-		return (bool) ( 0 < $counter );
-
+		return (bool) (0 < $counter);
 	}
-
 }    //end trait
 
 //EOF

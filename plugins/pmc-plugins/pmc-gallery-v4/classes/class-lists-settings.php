@@ -15,7 +15,8 @@ use CheezCapTextOption;
 use PMC\Global_Functions\Traits\Singleton;
 use PMC_Cheezcap;
 
-class Lists_Settings {
+class Lists_Settings
+{
 
 	use Singleton;
 
@@ -66,14 +67,15 @@ class Lists_Settings {
 	/**
 	 * Lists constructor.
 	 */
-	protected function __construct() {
-		add_filter( 'pmc_cheezcap_groups', array( $this, 'filter_add_list_cheezcap' ) );
-		add_filter( 'pmc_adm_locations', array( $this, 'add_list_ad_locations' ) );
-		add_action( 'init', array( $this, 'init' ) );
-		add_filter( 'redirect_canonical', array( $this, 'prevent_canonical_redirect' ), 100 );
+	protected function __construct()
+	{
+		add_filter('pmc_cheezcap_groups', array($this, 'filter_add_list_cheezcap'));
+		add_filter('pmc_adm_locations', array($this, 'add_list_ad_locations'));
+		add_action('init', array($this, 'init'));
+		add_filter('redirect_canonical', array($this, 'prevent_canonical_redirect'), 100);
 
 		// Add PMC Featured
-		add_filter( 'pmc_feature_video_post_types', [ $this, 'enable_videos_for_list_and_items' ] );
+		add_filter('pmc_feature_video_post_types', [$this, 'enable_videos_for_list_and_items']);
 	}
 
 	/**
@@ -83,14 +85,15 @@ class Lists_Settings {
 	 *
 	 * @return array $cheezcap_groups
 	 */
-	public function filter_add_list_cheezcap( array $cheezcap_groups = array() ) {
-		if ( empty( $cheezcap_groups ) || ! is_array( $cheezcap_groups ) ) {
+	public function filter_add_list_cheezcap(array $cheezcap_groups = array())
+	{
+		if (empty($cheezcap_groups) || !is_array($cheezcap_groups)) {
 			$cheezcap_groups = array();
 		}
 
 		// Needed for compatibility with BGR_CheezCap
 		// @codeCoverageIgnoreStart
-		if ( class_exists( 'BGR_CheezCapGroup' ) ) {
+		if (class_exists('BGR_CheezCapGroup')) {
 			$cheezcap_group_class = 'BGR_CheezCapGroup';
 		} else {
 			$cheezcap_group_class = 'CheezCapGroup';
@@ -100,31 +103,31 @@ class Lists_Settings {
 		$list_cheez_opts = array(
 			// Enable/disable
 			new CheezCapDropdownOption(
-				esc_html__( 'Enable v4 Lists', 'pmc-gallery-v4' ),
-				esc_html__( 'This option will enable the new list plugin', 'pmc-gallery-v4' ),
+				esc_html__('Enable v4 Lists', 'pmc-gallery-v4'),
+				esc_html__('This option will enable the new list plugin', 'pmc-gallery-v4'),
 				'pmc_gallery_list_enabled',
-				array( 'no', 'yes' ),
+				array('no', 'yes'),
 				0,
-				array( 'No', 'Yes' )
+				array('No', 'Yes')
 			),
 
 			new CheezCapDropdownOption(
-				esc_html__( 'List Ad Frequency', 'pmc-gallery-v4' ),
-				esc_html__( 'This number will determine the number of list items between ads. 1 is default', 'pmc-gallery-v4' ),
+				esc_html__('List Ad Frequency', 'pmc-gallery-v4'),
+				esc_html__('This number will determine the number of list items between ads. 1 is default', 'pmc-gallery-v4'),
 				'pmc_list_ad_frequency',
-				array( 1, 2, 3, 4, 5 ),
+				array(1, 2, 3, 4, 5),
 				0, // First option => Disabled
-				array( 1, 2, 3, 4, 5 )
+				array(1, 2, 3, 4, 5)
 			),
 			new CheezCapTextOption(
-				esc_html__( "Don't show ads on these lists", 'pmc-gallery-v4' ),
-				esc_html__( 'Comma delimited post IDs, e.g.: 123,456,789', 'pmc-gallery-v4' ),
+				esc_html__("Don't show ads on these lists", 'pmc-gallery-v4'),
+				esc_html__('Comma delimited post IDs, e.g.: 123,456,789', 'pmc-gallery-v4'),
 				'pmc_list_no_ads',
 				null
 			),
 		);
 
-		$cheezcap_groups[] = new $cheezcap_group_class( 'New List Plugin', 'pmc-gallery-list', $list_cheez_opts );
+		$cheezcap_groups[] = new $cheezcap_group_class('New List Plugin', 'pmc-gallery-list', $list_cheez_opts);
 
 		return $cheezcap_groups;
 	}
@@ -134,8 +137,9 @@ class Lists_Settings {
 	 *
 	 * @return boolean
 	 */
-	public function is_gallery_list_enabled() {
-		$list_opt = PMC_Cheezcap::get_instance()->get_option( 'pmc_gallery_list_enabled' );
+	public function is_gallery_list_enabled()
+	{
+		$list_opt = PMC_Cheezcap::get_instance()->get_option('pmc_gallery_list_enabled');
 
 		return 'yes' === $list_opt;
 	}
@@ -143,60 +147,62 @@ class Lists_Settings {
 	/**
 	 * Check cheezcap before activating everything
 	 */
-	public function init() {
-		if ( ! $this->is_gallery_list_enabled() ) {
+	public function init()
+	{
+		if (!$this->is_gallery_list_enabled()) {
 			return;
 		}
 		$this->register_list_post_types();
 		$this->_add_rewrite_rules();
 
-		add_filter( 'manage_pmc_list_posts_columns', [ $this, 'list_add_custom_column' ] );
-		add_action( 'manage_pmc_list_posts_custom_column', [ $this, 'list_manage_custom_column' ], 10, 2 );
-		add_filter( 'manage_pmc_list_item_posts_columns', [ $this, 'list_item_add_custom_column' ], 10, 2 );
-		add_action( 'manage_pmc_list_item_posts_custom_column', [ $this, 'list_item_manage_custom_column' ], 10, 2 );
-		add_action( 'restrict_manage_posts', [ $this, 'action_restrict_manage_posts' ] );
-		add_filter( 'views_edit-' . self::LIST_ITEM_POST_TYPE, [ $this, 'show_current_list' ] );
-		add_filter( 'pmc_sitemaps_post_type_whitelist', [ $this, 'whitelist_post_type_for_sitemaps' ] );
-		add_action( 'add_meta_boxes', array( $this, 'list_manager_meta_box' ) );
+		add_filter('manage_pmc_list_posts_columns', [$this, 'list_add_custom_column']);
+		add_action('manage_pmc_list_posts_custom_column', [$this, 'list_manage_custom_column'], 10, 2);
+		add_filter('manage_pmc_list_item_posts_columns', [$this, 'list_item_add_custom_column'], 10, 2);
+		add_action('manage_pmc_list_item_posts_custom_column', [$this, 'list_item_manage_custom_column'], 10, 2);
+		add_action('restrict_manage_posts', [$this, 'action_restrict_manage_posts']);
+		add_filter('views_edit-' . self::LIST_ITEM_POST_TYPE, [$this, 'show_current_list']);
+		add_filter('pmc_sitemaps_post_type_whitelist', [$this, 'whitelist_post_type_for_sitemaps']);
+		add_action('add_meta_boxes', array($this, 'list_manager_meta_box'));
 		// Run this late so that themes have a change to register their own default	sizes
-		add_action( 'init', array( $this, 'register_list_image_sizes' ), 99 );
+		add_action('init', array($this, 'register_list_image_sizes'), 99);
 
 		// Create view templates used by the admin area
-		add_action( 'print_media_templates', array( $this, 'print_item_template' ) );
+		add_action('print_media_templates', array($this, 'print_item_template'));
 
 		// Add addition list item metabox
-		add_action( 'fm_post_' . self::LIST_ITEM_POST_TYPE, [ $this, 'add_additional_list_item_meta_boxes' ] );
+		add_action('fm_post_' . self::LIST_ITEM_POST_TYPE, [$this, 'add_additional_list_item_meta_boxes']);
 	}
 
 	/**
 	 * Register the list and list item post types, and add URL query var.
 	 */
-	public function register_list_post_types() {
+	public function register_list_post_types()
+	{
 		register_post_type(
 			self::LIST_POST_TYPE,
 			[
 				'labels'               => [
-					'name'               => wp_strip_all_tags( __( 'PMC Lists', 'pmc-gallery-v4' ) ),
-					'singular_name'      => wp_strip_all_tags( __( 'List', 'pmc-gallery-v4' ) ),
-					'add_new'            => wp_strip_all_tags( _x( 'Add New', 'List', 'pmc-gallery-v4' ) ),
-					'add_new_item'       => wp_strip_all_tags( __( 'Add New List', 'pmc-gallery-v4' ) ),
-					'edit_item'          => wp_strip_all_tags( __( 'Edit List', 'pmc-gallery-v4' ) ),
-					'new_item'           => wp_strip_all_tags( __( 'New List', 'pmc-gallery-v4' ) ),
-					'view_item'          => wp_strip_all_tags( __( 'View List', 'pmc-gallery-v4' ) ),
-					'search_items'       => wp_strip_all_tags( __( 'Search Lists', 'pmc-gallery-v4' ) ),
-					'not_found'          => wp_strip_all_tags( __( 'No Lists found.', 'pmc-gallery-v4' ) ),
-					'not_found_in_trash' => wp_strip_all_tags( __( 'No Lists found in Trash.', 'pmc-gallery-v4' ) ),
-					'all_items'          => wp_strip_all_tags( __( 'Lists', 'pmc-gallery-v4' ) ),
+					'name'               => wp_strip_all_tags(__('Lists', 'pmc-gallery-v4')),
+					'singular_name'      => wp_strip_all_tags(__('List', 'pmc-gallery-v4')),
+					'add_new'            => wp_strip_all_tags(_x('Add New', 'List', 'pmc-gallery-v4')),
+					'add_new_item'       => wp_strip_all_tags(__('Add New List', 'pmc-gallery-v4')),
+					'edit_item'          => wp_strip_all_tags(__('Edit List', 'pmc-gallery-v4')),
+					'new_item'           => wp_strip_all_tags(__('New List', 'pmc-gallery-v4')),
+					'view_item'          => wp_strip_all_tags(__('View List', 'pmc-gallery-v4')),
+					'search_items'       => wp_strip_all_tags(__('Search Lists', 'pmc-gallery-v4')),
+					'not_found'          => wp_strip_all_tags(__('No Lists found.', 'pmc-gallery-v4')),
+					'not_found_in_trash' => wp_strip_all_tags(__('No Lists found in Trash.', 'pmc-gallery-v4')),
+					'all_items'          => wp_strip_all_tags(__('Lists', 'pmc-gallery-v4')),
 				],
 				'public'               => true,
 				'show_in_rest'         => true,
-				'supports'             => [ 'title', 'author', 'comments', 'thumbnail', 'excerpt', 'editor' ],
+				'supports'             => ['title', 'author', 'comments', 'thumbnail', 'excerpt', 'editor'],
 				'has_archive'          => 'lists',
 				'rewrite'              => [
-					'slug' => apply_filters( 'pmc_gallery_lists_standalone_slug', 'lists' ),
+					'slug' => apply_filters('pmc_gallery_lists_standalone_slug', 'lists'),
 				],
-				'register_meta_box_cb' => [ $this, 'list_meta_boxes' ],
-				'taxonomies'           => [ 'category', 'post_tag' ],
+				'register_meta_box_cb' => [$this, 'list_meta_boxes'],
+				'taxonomies'           => ['category', 'post_tag'],
 				'menu_icon'            => 'dashicons-list-view',
 			]
 		);
@@ -205,22 +211,22 @@ class Lists_Settings {
 			self::LIST_ITEM_POST_TYPE,
 			[
 				'labels'               => [
-					'name'               => wp_strip_all_tags( __( 'List Item', 'pmc-gallery-v4' ) ),
-					'singular_name'      => wp_strip_all_tags( __( 'List Item', 'pmc-gallery-v4' ) ),
-					'add_new'            => wp_strip_all_tags( _x( 'Add New', 'List Item', 'pmc-gallery-v4' ) ),
-					'add_new_item'       => wp_strip_all_tags( __( 'Add New List Item', 'pmc-gallery-v4' ) ),
-					'edit_item'          => wp_strip_all_tags( __( 'Edit List Item', 'pmc-gallery-v4' ) ),
-					'new_item'           => wp_strip_all_tags( __( 'New List Item', 'pmc-gallery-v4' ) ),
-					'view_item'          => wp_strip_all_tags( __( 'View List Item', 'pmc-gallery-v4' ) ),
-					'search_items'       => wp_strip_all_tags( __( 'Search List Items', 'pmc-gallery-v4' ) ),
-					'not_found'          => wp_strip_all_tags( __( 'No Lists found.', 'pmc-gallery-v4' ) ),
-					'not_found_in_trash' => wp_strip_all_tags( __( 'No Lists found in Trash.', 'pmc-gallery-v4' ) ),
-					'all_items'          => wp_strip_all_tags( __( 'List Items', 'pmc-gallery-v4' ) ),
+					'name'               => wp_strip_all_tags(__('List Item', 'pmc-gallery-v4')),
+					'singular_name'      => wp_strip_all_tags(__('List Item', 'pmc-gallery-v4')),
+					'add_new'            => wp_strip_all_tags(_x('Add New', 'List Item', 'pmc-gallery-v4')),
+					'add_new_item'       => wp_strip_all_tags(__('Add New List Item', 'pmc-gallery-v4')),
+					'edit_item'          => wp_strip_all_tags(__('Edit List Item', 'pmc-gallery-v4')),
+					'new_item'           => wp_strip_all_tags(__('New List Item', 'pmc-gallery-v4')),
+					'view_item'          => wp_strip_all_tags(__('View List Item', 'pmc-gallery-v4')),
+					'search_items'       => wp_strip_all_tags(__('Search List Items', 'pmc-gallery-v4')),
+					'not_found'          => wp_strip_all_tags(__('No Lists found.', 'pmc-gallery-v4')),
+					'not_found_in_trash' => wp_strip_all_tags(__('No Lists found in Trash.', 'pmc-gallery-v4')),
+					'all_items'          => wp_strip_all_tags(__('List Items', 'pmc-gallery-v4')),
 				],
 				'public'               => true,
-				'supports'             => [ 'title', 'author', 'comments', 'editor', 'thumbnail', 'excerpt' ],
-				'register_meta_box_cb' => [ $this, 'list_item_meta_boxes' ],
-				'taxonomies'           => [ self::LIST_RELATION_TAXONOMY ],
+				'supports'             => ['title', 'author', 'comments', 'editor', 'thumbnail', 'excerpt'],
+				'register_meta_box_cb' => [$this, 'list_item_meta_boxes'],
+				'taxonomies'           => [self::LIST_RELATION_TAXONOMY],
 				'has_archive'          => false,
 				'show_ui'              => true,
 				'show_in_menu'         => 'edit.php?post_type=' . self::LIST_POST_TYPE,
@@ -236,7 +242,7 @@ class Lists_Settings {
 			self::LIST_ITEM_POST_TYPE,
 			[
 				'labels'            => [
-					'name' => __( 'List Relation', 'pmc-gallery-v4' ),
+					'name' => __('List Relation', 'pmc-gallery-v4'),
 				],
 				'public'            => false,
 				'rewrite'           => false,
@@ -245,18 +251,18 @@ class Lists_Settings {
 				'show_admin_column' => false,
 			]
 		);
-
 	}
 
 	/**
 	 * Defines a rewrite rule for the single image page from list.
 	 */
-	protected function _add_rewrite_rules() {
-		if ( apply_filters( 'pmc_gallery_v4_lists_has_custom_rewrite_rule', false ) ) {
+	protected function _add_rewrite_rules()
+	{
+		if (apply_filters('pmc_gallery_v4_lists_has_custom_rewrite_rule', false)) {
 			return;
 		}
 
-		$slug = preg_quote( sanitize_title_with_dashes( apply_filters( 'pmc_gallery_lists_standalone_slug', 'lists' ) ) );
+		$slug = preg_quote(sanitize_title_with_dashes(apply_filters('pmc_gallery_lists_standalone_slug', 'lists')));
 
 		$rewrite_rules = [
 			$slug . '/([^/]+)/([^/]+)/?$'            => 'index.php?pmc_list=$matches[1]&pmc_list_item_slug=$matches[2]',
@@ -268,24 +274,24 @@ class Lists_Settings {
 			$slug . '/([^/]+)/([^/]+)/amp/(.*)?/?$'  => 'index.php?pmc_list=$matches[1]&pmc_list_item_slug=$matches[2]&amp=$matches[3]',
 		];
 
-		foreach ( $rewrite_rules as $regex => $query ) {
-			add_rewrite_rule( $regex, $query, 'top' );
+		foreach ($rewrite_rules as $regex => $query) {
+			add_rewrite_rule($regex, $query, 'top');
 		}
 
-		add_rewrite_tag( '%pmc_list_item_slug%', '([^/])+' );
-
+		add_rewrite_tag('%pmc_list_item_slug%', '([^/])+');
 	}
 
 	/**
 	 * Metabox for List post type.
 	 *
 	 */
-	public function list_meta_boxes() {
+	public function list_meta_boxes()
+	{
 		// List options meta box.
 		add_meta_box(
 			'pmc-list-options',
-			esc_html__( 'List Options', 'pmc-gallery-v4' ),
-			[ $this, 'list_options_meta_box' ],
+			esc_html__('List Options', 'pmc-gallery-v4'),
+			[$this, 'list_options_meta_box'],
 			self::LIST_POST_TYPE,
 			'side',
 			'high'
@@ -296,12 +302,13 @@ class Lists_Settings {
 	 * Metabox for List Items post type.
 	 *
 	 */
-	public function list_item_meta_boxes() {
+	public function list_item_meta_boxes()
+	{
 		// Meta box to select a list.
 		add_meta_box(
 			'pmc-list-select',
-			esc_html__( 'Choose List', 'pmc-gallery-v4' ),
-			[ $this, 'list_select_meta_box' ],
+			esc_html__('Choose List', 'pmc-gallery-v4'),
+			[$this, 'list_select_meta_box'],
 			self::LIST_ITEM_POST_TYPE,
 			'side',
 			'high'
@@ -313,35 +320,36 @@ class Lists_Settings {
 	 *
 	 * @return object|null \Fieldmanager_Context_Post
 	 */
-	public function add_additional_list_item_meta_boxes() : ?object {
+	public function add_additional_list_item_meta_boxes(): ?object
+	{
 		$additional_fields = [];
 
-		if ( true === apply_filters( 'pmc_gallery_v4_lists_enable_list_item_subtitle', false ) ) {
+		if (true === apply_filters('pmc_gallery_v4_lists_enable_list_item_subtitle', false)) {
 			array_push(
 				$additional_fields,
 				new \Fieldmanager_TextArea(
 					[
-						'name'     => sprintf( '%s_subtitle', self::LIST_ITEM_POST_TYPE ),
-						'label'    => __( 'Subtitle', 'pmc-gallery' ),
+						'name'     => sprintf('%s_subtitle', self::LIST_ITEM_POST_TYPE),
+						'label'    => __('Subtitle', 'pmc-gallery'),
 						'sanitize' => 'wp_kses_post',
 					]
 				)
 			);
 		}
 
-		if ( true === apply_filters( 'pmc_gallery_v4_lists_enable_list_item_apple_music_player', false ) ) {
+		if (true === apply_filters('pmc_gallery_v4_lists_enable_list_item_apple_music_player', false)) {
 			array_push(
 				$additional_fields,
 				new \Fieldmanager_Textfield(
 					[
-						'name'  => sprintf( '%s_apple_song_id', self::LIST_ITEM_POST_TYPE ),
-						'label' => __( 'Apple Song ID', 'pmc-gallery-v4' ),
+						'name'  => sprintf('%s_apple_song_id', self::LIST_ITEM_POST_TYPE),
+						'label' => __('Apple Song ID', 'pmc-gallery-v4'),
 					]
 				)
 			);
 		}
 
-		if ( 0 < count( $additional_fields ) ) {
+		if (0 < count($additional_fields)) {
 
 			$fm_additional = new \Fieldmanager_Group(
 				array(
@@ -353,7 +361,7 @@ class Lists_Settings {
 			);
 
 			return $fm_additional->add_meta_box(
-				__( 'Additional List Item Data', 'pmc-gallery-v4' ),
+				__('Additional List Item Data', 'pmc-gallery-v4'),
 				self::LIST_ITEM_POST_TYPE,
 				'normal',
 				'high'
@@ -369,12 +377,13 @@ class Lists_Settings {
 	 *
 	 * @throws \Exception
 	 */
-	public function list_select_meta_box( $post ) {
+	public function list_select_meta_box($post)
+	{
 		$list_id    = '';
-		$list_terms = get_the_terms( $post->ID, self::LIST_RELATION_TAXONOMY );
+		$list_terms = get_the_terms($post->ID, self::LIST_RELATION_TAXONOMY);
 
-		if ( is_array( $list_terms ) && is_a( reset( $list_terms ), 'WP_Term' ) && ! empty( reset( $list_terms )->name ) ) {
-			$list_id = reset( $list_terms )->name;
+		if (is_array($list_terms) && is_a(reset($list_terms), 'WP_Term') && !empty(reset($list_terms)->name)) {
+			$list_id = reset($list_terms)->name;
 		}
 		$recent_query = new \WP_Query(
 			[
@@ -385,7 +394,7 @@ class Lists_Settings {
 			]
 		);
 		$recent_lists = $recent_query->have_posts() ? $recent_query->posts : [];
-		\PMC::render_template( PMC_GALLERY_PLUGIN_DIR . '/template-parts/admin/list-select.php', compact( 'list_id', 'recent_lists' ), true );
+		\PMC::render_template(PMC_GALLERY_PLUGIN_DIR . '/template-parts/admin/list-select.php', compact('list_id', 'recent_lists'), true);
 	}
 
 	/**
@@ -395,9 +404,10 @@ class Lists_Settings {
 	 *
 	 * @throws \Exception
 	 */
-	public function list_options_meta_box( $post ) {
+	public function list_options_meta_box($post)
+	{
 
-		\PMC::render_template( PMC_GALLERY_PLUGIN_DIR . '/template-parts/admin/list-options.php', compact( 'post' ), true );
+		\PMC::render_template(PMC_GALLERY_PLUGIN_DIR . '/template-parts/admin/list-options.php', compact('post'), true);
 	}
 
 	/**
@@ -407,11 +417,12 @@ class Lists_Settings {
 	 *
 	 * @return array List of post type for site map.
 	 */
-	public function whitelist_post_type_for_sitemaps( $post_types ) {
+	public function whitelist_post_type_for_sitemaps($post_types)
+	{
 
-		$post_types = ( ! empty( $post_types ) && is_array( $post_types ) ) ? $post_types : [];
+		$post_types = (!empty($post_types) && is_array($post_types)) ? $post_types : [];
 
-		if ( ! in_array( self::LIST_POST_TYPE, (array) $post_types, true ) ) {
+		if (!in_array(self::LIST_POST_TYPE, (array) $post_types, true)) {
 			$post_types[] = self::LIST_POST_TYPE;
 		}
 
@@ -425,9 +436,10 @@ class Lists_Settings {
 	 *
 	 * @return array $columns.
 	 */
-	public function list_item_add_custom_column( $columns ) {
+	public function list_item_add_custom_column($columns)
+	{
 
-		return array_merge( $columns, array( 'list' => __( 'List', 'pmc-gallery-v4' ) ) );
+		return array_merge($columns, array('list' => __('List', 'pmc-gallery-v4')));
 	}
 
 	/**
@@ -436,16 +448,17 @@ class Lists_Settings {
 	 * @param string  $column_name  current column name.
 	 * @param integer $list_item_id current list id.
 	 */
-	public function list_item_manage_custom_column( $column_name, $list_item_id ) {
-		if ( ! empty( $column_name ) && ! empty( $list_item_id ) && 'list' === $column_name ) {
-			$list_relation = get_the_terms( $list_item_id, self::LIST_RELATION_TAXONOMY );
-			if ( ! empty( $list_relation ) ) {
+	public function list_item_manage_custom_column($column_name, $list_item_id)
+	{
+		if (!empty($column_name) && !empty($list_item_id) && 'list' === $column_name) {
+			$list_relation = get_the_terms($list_item_id, self::LIST_RELATION_TAXONOMY);
+			if (!empty($list_relation)) {
 				$list_relations = [];
-				foreach ( $list_relation as $relation ) {
-					$list_relations[] = sprintf( '<a href="%s" target="_blank">%s</a>', get_edit_post_link( $relation->slug ), get_the_title( $relation->slug ) );
+				foreach ($list_relation as $relation) {
+					$list_relations[] = sprintf('<a href="%s" target="_blank">%s</a>', get_edit_post_link($relation->slug), get_the_title($relation->slug));
 				}
-				$list_relations = implode( ', ', $list_relations );
-				echo wp_kses_post( $list_relations );
+				$list_relations = implode(', ', $list_relations);
+				echo wp_kses_post($list_relations);
 			}
 		}
 	}
@@ -458,10 +471,10 @@ class Lists_Settings {
 	 *
 	 * @return array $columns.
 	 */
-	public function list_add_custom_column( $columns ) {
+	public function list_add_custom_column($columns)
+	{
 
-		return array_merge( $columns, array( 'list-items' => __( 'List Items', 'pmc-gallery-v4' ) ) );
-
+		return array_merge($columns, array('list-items' => __('List Items', 'pmc-gallery-v4')));
 	}
 
 	/**
@@ -470,11 +483,12 @@ class Lists_Settings {
 	 * @param string  $column_name current column name.
 	 * @param integer $list_id     current list id.
 	 */
-	public function list_manage_custom_column( $column_name, $list_id ) {
-		if ( ! empty( $column_name ) && ! empty( $list_id ) && 'list-items' === $column_name ) {
-			$list_relation = get_term_by( 'slug', $list_id, self::LIST_RELATION_TAXONOMY );
-			if ( ! empty( $list_relation->count ) ) {
-				echo sprintf( '<a href="%s">%s</a>', esc_url( add_query_arg( self::LIST_RELATION_TAXONOMY, $list_id, admin_url( '/edit.php?post_type=' . self::LIST_ITEM_POST_TYPE ) ) ), esc_html( $list_relation->count ) );
+	public function list_manage_custom_column($column_name, $list_id)
+	{
+		if (!empty($column_name) && !empty($list_id) && 'list-items' === $column_name) {
+			$list_relation = get_term_by('slug', $list_id, self::LIST_RELATION_TAXONOMY);
+			if (!empty($list_relation->count)) {
+				echo sprintf('<a href="%s">%s</a>', esc_url(add_query_arg(self::LIST_RELATION_TAXONOMY, $list_id, admin_url('/edit.php?post_type=' . self::LIST_ITEM_POST_TYPE))), esc_html($list_relation->count));
 			}
 		}
 	}
@@ -482,11 +496,12 @@ class Lists_Settings {
 	/**
 	 * Adds the meta box container
 	 */
-	public function list_manager_meta_box() {
+	public function list_manager_meta_box()
+	{
 		add_meta_box(
 			self::LIST_ITEM_POST_TYPE . '_meta_box',
-			esc_html__( 'List Items', 'pmc-gallery-v4' ),
-			array( $this, 'render_meta_box_content' ),
+			esc_html__('List Items', 'pmc-gallery-v4'),
+			array($this, 'render_meta_box_content'),
 			self::LIST_POST_TYPE,
 			'normal',
 			'high'
@@ -500,15 +515,16 @@ class Lists_Settings {
 	 * @return void|false False if the list inputs template is not rendered.
 	 * @throws \Exception
 	 */
-	public function action_restrict_manage_posts() : void {
+	public function action_restrict_manage_posts(): void
+	{
 
-		if ( self::LIST_ITEM_POST_TYPE !== get_post_type() ) {
+		if (self::LIST_ITEM_POST_TYPE !== get_post_type()) {
 			return;
 		}
 
-		$list_id        = get_query_var( self::LIST_RELATION_TAXONOMY );
-		$list_title     = get_the_title( $list_id );
-		$list_permalink = get_the_permalink( $list_id );
+		$list_id        = get_query_var(self::LIST_RELATION_TAXONOMY);
+		$list_title     = get_the_title($list_id);
+		$list_permalink = get_the_permalink($list_id);
 
 		\PMC::render_template(
 			PMC_GALLERY_PLUGIN_DIR . '/template-parts/admin/list-inputs.php',
@@ -528,21 +544,22 @@ class Lists_Settings {
 	 *
 	 * @return void|false Returns false if the list view template is not rendered.
 	 */
-	public function show_current_list( $views ) {
-		if ( self::LIST_ITEM_POST_TYPE !== get_post_type() ) {
+	public function show_current_list($views)
+	{
+		if (self::LIST_ITEM_POST_TYPE !== get_post_type()) {
 			return $views;
 		}
 
-		$list_id = get_query_var( self::LIST_RELATION_TAXONOMY );
+		$list_id = get_query_var(self::LIST_RELATION_TAXONOMY);
 
-		if ( empty( $list_id ) ) {
+		if (empty($list_id)) {
 			return $views;
 		}
-		$list_title             = get_the_title( $list_id );
-		$list_permalink         = get_the_permalink( $list_id );
-		$edit_link              = get_edit_post_link( $list_id );
-		$views['currently_f']   = sprintf( 'Currently Viewing: <a href="%s"><strong>%s</strong></a>', $list_permalink, $list_title );
-		$views['currentedit_f'] = sprintf( '<a href="%s"><strong>Edit Current List</strong></a>', $edit_link );
+		$list_title             = get_the_title($list_id);
+		$list_permalink         = get_the_permalink($list_id);
+		$edit_link              = get_edit_post_link($list_id);
+		$views['currently_f']   = sprintf('Currently Viewing: <a href="%s"><strong>%s</strong></a>', $list_permalink, $list_title);
+		$views['currentedit_f'] = sprintf('<a href="%s"><strong>Edit Current List</strong></a>', $edit_link);
 
 		return $views;
 	}
@@ -550,7 +567,8 @@ class Lists_Settings {
 	/**
 	 * Render Meta Box content
 	 */
-	public function render_meta_box_content() {
+	public function render_meta_box_content()
+	{
 		echo '<ul id="pmc-list-items"></ul>'; // Give the list manager a home
 	}
 
@@ -559,8 +577,9 @@ class Lists_Settings {
 	 *
 	 * @action print_media_templates
 	 */
-	function print_item_template() {
-		?>
+	function print_item_template()
+	{
+?>
 		<script type="text/html" id="tmpl-list-item-template">
 			<div class="pmc-list-item-table">
 
@@ -585,15 +604,16 @@ class Lists_Settings {
 				</div>
 			</div>
 		</script>
-		<?php
+<?php
 	}
 
 	/**
 	 * @return string template used for the list
 	 */
-	public static function get_current_list_template() {
-		$template = get_post_meta( get_the_ID(), self::TEMPLATE_OPT_KEY, true );
-		if ( ! $template ) {
+	public static function get_current_list_template()
+	{
+		$template = get_post_meta(get_the_ID(), self::TEMPLATE_OPT_KEY, true);
+		if (!$template) {
 			$template = 'item-featured-image';
 		}
 
@@ -603,8 +623,9 @@ class Lists_Settings {
 	/**
 	 * @return string ordering scheme used for the list
 	 */
-	public static function get_current_list_order() {
-		return get_post_meta( get_the_ID(), self::NUMBERING_OPT_KEY, true );
+	public static function get_current_list_order()
+	{
+		return get_post_meta(get_the_ID(), self::NUMBERING_OPT_KEY, true);
 	}
 
 	/**
@@ -614,12 +635,13 @@ class Lists_Settings {
 	 * @see PMC_Ads::no_ads_on_this_post()
 	 *
 	 */
-	public function no_ads_on_this_post() {
-		$no_ads_string = PMC_Cheezcap::get_instance()->get_option( 'pmc_list_no_ads' );
-		$no_ads_array  = explode( ',', $no_ads_string );
-		$no_ads_array  = array_map( 'intval', $no_ads_array );
+	public function no_ads_on_this_post()
+	{
+		$no_ads_string = PMC_Cheezcap::get_instance()->get_option('pmc_list_no_ads');
+		$no_ads_array  = explode(',', $no_ads_string);
+		$no_ads_array  = array_map('intval', $no_ads_array);
 
-		return in_array( get_queried_object_id(), (array) $no_ads_array, true );
+		return in_array(get_queried_object_id(), (array) $no_ads_array, true);
 	}
 
 	/**
@@ -629,15 +651,16 @@ class Lists_Settings {
 	 *
 	 * @return array Ad locations.
 	 */
-	public function add_list_ad_locations( $locations = [] ) {
+	public function add_list_ad_locations($locations = [])
+	{
 		$locations['in-list-1'] = [
 			'title'     => 'Gallery v4: In List Top Ad',
-			'providers' => [ 'boomerang', 'google-publisher' ],
+			'providers' => ['boomerang', 'google-publisher'],
 		];
 
 		$locations['in-list-x'] = [
 			'title'     => 'Gallery v4: In List X',
-			'providers' => [ 'boomerang', 'google-publisher' ],
+			'providers' => ['boomerang', 'google-publisher'],
 		];
 
 		/**
@@ -647,11 +670,11 @@ class Lists_Settings {
 		// pmc-rollingstone-2018
 		$locations['lists-top-river-ad'] = [
 			'title'     => 'Lists Top River Ad',
-			'providers' => [ 'boomerang', 'google-publisher' ],
+			'providers' => ['boomerang', 'google-publisher'],
 		];
 		$locations['lists-river-ad']     = [
 			'title'     => 'Lists River Ad',
-			'providers' => [ 'boomerang', 'google-publisher' ],
+			'providers' => ['boomerang', 'google-publisher'],
 		];
 
 		return $locations;
@@ -660,7 +683,8 @@ class Lists_Settings {
 	/**
 	 * Register image sizes for galleries.
 	 */
-	public function register_list_image_sizes() {
+	public function register_list_image_sizes()
+	{
 
 		/**
 		 * Image size configuration.
@@ -716,9 +740,9 @@ class Lists_Settings {
 
 		$registered_sizes = \PMC\Image\get_intermediate_image_sizes();
 
-		foreach ( $sizes as $name => $size ) {
-			if ( ! in_array( $name, (array) $registered_sizes, true ) ) {
-				add_image_size( $name, $size['width'], $size['height'] );
+		foreach ($sizes as $name => $size) {
+			if (!in_array($name, (array) $registered_sizes, true)) {
+				add_image_size($name, $size['width'], $size['height']);
 			}
 		}
 	}
@@ -726,12 +750,13 @@ class Lists_Settings {
 	/**
 	 * Get maximum list per page config
 	 */
-	public function get_list_items_per_page() {
-		if ( ! empty( self::$_list_items_per_page ) ) {
+	public function get_list_items_per_page()
+	{
+		if (!empty(self::$_list_items_per_page)) {
 			return self::$_list_items_per_page;
 		}
 
-		self::$_list_items_per_page = apply_filters( 'pmc_gallery_list_items_per_page', 100 );
+		self::$_list_items_per_page = apply_filters('pmc_gallery_list_items_per_page', 100);
 
 		return self::$_list_items_per_page;
 	}
@@ -741,8 +766,9 @@ class Lists_Settings {
 	 *
 	 * @return array
 	 */
-	public function get_list_config() {
-		if ( ! empty( self::$_list_config ) ) {
+	public function get_list_config()
+	{
+		if (!empty(self::$_list_config)) {
 			return self::$_list_config;
 		}
 		$list_id = get_the_ID();
@@ -750,18 +776,19 @@ class Lists_Settings {
 		// Options.
 
 		$options       = Settings::get_instance()->get_common_options();
-		$ad_frequency  = PMC_Cheezcap::get_instance()->get_option( 'pmc_list_ad_frequency' );
+		$ad_frequency  = PMC_Cheezcap::get_instance()->get_option('pmc_list_ad_frequency');
 		$list_ordering = self::get_current_list_order();
 		$list_template = self::get_current_list_template();
 
-		$current_page_items             = Lists::fetch_list( $list_id, $list_template );
-		$current_page_items_first_index = array_column( (array) $current_page_items, 'position' )[0];
+		$current_page_items             = Lists::fetch_list($list_id, $list_template);
 
-		$all_list_item_ids    = array_column( Lists::$all_list_items_by_list_id[ $list_id ], 'ID' );
-		$all_list_items_count = count( $all_list_item_ids );
+		$current_page_items_first_index = array_column((array) $current_page_items, 'position')[0];
 
-		$previous_page_slug = Lists::$all_list_items_by_list_id[ $list_id ][ $current_page_items_first_index - self::get_list_items_per_page() ]->slug ?? null;
-		$next_page_slug     = Lists::$all_list_items_by_list_id[ $list_id ][ $current_page_items_first_index + self::get_list_items_per_page() ]->slug ?? null;
+		$all_list_item_ids    = array_column(Lists::$all_list_items_by_list_id[$list_id], 'ID');
+		$all_list_items_count = count($all_list_item_ids);
+
+		$previous_page_slug = Lists::$all_list_items_by_list_id[$list_id][$current_page_items_first_index - self::get_list_items_per_page()]->slug ?? null;
+		$next_page_slug     = Lists::$all_list_items_by_list_id[$list_id][$current_page_items_first_index + self::get_list_items_per_page()]->slug ?? null;
 
 		self::$_list_config = apply_filters(
 			'pmc_list_v4_config',
@@ -769,40 +796,40 @@ class Lists_Settings {
 				'gallery'                     => $current_page_items,
 				'galleryCount'                => $all_list_items_count,
 				'galleryID'                   => $list_id,
-				'previousPageLink'            => $previous_page_slug ? trailingslashit( get_permalink() ) . $previous_page_slug : '',
-				'nextPageLink'                => $next_page_slug ? trailingslashit( get_permalink() ) . $next_page_slug : '',
+				'previousPageLink'            => $previous_page_slug ? trailingslashit(get_permalink()) . $previous_page_slug : '',
+				'nextPageLink'                => $next_page_slug ? trailingslashit(get_permalink()) . $next_page_slug : '',
 				'template'                    => $list_template,
 				'ordering'                    => $list_ordering,
-				'galleryTitle'                => get_the_title( $list_id ),
+				'galleryTitle'                => get_the_title($list_id),
 				'isList'                      => true,
 				'logo'                        => [],
 				'i10n'                        => [
-					'backToArticle'      => esc_html__( 'Back to Article', 'pmc-gallery-v4' ),
-					'backToAllGalleries' => esc_html__( 'Back to All Galleries', 'pmc-gallery-v4' ),
-					'backToReview'       => esc_html__( 'Back to Review', 'pmc-gallery-v4' ),
-					'backToAllReviews'   => esc_html__( 'Back to All Reviews', 'pmc-gallery-v4' ),
-					'thumbnail'          => esc_html__( 'Thumbnails', 'pmc-gallery-v4' ),
-					'nextSlide'          => esc_html__( 'Next Slide', 'pmc-gallery-v4' ),
-					'prevSlide'          => esc_html__( 'Previous Slide', 'pmc-gallery-v4' ),
-					'skipAd'             => esc_html__( 'Skip Ad', 'pmc-gallery-v4' ),
-					'skipIn'             => esc_html__( 'Skip In', 'pmc-gallery-v4' ),
-					'of'                 => esc_html__( 'of', 'pmc-gallery-v4' ),
-					'missingSomething'   => __( 'You\'re missing something!', 'pmc-gallery-v4' ),
-					'subscribeNow'       => esc_html__( 'Subscribe Now', 'pmc-gallery-v4' ),
-					'next'               => esc_html__( 'Next', 'pmc-gallery-v4' ),
-					'nextGallery'        => esc_html__( 'Next Gallery', 'pmc-gallery-v4' ),
-					'closeThisMessage'   => esc_html__( 'Close this message', 'pmc-gallery-v4' ),
-					'closeModal'         => esc_html__( 'Close Modal', 'pmc-gallery-v4' ),
-					'closeGallery'       => esc_html__( 'Close Gallery', 'pmc-gallery-v4' ),
-					'startSlideShow'     => esc_html__( 'Start Slideshow', 'pmc-gallery-v4' ),
-					'lightBox'           => esc_html__( 'Lightbox', 'pmc-gallery-v4' ),
-					'scrollUp'           => esc_html__( 'Scroll Up', 'pmc-gallery-v4' ),
-					'scrollDown'         => esc_html__( 'Scroll Down', 'pmc-gallery-v4' ),
-					'look'               => esc_html__( 'Look', 'pmc-gallery-v4' ),
-					'readMore'           => esc_html__( 'Read More', 'pmc-gallery-v4' ),
-					'showLess'           => esc_html__( 'Show Less', 'pmc-gallery-v4' ),
+					'backToArticle'      => esc_html__('Back to Article', 'pmc-gallery-v4'),
+					'backToAllGalleries' => esc_html__('Back to All Galleries', 'pmc-gallery-v4'),
+					'backToReview'       => esc_html__('Back to Review', 'pmc-gallery-v4'),
+					'backToAllReviews'   => esc_html__('Back to All Reviews', 'pmc-gallery-v4'),
+					'thumbnail'          => esc_html__('Thumbnails', 'pmc-gallery-v4'),
+					'nextSlide'          => esc_html__('Next Slide', 'pmc-gallery-v4'),
+					'prevSlide'          => esc_html__('Previous Slide', 'pmc-gallery-v4'),
+					'skipAd'             => esc_html__('Skip Ad', 'pmc-gallery-v4'),
+					'skipIn'             => esc_html__('Skip In', 'pmc-gallery-v4'),
+					'of'                 => esc_html__('of', 'pmc-gallery-v4'),
+					'missingSomething'   => __('You\'re missing something!', 'pmc-gallery-v4'),
+					'subscribeNow'       => esc_html__('Subscribe Now', 'pmc-gallery-v4'),
+					'next'               => esc_html__('Next', 'pmc-gallery-v4'),
+					'nextGallery'        => esc_html__('Next Gallery', 'pmc-gallery-v4'),
+					'closeThisMessage'   => esc_html__('Close this message', 'pmc-gallery-v4'),
+					'closeModal'         => esc_html__('Close Modal', 'pmc-gallery-v4'),
+					'closeGallery'       => esc_html__('Close Gallery', 'pmc-gallery-v4'),
+					'startSlideShow'     => esc_html__('Start Slideshow', 'pmc-gallery-v4'),
+					'lightBox'           => esc_html__('Lightbox', 'pmc-gallery-v4'),
+					'scrollUp'           => esc_html__('Scroll Up', 'pmc-gallery-v4'),
+					'scrollDown'         => esc_html__('Scroll Down', 'pmc-gallery-v4'),
+					'look'               => esc_html__('Look', 'pmc-gallery-v4'),
+					'readMore'           => esc_html__('Read More', 'pmc-gallery-v4'),
+					'showLess'           => esc_html__('Show Less', 'pmc-gallery-v4'),
 					'vertical'           => [
-						'photo' => esc_html__( 'Photo', 'pmc-gallery-v4' ),
+						'photo' => esc_html__('Photo', 'pmc-gallery-v4'),
 					],
 				],
 
@@ -820,15 +847,15 @@ class Lists_Settings {
 					'pinterest' => [],
 					'tumblr'    => [],
 				],
-				'twitterUserName'             => defined( 'PMC_TWITTER_SITE_USERNAME' ) ? PMC_TWITTER_SITE_USERNAME : '',
+				'twitterUserName'             => defined('PMC_TWITTER_SITE_USERNAME') ? PMC_TWITTER_SITE_USERNAME : '',
 				'timestamp'                   => [
-					'date'     => get_the_date( 'F d, Y, g:ia' ),
-					'datetime' => get_the_date( 'Y-m-d\TH:i:sP' ),
+					'date'     => get_the_date('F d, Y, g:ia'),
+					'datetime' => get_the_date('Y-m-d\TH:i:sP'),
 				],
 				'showThumbnails'              => false,
-				'siteTitle'                   => sanitize_text_field( get_bloginfo( 'name' ) ),
-				'siteUrl'                     => trailingslashit( wp_make_link_relative( get_site_url() ) ),
-				'pagePermalink'               => trailingslashit( get_permalink() ),
+				'siteTitle'                   => sanitize_text_field(get_bloginfo('name')),
+				'siteUrl'                     => trailingslashit(wp_make_link_relative(get_site_url())),
+				'pagePermalink'               => trailingslashit(get_permalink()),
 				'enableInterstitial'          => null,
 				'interstitialAdAfter'         => null,
 				'zoom'                        => false,
@@ -989,21 +1016,21 @@ class Lists_Settings {
 
 		$generated_ranges = [];
 
-		foreach ( (array) self::$_list_config['listNavBar']['numberOfRangesAtMinWidth'] as $min_width => $max_number_of_ranges ) {
-			$max_chunk_size = ceil( count( $all_list_item_ids ) / $max_number_of_ranges );
-			$all_chunks     = array_chunk( $all_list_item_ids, $max_chunk_size, true );
+		foreach ((array) self::$_list_config['listNavBar']['numberOfRangesAtMinWidth'] as $min_width => $max_number_of_ranges) {
+			$max_chunk_size = ceil(count($all_list_item_ids) / $max_number_of_ranges);
+			$all_chunks     = array_chunk($all_list_item_ids, $max_chunk_size, true);
 
-			foreach ( (array) $all_chunks as $chunk ) {
-				$chunk_first_index = array_keys( (array) $chunk )[0];
-				$chunk_last_index  = array_keys( (array) $chunk )[ count( $chunk ) - 1 ];
-				$chunk_first_slug  = Lists::$all_list_items_by_list_id[ $list_id ][ $chunk_first_index ]->slug;
+			foreach ((array) $all_chunks as $chunk) {
+				$chunk_first_index = array_keys((array) $chunk)[0];
+				$chunk_last_index  = array_keys((array) $chunk)[count($chunk) - 1];
+				$chunk_first_slug  = Lists::$all_list_items_by_list_id[$list_id][$chunk_first_index]->slug;
 
-				$generated_ranges[ $min_width ][] = [
+				$generated_ranges[$min_width][] = [
 					'indexStart'           => $chunk_first_index,
 					'indexEnd'             => $chunk_last_index,
 					'positionDisplayStart' => 'desc' === $list_ordering ? $all_list_items_count - $chunk_first_index : $chunk_first_index + 1,
 					'positionDisplayEnd'   => 'desc' === $list_ordering ? $all_list_items_count - $chunk_last_index : $chunk_last_index + 1,
-					'link'                 => trailingslashit( get_permalink() ) . $chunk_first_slug,
+					'link'                 => trailingslashit(get_permalink()) . $chunk_first_slug,
 				];
 			}
 		}
@@ -1011,16 +1038,16 @@ class Lists_Settings {
 		self::$_list_config['listNavBar']['generatedRanges'] = $generated_ranges;
 		self::$_list_config['closeButtonLink']               = self::$_list_config['siteUrl'];
 
-		$ads = Plugin::get_instance()->get_ads( 'right-rail-gallery' );
+		$ads = Plugin::get_instance()->get_ads('right-rail-gallery');
 
-		if ( ! empty( $ads ) ) {
+		if (!empty($ads)) {
 
 			// Override and add some default
 			array_walk(
 				$ads['data'],
-				function ( &$item ) {
+				function (&$item) {
 					$item['displayType'] = 'flexrec';
-					if ( empty( $item['targeting'] ) ) {
+					if (empty($item['targeting'])) {
 						$item['targeting'] = [];
 					}
 					$item['targeting'][] = [
@@ -1045,7 +1072,8 @@ class Lists_Settings {
 	 *
 	 * @return array
 	 */
-	public static function get_image_sizes( $attachment_id, $list_template = '' ) {
+	public static function get_image_sizes($attachment_id, $list_template = '')
+	{
 		$image_sizes = array();
 		// TODO: Add filters for image size
 		$sizes_config = array(
@@ -1071,8 +1099,8 @@ class Lists_Settings {
 			),
 		);
 
-		foreach ( $sizes_config as $size_name => $size_config ) {
-			$image_sizes[ $size_name ] = self::get_image_size( $attachment_id, $size_config, $list_template );
+		foreach ($sizes_config as $size_name => $size_config) {
+			$image_sizes[$size_name] = self::get_image_size($attachment_id, $size_config, $list_template);
 		}
 
 		return $image_sizes;
@@ -1088,26 +1116,66 @@ class Lists_Settings {
 	 *
 	 * @return array
 	 */
-	public static function get_image_size( $attachment_id, $size_config, $list_template = '' ) {
-		$image_meta = wp_get_attachment_metadata( $attachment_id );
+	public static function get_image_size($attachment_id, $size_config, $list_template = '')
+	{
+		$image_meta = wp_get_attachment_metadata($attachment_id);
 
-		if ( empty( $image_meta ) ) {
+		if (empty($image_meta)) {
 			return array();
 		}
 
-		if ( 'item-album' === $list_template ) {
+		if ('item-album' === $list_template) {
 			$size = $size_config['portrait'];
 		} else {
 			$size = $size_config['landscape'];
 		}
 
-		$image = wp_get_attachment_image_src( $attachment_id, $size );
+		$image = wp_get_attachment_image_src($attachment_id, $size);
 
 		return array(
-			'src'    => ( is_array( $image ) && ! empty( $image[0] ) ) ? $image[0] : '',
-			'width'  => ( is_array( $image ) && ! empty( $image[1] ) ) ? $image[1] : '',
-			'height' => ( is_array( $image ) && ! empty( $image[2] ) ) ? $image[2] : '',
+			'src'    => (is_array($image) && !empty($image[0])) ? $image[0] : '',
+			'width'  => (is_array($image) && !empty($image[1])) ? $image[1] : '',
+			'height' => (is_array($image) && !empty($image[2])) ? $image[2] : '',
 		);
+	}
+
+	public static function get_image_sizes_external($image_url)
+	{
+		$sizes_config = array(
+			'pmc-gallery-s'   => array(
+				'landscape' => 'pmc-list-s',
+				'portrait'  => 'pmc-list-s-portrait',
+			),
+			'pmc-gallery-m'   => array(
+				'landscape' => 'pmc-list-m',
+				'portrait'  => 'pmc-list-m-portrait',
+			),
+			'pmc-gallery-l'   => array(
+				'landscape' => 'pmc-list-l',
+				'portrait'  => 'pmc-list-l-portrait',
+			),
+			'pmc-gallery-xl'  => array(
+				'landscape' => 'pmc-list-xl',
+				'portrait'  => 'pmc-list-xl-portrait',
+			),
+			'pmc-gallery-xxl' => array(
+				'landscape' => 'pmc-list-xxl',
+				'portrait'  => 'pmc-list-xxl-portrait',
+			),
+		);
+
+		global $_wp_additional_image_sizes;
+
+		foreach ($sizes_config as $size_name => $size_config) {
+			$sizes = ($_wp_additional_image_sizes[$size_name]);
+			$image_sizes[$size_name] = [
+				'src' => $image_url,
+				'width' => $sizes['width'],
+				'height' => $sizes['height'],
+			];
+		}
+
+		return $image_sizes;
 	}
 
 	/**
@@ -1116,7 +1184,8 @@ class Lists_Settings {
 	 * @param array $post_types
 	 * @return array
 	 */
-	public function enable_videos_for_list_and_items( $post_types ) {
+	public function enable_videos_for_list_and_items($post_types)
+	{
 		return array_unique(
 			array_merge(
 				(array) $post_types,
@@ -1141,10 +1210,9 @@ class Lists_Settings {
 	 *
 	 * @return string
 	 */
-	public function prevent_canonical_redirect( $redirect_url ) {
-
-		return ( ! is_singular( self::LIST_POST_TYPE ) ) ? $redirect_url : '';
-
+	public function prevent_canonical_redirect($redirect_url)
+	{
+		return (!is_singular(self::LIST_POST_TYPE)) ? $redirect_url : '';
 	}
 }
 

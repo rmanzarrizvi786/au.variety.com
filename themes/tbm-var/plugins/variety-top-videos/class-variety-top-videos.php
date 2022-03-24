@@ -826,7 +826,7 @@ class Variety_Top_Videos
 				return '';
 			}
 
-			$term_exists = (function_exists('wpcom_vip_term_exists')) ? 'wpcom_vip_term_exists' : 'term_exists';
+			$term_exists = (function_exists('term_exists')) ? 'term_exists' : 'term_exists';
 			if ($term && $term_exists(intval($term), $tax)) {
 				$tax_array = (array($term));
 			} else {

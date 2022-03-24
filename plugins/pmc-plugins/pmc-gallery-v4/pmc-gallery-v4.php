@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Plugin Name: PMC Gallery V4
  * Description:
@@ -19,20 +20,20 @@
  * @package pmc-plugins
  */
 
-if ( ! defined( 'PMC_GALLERY_VERSION' ) ) {
-	define( 'PMC_GALLERY_VERSION', '2022.1' );
+if (!defined('PMC_GALLERY_VERSION')) {
+	define('PMC_GALLERY_VERSION', '2022.1');
 }
 
-if ( ! defined( 'PMC_GALLERY_PLUGIN_URL' ) ) {
-	define( 'PMC_GALLERY_PLUGIN_URL', trailingslashit( plugins_url( null, __FILE__ ) ) );
+if (!defined('PMC_GALLERY_PLUGIN_URL')) {
+	define('PMC_GALLERY_PLUGIN_URL', trailingslashit(plugins_url(null, __FILE__)));
 }
 
-if ( ! defined( 'PMC_GALLERY_PLUGIN_DIR' ) ) {
-	define( 'PMC_GALLERY_PLUGIN_DIR', __DIR__ );
+if (!defined('PMC_GALLERY_PLUGIN_DIR')) {
+	define('PMC_GALLERY_PLUGIN_DIR', __DIR__);
 }
 
 // Note: update this constant to force all gallery related cache to expire when code is deployed to production
-define( 'PMC_GALLERY_CACHE_VERSION', '2022.1' );
+define('PMC_GALLERY_CACHE_VERSION', '2022.1');
 
 // Load plugin dependencies
 require_once __DIR__ . '/dependencies.php';
@@ -58,7 +59,7 @@ PMC\Gallery\Attachment_Image_Credit::get_instance();
 require_once __DIR__ . '/classes/services/apple-music/class-api-auth.php';
 PMC\Gallery\Services\Apple_Music\API_Auth::get_instance();
 
-if ( is_admin() ) {
+if (is_admin()) {
 
 	require_once __DIR__ . '/classes/admin/class-link-content.php';
 	PMC\Gallery\Admin\Link_Content::get_instance();
@@ -78,7 +79,7 @@ PMC\Gallery\PMC_Store_Products::get_instance();
 
 require_once __DIR__ . '/classes/class-view-legacy.php';
 
-if ( ! is_admin() || ( defined( 'WP_CLI' ) && WP_CLI ) ) {
+if (!is_admin() || (defined('WP_CLI') && WP_CLI)) {
 	require_once __DIR__ . '/classes/class-link-content-view.php';
 	PMC\Gallery\Link_Content_View::get_instance();
 
@@ -99,4 +100,4 @@ PMC\Gallery\Plugin::get_instance();
 require __DIR__ . '/compatibility.php';
 
 // load pmc-comscore plugin.
-pmc_load_plugin( 'pmc-comscore', 'pmc-plugins' );
+pmc_load_plugin('pmc-comscore', 'pmc-plugins');

@@ -18,7 +18,7 @@ plugins/ssm-ga/*
 !plugins/s3-uploads
 
 !plugins/pmc-plugins/
-plugins/pmc-plugins/*
+!plugins/pmc-plugins/*
 
 !plugins/cheezcap
 

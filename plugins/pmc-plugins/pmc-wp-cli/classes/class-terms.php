@@ -1,4 +1,5 @@
 <?php
+
 /**
  * WP-CLI command to manage terms
  *
@@ -16,7 +17,8 @@ namespace PMC\WP_CLI;
  *
  * @package PMC\WP_CLI
  */
-class Terms extends \PMC_WP_CLI_Base {
+class Terms extends \PMC_WP_CLI_Base
+{
 	/**
 	 *
 	 * WP-CLI command to delete terms given in csv file
@@ -58,96 +60,93 @@ class Terms extends \PMC_WP_CLI_Base {
 	 * @param array $args       Store all the positional arguments.
 	 * @param array $assoc_args Store all the associative arguments.
 	 */
-	public function delete_empty_from_csv( $args = array(), $assoc_args = array() ) {
+	public function delete_empty_from_csv($args = array(), $assoc_args = array())
+	{
 
-		$this->_extract_common_args( $assoc_args );
+		$this->_extract_common_args($assoc_args);
 
-		if ( $this->dry_run ) {
-			$this->_warning( 'You have called the command pmc-terms:delete-empty in dry run mode.' . "\n" );
+		if ($this->dry_run) {
+			$this->_warning('You have called the command pmc-terms:delete-empty in dry run mode.' . "\n");
 		}
 
-		if ( empty( $assoc_args['taxonomy'] ) ) {
-			$this->_error( 'Please pass taxonomy slug.' );
+		if (empty($assoc_args['taxonomy'])) {
+			$this->_error('Please pass taxonomy slug.');
 		}
 
-		$taxonomy = sanitize_title( $assoc_args['taxonomy'] );
+		$taxonomy = sanitize_title($assoc_args['taxonomy']);
 
-		if ( ! taxonomy_exists( $taxonomy ) ) {
-			$this->_error( sprintf( 'Taxonomy %s does not exists.', $taxonomy ) );
+		if (!taxonomy_exists($taxonomy)) {
+			$this->_error(sprintf('Taxonomy %s does not exists.', $taxonomy));
 		}
 
-		if ( empty( $assoc_args['csv'] ) ) {
-			$this->_error( 'Please pass CSV file path.' );
+		if (empty($assoc_args['csv'])) {
+			$this->_error('Please pass CSV file path.');
 		}
 
-		if ( ! file_exists( $assoc_args['csv'] ) || ! is_readable( $assoc_args['csv'] ) ) {
-			$this->_error( 'Either CSV file does not exists or is not readable.' );
+		if (!file_exists($assoc_args['csv']) || !is_readable($assoc_args['csv'])) {
+			$this->_error('Either CSV file does not exists or is not readable.');
 		}
 
-		$handle = fopen( $assoc_args['csv'], 'r' );
+		$handle = fopen($assoc_args['csv'], 'r');
 
-		if ( false === $handle ) {
-			$this->_error( 'Please pass a valid .csv file.' );
+		if (false === $handle) {
+			$this->_error('Please pass a valid .csv file.');
 		}
 
 		$num_of_terms_deleted = 0;
 
 		$iteration_count = 0;
 
-		while ( ( $row = fgetcsv( $handle, 1000, ',' ) ) !== false ) {
+		while (($row = fgetcsv($handle, 1000, ',')) !== false) {
 
 			$iteration_count++;
 
-			if ( empty( $row[0] ) ) {
+			if (empty($row[0])) {
 				continue;
 			}
 
-			if ( empty( wpcom_vip_term_exists( $row[0], $taxonomy ) ) ) {
+			if (empty(term_exists($row[0], $taxonomy))) {
 
-				$this->_warning( sprintf( '%s term does not exists.', $row[0] ) );
-				$this->_write_log( '' ); // To add blank line.
+				$this->_warning(sprintf('%s term does not exists.', $row[0]));
+				$this->_write_log(''); // To add blank line.
 				continue;
-
 			}
 
-			$term = get_term_by( 'slug', $row[0], $taxonomy );
+			$term = get_term_by('slug', $row[0], $taxonomy);
 
-			if ( 0 !== $term->count ) {
+			if (0 !== $term->count) {
 
-				$this->_warning( sprintf( '%s term is not empty.', $row[0] ) );
-				$this->_write_log( '' ); // To add blank line.
+				$this->_warning(sprintf('%s term is not empty.', $row[0]));
+				$this->_write_log(''); // To add blank line.
 				continue;
-
 			}
 
-			if ( ! $this->dry_run ) {
-				wp_delete_term( $term->term_id, $taxonomy );
+			if (!$this->dry_run) {
+				wp_delete_term($term->term_id, $taxonomy);
 			}
 
 			$num_of_terms_deleted++;
 
-			$this->_success( sprintf( '%s term has been deleted.', $row[0] ) );
+			$this->_success(sprintf('%s term has been deleted.', $row[0]));
 
-			$this->_write_log( '' ); // To add blank line.
+			$this->_write_log(''); // To add blank line.
 
-			if ( 100 === $iteration_count ) {
+			if (100 === $iteration_count) {
 				// To prevent execution of command due to memory issue.
 				$this->stop_the_insanity();
 
-				sleep( 2 );
+				sleep(2);
 				$iteration_count = 0;
 			}
-
 		}
 
-		fclose( $handle );
+		fclose($handle);
 
 		$this->stop_the_insanity();
 
-		$this->_success( sprintf( 'Taxonomy: %s -- Number of terms deleted %d', $taxonomy, $num_of_terms_deleted ) );
+		$this->_success(sprintf('Taxonomy: %s -- Number of terms deleted %d', $taxonomy, $num_of_terms_deleted));
 
-		$this->_notify_done( 'WP-CLI command pmc-terms:delete-empty Completed' );
-
+		$this->_notify_done('WP-CLI command pmc-terms:delete-empty Completed');
 	}
 
 	/**
@@ -168,16 +167,17 @@ class Terms extends \PMC_WP_CLI_Base {
 	 * @param array $args       Store all the positional arguments.
 	 * @param array $assoc_args Store all the associative arguments.
 	 */
-	public function recount( $args = [], $assoc_args = [] ) {
+	public function recount($args = [], $assoc_args = [])
+	{
 
-		if ( empty( $args[0] ) ) {
-			$this->_error( 'Please pass taxonomy.' );
+		if (empty($args[0])) {
+			$this->_error('Please pass taxonomy.');
 		}
 
 		$taxonomy = $args[0];
 
-		if ( ! taxonomy_exists( $taxonomy ) ) {
-			$this->_error( sprintf( 'Taxonomy %s does not exist.', $taxonomy ) );
+		if (!taxonomy_exists($taxonomy)) {
+			$this->_error(sprintf('Taxonomy %s does not exist.', $taxonomy));
 		}
 
 		$term_count = wp_count_terms(
@@ -187,47 +187,45 @@ class Terms extends \PMC_WP_CLI_Base {
 			]
 		);
 
-		if ( empty( $term_count ) ) {
-			$this->_error( 'No terms found.' );
+		if (empty($term_count)) {
+			$this->_error('No terms found.');
 		}
 
-		$this->_write_log( sprintf( 'Total %d terms found.', $term_count ) );
+		$this->_write_log(sprintf('Total %d terms found.', $term_count));
 
 		$limit = 100;
 
-		$iteration = ceil( $term_count / $limit );
+		$iteration = ceil($term_count / $limit);
 
-		for ( $i = 0; $i < $iteration; $i++ ) {
+		for ($i = 0; $i < $iteration; $i++) {
 
 			$args = [
-				'taxonomy'   => [ $taxonomy ],
+				'taxonomy'   => [$taxonomy],
 				'hide_empty' => false,
 				'number'     => $limit,
-				'offset'     => ( $i * $limit ),
+				'offset'     => ($i * $limit),
 			];
 
 			$term_query = new \WP_Term_Query();
 
-			$terms = $term_query->query( $args );
+			$terms = $term_query->query($args);
 
-			if ( empty( $terms ) || is_wp_error( $terms ) ) {
+			if (empty($terms) || is_wp_error($terms)) {
 				continue;
 			}
 
-			$term_taxonomy_ids = wp_list_pluck( $terms, 'term_taxonomy_id' );
+			$term_taxonomy_ids = wp_list_pluck($terms, 'term_taxonomy_id');
 
-			wp_update_term_count( $term_taxonomy_ids, $taxonomy );
+			wp_update_term_count($term_taxonomy_ids, $taxonomy);
 
-			$this->_write_log( sprintf( 'Batch %d -- terms count updated.', ( $i + 1 ) ) );
+			$this->_write_log(sprintf('Batch %d -- terms count updated.', ($i + 1)));
 
 			$this->stop_the_insanity();
 
-			sleep( 1 );
-
+			sleep(1);
 		}
 
-		$this->_success( sprintf( 'Updated %s term count.', $taxonomy ) );
-
+		$this->_success(sprintf('Updated %s term count.', $taxonomy));
 	}
 
 	/**
@@ -270,18 +268,19 @@ class Terms extends \PMC_WP_CLI_Base {
 	 * @param array $args       Store all the positional arguments.
 	 * @param array $assoc_args Store all the associative arguments.
 	 */
-	public function delete_empty_terms( $args = [], $assoc_args = [] ) {
+	public function delete_empty_terms($args = [], $assoc_args = [])
+	{
 
-		$this->_extract_common_args( $assoc_args );
+		$this->_extract_common_args($assoc_args);
 
-		if ( $this->dry_run ) {
-			$this->_warning( 'You have called the command pmc-terms:delete_empty_terms in dry run mode.' . "\n" );
+		if ($this->dry_run) {
+			$this->_warning('You have called the command pmc-terms:delete_empty_terms in dry run mode.' . "\n");
 		}
 
-		$taxonomy = ( ! empty( $assoc_args['taxonomy'] ) ) ? $assoc_args['taxonomy'] : 'post_tag';
+		$taxonomy = (!empty($assoc_args['taxonomy'])) ? $assoc_args['taxonomy'] : 'post_tag';
 
-		if ( ! taxonomy_exists( $taxonomy ) ) {
-			$this->_error( sprintf( 'Taxonomy %s does not exist.', $taxonomy ) );
+		if (!taxonomy_exists($taxonomy)) {
+			$this->_error(sprintf('Taxonomy %s does not exist.', $taxonomy));
 		}
 
 		$term_count = wp_count_terms(
@@ -291,54 +290,54 @@ class Terms extends \PMC_WP_CLI_Base {
 			]
 		);
 
-		if ( empty( $term_count ) ) {
-			$this->_error( 'No terms found.' );
+		if (empty($term_count)) {
+			$this->_error('No terms found.');
 		}
 
-		$this->_write_log( sprintf( 'Total %d terms found.', $term_count ) );
+		$this->_write_log(sprintf('Total %d terms found.', $term_count));
 
-		wp_defer_term_counting( true );
+		wp_defer_term_counting(true);
 
 		$limit = 100;
 
-		$iteration = ceil( $term_count / $limit );
+		$iteration = ceil($term_count / $limit);
 
 		$num_of_terms_deleted = 0;
 
 		$num_of_terms_deleted_in_iteration = 0;
 
-		for ( $i = 0; $i < $iteration; $i++ ) {
+		for ($i = 0; $i < $iteration; $i++) {
 
 			$args = [
-				'taxonomy'   => [ $taxonomy ],
+				'taxonomy'   => [$taxonomy],
 				'hide_empty' => false,
 				'number'     => $limit,
 			];
 
 			// total terms count will change after terms delete in each iteration.
 			// So, need to deduct no of terms deleted in each iteration from offset.
-			$args['offset'] = ( $i * $limit ) - $num_of_terms_deleted_in_iteration;
+			$args['offset'] = ($i * $limit) - $num_of_terms_deleted_in_iteration;
 
 			$term_query = new \WP_Term_Query();
 
-			$terms = $term_query->query( $args );
+			$terms = $term_query->query($args);
 
-			if ( ! empty( $terms ) && ! is_wp_error( $terms ) ) {
+			if (!empty($terms) && !is_wp_error($terms)) {
 
-				foreach ( $terms as $term ) {
+				foreach ($terms as $term) {
 
-					if ( 0 === $term->count ) {
+					if (0 === $term->count) {
 
-						$this->_write_log( sprintf( '%s term has no posts.', $term->slug ) );
+						$this->_write_log(sprintf('%s term has no posts.', $term->slug));
 
-						if ( ! $this->dry_run ) {
+						if (!$this->dry_run) {
 
-							$action = wp_delete_term( $term->term_id, $taxonomy );
+							$action = wp_delete_term($term->term_id, $taxonomy);
 
-							if ( true === $action && ! is_wp_error( $action ) ) {
+							if (true === $action && !is_wp_error($action)) {
 								$num_of_terms_deleted_in_iteration++;
-								$this->_success( sprintf( '%s term has been deleted.', $term->slug ) );
-								$this->_write_log( "\n" );
+								$this->_success(sprintf('%s term has been deleted.', $term->slug));
+								$this->_write_log("\n");
 								$num_of_terms_deleted++;
 							}
 						}
@@ -347,16 +346,15 @@ class Terms extends \PMC_WP_CLI_Base {
 
 				$this->stop_the_insanity();
 
-				sleep( 2 );
+				sleep(2);
 			}
 		}
 
-		wp_defer_term_counting( false );
+		wp_defer_term_counting(false);
 
-		$this->_success( sprintf( 'Taxonomy: %s -- Number of terms deleted %d', $taxonomy, $num_of_terms_deleted ) );
+		$this->_success(sprintf('Taxonomy: %s -- Number of terms deleted %d', $taxonomy, $num_of_terms_deleted));
 
-		$this->_notify_done( 'WP-CLI command pmc-terms:delete_empty_terms Completed' );
-
+		$this->_notify_done('WP-CLI command pmc-terms:delete_empty_terms Completed');
 	}
 
 	/**
@@ -414,27 +412,28 @@ class Terms extends \PMC_WP_CLI_Base {
 	 * @param array $args       Store all the positional arguments.
 	 * @param array $assoc_args Store all the associative arguments.
 	 */
-	public function delete_terms_with_old_content( $args = [], $assoc_args = [] ) {
+	public function delete_terms_with_old_content($args = [], $assoc_args = [])
+	{
 
-		$this->_extract_common_args( $assoc_args );
+		$this->_extract_common_args($assoc_args);
 
-		if ( $this->dry_run ) {
-			$this->_warning( 'You have called the command pmc-terms:delete_terms_with_old_content in dry run mode.' . "\n" );
+		if ($this->dry_run) {
+			$this->_warning('You have called the command pmc-terms:delete_terms_with_old_content in dry run mode.' . "\n");
 		}
 
-		$taxonomy                         = ! empty( $assoc_args['taxonomy'] ) ? $assoc_args['taxonomy'] : 'post_tag';
-		$number_of_posts                  = ! empty( $assoc_args['number-of-posts'] ) ? $assoc_args['number-of-posts'] : 3;
-		$post_created_before              = ! empty( $assoc_args['post-created-before'] ) ? $assoc_args['post-created-before'] : gmdate( 'm-d-Y', strtotime( '-1 year' ) );
-		$post_created_before_in_timestamp = \DateTime::createFromFormat( 'm-d-Y', $post_created_before )->getTimestamp();
+		$taxonomy                         = !empty($assoc_args['taxonomy']) ? $assoc_args['taxonomy'] : 'post_tag';
+		$number_of_posts                  = !empty($assoc_args['number-of-posts']) ? $assoc_args['number-of-posts'] : 3;
+		$post_created_before              = !empty($assoc_args['post-created-before']) ? $assoc_args['post-created-before'] : gmdate('m-d-Y', strtotime('-1 year'));
+		$post_created_before_in_timestamp = \DateTime::createFromFormat('m-d-Y', $post_created_before)->getTimestamp();
 
-		if ( ! taxonomy_exists( $taxonomy ) ) {
-			$this->_error( sprintf( 'Taxonomy %s does not exist.', $taxonomy ) );
+		if (!taxonomy_exists($taxonomy)) {
+			$this->_error(sprintf('Taxonomy %s does not exist.', $taxonomy));
 		}
 
-		if ( ! empty( $assoc_args['post_type'] ) ) {
-			$post_types = explode( ',', $assoc_args['post_type'] );
+		if (!empty($assoc_args['post_type'])) {
+			$post_types = explode(',', $assoc_args['post_type']);
 		} else {
-			$post_types = [ 'post' ];
+			$post_types = ['post'];
 		}
 
 		$term_count = wp_count_terms(
@@ -444,67 +443,67 @@ class Terms extends \PMC_WP_CLI_Base {
 			]
 		);
 
-		if ( empty( $term_count ) ) {
-			$this->_error( 'No terms found.' );
+		if (empty($term_count)) {
+			$this->_error('No terms found.');
 		}
 
-		$this->_write_log( sprintf( 'Total %d terms found.', $term_count ) );
+		$this->_write_log(sprintf('Total %d terms found.', $term_count));
 
-		wp_defer_term_counting( true );
+		wp_defer_term_counting(true);
 
 		$limit = 100;
 
-		$iteration = ceil( $term_count / $limit );
+		$iteration = ceil($term_count / $limit);
 
 		$num_of_terms_deleted = 0;
 
 		$num_of_terms_deleted_in_iteration = 0;
 
-		for ( $i = 0; $i < $iteration; $i++ ) {
+		for ($i = 0; $i < $iteration; $i++) {
 
 			$args = [
-				'taxonomy'   => [ $taxonomy ],
+				'taxonomy'   => [$taxonomy],
 				'hide_empty' => true,
 				'number'     => $limit,
 			];
 
 			// total terms count will change after terms delete in each iteration.
 			// So, need to deduct no of terms deleted in iteration from offset.
-			$args['offset'] = ( $i * $limit ) - $num_of_terms_deleted_in_iteration;
+			$args['offset'] = ($i * $limit) - $num_of_terms_deleted_in_iteration;
 
 			$term_query = new \WP_Term_Query();
 
-			$terms = $term_query->query( $args );
+			$terms = $term_query->query($args);
 
-			if ( ! empty( $terms ) && ! is_wp_error( $terms ) ) {
+			if (!empty($terms) && !is_wp_error($terms)) {
 
-				foreach ( $terms as $term ) {
-					if ( $term->count > $number_of_posts || $term->count < 1 ) {
+				foreach ($terms as $term) {
+					if ($term->count > $number_of_posts || $term->count < 1) {
 						continue;
 					}
 
 					$can_delete = false;
-					$post_args  = $this->_get_post_args( $post_types, $term, $taxonomy );
-					$posts      = get_posts( $post_args ); // phpcs:ignore
+					$post_args  = $this->_get_post_args($post_types, $term, $taxonomy);
+					$posts      = get_posts($post_args); // phpcs:ignore
 
-					if ( ! empty( $posts ) ) {
-						$post = array_pop( $posts );
+					if (!empty($posts)) {
+						$post = array_pop($posts);
 
-						if ( strtotime( $post->post_date_gmt ) < $post_created_before_in_timestamp ) {
+						if (strtotime($post->post_date_gmt) < $post_created_before_in_timestamp) {
 							$can_delete = true;
-							$this->_write_log( sprintf( '%s term has total %d posts older than %s.', $term->slug, $term->count, $post_created_before ) );
+							$this->_write_log(sprintf('%s term has total %d posts older than %s.', $term->slug, $term->count, $post_created_before));
 						}
 					}
 
-					if ( ! $this->dry_run && $can_delete ) {
+					if (!$this->dry_run && $can_delete) {
 
-						$action = wp_delete_term( $term->term_id, $taxonomy );
+						$action = wp_delete_term($term->term_id, $taxonomy);
 
-						if ( true === $action && ! is_wp_error( $action ) ) {
+						if (true === $action && !is_wp_error($action)) {
 
 							$num_of_terms_deleted_in_iteration++;
-							$this->_success( sprintf( '%s term has been deleted.', $term->slug ) );
-							$this->_write_log( "\n" );
+							$this->_success(sprintf('%s term has been deleted.', $term->slug));
+							$this->_write_log("\n");
 							$num_of_terms_deleted++;
 						}
 					}
@@ -512,16 +511,15 @@ class Terms extends \PMC_WP_CLI_Base {
 
 				$this->stop_the_insanity();
 
-				sleep( 2 );
+				sleep(2);
 			}
 		}
 
-		wp_defer_term_counting( false );
+		wp_defer_term_counting(false);
 
-		$this->_success( sprintf( 'Taxonomy: %s -- Number of terms deleted %d', $taxonomy, $num_of_terms_deleted ) );
+		$this->_success(sprintf('Taxonomy: %s -- Number of terms deleted %d', $taxonomy, $num_of_terms_deleted));
 
-		$this->_notify_done( 'WP-CLI command pmc-terms:delete_terms_with_old_content Completed' );
-
+		$this->_notify_done('WP-CLI command pmc-terms:delete_terms_with_old_content Completed');
 	}
 
 	/**
@@ -564,109 +562,106 @@ class Terms extends \PMC_WP_CLI_Base {
 	 * @param array $args Store all the positional arguments.
 	 * @param array $assoc_args Store all the associative arguments.
 	 */
-	public function assign_term_from_csv( $args = [], $assoc_args = [] ) {
+	public function assign_term_from_csv($args = [], $assoc_args = [])
+	{
 
-		$this->_extract_common_args( $assoc_args );
+		$this->_extract_common_args($assoc_args);
 
-		if ( $this->dry_run ) {
-			$this->_write_log( 'NOTICE: You have called the command pmc-terms::assign-term-from-csv in dry run mode.' . "\n" );
+		if ($this->dry_run) {
+			$this->_write_log('NOTICE: You have called the command pmc-terms::assign-term-from-csv in dry run mode.' . "\n");
 		}
 
-		if ( empty( $assoc_args['taxonomy'] ) ) {
-			$this->_error( 'Please pass taxonomy slug.' );
+		if (empty($assoc_args['taxonomy'])) {
+			$this->_error('Please pass taxonomy slug.');
 		}
 
-		$taxonomy = sanitize_title( $assoc_args['taxonomy'] );
+		$taxonomy = sanitize_title($assoc_args['taxonomy']);
 
-		if ( ! taxonomy_exists( $taxonomy ) ) {
-			$this->_error( sprintf( 'Taxonomy %s does not exists.', $taxonomy ) );
+		if (!taxonomy_exists($taxonomy)) {
+			$this->_error(sprintf('Taxonomy %s does not exists.', $taxonomy));
 		}
 
-		if ( ! empty( $assoc_args['csv'] ) && file_exists( $assoc_args['csv'] ) && is_readable( $assoc_args['csv'] ) ) {
+		if (!empty($assoc_args['csv']) && file_exists($assoc_args['csv']) && is_readable($assoc_args['csv'])) {
 
-			$handle = fopen( $assoc_args['csv'], 'r' ); //@codingStandardsIgnoreLine: WP_Filesystem not appropriate for this logic.
+			$handle = fopen($assoc_args['csv'], 'r'); //@codingStandardsIgnoreLine: WP_Filesystem not appropriate for this logic.
 
-			if ( false !== $handle ) {
+			if (false !== $handle) {
 
-				wp_defer_term_counting( true );
+				wp_defer_term_counting(true);
 
 				$num_of_terms_assigned = 0;
 				$iteration_count       = 0;
 
-				while ( false !== ( $row = fgetcsv( $handle, 1000, ',' ) ) ) { // phpcs:ignore
+				while (false !== ($row = fgetcsv($handle, 1000, ','))) { // phpcs:ignore
 
-					$iteration_count ++;
+					$iteration_count++;
 
-					list( $post_id, $term_slug ) = $row;
+					list($post_id, $term_slug) = $row;
 
-					$post_id = intval( $post_id );
+					$post_id = intval($post_id);
 
-					if ( empty( $post_id ) || empty( $term_slug ) ) {
+					if (empty($post_id) || empty($term_slug)) {
 
-						$this->_write_log( 'Post ID|term data not passed.' );
-						$this->_write_log( '' );
-						continue;
-
-					}
-
-					$post_object = get_post( $post_id );
-
-					if ( empty( $post_object ) ) {
-
-						$this->_write_log( $post_id . ' post not found.' );
-						$this->_write_log( '' );
+						$this->_write_log('Post ID|term data not passed.');
+						$this->_write_log('');
 						continue;
 					}
 
-					$this->_write_log( 'Post Found: ' . $post_object->ID . ' | ' . $post_object->post_type . ' | ' . $post_object->post_title );
+					$post_object = get_post($post_id);
 
-					if ( empty( wpcom_vip_term_exists( $term_slug, $taxonomy ) ) ) {
+					if (empty($post_object)) {
 
-						$this->_warning( sprintf( '%s term does not exists.', $term_slug ) );
-						$this->_write_log( '' ); // To add blank line.
+						$this->_write_log($post_id . ' post not found.');
+						$this->_write_log('');
 						continue;
-
 					}
 
-					$term = get_term_by( 'slug', $term_slug, $taxonomy );
+					$this->_write_log('Post Found: ' . $post_object->ID . ' | ' . $post_object->post_type . ' | ' . $post_object->post_title);
 
-					if ( is_a( $term, 'WP_Term' ) ) {
-						$this->_write_log( 'Term Found: ' . $term->slug );
+					if (empty(term_exists($term_slug, $taxonomy))) {
+
+						$this->_warning(sprintf('%s term does not exists.', $term_slug));
+						$this->_write_log(''); // To add blank line.
+						continue;
 					}
 
-					if ( ! $this->dry_run ) {
-						wp_set_object_terms( $post_object->ID, [ $term->slug ], $taxonomy, true );
-						$this->_write_log( 'New term have been assigned to post.' . "\n" );
+					$term = get_term_by('slug', $term_slug, $taxonomy);
+
+					if (is_a($term, 'WP_Term')) {
+						$this->_write_log('Term Found: ' . $term->slug);
+					}
+
+					if (!$this->dry_run) {
+						wp_set_object_terms($post_object->ID, [$term->slug], $taxonomy, true);
+						$this->_write_log('New term have been assigned to post.' . "\n");
 					} else {
-						$this->_write_log( 'New term will be assigned to post.' . "\n" );
+						$this->_write_log('New term will be assigned to post.' . "\n");
 					}
 
-					$num_of_terms_assigned ++;
+					$num_of_terms_assigned++;
 
-					if ( 100 === $iteration_count ) {
+					if (100 === $iteration_count) {
 						// To prevent execution of command due to memory issue.
 						$this->stop_the_insanity();
 
-						sleep( 2 );
+						sleep(2);
 						$iteration_count = 0;
 					}
-
 				} //End while loop.
 
-				wp_defer_term_counting( false );
+				wp_defer_term_counting(false);
 
 				$this->stop_the_insanity();
 
-				$this->_success( sprintf( ':: Number of terms assigned %d ::', $num_of_terms_assigned ) );
+				$this->_success(sprintf(':: Number of terms assigned %d ::', $num_of_terms_assigned));
 
-				$this->_notify_done( 'WP-CLI command pmc-terms:assign-term-from-csv Completed' );
-
+				$this->_notify_done('WP-CLI command pmc-terms:assign-term-from-csv Completed');
 			}
 
-			fclose( $handle ); //@codingStandardsIgnoreLine: WP_Filesystem not appropriate for this logic.
+			fclose($handle); //@codingStandardsIgnoreLine: WP_Filesystem not appropriate for this logic.
 
 		} else {
-			$this->_error( 'Either CSV file does not exists or is not readable.' );
+			$this->_error('Either CSV file does not exists or is not readable.');
 		}
 	}
 
@@ -721,34 +716,35 @@ class Terms extends \PMC_WP_CLI_Base {
 	 *
 	 * @return void
 	 */
-	public function generate_csv( $args = [], $assoc_args = [] ): void {
-		$this->_extract_common_args( $assoc_args );
-		$this->_notify_start( 'Start: generate-csv' );
+	public function generate_csv($args = [], $assoc_args = []): void
+	{
+		$this->_extract_common_args($assoc_args);
+		$this->_notify_start('Start: generate-csv');
 
-		$csv_file    = ! empty( $assoc_args['file'] ) ? $assoc_args['file'] : 'php://output';
-		$taxonomy    = ! empty( $assoc_args['taxonomy'] ) ? $assoc_args['taxonomy'] : 'post_tag';
-		$post_types  = ! empty( $assoc_args['post_type'] ) ? explode( ',', $assoc_args['post_type'] ) : [ 'post' ];
-		$terms_count = $this->_get_terms_count( $taxonomy );
+		$csv_file    = !empty($assoc_args['file']) ? $assoc_args['file'] : 'php://output';
+		$taxonomy    = !empty($assoc_args['taxonomy']) ? $assoc_args['taxonomy'] : 'post_tag';
+		$post_types  = !empty($assoc_args['post_type']) ? explode(',', $assoc_args['post_type']) : ['post'];
+		$terms_count = $this->_get_terms_count($taxonomy);
 
-		if ( empty( $terms_count ) ) {
-			$this->_error( 'No terms found' );
+		if (empty($terms_count)) {
+			$this->_error('No terms found');
 		}
 
 		$echo_to_standard_output = 'php://output' === $csv_file;
 		$progress                = null;
 
-		if ( ! $echo_to_standard_output ) {
-			$progress = \WP_CLI\Utils\make_progress_bar( 'Generating CSV:', $terms_count );
+		if (!$echo_to_standard_output) {
+			$progress = \WP_CLI\Utils\make_progress_bar('Generating CSV:', $terms_count);
 		}
 
-		$this->_write_log( sprintf( 'Total %d terms found.', $terms_count ) );
+		$this->_write_log(sprintf('Total %d terms found.', $terms_count));
 
-		if ( $echo_to_standard_output ) {
+		if ($echo_to_standard_output) {
 			// As we're echoing CSV to standard output, let's disable the `--dry-run` check.
 			$this->dry_run = false;
 		}
 
-		if ( ! $this->dry_run ) {
+		if (!$this->dry_run) {
 			$this->write_to_csv(
 				$csv_file,
 				[
@@ -756,33 +752,33 @@ class Terms extends \PMC_WP_CLI_Base {
 					'date',
 					'number_of_posts',
 				],
-				[ [] ],
+				[[]],
 			);
 		}
 
 		$offset = 0;
 
 		do {
-			if ( ! $echo_to_standard_output ) {
+			if (!$echo_to_standard_output) {
 				$progress->tick();
 			}
 
-			$terms   = $this->_get_terms( $taxonomy, $offset );
+			$terms   = $this->_get_terms($taxonomy, $offset);
 			$offset += $this->batch_size;
 
-			foreach ( $terms as $term ) {
-				$post_args = $this->_get_post_args( $post_types, $term, $taxonomy );
-				$posts     = get_posts( $post_args ); // phpcs:disable
+			foreach ($terms as $term) {
+				$post_args = $this->_get_post_args($post_types, $term, $taxonomy);
+				$posts     = get_posts($post_args); // phpcs:disable
 
-				if ( ! $this->dry_run && ! empty( $posts ) ) {
-					$post = reset( $posts );
+				if (!$this->dry_run && !empty($posts)) {
+					$post = reset($posts);
 					$this->write_to_csv(
 						$csv_file,
 						[],
 						[
 							[
 								$term->slug,
-								date_i18n( get_option( 'date_format' ), strtotime( $post->post_date_gmt ) ),
+								date_i18n(get_option('date_format'), strtotime($post->post_date_gmt)),
 								$term->count
 							]
 						],
@@ -794,14 +790,14 @@ class Terms extends \PMC_WP_CLI_Base {
 
 			$this->_update_iteration();
 		} while (
-			! empty( $terms )
+			!empty($terms)
 		);
 
-		if ( ! $echo_to_standard_output ) {
+		if (!$echo_to_standard_output) {
 			$progress->finish();
 		}
 
-		$this->_notify_done( 'WP-CLI command pmc-terms:generate-csv completed', [ $csv_file ] );
+		$this->_notify_done('WP-CLI command pmc-terms:generate-csv completed', [$csv_file]);
 	}
 
 	/**
@@ -811,7 +807,8 @@ class Terms extends \PMC_WP_CLI_Base {
 	 *
 	 * @return int
 	 */
-	private function _get_terms_count( string $taxonomy ): int {
+	private function _get_terms_count(string $taxonomy): int
+	{
 		$term_count = wp_count_terms(
 			[
 				'taxonomy'   => $taxonomy,
@@ -819,7 +816,7 @@ class Terms extends \PMC_WP_CLI_Base {
 			]
 		);
 
-		if ( is_wp_error( $term_count ) ) {
+		if (is_wp_error($term_count)) {
 			return 0;
 		}
 
@@ -834,18 +831,19 @@ class Terms extends \PMC_WP_CLI_Base {
 	 *
 	 * @return array
 	 */
-	private function _get_terms( string $taxonomy, int $offset = 0 ): array {
+	private function _get_terms(string $taxonomy, int $offset = 0): array
+	{
 		$args = apply_filters(
 			'pmc_wp_cli_terms_get_terms_args',
 			[
-				'taxonomy'   => [ $taxonomy ],
+				'taxonomy'   => [$taxonomy],
 				'hide_empty' => false,
 				'number'     => $this->batch_size,
 				'offset'     => $offset,
 			]
 		);
 
-		return (array) ( new \WP_Term_Query() )->query( $args );
+		return (array) (new \WP_Term_Query())->query($args);
 	}
 
 	/**
@@ -857,7 +855,8 @@ class Terms extends \PMC_WP_CLI_Base {
 	 *
 	 * @return array
 	 */
-	private function _get_post_args( array $post_types, object $term, string $taxonomy ): array {
+	private function _get_post_args(array $post_types, object $term, string $taxonomy): array
+	{
 		$args = [
 			'post_type'        => $post_types,
 			'numberposts'      => 1,
@@ -866,15 +865,15 @@ class Terms extends \PMC_WP_CLI_Base {
 			'order'            => 'desc',
 		];
 
-		if ( 'post_tag' === $taxonomy ) {
+		if ('post_tag' === $taxonomy) {
 			$args['tag_id'] = $term->term_id;
 		}
 
-		if ( 'category' === $taxonomy ) {
+		if ('category' === $taxonomy) {
 			$args['category'] = $term->term_id;
 		}
 
-		if ( ! in_array( $taxonomy, [ 'post_tag', 'category' ], true ) ) {
+		if (!in_array($taxonomy, ['post_tag', 'category'], true)) {
 			$args['tax_query'] = [ // phpcs:ignore
 				[
 					'taxonomy' => $taxonomy,
@@ -884,7 +883,7 @@ class Terms extends \PMC_WP_CLI_Base {
 			];
 		}
 
-		return apply_filters( 'pmc_wp_cli_terms_get_post_args', $args );
+		return apply_filters('pmc_wp_cli_terms_get_post_args', $args);
 	}
 }
 
