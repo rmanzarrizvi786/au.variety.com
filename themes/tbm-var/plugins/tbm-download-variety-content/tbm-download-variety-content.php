@@ -489,6 +489,8 @@ class DownloadVarietyContent
         // wp_send_json_error(array('result' => '<pre>' . print_r(str_replace(['<', '>',], ['&lt;', '&gt;',], $html), true) . '</pre>'));
         // die();
 
+        $metas = ['_yoast_wpseo_canonical' => $list_url];
+
         $doc = new \DOMDocument();
         @$doc->loadHTML($html);
         $doc->preserveWhiteSpace = false;
@@ -528,6 +530,14 @@ class DownloadVarietyContent
         $lead_elements = $dom_xpath->query("//*[contains(concat(' ', @class, ' '),'vy-cx-page-content')]");
         foreach ($lead_elements as $element) {
           $list_content = $this->get_inner_html($element);
+          break;
+        }
+
+        $author_elements = $dom_xpath->query("//*[contains(concat(' ', @class, ' '),'author')]");
+        foreach ($author_elements as $element) {
+          $author = $this->get_inner_html($element, true);
+          $author = str_ireplace('by ', '', $author);
+          $metas['author']  = $author;
           break;
         }
 
@@ -574,9 +584,7 @@ class DownloadVarietyContent
           'post_status' => 'draft',
           'post_type' => 'pmc_list',
           'post_category' => $cat_IDs,
-          'meta_input' => [
-            '_yoast_wpseo_canonical' => $list_url,
-          ],
+          'meta_input' => $metas,
         );
 
         $new_list_id = wp_insert_post($new_list_args);
