@@ -498,6 +498,10 @@ class DownloadVarietyContent
           if ($meta->getAttribute('property') == 'og:description') {
             $meta_og_description = $meta->getAttribute('content');
           }
+
+          if ($meta->getAttribute('property') == 'og:image') {
+            $featured_img = $meta->getAttribute('content');
+          }
         }
 
         $dom_xpath = new \DOMXpath($doc);
@@ -527,22 +531,17 @@ class DownloadVarietyContent
           break;
         }
 
-        // wp_send_json_error(array('result' => $list_content));
-        // wp_send_json_error(array('result' => '<div style="width: 100%; max-width: 100%:"><pre>' . print_r(str_replace(['<', '>',], ['&lt;', '&gt;',], $list_content), true) . '</pre></div>'));
-        // die();
-
         $list_content .= '<p><em>From <a href="' . $list_url . '" target="_blank">Variety US</a></em></p>';
 
-        /* $featured_img_elements = $dom_xpath->query("//*[contains(concat(' ', @class, ' '),'wp-post-image')]");
-        foreach ($featured_img_elements as $element) {
-          $featured_img = $element->getAttribute('data-src');
-          $featured_img = strtok($featured_img, '?') . '?w=10000';
-          break;
-        } */
+        foreach ($doc->getElementsByTagName('figcaption') as $figcaption) {
+          if ($figcaption->nodeValue) {
+            $featured_img_credit = $figcaption->nodeValue;
+          }
+        }
 
         // Categories - get from breadcrumbs
-        $cat_names = $cat_IDs = array();
-        /* $breadcrumbs_elements = $dom_xpath->query("//*[contains(concat(' ', @class, ' '),'c-breadcrumbs')]");
+        $breadcrumbs = $cat_IDs = array();
+        $breadcrumbs_elements = $dom_xpath->query("//*[contains(concat(' ', @class, ' '),'o-nav-breadcrumblist__list')]");
         foreach ($breadcrumbs_elements as $element) {
           $dom = new \DOMDocument();
           @$dom->loadHTML($this->get_inner_html($element));
@@ -550,17 +549,23 @@ class DownloadVarietyContent
           $a_elements = $dom->getElementsByTagName('a');
           if ($a_elements->length > 0) {
             foreach ($a_elements as $element) {
-              if (!in_array(strtolower($element->nodeValue), array('home'))) {
-                $cat_names[] = $element->nodeValue;
+              $cat_name = trim(strtolower($element->nodeValue));
+              if (!in_array($cat_name, array('home')) && !in_array($cat_name, $breadcrumbs)) {
+                $breadcrumbs[] = $cat_name;
               }
             }
           }
         }
-        if (!empty($cat_names)) {
-          foreach ($cat_names as $cat_name) {
-            $cat_IDs[] = get_cat_ID($cat_name);
-          }
-        } */
+
+        // wp_send_json_error(array('result' => '<pre>' . print_r($breadcrumbs, true) . '</pre>'));
+        // exit;
+
+        if (!empty($breadcrumbs)) {
+          if (isset($breadcrumbs[0]))
+            $vertical = $breadcrumbs[0];
+          if (isset($breadcrumbs[1]))
+            $cat_IDs[] = get_cat_ID($breadcrumbs[1]);
+        }
 
         $new_list_args = array(
           'post_content' => $list_content,
@@ -575,6 +580,10 @@ class DownloadVarietyContent
         );
 
         $new_list_id = wp_insert_post($new_list_args);
+
+        if (isset($vertical)) {
+          wp_set_object_terms($new_list_id, $vertical, 'vertical');
+        }
 
         if (!isset($new_list_id) || is_wp_error($new_list_id)) {
           wp_send_json_error(['result' => 'Error creating main list']);
@@ -596,9 +605,13 @@ class DownloadVarietyContent
           // then find the last image added to the post attachments
           $attachments = get_posts(['numberposts' => '1', 'post_parent' => $new_list_id, 'post_type' => 'attachment', 'post_mime_type' => 'image', 'order' => 'ASC']);
 
+
           if (sizeof($attachments) > 0) {
+            $attachment_id = $attachments[0]->ID;
+            if (isset($featured_img_credit))
+              update_post_meta($attachment_id, '_image_credit', trim($featured_img_credit));
             // set image as the post thumbnail
-            set_post_thumbnail($new_list_id, $attachments[0]->ID);
+            set_post_thumbnail($new_list_id, $attachment_id);
           }
         }
 

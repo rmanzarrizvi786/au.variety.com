@@ -603,7 +603,17 @@ class Lists
 				'imageID'  => get_post_thumbnail_id($item->ID),
 				'editLink' => get_edit_post_link($item->ID),
 			];
-			$f_item['imageSrc'] = has_post_thumbnail($item->ID) ? get_the_post_thumbnail($item->ID, 'thumbnail') : '';
+
+			$external_image_src = '';
+			if (get_post_meta($item->ID, 'thumbnail_ext_url')) {
+				$external_image_src = get_post_meta($item->ID, 'thumbnail_ext_url', true);
+			}
+
+			if ('' != $external_image_src) {
+				$f_item['imageSrc'] = '<img src="' . $external_image_src . '&w=130&h=130&crop=1">';
+			} else {
+				$f_item['imageSrc'] = has_post_thumbnail($item->ID) ? get_the_post_thumbnail($item->ID, 'thumbnail') : '';
+			}
 			$for_admin[]        = $f_item;
 		}
 
