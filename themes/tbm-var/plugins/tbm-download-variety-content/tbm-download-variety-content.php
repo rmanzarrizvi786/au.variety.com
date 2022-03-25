@@ -95,14 +95,17 @@ class DownloadVarietyContent
     $children = $node->childNodes;
     if ($children->length > 0) {
       foreach ($children as $child) {
-        if (isset($child->tagName) && 'div' == $child->tagName) {
-          foreach ($child->attributes as $key => $value) {
-            if (
-              'id' == $key && 'pmc-gallery-vertical' == $child->getAttribute($key) ||
-              'class' == $key && strpos($child->getAttribute($key), 'article-tags') !== FALSE ||
-              'class' == $key && strpos($child->getAttribute($key), 'o-comments-link') !== FALSE
-            ) {
-              continue (2);
+        if (isset($child->tagName)) {
+
+          if ('div' == $child->tagName) {
+            foreach ($child->attributes as $key => $value) {
+              if (
+                'id' == $key && 'pmc-gallery-vertical' == $child->getAttribute($key) ||
+                'class' == $key && strpos($child->getAttribute($key), 'article-tags') !== FALSE ||
+                'class' == $key && strpos($child->getAttribute($key), 'o-comments-link') !== FALSE
+              ) {
+                continue (2);
+              }
             }
           }
         }
@@ -227,6 +230,14 @@ class DownloadVarietyContent
       $html = file_get_contents($article_url);
       $html = preg_replace('/<!--(.|\s)*?-->/', '', $html);
 
+      $html = preg_replace(
+        '/<p(.*?)?>(<script .*?><\/script>)(.*)?<\/p>/',
+        '$2',
+        $html
+      );
+
+      $html = str_replace('<p></a></p>', '</a>', $html);
+
       $doc = new \DOMDocument();
       @$doc->loadHTML($html);
       $doc->preserveWhiteSpace = false;
@@ -283,7 +294,11 @@ class DownloadVarietyContent
 
             // blockquote
             if ('blockquote' == $child->tagName && trim($child->nodeValue) != '') {
-              $content .= '<blockquote>' . $this->get_inner_html($child) . '</blockquote>';
+              $blockquote_attr = '';
+              foreach ($child->attributes as $key => $value) {
+                $blockquote_attr .= ' ' . $key . '="' . $child->getAttribute($key)  . '"';
+              }
+              $content .= '<blockquote' . $blockquote_attr . '>' . $this->get_inner_html($child) . '</blockquote>';
             }
 
             // iframe
@@ -299,9 +314,13 @@ class DownloadVarietyContent
             if ('script' == $child->tagName) {
               $script_attr = '';
               foreach ($child->attributes as $key => $value) {
-                $script_attr .= ' ' . $key . '="' . $child->getAttribute($key) . '"';
+                if ('' != $child->getAttribute($key)) {
+                  $script_attr .= ' ' . $key . '="' . $child->getAttribute($key) . '"';
+                } else {
+                  $script_attr .= ' ' . $key . ' ';
+                }
               }
-              // $content .= '<script' . $script_attr . '>' . $child->nodeValue . '</script>';
+              $content .= '<script' . $script_attr . '>' . $child->nodeValue . '</script>';
             }
 
             // div
@@ -326,6 +345,9 @@ class DownloadVarietyContent
             // img
             $content = str_replace('data-lazy-', '', $content);
           }
+
+          // wp_send_json_error(array('result' => '<pre>' . print_r(str_replace(['<', '>',], ['&lt;', '&gt;',], $content), true) . '</pre>'));
+          // die();
         }
       }
 
