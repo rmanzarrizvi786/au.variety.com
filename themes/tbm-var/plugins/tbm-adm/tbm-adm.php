@@ -36,7 +36,7 @@ class TBMAds
   */
   public function action_wp_enqueue_scripts()
   {
-    wp_enqueue_script('adm-fuse', 'https://cdn.fuseplatform.net/publift/tags/2/2745/fuse.js', [], '1');
+    wp_enqueue_script('adm-fuse', 'https://cdn.fuseplatform.net/publift/tags/2/2754/fuse.js', [], '1');
   }
 
   /*
@@ -177,7 +177,7 @@ class TBMAds
       ) {
         $height = 600;
       }
-      $html = '<div class="fuse-ad d-flex ' . $ad_location . ' ' . $section . '" style="background-color: #ccc;"><h2>Ad: ' . $ad_location . '</h2></div>';
+      // $html = '<div class="fuse-ad d-flex ' . $ad_location . ' ' . $section . '" style="background-color: #ccc;"><h2>Ad: ' . $ad_location . '</h2></div>';
       /**
        * Temporary Placeholders
        */
@@ -234,46 +234,44 @@ class TBMAds
         ]
       ],
       'article' => [
-        'skin' =>   '22693233910',
-        'leaderboard' =>   '22693233901',
-        'mrec' =>   '22693233913',
-        'vrec' =>   '22693233919',
-        'incontent_1' =>   '22693233925',
-        'incontent_2' =>   '22693233916',
+        'skin' =>   '22697869623',
+        'leaderboard' =>   '22698324191',
+        'mrec' =>   '22698324194',
+        'vrec' =>   '22697869656',
+        'incontent_1' =>   '22697869641',
+        'incontent_2' =>   '22697869650',
       ],
       'second_article' => [
-        'skin' =>   '22693233910',
-        'leaderboard' =>   '22693233901',
-        'mrec' =>   '22693233913',
-        'vrec' =>   '22693233919',
-        'incontent_1' =>   '22693233925',
-        'incontent_2' =>   '22693233916',
+        'skin' =>   '22697869623',
+        'leaderboard' =>   '22698324191',
+        'mrec' =>   '22698324194',
+        'vrec' =>   '22697869656',
+        'incontent_1' =>   '22697869641',
+        'incontent_2' =>   '22697869650',
       ],
       'category' => [
-        'skin' =>   '22693233889',
-        'leaderboard' =>   '22693233907',
-        'mrec' => '22693555511',
-        'vrec_1' => '22693555511',
-        'vrec' =>   '22693233895',
-        'vrec_2' =>   '22693233895',
+        'skin' =>   '22697869614',
+        'leaderboard' =>   '22697869626',
+        'mrec' => '22697869620',
+        'vrec_1' => '22697869620',
+        'vrec' =>   '22697869635',
+        'vrec_2' =>   '22697869635',
       ],
       'homepage' => [
-        'skin' => '22693233868',
-        'leaderboard' =>   '22693233877',
-        'vrec_1' =>   '22693554851',
-        'vrec_2' =>   '22693233871',
-        'vrec_3' =>   '22693233886',
-        'vrec_4' =>   '22693233880',
-        'vrec_5' =>   '22693233883',
-        'vrec_7' =>   '22339226179',
-        'vrec_6' =>   '22339066310',
+        'skin' => '22697869590',
+        'leaderboard' =>   '22697869605',
 
-        'incontent_1' =>   '22693233874',
-        'incontent_2' =>   '22693555508',
-        'incontent_3' =>   '22693233904',
-        'incontent_4' =>   '22693233892',
-        'incontent_5' =>   '22693233898',
-        'incontent_6' =>   '22339066325',
+        'vrec_1' =>   '22698324188',
+        'vrec_2' =>   '22697869602',
+        'vrec_3' =>   '22697869608',
+        'vrec_4' =>   '22697869611',
+        'vrec_5' =>   '22697869593',
+
+        'incontent_1' =>   '22697869596',
+        'incontent_2' =>   '22697869599',
+        'incontent_3' =>   '22697869617',
+        'incontent_4' =>   '22697869632',
+        'incontent_5' =>   '22697869629',
       ]
     ];
   }
