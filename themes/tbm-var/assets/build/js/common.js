@@ -2965,8 +2965,7 @@
         "string" == typeof t.data &&
           "tbmadm:dfp:skinad" ===
             t.data.substring(0, "tbmadm:dfp:skinad".length) &&
-          ((e = t.data.substring("tbmadm:dfp:skinad".length)),
-          e && (p()));
+          ((e = t.data.substring("tbmadm:dfp:skinad".length)), e && p());
         /* let e = "";
         "string" == typeof t.data &&
           "object" == typeof window.pmc.skinAds &&

@@ -88,7 +88,8 @@ if (!empty($footer_menus)) {
 $footer['footer_menus']['footer_menu_classes'] = str_replace('cols5', 'cols3', $footer['footer_menus']['footer_menu_classes']);
 
 // translators: %1$s current year.
-$copy_text = sprintf(esc_html__('Variety is a part of Penske Media Corporation. &copy; %1$s Variety Media, LLC. All Rights Reserved. Variety and the Flying V logos are trademarks of Variety Media, LLC.', 'pmc-variety'), gmdate('Y'));
+// $copy_text = sprintf(esc_html__('Variety is a part of Penske Media Corporation. &copy; %1$s Variety Media, LLC. All Rights Reserved. Variety and the Flying V logos are trademarks of Variety Media, LLC.', 'pmc-variety'), gmdate('Y'));
+$copy_text = sprintf(esc_html__('Variety Australia/New Zealand&reg; and &copy; %1$s Variety Media, LLC. All Rights Reserved. Published under license from Variety Media, LLC, a subsidiary of Penske Media Corporation', 'pmc-variety'), gmdate('Y'));
 
 // translators: %1$s WordPress.com VIP URL.
 // $powered_text = sprintf(esc_html__('Powered by %1$s', 'pmc-variety'), '<a href="https://vip.wordpress.com/?utm_source=vip_powered_wpcom&amp;utm_medium=web&amp;utm_campaign=VIP%20Footer%20Credit" class="lrv-u-color-white lrv-u-color-brand-primary:hover">WordPress.com VIP</a>');

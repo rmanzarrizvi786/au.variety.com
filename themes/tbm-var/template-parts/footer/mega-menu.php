@@ -80,8 +80,10 @@ if (!empty($mega_menu['root'])) {
 }
 
 // Mega PMC footer.
+$data['mega_menu_footer']['c_icon']['c_icon_name'] = 'pmc-logo';
 $data['mega_menu_footer']['c_icon']['c_icon_url']            = 'https://pmc.com/';
-$data['mega_menu_footer']['mega_menu_footer_copyright_text'] = ''; // sprintf('Variety is a part of Penske Media Corporation. &copy; %1$s Variety Media, LLC. All Rights Reserved.', gmdate('Y'));
+// $data['mega_menu_footer']['mega_menu_footer_copyright_text'] = sprintf('Variety is a part of Penske Media Corporation. &copy; %1$s Variety Media, LLC. All Rights Reserved.', gmdate('Y'));
+$data['mega_menu_footer']['mega_menu_footer_copyright_text'] = sprintf('Variety Australia/New Zealand&reg; and &copy; %1$s Variety Media, LLC. All Rights Reserved. Published under license from Variety Media, LLC, a subsidiary of Penske Media Corporation', gmdate('Y'));
 
 // Mega subscribe link.
 $data['mega_menu_footer']['c_subscribe_link']['c_link_url']     = 'https://thebrag.com/observer/film-tv/?utm_source=varietyau&utm_medium=Mega';
