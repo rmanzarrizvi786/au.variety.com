@@ -210,7 +210,7 @@ class TBMAds
   {
     return [
       'amp' => [
-        'network_id' => '/22071836792/SSM_themusicnetwork/',
+        'network_id' => '/22071836792/SSM_auvariety/',
         'header' => [
           'width' => 320,
           'height' => 50,
