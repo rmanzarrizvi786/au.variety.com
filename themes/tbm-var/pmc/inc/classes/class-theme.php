@@ -56,6 +56,8 @@ class Theme
 		// Add Vertical column to Posts list
 		add_filter('manage_post_posts_columns', [$this, 'manage_post_posts_columns']);
 		add_action('manage_posts_custom_column', [$this, 'manage_posts_custom_column'], 99, 2);
+
+		add_action('pre_get_posts', [$this, 'author_page_exclude_custom_author_posts']);
 	}
 
 	public function manage_post_posts_columns($columns)
@@ -1160,6 +1162,23 @@ class Theme
 	public function get_fieldmanager_version(): string
 	{
 		return '1.1';
+	}
+
+	public function author_page_exclude_custom_author_posts($query)
+	{
+		if (!is_admin() && $query->is_main_query()) {
+			if (is_author()) {
+				$query->set(
+					'meta_query',
+					[
+						'author_clause1' => [
+							'key' => 'author',
+							'compare' => 'NOT EXISTS'
+						],
+					]
+				);
+			}
+		}
 	}
 }
 
