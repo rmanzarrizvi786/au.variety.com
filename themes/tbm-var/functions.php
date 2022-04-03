@@ -465,7 +465,7 @@ function brands()
 			'link' => 'https://au.variety.com/',
 			'logo_name' => 'Variety-Australia',
 			'ext' => 'svg',
-			'width' => 300,
+			'width' => 120,
 		],
 	];
 	return $pub_logos;

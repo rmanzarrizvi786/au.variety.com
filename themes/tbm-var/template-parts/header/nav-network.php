@@ -9,7 +9,7 @@
                 <?php foreach (brands() as $brand => $brand_details) : ?>
                     <div class="brands-box">
                         <a href="<?php echo $brand_details['link']; ?>" title="<?php echo $brand_details['title']; ?>" target="_blank">
-                            <img src="https://images.thebrag.com/common/brands/<?php echo $brand_details['logo_name']; ?>-light.<?php echo isset($brand_details['ext']) ? $brand_details['ext'] : 'jpg'; ?>" alt="<?php echo $brand_details['title']; ?>" style="<?php echo isset($brand_details['width']) ? 'width: ' . $brand_details['width'] . 'px;' : ''; ?>" loading="lazy">
+                            <img src="https://images.thebrag.com/common/brands/<?php echo $brand_details['logo_name']; ?>-light.<?php echo isset($brand_details['ext']) ? $brand_details['ext'] : 'jpg'; ?>" alt="<?php echo $brand_details['title']; ?>" style="<?php echo isset($brand_details['width']) ? 'width: ' . $brand_details['width'] . 'px;' : ''; ?>">
                         </a>
                     </div>
                 <?php endforeach;
@@ -18,7 +18,7 @@
                 foreach ($brands_network as $brand => $brand_details) : ?>
                     <div class="brands-box">
                         <a href="<?php echo $brand_details['link']; ?>" title="<?php echo $brand_details['title']; ?>" target="_blank" class="d-block p-2" rel="noreferrer">
-                            <img src="https://images.thebrag.com/common/pubs-white/<?php echo str_replace(' ', '-', strtolower($brand_details['title'])); ?>.png" alt="<?php echo $brand_details['title']; ?>" style="<?php echo isset($brand_details['width']) ? 'width: ' . $brand_details['width'] . 'px;' : ''; ?>" loading="lazy">
+                            <img src="https://images.thebrag.com/common/pubs-white/<?php echo str_replace(' ', '-', strtolower($brand_details['title'])); ?>.png" alt="<?php echo $brand_details['title']; ?>" style="<?php echo isset($brand_details['width']) ? 'width: ' . $brand_details['width'] . 'px;' : ''; ?>">
                         </a>
                     </div>
                 <?php endforeach; ?>
