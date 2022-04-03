@@ -89,6 +89,13 @@ class Author
 				'author_name'    => $author_nicename,
 				'posts_per_page' => 4,
 				'no_found_rows'  => true,
+
+				'meta_query' => [
+					'author_clause1' => [
+						'key' => 'author',
+						'compare' => 'NOT EXISTS'
+					],
+				],
 			]
 		);
 
