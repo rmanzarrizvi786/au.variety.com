@@ -51,9 +51,7 @@ $bg_color_class = is_home() || (is_archive() && !is_author() && !is_tag('documen
 
 	<div id="skin-ad-section">
 		<div id="skin-ad-container">
-			<a href="https://theindustryobserver.thebrag.com/rolling-stone-australia-awards-2022-nominees/" target="_blank"><img src="https://tpc.googlesyndication.com/simgad/14625050865501020091?"></a>
-			<?php // ThemeSetup::render_ads('skin'); 
-			?>
+			<?php pmc_adm_render_ads('skin'); ?>
 		</div>
 	</div>
 
