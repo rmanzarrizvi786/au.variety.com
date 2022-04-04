@@ -58,6 +58,9 @@ class Theme
 		add_action('manage_posts_custom_column', [$this, 'manage_posts_custom_column'], 99, 2);
 
 		add_action('pre_get_posts', [$this, 'author_page_exclude_custom_author_posts']);
+
+		// Replace data-lazy-src
+		add_filter('the_content', array($this, 'replace_img_lazy_src'));
 	}
 
 	public function manage_post_posts_columns($columns)
@@ -1184,6 +1187,20 @@ class Theme
 				$query->set('meta_query', $meta_query);
 			}
 		}
+	}
+
+	public function replace_img_lazy_src($content)
+	{
+		$content = str_replace(
+			[
+				'data-lazy-src', 'data-lazy-srcset',
+			],
+			[
+				'src', 'srcset',
+			],
+			$content
+		);
+		return $content;
 	}
 }
 

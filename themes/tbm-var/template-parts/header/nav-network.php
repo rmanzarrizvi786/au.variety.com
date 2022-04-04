@@ -23,20 +23,6 @@
                     </div>
                 <?php endforeach; ?>
             </div><!-- .our-brands -->
-
-            <?php if (0) : ?>
-                <div class="text-center text-white py-3 my-0 text-network-pmc" style="border-bottom: 1px solid #2b2b2b; font-size: 1.5rem; text-align: center; color: #fff; padding: 1rem; width: 100%;">AUSTRALIAN NETWORK IN PARTNERSHIP WITH <a href="https://pmc.com/" target="_blank"><img src="https://images.thebrag.com/common/pubs-white/pmc.svg" alt="PMC" title="PMC" width="100" style="height: 1.1rem; margin-top: -5px; margin-left: 5px;"></a></div>
-
-                <div class="brands__grid brands__wrap network-brands flex-fill">
-                    <?php foreach (brands_network() as $brand => $brand_details) : ?>
-                        <div class="brands-box">
-                            <a href="<?php echo $brand_details['link']; ?>" title="<?php echo $brand_details['title']; ?>" target="_blank">
-                                <img src="https://images.thebrag.com/common/pubs/<?php echo $brand_details['logo_name']; ?>.jpg" alt="<?php echo $brand_details['title']; ?>">
-                            </a>
-                        </div>
-                    <?php endforeach; ?>
-                </div><!-- .network-brands -->
-            <?php endif; ?>
         </div>
     </div>
 </div>

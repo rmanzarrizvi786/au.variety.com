@@ -18,11 +18,8 @@ define('PMC_LARVA', true);
 define('PMC_CORE_PERMALINK_DISABLE', true);
 define('PMC_PLUGINS_DIR', WP_PLUGIN_DIR . '/pmc-plugins/');
 
-if (isset($_ENV) && isset($_ENV['ENVIRONMENT']) && 'sandbox' == $_ENV['ENVIRONMENT']) {
-	define('CDN_URL', CHILD_THEME_URL . '/assets/build/');
-} else {
-	define('CDN_URL', 'https://cdn.thebrag.com/var/');
-}
+// define('CDN_URL', CHILD_THEME_URL . '/assets/build/');
+define('CDN_URL', 'https://cdn.thebrag.com/var/');
 
 
 if (!defined('PMC_SITE_NAME')) {
@@ -512,6 +509,12 @@ function brands_network()
 			'title' => 'Gamelancer',
 			'link' => 'https://gamelancer.com/',
 			'logo_name' => 'Gamelancer',
+			'ext' => 'png',
+		],
+		'toongoggles' => [
+			'title' => 'ToonGoggles',
+			'link' => 'https://www.toongoggles.com/',
+			'logo_name' => 'ToonGoggles',
 			'ext' => 'png',
 		],
 
