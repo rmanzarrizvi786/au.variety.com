@@ -113,7 +113,7 @@ $popular_posts = \PMC\Core\Inc\Top_Posts::get_posts($count, $days, $period, 'mos
 
 ?>
 
-<div class="lrv-u-flex@tablet lrv-u-padding-t-1 lrv-a-wrapper">
+<div class="lrv-u-flex@tablet lrv-u-padding-t-1 lrv-a-wrapper u-margin-b-125">
 
 	<?php
 	\PMC::render_template(
@@ -130,6 +130,9 @@ $popular_posts = \PMC\Core\Inc\Top_Posts::get_posts($count, $days, $period, 'mos
 			?>
 		</div> -->
 		<?php
+
+		pmc_adm_render_ads('vrec_1');
+
 		\PMC::render_template(
 			sprintf('%s/template-parts/widgets/most-viewed.php', untrailingslashit(CHILD_THEME_PATH)),
 			[
@@ -143,6 +146,7 @@ $popular_posts = \PMC\Core\Inc\Top_Posts::get_posts($count, $days, $period, 'mos
 		?>
 		<div class="a-hidden@mobile-max">
 			<?php
+			pmc_adm_render_ads('vrec_1');
 			// \PMC::render_template(CHILD_THEME_PATH . '/template-parts/patterns/modules/cxense-widget.php', $bottom_ad, true);
 			?>
 		</div>
