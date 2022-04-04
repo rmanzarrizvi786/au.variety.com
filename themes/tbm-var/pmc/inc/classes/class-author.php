@@ -91,9 +91,15 @@ class Author
 				'no_found_rows'  => true,
 
 				'meta_query' => [
-					'author_clause1' => [
+					'relation' => 'OR',
+					[
 						'key' => 'author',
 						'compare' => 'NOT EXISTS'
+					],
+					[
+						'key' => 'author',
+						'value' => '',
+						'compare' => '='
 					],
 				],
 			]

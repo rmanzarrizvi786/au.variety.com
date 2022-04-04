@@ -1168,15 +1168,20 @@ class Theme
 	{
 		if (!is_admin() && $query->is_main_query()) {
 			if (is_author()) {
-				$query->set(
-					'meta_query',
+				$meta_query = (array)$query->get('meta_query');
+				$meta_query[] = [
+					'relation' => 'OR',
 					[
-						'author_clause1' => [
-							'key' => 'author',
-							'compare' => 'NOT EXISTS'
-						],
-					]
-				);
+						'key' => 'author',
+						'compare' => 'NOT EXISTS'
+					],
+					[
+						'key' => 'author',
+						'value' => '',
+						'compare' => '='
+					],
+				];
+				$query->set('meta_query', $meta_query);
 			}
 		}
 	}
