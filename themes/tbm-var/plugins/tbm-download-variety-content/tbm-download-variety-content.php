@@ -17,6 +17,7 @@ class DownloadVarietyContent
   protected $plugin_name;
   protected $plugin_slug;
   protected $rs_feed;
+  protected $author_id;
 
   public function __construct()
   {
@@ -24,6 +25,8 @@ class DownloadVarietyContent
     $this->plugin_slug = 'tbm-download-variety-com-content';
 
     $this->rs_feed = 'https://variety.com/custom-feed/australia/?v=' . time();
+
+    $this->author_id = 16;
 
     // Admin menu
     add_action('admin_menu', [$this, 'admin_menu']);
@@ -452,6 +455,7 @@ class DownloadVarietyContent
       'post_status' => 'draft',
       'post_type' => 'post',
       'post_category' => $cat_IDs,
+      'post_author' => $this->author_id,
       'tags_input' => isset($article['tags']) ? $article['tags'] : [],
       'meta_input' => $metas,
     ];
@@ -552,6 +556,10 @@ class DownloadVarietyContent
           if ($meta->getAttribute('property') == 'og:image') {
             $featured_img = $meta->getAttribute('content');
           }
+
+          if ($meta->getAttribute('name') == 'author') {
+            $metas['author'] = $meta->getAttribute('content');
+          }
         }
 
         $dom_xpath = new \DOMXpath($doc);
@@ -581,13 +589,13 @@ class DownloadVarietyContent
           break;
         }
 
-        $author_elements = $dom_xpath->query("//*[contains(concat(' ', @class, ' '),'author')]");
+        /* $author_elements = $dom_xpath->query("//*[contains(concat(' ', @class, ' '),'author')]");
         foreach ($author_elements as $element) {
           $author = $this->get_inner_html($element, true);
           $author = str_ireplace('by ', '', $author);
           $metas['author']  = $author;
           break;
-        }
+        } */
 
         $list_content .= '<p><em>From <a href="' . $list_url . '" target="_blank">Variety US</a></em></p>';
 
@@ -632,6 +640,7 @@ class DownloadVarietyContent
           'post_status' => 'draft',
           'post_type' => 'pmc_list',
           'post_category' => $cat_IDs,
+          'post_author' => $this->author_id,
           'meta_input' => $metas,
         );
 
@@ -848,7 +857,7 @@ class DownloadVarietyContent
                 'post_title' => $list_item['title'],
                 'post_status' => 'publish',
                 'post_type' => 'pmc_list_item',
-                // 'post_category' => $cat_IDs,
+                'post_author' => $this->author_id,
                 'tax_input' => array(
                   'pmc_list_relation' => array(
                     'pmc_list_relation' => $term_taxonomy_id
