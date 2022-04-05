@@ -61,6 +61,9 @@ class Theme
 
 		// Replace data-lazy-src
 		add_filter('the_content', array($this, 'replace_img_lazy_src'));
+
+		// Filters for Apple News
+		add_filter('get_the_author_display_name', array($this, 'tbm_the_author_display_name'));
 	}
 
 	public function manage_post_posts_columns($columns)
@@ -1201,6 +1204,16 @@ class Theme
 			$content
 		);
 		return $content;
+	}
+
+	public function tbm_the_author_display_name()
+	{
+		global $post;
+		if (get_field('author') && '' != trim(get_field('author'))) {
+			return get_field('author');
+		}
+		$author_id = $post->post_author;
+		return get_the_author_meta('first_name', $author_id) . ' ' . get_the_author_meta('last_name', $author_id);
 	}
 }
 
