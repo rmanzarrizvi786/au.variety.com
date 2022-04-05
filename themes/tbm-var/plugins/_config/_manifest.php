@@ -21,7 +21,7 @@ use Variety\Plugins\Config;
 \Variety\Plugins\Config\JW_Player::get_instance();
 \Variety\Plugins\Config\Outbrain::get_instance();
 // \Variety\Plugins\Config\PMC_Adm::get_instance();
-\Variety\Plugins\Config\PMC_Apple_News::get_instance();
+// \Variety\Plugins\Config\PMC_Apple_News::get_instance();
 \Variety\Plugins\Config\PMC_Automated_Related_Links::get_instance();
 \Variety\Plugins\Config\PMC_Buy_Now::get_instance();
 \Variety\Plugins\Config\PMC_Content::get_instance();
