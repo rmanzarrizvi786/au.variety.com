@@ -31,6 +31,8 @@ if (is_post_type_archive('vy-thought-leaders')) {
 
 if (is_archive()) {
 	$river['o_more_from_heading']['c_heading']['c_heading_is_primary_heading'] = true;
+} else if (is_search()) {
+	$river['o_more_from_heading'] = [];
 }
 
 $count = 1;
