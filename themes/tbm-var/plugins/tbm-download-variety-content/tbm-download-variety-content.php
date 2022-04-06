@@ -103,9 +103,14 @@ class DownloadVarietyContent
           if ('div' == $child->tagName) {
             foreach ($child->attributes as $key => $value) {
               if (
-                'id' == $key && 'pmc-gallery-vertical' == $child->getAttribute($key) ||
-                'class' == $key && strpos($child->getAttribute($key), 'article-tags') !== FALSE ||
-                'class' == $key && strpos($child->getAttribute($key), 'o-comments-link') !== FALSE
+                // 'id' == $key && 'pmc-gallery-vertical' == $child->getAttribute($key) ||
+                ('id' == $key && in_array($child->getAttribute($key), ['pmc-gallery-vertical', 'article-comments', 'comments-loading', 'cx-paywall'])) ||
+                ('class' == $key &&
+                  (in_array($child->getAttribute($key), ['admz', 'article-tags', 'c-featured-article__post-actions']) ||
+                    strpos($child->getAttribute($key), 'article-tags') !== FALSE ||
+                    strpos($child->getAttribute($key), 'o-comments-link') !== FALSE
+                  )
+                )
               ) {
                 continue (2);
               }
@@ -229,7 +234,6 @@ class DownloadVarietyContent
   private function downloadArticleFromUrl($article_url)
   {
     if (!is_null($article_url)) :
-
       $html = file_get_contents($article_url);
       $html = preg_replace('/<!--(.|\s)*?-->/', '', $html);
 
@@ -281,6 +285,18 @@ class DownloadVarietyContent
 
       $content = '';
       $content_elements = $dom_xpath->query("//*[contains(concat(' ', @class, ' '),'vy-cx-page-content ')]");
+
+      if ($content_elements->length == 0) {
+        $content_elements = $dom_xpath->query("//*[contains(concat(' ', @class, ' '),'a-featured-article-grid__content')]");
+      }
+      if ($content_elements->length == 0) {
+        wp_send_json_error(['result' => 'Unknown format!']);
+        die();
+      }
+
+      // wp_send_json_error(array('result' => '<pre>' . print_r($content_elements, true) . '</pre>'));
+      // die();
+
       foreach ($content_elements as $element) {
 
         $children = $element->childNodes;
@@ -331,11 +347,13 @@ class DownloadVarietyContent
               $div_attr = '';
               foreach ($child->attributes as $key => $value) {
                 if (
-                  $key == 'class' &&
-                  (in_array($child->getAttribute($key), array('admz', 'article-tags', 'c-featured-article__post-actions'))
-                    || strpos($child->getAttribute($key), 'article-tags') !== FALSE
-                    || strpos($child->getAttribute($key), 'o-comments-link') !== FALSE
-                    || strpos($child->getAttribute($key), 'widget_cxense') !== FALSE
+                  ('id' == $key && in_array($child->getAttribute($key), ['pmc-gallery-vertical', 'article-comments', 'comments-loading', 'cx-paywall'])) ||
+                  ('class' == $key &&
+                    (in_array($child->getAttribute($key), ['admz', 'article-tags', 'c-featured-article__post-actions'])
+                      || strpos($child->getAttribute($key), 'article-tags') !== FALSE
+                      || strpos($child->getAttribute($key), 'o-comments-link') !== FALSE
+                      || strpos($child->getAttribute($key), 'widget_cxense') !== FALSE
+                    )
                   )
                 ) {
                   continue (2);
@@ -370,7 +388,6 @@ class DownloadVarietyContent
 
         return $this->createArticle($the_article);
       }
-
     endif;
     wp_send_json_error(['result' => 'Unable to download!']);
     die();
