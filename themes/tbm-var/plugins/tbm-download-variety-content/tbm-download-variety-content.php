@@ -250,6 +250,7 @@ class DownloadVarietyContent
       $doc->preserveWhiteSpace = false;
 
       $author = $meta_og_description = '';
+      $authors = [];
       $categories = $tags = [];
       foreach ($doc->getElementsByTagName('meta') as $meta) {
         if ($meta->getAttribute('property') == 'og:description') {
@@ -268,11 +269,13 @@ class DownloadVarietyContent
           if ($meta->getAttribute('name') == 'topics') {
             array_push($categories, $meta->getAttribute('content'));
           }
-        }
-        if ($meta->getAttribute('name') == 'author') {
-          $author = $meta->getAttribute('content');
+          if ($meta->getAttribute('name') == 'author') {
+            $authors[] = $meta->getAttribute('content');
+          }
         }
       }
+
+      $author = implode(', ', $authors);
 
       // Image Credit
       foreach ($doc->getElementsByTagName('figcaption') as $figcaption) {
