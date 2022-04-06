@@ -103,7 +103,6 @@ class DownloadVarietyContent
           if ('div' == $child->tagName) {
             foreach ($child->attributes as $key => $value) {
               if (
-                // 'id' == $key && 'pmc-gallery-vertical' == $child->getAttribute($key) ||
                 ('id' == $key && in_array($child->getAttribute($key), ['pmc-gallery-vertical', 'article-comments', 'comments-loading', 'cx-paywall'])) ||
                 ('class' == $key &&
                   (in_array($child->getAttribute($key), ['admz', 'article-tags', 'c-featured-article__post-actions']) ||
@@ -310,7 +309,7 @@ class DownloadVarietyContent
               continue;
 
             // p
-            if ('p' == $child->tagName && trim($child->nodeValue) != '') {
+            if ('p' == $child->tagName) { //} && trim($child->nodeValue) != '') {
               $content .= '<p>' . $this->get_inner_html($child) . '</p>';
             }
 
@@ -370,7 +369,7 @@ class DownloadVarietyContent
             $content = str_replace('data-lazy-', '', $content);
           }
 
-          // wp_send_json_error(array('result' => '<pre>' . print_r(str_replace(['<', '>',], ['&lt;', '&gt;',], $content), true) . '</pre>'));
+          // wp_send_json_error(array('result' => '<div style="width: 100%; max-width: 100%:"><code>' . str_replace(['<', '>',], ['&lt;', '&gt;.',], $content) . '</code></div>'));
           // die();
         }
       }
