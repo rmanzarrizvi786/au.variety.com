@@ -489,7 +489,9 @@ class DownloadVarietyContent
     // Set Vertical Taxonomy
     if (isset($post_name_e[2])) {
       $vertical =  $post_name_e[2];
-      wp_set_object_terms($new_article_id, $vertical, 'vertical');
+      if (term_exists($vertical, 'vertical')) {
+        wp_set_object_terms($new_article_id, $vertical, 'vertical');
+      }
     }
 
     $wpdb->insert(
@@ -666,7 +668,9 @@ class DownloadVarietyContent
         $new_list_id = wp_insert_post($new_list_args);
 
         if (isset($vertical)) {
-          wp_set_object_terms($new_list_id, $vertical, 'vertical');
+          if (term_exists($vertical, 'vertical')) {
+            wp_set_object_terms($new_list_id, $vertical, 'vertical');
+          }
         }
 
         if (!isset($new_list_id) || is_wp_error($new_list_id)) {
