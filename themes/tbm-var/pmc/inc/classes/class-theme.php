@@ -64,6 +64,13 @@ class Theme
 
 		// Filters for Apple News
 		add_filter('get_the_author_display_name', array($this, 'tbm_the_author_display_name'));
+
+		add_action('admin_post_thumbnail_html', function ($content, $post_id, $thumbnail_id) {
+			$html = '<div style="background-color: lightyellow; padding: 0.25rem">
+			<em>Recommended size: 1200 x 630 (px)</em>
+			</div>';
+			return  $content . $html;
+		}, 10, 3);
 	}
 
 	public function manage_post_posts_columns($columns)
