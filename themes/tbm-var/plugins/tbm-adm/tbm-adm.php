@@ -151,6 +151,11 @@ class TBMAds
         }
       }
 
+      $tags = get_the_tags($post_id);
+      if ($tags) {
+        $tag_slugs = wp_list_pluck($tags, 'slug');
+      }
+
       if (isset($section)) {
         if (!isset($fuse_tags[$section][$ad_location])) {
           return;
@@ -159,28 +164,6 @@ class TBMAds
       } else {
         $fuse_id = $fuse_tags[$ad_location];
       }
-      /**
-       * Temporary Placeholders
-       */
-      $width = 300;
-      $height = 250;
-
-      if (
-        'leaderboard' == $ad_location
-        ||
-        (strpos($ad_location, 'incontent') !== FALSE and 'homepage' == $section)
-      ) {
-        $width = 970;
-      } elseif (
-        'vrec_2' == $ad_location
-        || ('vrec' == $ad_location && 'article' == $section)
-      ) {
-        $height = 600;
-      }
-      // $html = '<div class="fuse-ad d-flex ' . $ad_location . ' ' . $section . '" style="background-color: #ccc;"><h2>Ad: ' . $ad_location . '</h2></div>';
-      /**
-       * Temporary Placeholders
-       */
 
       // $html .= '<!--' . $post_id . ' | '  . $section . ' | ' . $ad_location . ' | ' . $slot_no . '-->';
       $html .= '<div data-fuse="' . $fuse_id . '" class="fuse-ad"></div>';
@@ -195,6 +178,9 @@ class TBMAds
         $html .= '<script type="text/javascript">';
         if (isset($category)) {
           $html .= 'fusetag.setTargeting("fuse_category", ["' . $category . '"]);';
+        }
+        if (isset($tag_slugs)) {
+          $html .= 'fusetag.setTargeting("tbm_tags", ' . json_encode($tag_slugs) . ');';
         }
         if (isset($pagepath)) {
           $html .= 'fusetag.setTargeting("pagepath", ["' . $pagepath . '"]);';
