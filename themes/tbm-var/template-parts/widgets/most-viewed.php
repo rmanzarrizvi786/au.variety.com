@@ -39,29 +39,14 @@ foreach ($data['articles'] as $_post) {
 	$most_viewed['o_tease_list']['o_tease_list_items'][] = $item;
 
 	if (2 === $i++) {
-		$most_viewed['o_tease_list']['o_tease_list_items'][] = [
+		/* $most_viewed['o_tease_list']['o_tease_list_items'][] = [
 			'sponsored_most_popular_ad_action' => empty($data['sponsored_most_popular_ad_action']) ? 'sponsored-most-popular' : $data['sponsored_most_popular_ad_action'],
-		];
+		]; */
 	}
 }
 
 // Remove banner by default
 $most_viewed['cxense_subscribe_widget'] = false;
-
-if (PMC::is_mobile()) {
-
-	// Add banner if is mobile homepage
-	if (is_home()) {
-		$most_viewed['cxense_subscribe_widget']['cxense_id_attr'] = 'cx-module-300x250-mobile';
-	}
-
-	if (is_single()) {
-		$most_viewed['o_tease_list']['o_tease_list_items'][] = [
-			'o_tease_primary_classes'          => 'lrv-u-padding-tb-1@mobile-max',
-		];
-	}
-}
-
 
 \PMC::render_template(
 	sprintf('%s/template-parts/patterns/modules/most-popular-sidebar.php', untrailingslashit(CHILD_THEME_PATH)),

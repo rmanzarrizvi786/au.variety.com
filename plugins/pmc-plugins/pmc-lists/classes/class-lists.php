@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Lists functionality for PMC properties.
  *
@@ -12,7 +13,8 @@ use \PMC\Global_Functions\Traits\Singleton;
 /**
  * Class Lists.
  */
-class Lists {
+class Lists
+{
 
 	use Singleton;
 
@@ -95,74 +97,75 @@ class Lists {
 	 *
 	 * @codeCoverageIgnore
 	 */
-	protected function __construct() {
+	protected function __construct()
+	{
 
-		add_action( 'init', [ $this, 'init' ] );
-		add_action( 'wp_ajax_pmc_get_lists', [ $this, 'get_lists' ] );
-		add_action( 'admin_enqueue_scripts', [ $this, 'admin_enqueue_scripts' ] );
-		add_action( 'save_post', [ $this, 'save_post' ], 10, 2 );
-		add_action( 'pre_get_posts', [ $this, 'modify_reorder_query' ] );
-		add_action( 'manage_pmc_list_item_posts_custom_column', [ $this, 'list_item_manage_custom_column' ], 10, 2 );
-		add_action( 'manage_pmc_list_posts_custom_column', [ $this, 'list_manage_custom_column' ], 10, 2 );
+		add_action('init', [$this, 'init']);
+		add_action('wp_ajax_pmc_get_lists', [$this, 'get_lists']);
+		add_action('admin_enqueue_scripts', [$this, 'admin_enqueue_scripts']);
+		add_action('save_post', [$this, 'save_post'], 10, 2);
+		add_action('pre_get_posts', [$this, 'modify_reorder_query']);
+		add_action('manage_pmc_list_item_posts_custom_column', [$this, 'list_item_manage_custom_column'], 10, 2);
+		add_action('manage_pmc_list_posts_custom_column', [$this, 'list_manage_custom_column'], 10, 2);
 
-		add_filter( 'simple_page_ordering_is_sortable', [ $this, 'enable_sorting' ], 20, 2 );
-		add_filter( 'restrict_manage_posts', [ $this, 'filter_list_items' ] );
-		add_filter( 'views_edit-' . self::LIST_ITEM_POST_TYPE, [ $this, 'show_current_list' ] );
-		add_filter( 'views_edit-' . self::LIST_ITEM_POST_TYPE, [ $this, 'fix_sort_by_order_link' ], 99 );
-		add_filter( 'custom_menu_order', [ $this, 'reorder_menu' ] );
-		add_filter( 'pmc_sitemaps_post_type_whitelist', [ $this, 'whitelist_post_type_for_sitemaps' ] );
-		add_filter( 'manage_pmc_list_item_posts_columns', [ $this, 'list_item_add_custom_column' ] );
-		add_filter( 'manage_pmc_list_posts_columns', [ $this, 'list_add_custom_column' ] );
-
+		add_filter('simple_page_ordering_is_sortable', [$this, 'enable_sorting'], 20, 2);
+		add_filter('restrict_manage_posts', [$this, 'filter_list_items']);
+		// add_filter('views_edit-' . self::LIST_ITEM_POST_TYPE, [$this, 'show_current_list']);
+		add_filter('views_edit-' . self::LIST_ITEM_POST_TYPE, [$this, 'fix_sort_by_order_link'], 99);
+		add_filter('custom_menu_order', [$this, 'reorder_menu']);
+		add_filter('pmc_sitemaps_post_type_whitelist', [$this, 'whitelist_post_type_for_sitemaps']);
+		add_filter('manage_pmc_list_item_posts_columns', [$this, 'list_item_add_custom_column']);
+		add_filter('manage_pmc_list_posts_columns', [$this, 'list_add_custom_column']);
 	}
 
 	/**
 	 * Register the list and list item post types, and add URL query var.
 	 */
-	public function init() {
-		register_post_type( self::LIST_POST_TYPE, [
+	public function init()
+	{
+		register_post_type(self::LIST_POST_TYPE, [
 			'labels'               => [
-				'name'               => wp_strip_all_tags( __( 'Lists', 'pmc-lists' ) ),
-				'singular_name'      => wp_strip_all_tags( __( 'List', 'pmc-lists' ) ),
-				'add_new'            => wp_strip_all_tags( _x( 'Add New', 'List', 'pmc-lists' ) ),
-				'add_new_item'       => wp_strip_all_tags( __( 'Add New List', 'pmc-lists' ) ),
-				'edit_item'          => wp_strip_all_tags( __( 'Edit List', 'pmc-lists' ) ),
-				'new_item'           => wp_strip_all_tags( __( 'New List', 'pmc-lists' ) ),
-				'view_item'          => wp_strip_all_tags( __( 'View List', 'pmc-lists' ) ),
-				'search_items'       => wp_strip_all_tags( __( 'Search Lists', 'pmc-lists' ) ),
-				'not_found'          => wp_strip_all_tags( __( 'No Lists found.', 'pmc-lists' ) ),
-				'not_found_in_trash' => wp_strip_all_tags( __( 'No Lists found in Trash.', 'pmc-lists' ) ),
-				'all_items'          => wp_strip_all_tags( __( 'Lists', 'pmc-lists' ) ),
+				'name'               => wp_strip_all_tags(__('Lists', 'pmc-lists')),
+				'singular_name'      => wp_strip_all_tags(__('List', 'pmc-lists')),
+				'add_new'            => wp_strip_all_tags(_x('Add New', 'List', 'pmc-lists')),
+				'add_new_item'       => wp_strip_all_tags(__('Add New List', 'pmc-lists')),
+				'edit_item'          => wp_strip_all_tags(__('Edit List', 'pmc-lists')),
+				'new_item'           => wp_strip_all_tags(__('New List', 'pmc-lists')),
+				'view_item'          => wp_strip_all_tags(__('View List', 'pmc-lists')),
+				'search_items'       => wp_strip_all_tags(__('Search Lists', 'pmc-lists')),
+				'not_found'          => wp_strip_all_tags(__('No Lists found.', 'pmc-lists')),
+				'not_found_in_trash' => wp_strip_all_tags(__('No Lists found in Trash.', 'pmc-lists')),
+				'all_items'          => wp_strip_all_tags(__('Lists', 'pmc-lists')),
 			],
 			'public'               => true,
-			'supports'             => [ 'title', 'author', 'comments', 'thumbnail', 'excerpt', 'editor' ],
+			'supports'             => ['title', 'author', 'comments', 'thumbnail', 'excerpt', 'editor'],
 			'has_archive'          => 'lists',
 			'rewrite'              => [
 				'slug' => 'lists',
 			],
-			'register_meta_box_cb' => [ $this, 'list_meta_boxes' ],
-			'taxonomies'           => [ 'category', 'post_tag' ],
+			'register_meta_box_cb' => [$this, 'list_meta_boxes'],
+			'taxonomies'           => ['category', 'post_tag'],
 			'menu_icon'            => 'dashicons-list-view',
-		] );
+		]);
 
-		register_post_type( self::LIST_ITEM_POST_TYPE, [
+		register_post_type(self::LIST_ITEM_POST_TYPE, [
 			'labels'               => [
-				'name'               => wp_strip_all_tags( __( 'List Item', 'pmc-lists' ) ),
-				'singular_name'      => wp_strip_all_tags( __( 'List Item', 'pmc-lists' ) ),
-				'add_new'            => wp_strip_all_tags( _x( 'Add New', 'List Item', 'pmc-lists' ) ),
-				'add_new_item'       => wp_strip_all_tags( __( 'Add New List Item', 'pmc-lists' ) ),
-				'edit_item'          => wp_strip_all_tags( __( 'Edit List Item', 'pmc-lists' ) ),
-				'new_item'           => wp_strip_all_tags( __( 'New List Item', 'pmc-lists' ) ),
-				'view_item'          => wp_strip_all_tags( __( 'View List Item', 'pmc-lists' ) ),
-				'search_items'       => wp_strip_all_tags( __( 'Search List Items', 'pmc-lists' ) ),
-				'not_found'          => wp_strip_all_tags( __( 'No Lists found.', 'pmc-lists' ) ),
-				'not_found_in_trash' => wp_strip_all_tags( __( 'No Lists found in Trash.', 'pmc-lists' ) ),
-				'all_items'          => wp_strip_all_tags( __( 'List Items', 'pmc-lists' ) ),
+				'name'               => wp_strip_all_tags(__('List Item', 'pmc-lists')),
+				'singular_name'      => wp_strip_all_tags(__('List Item', 'pmc-lists')),
+				'add_new'            => wp_strip_all_tags(_x('Add New', 'List Item', 'pmc-lists')),
+				'add_new_item'       => wp_strip_all_tags(__('Add New List Item', 'pmc-lists')),
+				'edit_item'          => wp_strip_all_tags(__('Edit List Item', 'pmc-lists')),
+				'new_item'           => wp_strip_all_tags(__('New List Item', 'pmc-lists')),
+				'view_item'          => wp_strip_all_tags(__('View List Item', 'pmc-lists')),
+				'search_items'       => wp_strip_all_tags(__('Search List Items', 'pmc-lists')),
+				'not_found'          => wp_strip_all_tags(__('No Lists found.', 'pmc-lists')),
+				'not_found_in_trash' => wp_strip_all_tags(__('No Lists found in Trash.', 'pmc-lists')),
+				'all_items'          => wp_strip_all_tags(__('List Items', 'pmc-lists')),
 			],
 			'public'               => true,
-			'supports'             => [ 'title', 'author', 'comments', 'editor', 'thumbnail' ],
-			'register_meta_box_cb' => [ $this, 'list_item_meta_boxes' ],
-			'taxonomies'           => [ self::LIST_RELATION_TAXONOMY ],
+			'supports'             => ['title', 'author', 'comments', 'editor', 'thumbnail'],
+			'register_meta_box_cb' => [$this, 'list_item_meta_boxes'],
+			'taxonomies'           => [self::LIST_RELATION_TAXONOMY],
 			'has_archive'          => false,
 			'show_ui'              => true,
 			'show_in_menu'         => 'edit.php?post_type=' . self::LIST_POST_TYPE,
@@ -170,21 +173,21 @@ class Lists {
 			'rewrite'              => [
 				'slug' => 'lists/item/',
 			],
-		] );
+		]);
 
-		register_taxonomy( self::LIST_RELATION_TAXONOMY, self::LIST_ITEM_POST_TYPE, [
+		register_taxonomy(self::LIST_RELATION_TAXONOMY, self::LIST_ITEM_POST_TYPE, [
 			'labels'            => [
-				'name' => __( 'List Relation', 'pmc-lists' ),
+				'name' => __('List Relation', 'pmc-lists'),
 			],
 			'public'            => false,
 			'rewrite'           => false,
 			'show_ui'           => false,
 			'show_in_nav_menus' => false,
 			'show_admin_column' => false,
-		] );
+		]);
 
 		// Used for pagination bypassing the main query.
-		add_rewrite_tag( '%list_page%', '([[0-9]+\])' );
+		add_rewrite_tag('%list_page%', '([[0-9]+\])');
 	}
 
 	/**
@@ -193,19 +196,20 @@ class Lists {
 	 * @param array $menu_order The menu items in order.
 	 * @return mixed
 	 */
-	public function reorder_menu( $menu_order ) {
+	public function reorder_menu($menu_order)
+	{
 		global $submenu;
 
 		$menu = 'edit.php?post_type=pmc_list';
 
-		foreach ( $submenu[ $menu ] as $key => $item ) {
-			if ( 'edit.php?post_type=pmc_list_item' === $item[2] ) {
-				$submenu[ $menu ][11] = $item;
-				unset( $submenu[ $menu ][ $key ] );
+		foreach ($submenu[$menu] as $key => $item) {
+			if ('edit.php?post_type=pmc_list_item' === $item[2]) {
+				$submenu[$menu][11] = $item;
+				unset($submenu[$menu][$key]);
 			}
 		}
 
-		ksort( $submenu[ $menu ] );
+		ksort($submenu[$menu]);
 
 		return $menu_order;
 	}
@@ -215,12 +219,13 @@ class Lists {
 	 *
 	 * @return void
 	 */
-	public function admin_enqueue_scripts() {
-		if ( is_admin() && self::LIST_ITEM_POST_TYPE === get_post_type() ) {
-			wp_enqueue_script( 'pmc-lists', PMC_LISTS_URL . 'assets/build/js/list.js', [ 'jquery' ], '1.0', true );
-			wp_localize_script( 'pmc-lists', 'pmcList', [
-				'nonce' => wp_create_nonce( 'pmc-lists' ),
-			] );
+	public function admin_enqueue_scripts()
+	{
+		if (is_admin() && self::LIST_ITEM_POST_TYPE === get_post_type()) {
+			wp_enqueue_script('pmc-lists', PMC_LISTS_URL . '/assets/build/js/list.js', ['jquery'], '1.0', true);
+			wp_localize_script('pmc-lists', 'pmcList', [
+				'nonce' => wp_create_nonce('pmc-lists'),
+			]);
 		}
 	}
 
@@ -232,8 +237,9 @@ class Lists {
 	 *
 	 * @return bool
 	 */
-	public function enable_sorting( $sortable, $post_type = '' ) {
-		if ( self::LIST_ITEM_POST_TYPE === $post_type ) {
+	public function enable_sorting($sortable, $post_type = '')
+	{
+		if (self::LIST_ITEM_POST_TYPE === $post_type) {
 			return true;
 		}
 
@@ -245,9 +251,10 @@ class Lists {
 	 *
 	 * @param WP_Post $post The post object of the current post.
 	 */
-	public function list_meta_boxes( $post ) {
+	public function list_meta_boxes($post)
+	{
 		// List options meta box.
-		add_meta_box( 'pmc-list-options', esc_html__( 'List Options', 'pmc-lists' ), [ $this, 'list_options_meta_box' ], $post->post_type, 'side', 'high' );
+		add_meta_box('pmc-list-options', esc_html__('List Options', 'pmc-lists'), [$this, 'list_options_meta_box'], $post->post_type, 'side', 'high');
 	}
 
 	/**
@@ -255,9 +262,10 @@ class Lists {
 	 *
 	 * @param WP_Post $post The post object of the current post.
 	 */
-	public function list_item_meta_boxes( $post ) {
+	public function list_item_meta_boxes($post)
+	{
 		// Meta box to select a list.
-		add_meta_box( 'pmc-list-select', esc_html__( 'Choose List', 'pmc-lists' ), [ $this, 'list_select_meta_box' ], $post->post_type, 'side', 'high' );
+		add_meta_box('pmc-list-select', esc_html__('Choose List', 'pmc-lists'), [$this, 'list_select_meta_box'], $post->post_type, 'side', 'high');
 	}
 
 	/**
@@ -265,8 +273,9 @@ class Lists {
 	 *
 	 * @param WP_Post $post The WP Post object.
 	 */
-	public function list_options_meta_box( $post ) {
-		\PMC::render_template( PMC_LISTS_PATH . '/templates/list-options.php', compact( 'post' ), true );
+	public function list_options_meta_box($post)
+	{
+		\PMC::render_template(PMC_LISTS_PATH . '/templates/list-options.php', compact('post'), true);
 	}
 
 	/**
@@ -274,15 +283,16 @@ class Lists {
 	 *
 	 * @param WP_Post $post The WP Post object.
 	 */
-	public function list_select_meta_box( $post ) {
+	public function list_select_meta_box($post)
+	{
 		$list_id    = '';
-		$list_terms = get_the_terms( $post->ID, self::LIST_RELATION_TAXONOMY );
+		$list_terms = get_the_terms($post->ID, self::LIST_RELATION_TAXONOMY);
 
-		if ( is_array( $list_terms ) && is_a( reset( $list_terms ), 'WP_Term' ) && ! empty( reset( $list_terms )->name ) ) {
-			$list_id = reset( $list_terms )->name;
+		if (is_array($list_terms) && is_a(reset($list_terms), 'WP_Term') && !empty(reset($list_terms)->name)) {
+			$list_id = reset($list_terms)->name;
 		}
 
-		\PMC::render_template( PMC_LISTS_PATH . '/templates/list-select.php', compact( 'list_id' ), true );
+		\PMC::render_template(PMC_LISTS_PATH . '/templates/list-select.php', compact('list_id'), true);
 	}
 
 	/**
@@ -293,72 +303,70 @@ class Lists {
 	 *
 	 * @return void|false Returns false if the post is not updated.
 	 */
-	public function save_post( $post_id, $post ) {
+	public function save_post($post_id, $post)
+	{
 
-		if ( wp_is_post_revision( $post_id ) ) {
+		if (wp_is_post_revision($post_id)) {
 			return false;
 		}
 
 		// When saving a list, add the ID to the relationship taxonomy to related items to this post.
-		if ( self::LIST_POST_TYPE === $post->post_type ) {
-			if ( ! wpcom_vip_term_exists( $post_id, self::LIST_RELATION_TAXONOMY ) ) {
-				wp_insert_term( $post_id, self::LIST_RELATION_TAXONOMY, [
+		if (self::LIST_POST_TYPE === $post->post_type) {
+			if (!term_exists($post_id, self::LIST_RELATION_TAXONOMY)) {
+				wp_insert_term($post_id, self::LIST_RELATION_TAXONOMY, [
 					'slug' => $post_id,
-				] );
+				]);
 			}
 
 			// Save options.
-			if ( ! empty( $_POST[ self::TEMPLATE_OPT_KEY ] ) && ! empty( $_POST[ self::NUMBERING_OPT_KEY ] ) ) { // WPCS: Input var okay. CSRF okay.
-				update_post_meta( $post_id, self::TEMPLATE_OPT_KEY, sanitize_text_field( wp_unslash( $_POST[ self::TEMPLATE_OPT_KEY ] ) ) ); // WPCS: Input var okay. CSRF okay.
-				update_post_meta( $post_id, self::NUMBERING_OPT_KEY, sanitize_text_field( wp_unslash( $_POST[ self::NUMBERING_OPT_KEY ] ) ) ); // WPCS: Input var okay. CSRF okay.
+			if (!empty($_POST[self::TEMPLATE_OPT_KEY]) && !empty($_POST[self::NUMBERING_OPT_KEY])) { // WPCS: Input var okay. CSRF okay.
+				update_post_meta($post_id, self::TEMPLATE_OPT_KEY, sanitize_text_field(wp_unslash($_POST[self::TEMPLATE_OPT_KEY]))); // WPCS: Input var okay. CSRF okay.
+				update_post_meta($post_id, self::NUMBERING_OPT_KEY, sanitize_text_field(wp_unslash($_POST[self::NUMBERING_OPT_KEY]))); // WPCS: Input var okay. CSRF okay.
 			}
 		}
 
-		if ( self::LIST_ITEM_POST_TYPE === $post->post_type ) {
+		if (self::LIST_ITEM_POST_TYPE === $post->post_type) {
 			// Holder for list term slug to re order
 			$reorder_slugs = [];
 
 			// Need to save the old relation term to be able to regenerate menu order for the old list.
-			$old_list_term = $this->get_relation_term_for_item( $post->ID );
+			$old_list_term = $this->get_relation_term_for_item($post->ID);
 
-			if ( ! empty( $old_list_term ) ) {
-				$reorder_slugs[ $old_list_term->slug ] = $old_list_term->slug;
+			if (!empty($old_list_term)) {
+				$reorder_slugs[$old_list_term->slug] = $old_list_term->slug;
 			}
 
 			// Update the post's term from metabox input.
-			$list_term_id = \PMC::filter_input( INPUT_POST, 'pmc_list_id', FILTER_SANITIZE_NUMBER_INT );
+			$list_term_id = \PMC::filter_input(INPUT_POST, 'pmc_list_id', FILTER_SANITIZE_NUMBER_INT);
 
 			// remove action to prevent cyclic call
-			remove_action( 'save_post', [ $this, 'save_post' ] );
+			remove_action('save_post', [$this, 'save_post']);
 
-			if ( ! empty( $list_term_id ) ) {
-				wp_set_post_terms( $post_id, $list_term_id, self::LIST_RELATION_TAXONOMY );
+			if (!empty($list_term_id)) {
+				wp_set_post_terms($post_id, $list_term_id, self::LIST_RELATION_TAXONOMY);
 
 				// Grab the current list term to allow re-ordering
-				$list_term = $this->get_relation_term_for_item( $post->ID );
+				$list_term = $this->get_relation_term_for_item($post->ID);
 
 				// $list_term can't be empty at this point
-				$reorder_slugs[ $list_term->slug ] = $list_term->slug;
+				$reorder_slugs[$list_term->slug] = $list_term->slug;
 
-				if ( 0 === $post->menu_order ) {
-					wp_update_post( [
+				if (0 === $post->menu_order) {
+					wp_update_post([
 						'ID'         => $post_id,
 						'menu_order' => $list_term->count + 2,
-					] );
+					]);
 				}
 
-				if ( ! empty( $reorder_slugs ) ) {
-					foreach ( $reorder_slugs as $slug ) {
-						$this->update_menu_orders( $slug );
+				if (!empty($reorder_slugs)) {
+					foreach ($reorder_slugs as $slug) {
+						$this->update_menu_orders($slug);
 					}
 				}
-
 			} else {
 				return false;
 			}
-
 		}
-
 	}
 
 	/**
@@ -372,11 +380,12 @@ class Lists {
 	 *
 	 * @param string $list_term_slug A list relation term slug.
 	 */
-	public function update_menu_orders( $list_term_slug ) {
+	public function update_menu_orders($list_term_slug)
+	{
 
-		$list_term = get_term_by( 'slug', strval( $list_term_slug ), self::LIST_RELATION_TAXONOMY );
+		$list_term = get_term_by('slug', strval($list_term_slug), self::LIST_RELATION_TAXONOMY);
 
-		$list_items_query = new \WP_Query( [
+		$list_items_query = new \WP_Query([
 			'post_status'    => 'publish',
 			'post_type'      => self::LIST_ITEM_POST_TYPE,
 			'posts_per_page' => $list_term->count,
@@ -388,7 +397,7 @@ class Lists {
 					'terms'    => $list_term->term_id,
 				],
 			],
-		] );
+		]);
 
 		/**
 		 * custom-metadata/custom_metadata.php?L#180 => add_action( 'save_post', array( $this, 'save_post_metadata' ) );
@@ -397,21 +406,21 @@ class Lists {
 		 *
 		 * @since 06-09-2018 Jignesh Nakrani READS-1488
 		 */
-		if ( class_exists( 'custom_metadata_manager' ) && method_exists( 'custom_metadata_manager', 'save_post_metadata' ) ) {
+		if (class_exists('custom_metadata_manager') && method_exists('custom_metadata_manager', 'save_post_metadata')) {
 
-			remove_action( 'save_post', array( \custom_metadata_manager::instance(), 'save_post_metadata' ) );
+			remove_action('save_post', array(\custom_metadata_manager::instance(), 'save_post_metadata'));
 		}
 
-		if ( ! is_wp_error( $list_items_query ) && $list_items_query->have_posts() ) {
-			foreach ( (array) $list_items_query->posts as $index => $item ) {
+		if (!is_wp_error($list_items_query) && $list_items_query->have_posts()) {
+			foreach ((array) $list_items_query->posts as $index => $item) {
 
 				// In most cases (such as when two items are swapped), most items won't need to update.
-				if ( $index + 1 !== $item->menu_order ) {
+				if ($index + 1 !== $item->menu_order) {
 
-					wp_update_post( [
+					wp_update_post([
 						'ID'         => $item->ID,
 						'menu_order' => $index + 1,
-					] );
+					]);
 				}
 			}
 		}
@@ -423,12 +432,10 @@ class Lists {
 		 *
 		 * @since 07-09-2018 Jignesh Nakrani READS-1488
 		 */
-		if ( class_exists( 'custom_metadata_manager' ) && method_exists( 'custom_metadata_manager', 'save_post_metadata' ) ) {
+		if (class_exists('custom_metadata_manager') && method_exists('custom_metadata_manager', 'save_post_metadata')) {
 
-			add_action( 'save_post', array( \custom_metadata_manager::instance(), 'save_post_metadata' ) );
-
+			add_action('save_post', array(\custom_metadata_manager::instance(), 'save_post_metadata'));
 		}
-
 	}
 
 	/**
@@ -439,26 +446,26 @@ class Lists {
 	 *
 	 * @param object $query A \WP_Query object before the query is run.
 	 */
-	public function modify_reorder_query( $query ) {
+	public function modify_reorder_query($query)
+	{
 
-		if ( self::LIST_ITEM_POST_TYPE !== $query->get( 'post_type' ) ) {
+		if (self::LIST_ITEM_POST_TYPE !== $query->get('post_type')) {
 			return;
 		}
 
-		if ( doing_action( 'wp_ajax_simple_page_ordering' ) ) {
-			$item_id = \PMC::filter_input( INPUT_POST, 'id', FILTER_SANITIZE_NUMBER_INT );
+		if (doing_action('wp_ajax_simple_page_ordering')) {
+			$item_id = \PMC::filter_input(INPUT_POST, 'id', FILTER_SANITIZE_NUMBER_INT);
 
-			if ( ! empty( $item_id ) ) {
-				$query->set( 'status', 'publish' );
+			if (!empty($item_id)) {
+				$query->set('status', 'publish');
 
-				$term = $this->get_relation_term_for_item( $item_id );
-				$query->set( 'tax_query', [
+				$term = $this->get_relation_term_for_item($item_id);
+				$query->set('tax_query', [
 					[
 						'taxonomy' => self::LIST_RELATION_TAXONOMY,
 						'terms'    => $term->term_id,
 					],
-				] );
-
+				]);
 			}
 		}
 	}
@@ -468,19 +475,20 @@ class Lists {
 	 *
 	 * @codeCoverageIgnore
 	 */
-	public function get_lists() {
+	public function get_lists()
+	{
 
-		$nonce = \PMC::filter_input( INPUT_POST, 'nonce', FILTER_SANITIZE_STRING );
+		$nonce = \PMC::filter_input(INPUT_POST, 'nonce', FILTER_SANITIZE_STRING);
 
-		if ( empty( $nonce ) || ! wp_verify_nonce( $nonce, 'pmc-lists' ) ) {
-			wp_send_json_error( 'Nonce verification failed.' );
+		if (empty($nonce) || !wp_verify_nonce($nonce, 'pmc-lists')) {
+			wp_send_json_error('Nonce verification failed.');
 		}
 
-		$search_query = \PMC::filter_input( INPUT_POST, 'query', FILTER_SANITIZE_STRING );
+		$search_query = \PMC::filter_input(INPUT_POST, 'query', FILTER_SANITIZE_STRING);
 
-		if ( ! empty( $search_query ) && is_string( $search_query ) ) {
+		if (!empty($search_query) && is_string($search_query)) {
 
-			$lists = new \WP_Query( [
+			$lists = new \WP_Query([
 				's'              => $search_query,
 				'post_status'    => [
 					'publish',
@@ -488,12 +496,12 @@ class Lists {
 				],
 				'post_type'      => self::LIST_POST_TYPE,
 				'posts_per_page' => 5,
-			] );
+			]);
 
-			if ( ! empty( $lists->posts ) ) {
-				wp_send_json_success( wp_list_pluck( $lists->posts, 'post_title', 'ID' ) );
+			if (!empty($lists->posts)) {
+				wp_send_json_success(wp_list_pluck($lists->posts, 'post_title', 'ID'));
 			} else {
-				wp_send_json_success( [] );
+				wp_send_json_success([]);
 			}
 		}
 
@@ -506,23 +514,24 @@ class Lists {
 	 *
 	 * @return void|false Returns false if the list view template is not rendered.
 	 */
-	public function show_current_list() {
-		if ( self::LIST_ITEM_POST_TYPE !== get_post_type() ) {
+	public function show_current_list()
+	{
+		if (self::LIST_ITEM_POST_TYPE !== get_post_type()) {
 			return false;
 		}
 
-		$list_id = get_query_var( self::LIST_RELATION_TAXONOMY );
+		$list_id = get_query_var(self::LIST_RELATION_TAXONOMY);
 
-		if ( empty( $list_id ) ) {
+		if (empty($list_id)) {
 			return false;
 		}
 
-		$list_title     = get_the_title( $list_id );
-		$list_permalink = get_the_permalink( $list_id );
+		$list_title     = get_the_title($list_id);
+		$list_permalink = get_the_permalink($list_id);
 
 		\PMC::render_template(
 			PMC_LISTS_PATH . '/templates/list-view.php',
-			compact( 'list_id', 'list_title', 'list_permalink' ),
+			compact('list_id', 'list_title', 'list_permalink'),
 			true
 		);
 	}
@@ -533,13 +542,14 @@ class Lists {
 	 * @param $views An array of view links.
 	 * @return $views The filtered array.
 	 */
-	public function fix_sort_by_order_link( $views ) {
+	public function fix_sort_by_order_link($views)
+	{
 
-		if ( ! isset( $views['all'] ) || false === strpos( $views['all'], 'orderby=menu_order+title' ) || false !== strpos( $views['all'], 'order=asc' ) ) {
+		if (!isset($views['all']) || false === strpos($views['all'], 'orderby=menu_order+title') || false !== strpos($views['all'], 'order=asc')) {
 			return $views;
 		}
 
-		$views['all'] = str_replace( 'orderby=menu_order+title', 'orderby=menu_order+title&order=asc', $views['all'] );
+		$views['all'] = str_replace('orderby=menu_order+title', 'orderby=menu_order+title&order=asc', $views['all']);
 
 		return $views;
 	}
@@ -550,18 +560,19 @@ class Lists {
 	 *
 	 * @return void|false False if the list inputs template is not rendered.
 	 */
-	public function filter_list_items() {
+	public function filter_list_items()
+	{
 
-		if ( self::LIST_ITEM_POST_TYPE !== get_post_type() ) {
+		if (self::LIST_ITEM_POST_TYPE !== get_post_type()) {
 			return false;
 		}
 
-		$list_id = get_query_var( self::LIST_RELATION_TAXONOMY );
+		$list_id = get_query_var(self::LIST_RELATION_TAXONOMY);
 
-		\PMC::render_template( PMC_LISTS_PATH . '/templates/list-inputs.php', [
+		\PMC::render_template(PMC_LISTS_PATH . '/templates/list-inputs.php', [
 			'list_id'  => $list_id,
 			'taxonomy' => self::LIST_RELATION_TAXONOMY,
-		], true );
+		], true);
 	}
 
 	/**
@@ -570,14 +581,14 @@ class Lists {
 	 * @param int $item_id An item ID.
 	 * @return null|\WP_Term A term object or null on failure.
 	 */
-	public function get_relation_term_for_item( $item_id ) {
+	public function get_relation_term_for_item($item_id)
+	{
 
-		$list_terms = get_the_terms( $item_id, self::LIST_RELATION_TAXONOMY );
+		$list_terms = get_the_terms($item_id, self::LIST_RELATION_TAXONOMY);
 
-		if ( ! empty( $list_terms ) ) {
-			return reset( $list_terms );
+		if (!empty($list_terms)) {
+			return reset($list_terms);
 		}
-
 	}
 
 	/**
@@ -586,14 +597,15 @@ class Lists {
 	 * @param int $item_id A list item ID.
 	 * @return \WP_Post|bool The found post or false on failure.
 	 */
-	public function get_list_for_item( $item_id ) {
+	public function get_list_for_item($item_id)
+	{
 
-		$term = $this->get_relation_term_for_item( $item_id );
+		$term = $this->get_relation_term_for_item($item_id);
 
 		// note: need to avoid get_post(0) where it return the default current post object
-		if ( ! empty( $term ) && is_numeric( $term->name ) ) {
-			$post = get_post( intval( $term->name ) );
-			if ( ! empty( $post ) && self::LIST_POST_TYPE === $post->post_type ) {
+		if (!empty($term) && is_numeric($term->name)) {
+			$post = get_post(intval($term->name));
+			if (!empty($post) && self::LIST_POST_TYPE === $post->post_type) {
 				return $post;
 			}
 		}
@@ -606,11 +618,12 @@ class Lists {
 	 *
 	 * @return array List of post type for site map.
 	 */
-	public function whitelist_post_type_for_sitemaps( $post_types ) {
+	public function whitelist_post_type_for_sitemaps($post_types)
+	{
 
-		$post_types = ( ! empty( $post_types ) && is_array( $post_types ) ) ? $post_types : [];
+		$post_types = (!empty($post_types) && is_array($post_types)) ? $post_types : [];
 
-		if ( ! in_array( self::LIST_POST_TYPE, (array) $post_types, true ) ) {
+		if (!in_array(self::LIST_POST_TYPE, (array) $post_types, true)) {
 			$post_types[] = self::LIST_POST_TYPE;
 		}
 
@@ -624,13 +637,14 @@ class Lists {
 	 *
 	 * @return array $default.
 	 */
-	public function list_item_add_custom_column( $default ) {
+	public function list_item_add_custom_column($default)
+	{
 
-		if ( empty( $default ) || ! is_array( $default ) ) {
+		if (empty($default) || !is_array($default)) {
 			$default = [];
 		}
 
-		$default['list'] = __( 'List', 'pmc-lists' );
+		$default['list'] = __('List', 'pmc-lists');
 
 		return $default;
 	}
@@ -641,13 +655,14 @@ class Lists {
 	 * @param string  $column_name  current column name.
 	 * @param integer $list_item_id current list id.
 	 */
-	public function list_item_manage_custom_column( $column_name, $list_item_id ) {
+	public function list_item_manage_custom_column($column_name, $list_item_id)
+	{
 
-		if ( ! empty( $column_name ) && ! empty( $list_item_id ) && 'list' === $column_name ) {
-			$list_relation = $this->get_relation_term_for_item( $list_item_id );
+		if (!empty($column_name) && !empty($list_item_id) && 'list' === $column_name) {
+			$list_relation = $this->get_relation_term_for_item($list_item_id);
 
-			if ( ! empty( $list_relation->slug ) ) {
-				echo sprintf( '<a href="%s">%s</a>', esc_url( add_query_arg( self::LIST_RELATION_TAXONOMY, $list_relation->slug ) ), get_the_title( $list_relation->slug ) );
+			if (!empty($list_relation->slug)) {
+				echo sprintf('<a href="%s">%s</a>', esc_url(add_query_arg(self::LIST_RELATION_TAXONOMY, $list_relation->slug)), get_the_title($list_relation->slug));
 			}
 		}
 	}
@@ -659,13 +674,14 @@ class Lists {
 	 *
 	 * @return array $default.
 	 */
-	public function list_add_custom_column( $default ) {
+	public function list_add_custom_column($default)
+	{
 
-		if ( empty( $default ) || ! is_array( $default ) ) {
+		if (empty($default) || !is_array($default)) {
 			$default = [];
 		}
 
-		$default['list-items'] = __( 'List Items', 'pmc-lists' );
+		$default['list-items'] = __('List Items', 'pmc-lists');
 
 		return $default;
 	}
@@ -676,22 +692,23 @@ class Lists {
 	 * @param string  $column_name current column name.
 	 * @param integer $list_id     current list id.
 	 */
-	public function list_manage_custom_column( $column_name, $list_id ) {
+	public function list_manage_custom_column($column_name, $list_id)
+	{
 
-		if ( ! empty( $column_name ) && ! empty( $list_id ) && 'list-items' === $column_name ) {
-			$list_relation = get_term_by( 'slug', $list_id, self::LIST_RELATION_TAXONOMY );
+		if (!empty($column_name) && !empty($list_id) && 'list-items' === $column_name) {
+			$list_relation = get_term_by('slug', $list_id, self::LIST_RELATION_TAXONOMY);
 
-			if ( ! empty( $list_relation->count ) ) {
+			if (!empty($list_relation->count)) {
 				echo sprintf(
 					'<a href="%s">%s</a>',
 					esc_url(
 						add_query_arg(
 							self::LIST_RELATION_TAXONOMY,
 							$list_id,
-							admin_url( '/edit.php?post_type=' . \PMC\Lists\Lists::LIST_ITEM_POST_TYPE )
+							admin_url('/edit.php?post_type=' . \PMC\Lists\Lists::LIST_ITEM_POST_TYPE)
 						)
 					),
-					esc_html( $list_relation->count )
+					esc_html($list_relation->count)
 				);
 			}
 		}

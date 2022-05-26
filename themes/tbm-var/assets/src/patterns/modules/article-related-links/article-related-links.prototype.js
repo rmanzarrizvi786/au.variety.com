@@ -14,7 +14,7 @@ c_heading.c_heading_classes = 'lrv-u-font-family-secondary lrv-u-font-weight-bol
 
 c_lazy_image.c_lazy_image_classes = 'a-pull-up-item a-hidden@mobile-max u-box-shadow-medium lrv-u-margin-b-050';
 c_lazy_image.c_lazy_image_crop_class = 'lrv-a-crop-2x3';
-c_lazy_image.c_lazy_image_placeholder_url = 'https://farm5.staticflickr.com/4078/5441060528_31db7838ba_z.jpg';
+c_lazy_image.c_lazy_image_placeholder_url = '';
 c_lazy_image.c_lazy_image_screen_reader_text = false;
 
 c_link.c_link_text = 'The Best Shows to See in Dusseldorf';

@@ -127,7 +127,7 @@ class Media
 	public function image_sizes_attr($sizes, $size)
 	{
 
-		return '(min-width: 87.5rem) 1000px, (min-width: 78.75rem) 681px, (min-width: 48rem) 450px, (max-width: 48rem) 250px';
+		return '(min-width: 87.5rem) 1000px, (min-width: 62.5rem) 681px, (min-width: 48rem) 450px, (max-width: 48rem) 250px';
 	}
 
 	/**

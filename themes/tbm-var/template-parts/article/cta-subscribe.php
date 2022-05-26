@@ -8,6 +8,8 @@
  * @package pmc-variety
  */
 
+return;
+
 if (!pmc_subscription_user_has_entitlements(['Variety.VarietyVIP'])) {
 	$variant = Variety\Plugins\Variety_VIP\Content::is_vip_page() ? 'variety-vip' : 'prototype';
 

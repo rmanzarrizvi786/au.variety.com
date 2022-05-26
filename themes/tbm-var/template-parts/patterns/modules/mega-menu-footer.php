@@ -26,17 +26,18 @@
 
 			<div class="lrv-u-flex lrv-u-align-items-center">
 				<?php \PMC::render_template(PMC_CORE_PATH . '/template-parts/patterns/objects/o-nav.php', $o_nav_tips, true); ?>
-				<?php // \PMC::render_template( CHILD_THEME_PATH . '/template-parts/patterns/modules/region-selector.php', $region_selector, true ); 
+				<?php \PMC::render_template(CHILD_THEME_PATH . '/template-parts/patterns/modules/region-selector.php', $region_selector, true);
 				?>
 			</div>
 		</div>
 
-		<div class="lrv-a-grid a-cols2@desktop u-grid-gap-0@desktop-max lrv-u-border-t-1 u-border-color-pale-sky-2">
+		<div class="lrv-a-grid a-cols1@desktop u-grid-gap-0@desktop-max lrv-u-border-t-1 u-border-color-pale-sky-2">
 			<div class="lrv-u-padding-tb-075 lrv-u-overflow-auto">
 				<?php \PMC::render_template(PMC_CORE_PATH . '/template-parts/patterns/objects/o-nav.php', $o_nav, true); ?>
 			</div>
-			<div class="lrv-u-flex lrv-u-align-items-center u-justify-content-end lrv-u-padding-a-050 lrv-u-height-100p">
-				<?php \PMC::render_template(PMC_CORE_PATH . '/template-parts/patterns/components/c-icon.php', $c_icon, true); ?>
+			<div class="lrv-u-flex lrv-u-align-items-center u-justify-content-center lrv-u-padding-a-050 lrv-u-height-100p">
+				<?php \PMC::render_template(PMC_CORE_PATH . '/template-parts/patterns/components/c-icon.php', $c_icon, true);
+				?>
 				<small class="lrv-u-padding-l-1 lrv-u-font-family-secondary u-color-brand-secondary-30 lrv-u-font-weight-normal lrv-u-font-size-14"><?php echo esc_html($mega_menu_footer_copyright_text ?? ''); ?></small>
 			</div>
 		</div>

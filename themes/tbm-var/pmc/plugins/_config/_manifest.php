@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Manifest for plugin configurations.
  *

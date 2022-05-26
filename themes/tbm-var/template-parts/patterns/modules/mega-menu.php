@@ -24,8 +24,7 @@
 				<?php \PMC::render_template(CHILD_THEME_PATH . '/template-parts/patterns/modules/mega-menu-content.php', $mega_menu_content, true); ?>
 
 				<?php \PMC::render_template(CHILD_THEME_PATH . '/template-parts/patterns/objects/o-nav.php', $mobile_navigation, true); ?>
-				<?php // \PMC::render_template(CHILD_THEME_PATH . '/template-parts/patterns/modules/region-selector.php', $region_selector_mobile, true); 
-				?>
+				<?php \PMC::render_template(CHILD_THEME_PATH . '/template-parts/patterns/modules/region-selector.php', $region_selector_mobile, true); ?>
 			</div>
 
 			<?php \PMC::render_template(CHILD_THEME_PATH . '/template-parts/patterns/modules/mega-menu-footer.php', $mega_menu_footer, true); ?>

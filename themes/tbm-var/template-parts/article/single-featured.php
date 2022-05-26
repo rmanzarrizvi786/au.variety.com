@@ -86,19 +86,19 @@ while (have_posts()) :
 				// After article content here.
 				?>
 				<?php
-				\PMC::render_template(
+				/* \PMC::render_template(
 					sprintf('%s/template-parts/article/cta-subscribe.php', untrailingslashit(CHILD_THEME_PATH)),
 					[],
 					true
-				);
+				); */
 				?>
 
 				<?php
-				\PMC::render_template(
+				/* \PMC::render_template(
 					sprintf('%s/template-parts/article/comments.php', untrailingslashit(CHILD_THEME_PATH)),
 					[],
 					true
-				);
+				); */
 				?>
 
 				<?php

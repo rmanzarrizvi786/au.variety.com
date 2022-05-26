@@ -31,6 +31,8 @@ if (is_post_type_archive('vy-thought-leaders')) {
 
 if (is_archive()) {
 	$river['o_more_from_heading']['c_heading']['c_heading_is_primary_heading'] = true;
+} else if (is_search()) {
+	$river['o_more_from_heading'] = [];
 }
 
 $count = 1;
@@ -140,7 +142,7 @@ if (have_posts()) {
 			$item['c_timestamp']['c_timestamp_text'] = variety_human_time_diff(get_the_ID());
 		}
 
-		if (3 === $count && !empty($item_ad)) {
+		/* if (3 === $count && !empty($item_ad)) {
 			$river['o_tease_news_list_primary']['o_tease_list_items'][] = $item_ad;
 		}
 
@@ -148,7 +150,8 @@ if (have_posts()) {
 			$river['o_tease_news_list_primary']['o_tease_list_items'][] = $item;
 		} else {
 			$river['o_tease_news_list_secondary']['o_tease_list_items'][] = $item;
-		}
+		} */
+		$river['o_tease_news_list_secondary']['o_tease_list_items'][] = $item;
 
 		$count++;
 	}
@@ -181,10 +184,6 @@ if (!empty($prev_post_link)) {
 } else {
 	// Hide link if there are no next posts
 	$river['o_more_link_previous']['c_link'] = false;
-}
-
-if (\PMC::is_mobile()) {
-	$river['o_tease_news_list_secondary']['o_tease_list_items'][] = ['sponsored_homepage_river_ad_action' => 'sponsored-homepage-river'];
 }
 
 $river = apply_filters('variety_river', $river, $template);

@@ -1,8 +1,5 @@
 .DS_Store
 
-uploads
-upgrade
-
 plugins/*
 !plugins/tbm-shout-writer-beer
 !plugins/tbm-adm

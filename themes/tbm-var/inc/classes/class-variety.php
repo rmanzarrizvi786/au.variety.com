@@ -127,7 +127,7 @@ class Variety
 		Thought_Leaders::get_instance();
 		Video::get_instance();
 
-		Widgets\Civicscience::get_instance();
+		// Widgets\Civicscience::get_instance();
 
 		// Callable Functions.
 		require_once(CHILD_THEME_PATH . '/inc/helpers/callable-functions.php');
@@ -292,7 +292,6 @@ class Variety
 	 */
 	public function add_tags_in_head(): void
 	{
-
 		PMC::render_template(CHILD_THEME_PATH . '/template-parts/tags/head-tags.php', [], true);
 	}
 

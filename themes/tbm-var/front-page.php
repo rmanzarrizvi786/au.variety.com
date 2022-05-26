@@ -15,7 +15,12 @@ get_header();
 	if (is_active_sidebar('homepage-top')) {
 		dynamic_sidebar('homepage-top');
 	}
+
 	?>
+	<div style="margin-top: 1rem;">
+		<?php pmc_adm_render_ads('incontent_1'); ?>
+	</div>
+
 
 	<div class="lrv-a-wrapper lrv-u-flex@tablet lrv-u-margin-t-1">
 
@@ -40,17 +45,23 @@ get_header();
 		[],
 		true
 	);
+	?>
 
-	pmc_adm_render_ads('incontent_1');
+	<div style="margin-top: 1rem;">
+		<?php pmc_adm_render_ads('incontent_2'); ?>
+	</div>
 
-	if (!\PMC::is_mobile()) {
-		pmc_adm_render_ads('homepage-bottom-river', '');
-	}
-
+	<?php
 	if (is_active_sidebar('homepage-bottom')) {
 		dynamic_sidebar('homepage-bottom');
 	}
 	?>
+
+	<div style="margin-top: 1rem;">
+		<?php
+		pmc_adm_render_ads('incontent_3');
+		?>
+	</div>
 
 </section>
 

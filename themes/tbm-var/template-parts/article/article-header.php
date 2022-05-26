@@ -45,9 +45,10 @@ if (!empty($breadcrumb)) {
 }
 
 // Author.
-$author_data = PMC\Core\Inc\Author::get_instance()->authors_data();
+$custom_author = get_post_meta(get_the_ID(), 'author', true);
 
-if (!empty($author_data['single_author'])) {
+$author_data = PMC\Core\Inc\Author::get_instance()->authors_data();
+if (!$custom_author && !empty($author_data['single_author'])) {
 
 	$author_url = get_author_posts_url($author_data['single_author']['author']->ID, $author_data['single_author']['author']->user_nicename);
 
@@ -60,7 +61,7 @@ if (!empty($author_data['single_author'])) {
 		$data['author_social']['author']['c_lazy_image'] = false;
 	}
 
-	$data['author_social']['author']['author_details']['c_tagline']['c_tagline_text'] = $author_data['single_author']['more_info']['author_role'];
+	$data['author_social']['author']['author_details']['c_tagline']['c_tagline_text'] = ''; // $author_data['single_author']['more_info']['author_role'];
 
 	if (!empty($author_data['single_author']['more_info']['twitter'])) {
 		$data['author_social']['author']['author_details']['c_link_twitter_profile']['c_link_text'] = $author_data['single_author']['more_info']['twitter']['handle'];
@@ -76,6 +77,10 @@ if (!empty($author_data['single_author'])) {
 	$data['author_social']['author']['author_details']['c_title']['c_title_markup'] = $author_data['single_author']['author']->display_name;
 
 	$author_article_ids       = PMC\Core\Inc\Author::get_instance()->get_author_posts($author_data['single_author']['author']->user_nicename);
+
+	// var_dump($author_article_ids);
+	// exit;
+
 	$author_article_prototype = $data['author_social']['author']['author_details']['stories'][0];
 	$author_article_list      = [];
 
@@ -97,8 +102,12 @@ if (!empty($author_data['single_author'])) {
 
 	$data['author_social']['author']['author_details']['c_link_view_all']['c_link_url'] = $author_url;
 } else {
+	if ($custom_author) {
+		$data['author_social']['author']['c_tagline']['c_tagline_markup'] = $custom_author;
+	} else {
+		$data['author_social']['author']['c_tagline']['c_tagline_markup'] = $author_data['byline'];
+	}
 	$data['author_social']['author']['is_byline_only']                = true;
-	$data['author_social']['author']['c_tagline']['c_tagline_markup'] = $author_data['byline'];
 }
 
 // Comment count.

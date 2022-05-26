@@ -8,7 +8,7 @@
 
 $current_term = get_queried_object();
 
-$menu_location = $current_term ?  $current_term->slug . '-' . $current_term->taxonomy . '-menu' : '';
+$menu_location = $current_term && isset($current_term->slug) ?  $current_term->slug . '-' . $current_term->taxonomy . '-menu' : '';
 
 $menu_items = PMC\Core\Inc\Menu::get_instance()->get_menu_data($menu_location);
 
@@ -70,11 +70,29 @@ if (is_tax('vertical')) {
 			</div>
 
 			<aside class="u-width-320@tablet lrv-u-flex-shrink-0 lrv-u-flex@tablet lrv-u-flex-direction-column lrv-a-space-children-vertical lrv-a-space-children--1 u-padding-l-1@tablet">
+				<div class="a-hidden@mobile-max">
+					<div class="lrv-u-padding-tb-1@mobile-max ">
+						<section>
+							<div class="admz">
+								<?php pmc_adm_render_ads('mrec'); ?>
+							</div>
+						</section>
+					</div>
+				</div>
 				<?php
 				if (is_active_sidebar($sidebar)) {
 					dynamic_sidebar($sidebar);
 				}
 				?>
+				<div id="tbm-sticky-rail-ad"  class="a-hidden@mobile-max">
+					<div class="lrv-u-padding-tb-1@mobile-max ">
+						<section>
+							<div class="admz">
+								<?php pmc_adm_render_ads('vrec'); ?>
+							</div>
+						</section>
+					</div>
+				</div>
 			</aside>
 		</div>
 	</div>

@@ -148,11 +148,11 @@ $data['header_main']['o_nav']['o_nav_list_items'] = [];
 $menu_items = [
 	[
 		'label' => __('Subscribe', 'pmc-variety'),
-		'url'   => '/subscribe-us/',
+		'url'   => 'https://thebrag.com/observer/film-tv/',
 	],
 	[
 		'label' => __('Login', 'pmc-variety'),
-		'url'   => '/digital-subscriber-access/#r=/print-plus/',
+		'url'   => wp_login_url(),
 	],
 ];
 
@@ -173,11 +173,12 @@ $data['header_main']['o_top_nav']['o_nav_list_items'] = [];
 $menu_items = [
 	[
 		'label' => __('Have a News Tip?', 'pmc-variety'),
-		'url'   => '/tips',
+		'url'   => 'https://thebrag.com/media/submit-a-tip/',
+		'target' => '_blank',
 	],
 	[
 		'label' => __('Newsletters', 'pmc-variety'),
-		'url'   => 'https://thebrag.com/observer/',
+		'url'   => 'https://thebrag.com/observer/film-tv/',
 		'target' => '_blank',
 	],
 ];
@@ -187,17 +188,23 @@ foreach ($menu_items as $menu_item) {
 
 	$item['c_link_text'] = $menu_item['label'];
 	$item['c_link_url']  = $menu_item['url'];
+	$item['c_link_target_attr']  = $menu_item['target'];
 
 	$data['header_main']['o_top_nav']['o_nav_list_items'][] = $item;
 }
 
 // Regions.
-$data['header_main']['region_selector']['region_selector']['us_url']            = '/';
-$data['header_main']['region_selector_mobile']['region_selector']['us_url']     = '/';
-$data['header_main']['region_selector']['region_selector']['asia_url']          = '/c/asia/';
-$data['header_main']['region_selector_mobile']['region_selector']['asia_url']   = '/c/asia/';
-$data['header_main']['region_selector']['region_selector']['global_url']        = '/c/global/';
-$data['header_main']['region_selector_mobile']['region_selector']['global_url'] = '/c/global/';
+// $data['header_main']['region_selector']['region_selector']['us_url']            = '/';
+// $data['header_main']['region_selector_mobile']['region_selector']['us_url']     = '/';
+// $data['header_main']['region_selector']['region_selector']['asia_url']          = '/c/asia/';
+// $data['header_main']['region_selector_mobile']['region_selector']['asia_url']   = '/c/asia/';
+// $data['header_main']['region_selector']['region_selector']['global_url']        = '/c/global/';
+// $data['header_main']['region_selector_mobile']['region_selector']['global_url'] = '/c/global/';
+
+$data['header_main']['region_selector']['region_selector']['us_url']            = 'https://variety.com/';
+$data['header_main']['region_selector']['region_selector']['us_url_target']     = '_blank';
+$data['header_main']['region_selector_mobile']['region_selector']['us_url']     = 'https://variety.com/';
+$data['header_main']['region_selector_mobile']['region_selector']['us_url_target']     = '_blank';
 
 \PMC::render_template(
 	sprintf('%s/template-parts/patterns/modules/header.php', untrailingslashit(CHILD_THEME_PATH)),

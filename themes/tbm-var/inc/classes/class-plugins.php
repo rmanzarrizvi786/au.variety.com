@@ -34,6 +34,7 @@ class Plugins
 	{
 
 		// Configs.
+		require_once PMC_CORE_PATH . '/plugins/_config/_manifest.php';
 		require_once CHILD_THEME_PATH . '/plugins/_config/_manifest.php';
 
 		// Variety-specific plugins.
@@ -51,7 +52,9 @@ class Plugins
 		require_once(CHILD_THEME_PATH . '/plugins/variety-top-videos/variety-top-videos.php');
 		require_once(CHILD_THEME_PATH . '/plugins/variety-vscore-top/variety-vscore-top.php');
 		// require_once( CHILD_THEME_PATH . '/plugins/variety-vip/variety-vip.php' );
-		
+
 		require_once(CHILD_THEME_PATH . '/plugins/tbm-adm/tbm-adm.php');
+		require_once(CHILD_THEME_PATH . '/plugins/tbm-amp/tbm-amp.php');
+		require_once(CHILD_THEME_PATH . '/plugins/tbm-download-variety-content/tbm-download-variety-content.php');
 	}
 }

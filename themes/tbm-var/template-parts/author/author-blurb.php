@@ -33,6 +33,8 @@ if (empty($author_email)) {
 	$author_blurb['c_link__email']['c_link_url']  = (!empty($author_email)) ? sprintf('mailto:%1$s', $author_email) : '';
 }
 
+$author_blurb['c_link__email'] = null;
+
 if (empty($guest_author['user_twitter'])) {
 	$author_blurb['c_icon__twitter'] = null;
 } else {

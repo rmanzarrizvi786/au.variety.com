@@ -1,12 +1,13 @@
 <?php
+
 /**
  * Inline gallery template.
  */
 
 use PMC\Gallery\View;
 
-if ( ! empty( $attachments ) ) {
-	?>
+if (!empty($attachments)) {
+?>
 	<div class="c-gallery-inline">
 		<div class="c-gallery-inline__nav">
 			<div class="c-gallery-inline__nav-head">01</div>
@@ -26,25 +27,25 @@ if ( ! empty( $attachments ) ) {
 
 		<div class="c-gallery-inline__slider">
 			<?php
-			foreach ( $attachments as $image ) {
-				?>
+			foreach ($attachments as $image) {
+			?>
 				<div class="c-gallery-inline__item">
-					<figure class="c-gallery-inline__figure" title="<?php echo esc_attr( $image->post_title ); ?>">
-						<?php View::get_gallery_inline_image( $image->ID ); ?>
+					<figure class="c-gallery-inline__figure" title="<?php echo esc_attr($image->post_title); ?>">
+						<?php View::get_gallery_inline_image($image->ID); ?>
 					</figure>
 					<div class="c-gallery-inline__caption">
 						<p class="c-gallery-inline__title">
-							<?php echo wp_kses_post( wp_get_attachment_caption( $image->ID ) ); ?>
+							<?php echo wp_kses_post(wp_get_attachment_caption($image->ID)); ?>
 						</p>
 						<p class="c-gallery-inline__source">
-							<?php echo wp_kses_post( get_post_meta( $image->ID, '_image_credit', true ) ); ?>
+							<?php echo wp_kses_post(get_post_meta($image->ID, '_image_credit', true)); ?>
 						</p>
 					</div>
 				</div>
-				<?php
+			<?php
 			}
 			?>
 		</div>
 	</div>
-	<?php
+<?php
 }

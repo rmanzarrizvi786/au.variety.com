@@ -253,7 +253,7 @@
 				&copy;
 				<?php
 				// translators: %s current year.
-				printf( esc_html_x( 'Variety is a part of Penske Media Corporation. &copy; %s Variety Media, LLC. All Rights Reserved. Variety and the Flying V logos are trademarks of Variety Media, LLC. Powered by WordPress.com VIP', 'footer copyright text', 'pmc-variety' ), esc_html( gmdate( 'Y' ) ) );
+				printf( esc_html_x( 'Variety is a part of Penske Media Corporation. &copy; %s Variety Media, LLC. All Rights Reserved. Variety and the Flying V logos are trademarks of Variety Media, LLC.', 'footer copyright text', 'pmc-variety' ), esc_html( gmdate( 'Y' ) ) );
 				?>
 			</p>
 		</div>

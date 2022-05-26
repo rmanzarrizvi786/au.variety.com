@@ -54,7 +54,7 @@ foreach ($data['articles'] as $story_data_item) {
 		// Show hard coded text for the first story vertical
 		$template['c_span']['c_span_text'] = __('Top Story', 'pmc-variety');
 	} else {
-		if (
+		/* if (
 			in_array(
 				get_post_type($story_data_item),
 				[Content::VIP_POST_TYPE, Content::VIP_VIDEO_POST_TYPE],
@@ -66,7 +66,8 @@ foreach ($data['articles'] as $story_data_item) {
 			$template['c_span']['c_span_link_classes'] .= ' u-color-brand-vip-primary ';
 		} else {
 			$template['c_span'] = $larva_populate->c_span_vertical($story_data_item, $template);
-		}
+		} */
+		$template['c_span'] = $larva_populate->c_span_vertical($story_data_item, $template);
 	}
 
 	$template['c_link']      = $larva_populate->c_link_author($story_data_item->ID, $template);
@@ -82,15 +83,6 @@ foreach ($data['articles'] as $story_data_item) {
 	$top_stories[$template_keys[$i]] = $template;
 
 	$i++;
-}
-
-if (is_home()) {
-
-	if (\PMC::is_mobile()) {
-		$top_stories['o_tease_ad'] = [
-			'c_markup' => pmc_adm_render_ads('widget', 'mob-hp-mid', false),
-		];
-	}
 }
 
 // 2. Most Popular / Most Viewed Widget
@@ -110,18 +102,18 @@ $popular_posts = \PMC\Core\Inc\Top_Posts::get_posts($count, $days, $period, 'mos
 
 // 3. Ad Widgets
 
-$top_ad    = PMC\Core\Inc\Larva::get_instance()->get_json('modules/vip-banner.300x250');
-$bottom_ad = PMC\Core\Inc\Larva::get_instance()->get_json('modules/cxense-widget.300x250');
+// $top_ad    = PMC\Core\Inc\Larva::get_instance()->get_json('modules/vip-banner.300x250');
+// $bottom_ad = PMC\Core\Inc\Larva::get_instance()->get_json('modules/cxense-widget.300x250');
 
 // vip-banner.300x250 - top
-$top_ad['homepage_top_stories_ad_action'] = 'homepage-top-stories';
+// $top_ad['homepage_top_stories_ad_action'] = 'homepage-top-stories';
 
 // cxense widget 300x250 - bottom
-$bottom_ad['cxense_id_attr'] = 'cx-module-300x250';
+// $bottom_ad['cxense_id_attr'] = 'cx-module-300x250';
 
 ?>
 
-<div class="lrv-u-flex@tablet lrv-u-padding-t-1 lrv-a-wrapper">
+<div class="lrv-u-flex@tablet lrv-u-padding-t-1 lrv-a-wrapper u-margin-b-125">
 
 	<?php
 	\PMC::render_template(
@@ -138,6 +130,9 @@ $bottom_ad['cxense_id_attr'] = 'cx-module-300x250';
 			?>
 		</div> -->
 		<?php
+
+		pmc_adm_render_ads('vrec_1');
+
 		\PMC::render_template(
 			sprintf('%s/template-parts/widgets/most-viewed.php', untrailingslashit(CHILD_THEME_PATH)),
 			[
@@ -151,6 +146,7 @@ $bottom_ad['cxense_id_attr'] = 'cx-module-300x250';
 		?>
 		<div class="a-hidden@mobile-max">
 			<?php
+			pmc_adm_render_ads('vrec_1');
 			// \PMC::render_template(CHILD_THEME_PATH . '/template-parts/patterns/modules/cxense-widget.php', $bottom_ad, true);
 			?>
 		</div>

@@ -80,21 +80,31 @@ if (!empty($mega_menu['root'])) {
 }
 
 // Mega PMC footer.
+$data['mega_menu_footer']['c_icon']['c_icon_name'] = 'pmc-logo';
 $data['mega_menu_footer']['c_icon']['c_icon_url']            = 'https://pmc.com/';
-$data['mega_menu_footer']['mega_menu_footer_copyright_text'] = sprintf('Variety is a part of Penske Media Corporation. &copy; %1$s Variety Media, LLC. All Rights Reserved.', gmdate('Y'));
+// $data['mega_menu_footer']['mega_menu_footer_copyright_text'] = sprintf('Variety is a part of Penske Media Corporation. &copy; %1$s Variety Media, LLC. All Rights Reserved.', gmdate('Y'));
+$data['mega_menu_footer']['mega_menu_footer_copyright_text'] = sprintf('Variety Australia/New Zealand&reg; and &copy; %1$s Variety Media, LLC. All Rights Reserved. Published under license from Variety Media, LLC, a subsidiary of Penske Media Corporation', gmdate('Y'));
 
 // Mega subscribe link.
-$data['mega_menu_footer']['c_subscribe_link']['c_link_url']     = '/subscribe-us/?utm_source=site&utm_medium=Mega';
+$data['mega_menu_footer']['c_subscribe_link']['c_link_url']     = 'https://thebrag.com/observer/film-tv/?utm_source=varietyau&utm_medium=Mega';
 $data['mega_menu_footer']['c_subscribe_link']['modifier_class'] = 'cx-module-header-link-vy';
 
 // Mega Regions + tips.
-$data['mega_menu_footer']['o_nav_tips']['o_nav_list_items'][0]['c_link_url']  = '/tips';
-$data['mega_menu_footer']['region_selector']['region_selector']['us_url']     = '/';
-$data['region_selector_mobile']['region_selector']['us_url']                  = '/';
-$data['mega_menu_footer']['region_selector']['region_selector']['asia_url']   = '/c/asia/';
-$data['region_selector_mobile']['region_selector']['asia_url']                = '/c/asia/';
-$data['mega_menu_footer']['region_selector']['region_selector']['global_url'] = '/c/global/';
-$data['region_selector_mobile']['region_selector']['global_url']              = '/c/global/';
+$data['mega_menu_footer']['o_nav_tips']['o_nav_list_items'][0]['c_link_url']  = 'https://thebrag.com/media/submit-a-tip/';
+
+// $data['mega_menu_footer']['region_selector']['region_selector']['us_url']     = '/';
+// $data['region_selector_mobile']['region_selector']['us_url']                  = '/';
+// $data['mega_menu_footer']['region_selector']['region_selector']['asia_url']   = '/c/asia/';
+// $data['region_selector_mobile']['region_selector']['asia_url']                = '/c/asia/';
+// $data['mega_menu_footer']['region_selector']['region_selector']['global_url'] = '/c/global/';
+// $data['region_selector_mobile']['region_selector']['global_url']              = '/c/global/';
+
+
+$data['region_selector_mobile']['region_selector']['us_url']                  = 'https://variety.com/';
+$data['region_selector_mobile']['region_selector']['us_url_target']     = '_blank';
+$data['mega_menu_footer']['region_selector']['region_selector']['us_url']                  = 'https://variety.com/';
+$data['mega_menu_footer']['region_selector']['region_selector']['us_url_target']     = '_blank';
+
 
 // Mega mobile nav.
 $template = $data['mobile_navigation']['o_nav_list_items'][0];
@@ -104,17 +114,25 @@ $data['mobile_navigation']['o_nav_list_items'] = [];
 $menu_items = [
 	[
 		'label' => __('Have a News Tip?', 'pmc-variety'),
-		'url'   => '/tips',
+		'url'   => 'https://thebrag.com/media/submit-a-tip/',
 	],
-	[
-		'label' => __('Subscribe', 'pmc-variety'),
-		'url'   => '/subscribe-us/?utm_source=site&utm_medium=Mega',
-	],
+	// [
+	// 	'label' => __('Subscribe', 'pmc-variety'),
+	// 	'url'   => '/subscribe-us/?utm_source=site&utm_medium=Mega',
+	// ],
 	[
 		'label' => __('Newsletters', 'pmc-variety'),
-		'url'   => 'https://thebrag.com/observer/',
+		'url'   => 'https://thebrag.com/observer/film-tv/',
 	],
 ];
+if (is_user_logged_in()) {
+	$current_url = home_url(add_query_arg([], $GLOBALS['wp']->request));
+	$menu_items[] =
+		[
+			'label' => __('Logout', 'pmc-variety'),
+			'url'   => esc_url(wp_logout_url($current_url)),
+		];
+}
 
 foreach ($menu_items as $menu_item) {
 	$item = $template;

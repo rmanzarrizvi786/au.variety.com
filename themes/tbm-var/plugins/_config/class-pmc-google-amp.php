@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Configuration for pmc-google-amp plugin
  *
@@ -15,7 +16,8 @@ use \PMC;
 use \PMC\Global_Functions\Traits\Singleton;
 use Variety\Plugins\Variety_VIP\Content;
 
-class PMC_Google_AMP {
+class PMC_Google_AMP
+{
 
 	use Singleton;
 
@@ -24,11 +26,11 @@ class PMC_Google_AMP {
 	 *
 	 *
 	 */
-	protected function __construct() {
+	protected function __construct()
+	{
 
 		// Because 'is_amp_endpoint()' is only available after `parse_query` action.
-		add_action( 'wp', [ $this, 'setup_hooks' ], 15 );
-
+		add_action('wp', [$this, 'setup_hooks'], 15);
 	}
 
 	/**
@@ -36,7 +38,8 @@ class PMC_Google_AMP {
 	 *
 	 * @return bool Returns TRUE if current URL is AMP URL else FALSE
 	 */
-	public function is_amp() {
+	public function is_amp()
+	{
 
 		return \PMC::is_amp();
 	}
@@ -50,39 +53,39 @@ class PMC_Google_AMP {
 	 *
 	 * @return void
 	 */
-	public function setup_hooks() {
+	public function setup_hooks()
+	{
 
-		if ( ! $this->is_amp() ) {
+		if (!$this->is_amp()) {
 			return;
 		}
 
 		/**
 		 * Filters
 		 */
-		add_filter( 'pmc-google-amp-styles', array( $this, 'setup_styling' ) );
-		add_filter( 'pmc_google_amp_ga_event_tracking', array( $this, 'ga_event_tracking' ) );
-		add_filter( 'post_thumbnail_size', array( $this, 'post_thumbnail_size' ) );
-		add_filter( 'amp_social_share_template', array( $this, 'get_social_share_template' ), 10, 2 );
-		add_filter( 'pmc_google_amp_related_article_thumbnail_size', array( $this, 'get_related_article_thumbnail_size' ) );
-		add_filter( 'pmc_google_amp_get_breadcrumbs', array( $this, 'get_breadcrumbs' ) );
-		add_filter( 'pmc_google_amp_ix_ad_slot_ids', [ $this, 'set_ix_amp_ad_slot_ids' ] );
-		add_filter( 'pmc_google_amp_skimlinks_site_id', array( $this, 'amp_skimlinks_publisher_code' ) );
-		add_filter( 'pmc_google_amp_gallery_button_link', [ $this, 'amp_gallery_button_link' ], 10, 3 );
-		add_filter( 'amp_post_template_meta_parts', '__return_empty_array' );
-		add_action( 'pmc_amp_before_post_title', [ $this, 'render_before_title' ], 11 );
-		add_action( 'pmc_amp_after_post_title', [ $this, 'render_after_title' ] );
+		add_filter('pmc-google-amp-styles', array($this, 'setup_styling'));
+		add_filter('pmc_google_amp_ga_event_tracking', array($this, 'ga_event_tracking'));
+		add_filter('post_thumbnail_size', array($this, 'post_thumbnail_size'));
+		add_filter('amp_social_share_template', array($this, 'get_social_share_template'), 10, 2);
+		add_filter('pmc_google_amp_related_article_thumbnail_size', array($this, 'get_related_article_thumbnail_size'));
+		add_filter('pmc_google_amp_get_breadcrumbs', array($this, 'get_breadcrumbs'));
+		add_filter('pmc_google_amp_ix_ad_slot_ids', [$this, 'set_ix_amp_ad_slot_ids']);
+		add_filter('pmc_google_amp_skimlinks_site_id', array($this, 'amp_skimlinks_publisher_code'));
+		add_filter('pmc_google_amp_gallery_button_link', [$this, 'amp_gallery_button_link'], 10, 3);
+		add_filter('amp_post_template_meta_parts', '__return_empty_array');
+		add_action('pmc_amp_before_post_title', [$this, 'render_before_title'], 11);
+		add_action('pmc_amp_after_post_title', [$this, 'render_after_title']);
 
 		/**
 		 * Use 9 priority because pmc-google-amp plugin use 10
 		 * To add "Launch Gallery" and other stuffs
 		 */
-		add_filter( 'the_content', array( $this, 'append_sub_heading' ), 9 );
+		add_filter('the_content', array($this, 'append_sub_heading'), 9);
 
 		/**
 		 * Actions.
 		 */
-		add_action( 'amp_post_template_footer', [ $this, 'add_bombora_amp_pixel_tracking' ] );
-
+		add_action('amp_post_template_footer', [$this, 'add_bombora_amp_pixel_tracking']);
 	}
 
 	/**
@@ -95,27 +98,28 @@ class PMC_Google_AMP {
 	 *
 	 *
 	 */
-	public function setup_styling( $css = '' ) {
+	public function setup_styling($css = '')
+	{
 		$logo_img_url = sprintf(
-			'%s/assets/src/svg/variety-logo.svg',
-			untrailingslashit( get_stylesheet_directory_uri() )
+			'%s/assets/src/svg/brand-logo.svg',
+			untrailingslashit(get_stylesheet_directory_uri())
 		);
 
-		if ( Content::is_vip_page() ) {
+		if (Content::is_vip_page()) {
 			$logo_img_url = sprintf(
-				'%s/assets/src/svg/variety-logo.svg',
-				untrailingslashit( get_stylesheet_directory_uri() )
+				'%s/assets/src/svg/brand-logo.svg',
+				untrailingslashit(get_stylesheet_directory_uri())
 			);
 		}
 
 		return PMC::render_template(
-			sprintf( '%s/plugins/templates/pmc-google-amp/single-post/css.php', CHILD_THEME_PATH ),
+			sprintf('%s/plugins/templates/pmc-google-amp/single-post/css.php', CHILD_THEME_PATH),
 			[
-				'amp_stylesheet_path' => sprintf( '%s/assets/build/css', untrailingslashit( CHILD_THEME_PATH ) ),
+				'amp_stylesheet_path' => sprintf('%s/assets/build/css', untrailingslashit(CHILD_THEME_PATH)),
 				'logo_img_url'        => $logo_img_url,
 				'font_dir_url'        => sprintf(
 					'%s/assets/public',
-					untrailingslashit( get_stylesheet_directory_uri() )
+					untrailingslashit(get_stylesheet_directory_uri())
 				),
 			]
 		);
@@ -130,9 +134,10 @@ class PMC_Google_AMP {
 	 *
 	 * @return string List of events.
 	 */
-	public function ga_event_tracking( $events ) {
+	public function ga_event_tracking($events)
+	{
 
-		$events = ( ! empty( $events ) && is_array( $events ) ) ? $events : array();
+		$events = (!empty($events) && is_array($events)) ? $events : array();
 
 		$events[] = array(
 			'label'    => 'gallery_simple',
@@ -184,7 +189,8 @@ class PMC_Google_AMP {
 	 *
 	 * @return  string Size of feature image to be show.
 	 */
-	public function post_thumbnail_size( $size ) {
+	public function post_thumbnail_size($size)
+	{
 		return 'landscape-large';
 	}
 
@@ -196,9 +202,10 @@ class PMC_Google_AMP {
 	 *
 	 * @return boolean
 	 */
-	public function get_social_share_template( $template_path, $location ) {
+	public function get_social_share_template($template_path, $location)
+	{
 
-		if ( 'top' === strtolower( $location ) ) {
+		if ('top' === strtolower($location)) {
 			return false;
 		}
 
@@ -212,7 +219,8 @@ class PMC_Google_AMP {
 	 *
 	 * @return string One of registered image size.
 	 */
-	public function get_related_article_thumbnail_size( $size = '' ) {
+	public function get_related_article_thumbnail_size($size = '')
+	{
 		return 'landscape-small';
 	}
 
@@ -225,25 +233,26 @@ class PMC_Google_AMP {
 	 *
 	 * @return array
 	 */
-	public function get_breadcrumbs( $breadcrumbs ) {
+	public function get_breadcrumbs($breadcrumbs)
+	{
 
-		if ( empty( $breadcrumbs ) || ! is_array( $breadcrumbs ) ) {
+		if (empty($breadcrumbs) || !is_array($breadcrumbs)) {
 			$breadcrumbs = array();
 		}
 
 		$_breadcrumbs = \PMC\Core\Inc\Theme::get_instance()->get_breadcrumb();
 
 		$breadcrumbs[] = array(
-			'label' => __( 'Home', 'pmc-variety' ),
-			'href'  => home_url( '/' ),
+			'label' => __('Home', 'pmc-variety'),
+			'href'  => home_url('/'),
 		);
 
-		if ( ! empty( $_breadcrumbs ) && is_array( $_breadcrumbs ) ) {
+		if (!empty($_breadcrumbs) && is_array($_breadcrumbs)) {
 
-			foreach ( $_breadcrumbs as $crumb ) {
+			foreach ($_breadcrumbs as $crumb) {
 				$breadcrumbs[] = array(
 					'label' => $crumb->name,
-					'href'  => get_term_link( $crumb ),
+					'href'  => get_term_link($crumb),
 				);
 			}
 		}
@@ -258,12 +267,13 @@ class PMC_Google_AMP {
 	 *
 	 * @return string Post Content.
 	 */
-	public function append_sub_heading( $content = '' ) {
+	public function append_sub_heading($content = '')
+	{
 
-		$sub_heading = get_post_meta( get_the_ID(), '_variety-sub-heading', true );
+		$sub_heading = get_post_meta(get_the_ID(), '_variety-sub-heading', true);
 
-		if ( ! empty( $sub_heading ) ) {
-			$sub_heading = sprintf( '<h3 class="sub-heading">%s</h3>', esc_html( $sub_heading ) );
+		if (!empty($sub_heading)) {
+			$sub_heading = sprintf('<h3 class="sub-heading">%s</h3>', esc_html($sub_heading));
 		} else {
 			$sub_heading = '';
 		}
@@ -278,7 +288,8 @@ class PMC_Google_AMP {
 	 *
 	 * @return array
 	 */
-	public function set_ix_amp_ad_slot_ids( $ix_slot_ids ) {
+	public function set_ix_amp_ad_slot_ids($ix_slot_ids)
+	{
 
 		return [
 			'amp-header'        => '331228',
@@ -288,14 +299,14 @@ class PMC_Google_AMP {
 			'amp-mid-article-1' => '331230',
 			'amp-mid-article-x' => '331230',
 		];
-
 	}
 
 	/**
 	 * Add Bombora amp page view tracking pixel codes.
 	 */
-	public function add_bombora_amp_pixel_tracking() {
-		printf( '<amp-pixel src="%s" layout="nodisplay"></amp-pixel>', esc_url( 'https://ml314.com/utsync.ashx?eid=65499&et=0&cid=amp' ) );
+	public function add_bombora_amp_pixel_tracking()
+	{
+		printf('<amp-pixel src="%s" layout="nodisplay"></amp-pixel>', esc_url('https://ml314.com/utsync.ashx?eid=65499&et=0&cid=amp'));
 	}
 
 	/**
@@ -303,7 +314,8 @@ class PMC_Google_AMP {
 	 *
 	 * @return string skimlinks publisher code
 	 */
-	public function amp_skimlinks_publisher_code( $publisher_code ) {
+	public function amp_skimlinks_publisher_code($publisher_code)
+	{
 
 		return '87443X1540253';
 	}
@@ -320,25 +332,26 @@ class PMC_Google_AMP {
 	 *
 	 * @return string
 	 */
-	public function amp_gallery_button_link( string $amp_url, int $gallery_id, int $post_id ) {
+	public function amp_gallery_button_link(string $amp_url, int $gallery_id, int $post_id)
+	{
 
-		$dirt_url = get_post_meta( $post_id, 'dirt_permalink', true );
+		$dirt_url = get_post_meta($post_id, 'dirt_permalink', true);
 
-		if ( empty( $dirt_url ) ) {
+		if (empty($dirt_url)) {
 			// Return not a cross post from Dirt.com
 			return $amp_url;
 		}
 
 		// Is a cross post from Dirt.com
-		$linked_gallery = get_post_meta( $post_id, 'pmc-gallery-linked-gallery', true );
+		$linked_gallery = get_post_meta($post_id, 'pmc-gallery-linked-gallery', true);
 
-		if ( empty( $linked_gallery ) ) {
+		if (empty($linked_gallery)) {
 			return $amp_url;
 		}
 
-		$linked_gallery = json_decode( $linked_gallery, true );
+		$linked_gallery = json_decode($linked_gallery, true);
 
-		if ( ! empty( $linked_gallery['url'] ) ) {
+		if (!empty($linked_gallery['url'])) {
 			$amp_url = $linked_gallery['url'];
 		}
 
@@ -350,9 +363,10 @@ class PMC_Google_AMP {
 	 *
 	 *
 	 */
-	public function render_before_title() {
+	public function render_before_title()
+	{
 		PMC::render_template(
-			sprintf( '%s/templates/pmc-google-amp/single-post/meta-time.php', untrailingslashit( dirname( __DIR__ ) ) ),
+			sprintf('%s/templates/pmc-google-amp/single-post/meta-time.php', untrailingslashit(dirname(__DIR__))),
 			[],
 			true
 		);
@@ -363,18 +377,18 @@ class PMC_Google_AMP {
 	 *
 	 *
 	 */
-	public function render_after_title() {
+	public function render_after_title()
+	{
 		PMC::render_template(
-			sprintf( '%s/templates/pmc-google-amp/single-post/excerpt.php', untrailingslashit( dirname( __DIR__ ) ) ),
+			sprintf('%s/templates/pmc-google-amp/single-post/excerpt.php', untrailingslashit(dirname(__DIR__))),
 			[],
 			true
 		);
 
 		PMC::render_template(
-			sprintf( '%s/templates/pmc-google-amp/single-post/meta-author.php', untrailingslashit( dirname( __DIR__ ) ) ),
+			sprintf('%s/templates/pmc-google-amp/single-post/meta-author.php', untrailingslashit(dirname(__DIR__))),
 			[],
 			true
 		);
 	}
-
 }

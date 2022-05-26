@@ -70,9 +70,9 @@ c_hidden_field_name = clonedeep( c_hidden_field_prototype );
 
 /* Form data */
 
-o_email_capture_form.o_email_capture_form_success_url = 'https://pages.email.variety.com/signup/?signup=success';
+o_email_capture_form.o_email_capture_form_success_url = '#';
 o_email_capture_form.o_email_capture_form_name_attr = 'newsletter-module-form';
-o_email_capture_form.o_email_capture_form_action_url = 'https://pages.email.variety.com/api/';
+o_email_capture_form.o_email_capture_form_action_url = '#';
 o_email_capture_form.c_email_field.c_email_field_input_name_attr = 'EmailAddress';
 o_email_capture_form.c_email_field.c_email_field_input_id_attr = 'mega_newsletter_email';
 o_email_capture_form.o_email_capture_form_context_name_attr = 'NewsletterFormPost';

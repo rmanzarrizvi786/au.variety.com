@@ -62,7 +62,7 @@ class Assets
 			return;
 		}
 
-		$path = CHILD_THEME_URL . '/assets/build/';
+		$path = CDN_URL; // CHILD_THEME_URL . '/assets/build/';
 
 		// JS
 		$fmtime = filemtime(CHILD_THEME_PATH . '/assets/public/webfontloader.js');
@@ -78,12 +78,23 @@ class Assets
 		$fmtime = filemtime(CHILD_THEME_PATH . '/assets/build/js/common.js');
 		wp_register_script(
 			'variety-common-js',
-			CHILD_THEME_URL . '/assets/build/js/common.js',
+			CDN_URL . 'js/common.js',
 			['jquery'],
 			$fmtime,
 			true
 		);
 		wp_enqueue_script('variety-common-js');
+
+		$fmtime = filemtime(CHILD_THEME_PATH . '/assets/build/js/tbm.js');
+		wp_register_script(
+			'tbm-js',
+			CDN_URL . 'js/tbm.js',
+			['jquery'],
+			$fmtime,
+			true
+		);
+		wp_enqueue_script('tbm-js');
+		wp_localize_script('tbm-js', 'tbm', ['ajaxurl' => admin_url('admin-ajax.php')]);
 
 		// Inline, critical CSS.
 		\PMC\Core\Inc\Assets::get_instance()->inline_style('common.inline', CHILD_THEME_PATH);
@@ -92,7 +103,7 @@ class Assets
 		$fmtime = filemtime(CHILD_THEME_PATH . '/assets/build/css/common.async.css');
 		wp_register_style(
 			'common.async',
-			CHILD_THEME_URL . '/assets/build/css/common.async.css',
+			CDN_URL . 'css/common.async.css',
 			[],
 			$fmtime,
 			'all'
@@ -107,7 +118,7 @@ class Assets
 			$fmtime = filemtime(CHILD_THEME_PATH . '/assets/build/css/frontpage.async.css');
 			wp_register_style(
 				'frontpage.async',
-				CHILD_THEME_URL . '/assets/build/css/frontpage.async.css',
+				CDN_URL . 'css/frontpage.async.css',
 				[],
 				$fmtime,
 				'all'
@@ -128,7 +139,7 @@ class Assets
 			$fmtime = filemtime(CHILD_THEME_PATH . '/assets/build/js/page.js');
 			wp_register_script(
 				'variety-page-js',
-				CHILD_THEME_URL . '/assets/build/js/page.js',
+				CDN_URL . 'js/page.js',
 				['jquery'],
 				$fmtime,
 				true
@@ -146,7 +157,7 @@ class Assets
 			$fmtime = filemtime(CHILD_THEME_PATH . '/assets/build/css/single.async.css');
 			wp_register_style(
 				'single.async',
-				CHILD_THEME_URL . '/assets/build/css/single.async.css',
+				CDN_URL . 'css/single.async.css',
 				[],
 				$fmtime,
 				'all'
@@ -166,7 +177,7 @@ class Assets
 			$fmtime = filemtime(CHILD_THEME_PATH . '/assets/build/css/author.async.css');
 			wp_register_style(
 				'author.async',
-				CHILD_THEME_URL . '/assets/build/css/author.async.css',
+				CDN_URL . 'css/author.async.css',
 				[],
 				$fmtime,
 				'all'
@@ -181,7 +192,7 @@ class Assets
 			$fmtime = filemtime(CHILD_THEME_PATH . '/assets/build/css/featured-article.async.css');
 			wp_register_style(
 				'featured-article.async',
-				CHILD_THEME_URL . '/assets/build/css/featured-article.async.css',
+				CDN_URL . 'css/featured-article.async.css',
 				[],
 				$fmtime,
 				'all'
@@ -197,7 +208,7 @@ class Assets
 			$fmtime = filemtime(CHILD_THEME_PATH . '/assets/build/css/search-results.async.css');
 			wp_register_style(
 				'search-results.async',
-				CHILD_THEME_URL . '/assets/build/css/search-results.async.css',
+				CDN_URL . 'css/search-results.async.css',
 				[],
 				$fmtime,
 				'all'
@@ -216,10 +227,20 @@ class Assets
 			);
 		}
 
+		$fmtime = filemtime(CHILD_THEME_PATH . '/assets/build/css/tbm.css');
+		wp_register_style(
+			'tbm',
+			CDN_URL . 'css/tbm.css',
+			[],
+			$fmtime,
+			'all'
+		);
+		wp_enqueue_style('tbm');
+
 		// VIP Classic comments script
-		if (is_singular() && get_option('thread_comments') && !is_singular(\PMC\Gallery\Defaults::NAME)) {
+		/* if (is_singular() && get_option('thread_comments') && !is_singular(\PMC\Gallery\Defaults::NAME)) {
 			wp_enqueue_script('comment-reply');
-		}
+		} */
 
 		if (is_singular()) {
 			//Dequeue this script since there is already js that pmc-outbrain widget enqueues this

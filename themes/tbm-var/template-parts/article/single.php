@@ -12,6 +12,7 @@ while (have_posts()) :
 ?>
 
 	<section class="article-with-sidebar // ">
+		<!-- <div class="lrv-a-wrapper lrv-u-flex@tablet lrv-u-margin-t-1"> -->
 		<div class="lrv-a-wrapper lrv-u-flex@tablet lrv-u-margin-t-1">
 
 			<article class="lrv-u-width-100p u-max-width-830 u-border-r-1@tablet u-border-color-brand-secondary-40 u-padding-r-125@tablet u-margin-r-125@tablet">
@@ -57,7 +58,10 @@ while (have_posts()) :
 
 					</div>
 
-					<?php if (\Variety\Inc\Article::get_instance()->is_article_vip(get_the_ID())) { ?>
+					<?php
+					// if (\Variety\Inc\Article::get_instance()->is_article_vip(get_the_ID())) {
+					if (0) {
+					?>
 						<div id="cx-paywall" class="u-max-width-618 lrv-u-margin-lr-auto"></div>
 					<?php } ?>
 
@@ -92,31 +96,47 @@ while (have_posts()) :
 				?>
 
 				<?php
-				\PMC::render_template(
-					sprintf('%s/template-parts/ads/outbrain.php', untrailingslashit(CHILD_THEME_PATH)),
-					[],
-					true
-				);
-				?>
-				<?php
-				if (!\PMC::is_mobile()) {
-					get_template_part('template-parts/ads/article-page-bottom');
-				}
-				?>
-				<?php
 				/* \PMC::render_template(
-					sprintf('%s/template-parts/article/comments.php', untrailingslashit(CHILD_THEME_PATH)),
+					sprintf('%s/template-parts/ads/outbrain.php', untrailingslashit(CHILD_THEME_PATH)),
 					[],
 					true
 				); */
 				?>
 
+				<?php
+				\PMC::render_template(
+					sprintf('%s/template-parts/widgets/brag-jobs.php', untrailingslashit(CHILD_THEME_PATH)),
+					['size' => 4, 'pos' => 'article-bottom', 'order_by' => 'rand'],
+					true
+				);
+				?>
+
+				<?php get_template_part('template-parts/ads/article-page-bottom'); ?>
+
 			</article>
 
 			<aside class="u-width-320@tablet lrv-u-flex-shrink-0 lrv-u-flex@tablet lrv-u-flex-direction-column lrv-a-space-children-vertical lrv-a-space-children--1">
+				<div class="a-hidden@mobile-max">
+					<div class="lrv-u-padding-tb-1@mobile-max ">
+						<section>
+							<div class="admz">
+								<?php pmc_adm_render_ads('mrec'); ?>
+							</div>
+						</section>
+					</div>
+				</div>
 				<?php if (is_active_sidebar('global-sidebar')) : ?>
 					<?php dynamic_sidebar('global-sidebar'); ?>
 				<?php endif; ?>
+				<div id="tbm-sticky-rail-ad" class="a-hidden@mobile-max">
+					<div class="lrv-u-padding-tb-1@mobile-max ">
+						<section>
+							<div class="admz">
+								<?php pmc_adm_render_ads('vrec'); ?>
+							</div>
+						</section>
+					</div>
+				</div>
 			</aside>
 
 		</div>

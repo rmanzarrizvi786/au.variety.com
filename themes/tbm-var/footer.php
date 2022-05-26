@@ -18,7 +18,7 @@
 
 <?php
 
-\pmc_adm_render_ads('mobile-footer');
+// \pmc_adm_render_ads('mobile-footer');
 
 get_template_part('template-parts/footer/main');
 
@@ -34,6 +34,7 @@ get_template_part('template-parts/footer/main');
 	</div><!-- /#main-wrapper -->
 <?php endif; ?>
 
+<div id="body-overlay" style="display: none;"></div>
 </body>
 
 </html>

@@ -41,8 +41,149 @@ class Theme
 		add_filter('script_loader_tag', [$this, 'async_scripts'], 11, 3); // <-- Notice priority 11 for VIP environment
 		add_filter('document_title_parts', [$this, 'get_single_page_post_title']); // hook sets aside title from SEO meta box.
 
+		// Hide Admin Bar
+		add_filter('show_admin_bar', [$this, '_show_admin_bar']);
+		remove_action('wp_head', '_admin_bar_bump_cb');
+
+		add_action('admin_init', [$this, '_admin_init']);
+
 		// Setting this at priority 9 to allow child themes to override if needed
 		add_filter('pmc_fieldmanager_version', [$this, 'get_fieldmanager_version'], 9);
+
+		// Ad in content
+		add_filter('the_content', array($this, 'inject_ads'));
+
+		// Add Vertical column to Posts list
+		add_filter('manage_post_posts_columns', [$this, 'manage_post_posts_columns']);
+		add_action('manage_posts_custom_column', [$this, 'manage_posts_custom_column'], 99, 2);
+
+		add_action('pre_get_posts', [$this, 'author_page_exclude_custom_author_posts']);
+
+		// Replace data-lazy-src
+		add_filter('the_content', array($this, 'replace_img_lazy_src'));
+
+		// Filters for Apple News
+		add_filter('get_the_author_display_name', array($this, 'tbm_the_author_display_name'));
+
+		add_action('admin_post_thumbnail_html', function ($content, $post_id, $thumbnail_id) {
+			$html = '<div style="background-color: lightyellow; padding: 0.25rem">
+			<em>Recommended size: 1200 x 630 (px)</em>
+			</div>';
+			return  $content . $html;
+		}, 10, 3);
+	}
+
+	public function manage_post_posts_columns($columns)
+	{
+		$columns['vertical'] = __('Vertical', 'pmc-variety');
+		// return $columns;
+
+		unset($columns['coauthors'], $columns['comments']);
+		$n_columns = array();
+		$move = 'vertical';
+		$before = 'categories';
+		foreach ($columns as $key => $value) {
+			if ($key == $before) {
+				$n_columns[$move] = $move;
+			}
+			$n_columns[$key] = $value;
+		}
+		$n_columns['coauthors'] = 'Authors';
+		return $n_columns;
+	}
+	function manage_posts_custom_column($column, $post_id)
+	{
+		switch ($column) {
+			case 'vertical':
+				$terms = get_the_term_list($post_id, 'vertical', '', ', ', '');
+				if (is_string($terms))
+					echo $terms;
+				break;
+			case 'coauthors':
+				$custom_author = get_post_meta($post_id, 'author', true);
+				echo $custom_author ? '(' . $custom_author . ')' : '';
+				break;
+		}
+	}
+
+	/*
+	* Show admin bar only for admins and editors
+	*/
+	public function _show_admin_bar()
+	{
+		return current_user_can('edit_posts');
+	}
+
+	/**
+	 * Redirect non-admin users to home page
+	 */
+	public function _admin_init()
+	{
+		if (!current_user_can('edit_posts') && !current_user_can('snaps') && ('/wp-admin/admin-ajax.php' != $_SERVER['PHP_SELF'])) {
+			wp_redirect(home_url());
+			exit;
+		}
+	}
+
+	/*
+	* Inject Ads in content
+	*/
+	public function inject_ads($content)
+	{
+
+		if (function_exists('get_field') && (get_field('disable_ads') || get_field('disable_ads_in_content'))) :
+			return $content;
+		endif;
+
+		if (function_exists('amp_is_request') && amp_is_request()) {
+			return $content;
+		}
+
+		if (is_singular('page')) {
+			return $content;
+		}
+
+		if (
+			(function_exists('get_field') && get_field('paid_content'))
+			|| is_page_template('single-template-featured.php')
+			|| 'post' != get_post_type()
+		) :
+			return $content;
+		endif;
+
+		$count_articles = isset($_POST['count_articles']) ? (int) $_POST['count_articles'] : 1;
+
+		$after_para = function_exists('get_field') && get_field('ads_after') ? get_field('ads_after') : 3;
+
+		ob_start();
+		pmc_adm_render_ads('incontent_1');
+		$content_ad_tag = ob_get_contents();
+		ob_end_clean();
+		if ($after_para == 0) {
+			$content = '<div class="ad-mrec" id="ad-incontent-' . $count_articles . '">' . $content_ad_tag . '</div>' . $content;
+		} else {
+			$content = $this->insert_after_paragraph('<div class="ad-mrec" id="ad-incontent-' . $count_articles . '">' . $content_ad_tag . '</div>', $after_para, $content);
+		}
+
+		return $content;
+	}
+
+	public function insert_after_paragraph($insertion, $paragraph_id, $content)
+	{
+		$closing_p = '</p>';
+		$paragraphs = explode($closing_p, $content);
+		if (count($paragraphs) <= ($paragraph_id + 1)) :
+			return $content;
+		endif;
+		foreach ($paragraphs as $index => $paragraph) {
+			if (trim($paragraph)) {
+				$paragraphs[$index] .= $closing_p;
+			}
+			if ($paragraph_id == $index + 1) {
+				$paragraphs[$index] .= $insertion;
+			}
+		}
+		return implode('', $paragraphs);
 	}
 
 	private function _instantiate_singletons()
@@ -56,6 +197,9 @@ class Theme
 		// register_widget('\PMC\Core\Inc\Widgets\Social_Profiles');
 		// register_widget('\PMC\Core\Inc\Widgets\Newsletter');
 		// register_widget('\PMC\Core\Inc\Widgets\Trending_Now');
+
+		require_once CHILD_THEME_PATH . '/widgets/class-jobs.php';
+		register_widget('\TBM\Jobs');
 	}
 
 	/**
@@ -1031,6 +1175,52 @@ class Theme
 	public function get_fieldmanager_version(): string
 	{
 		return '1.1';
+	}
+
+	public function author_page_exclude_custom_author_posts($query)
+	{
+		if (!is_admin() && $query->is_main_query()) {
+			if (is_author()) {
+				$meta_query = (array)$query->get('meta_query');
+				$meta_query[] = [
+					'relation' => 'OR',
+					[
+						'key' => 'author',
+						'compare' => 'NOT EXISTS'
+					],
+					[
+						'key' => 'author',
+						'value' => '',
+						'compare' => '='
+					],
+				];
+				$query->set('meta_query', $meta_query);
+			}
+		}
+	}
+
+	public function replace_img_lazy_src($content)
+	{
+		$content = str_replace(
+			[
+				'data-lazy-src', 'data-lazy-srcset',
+			],
+			[
+				'src', 'srcset',
+			],
+			$content
+		);
+		return $content;
+	}
+
+	public function tbm_the_author_display_name()
+	{
+		global $post;
+		if (get_field('author') && '' != trim(get_field('author'))) {
+			return get_field('author');
+		}
+		$author_id = $post->post_author;
+		return get_the_author_meta('first_name', $author_id) . ' ' . get_the_author_meta('last_name', $author_id);
 	}
 }
 

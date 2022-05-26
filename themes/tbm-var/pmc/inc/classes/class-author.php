@@ -89,6 +89,19 @@ class Author
 				'author_name'    => $author_nicename,
 				'posts_per_page' => 4,
 				'no_found_rows'  => true,
+
+				'meta_query' => [
+					'relation' => 'OR',
+					[
+						'key' => 'author',
+						'compare' => 'NOT EXISTS'
+					],
+					[
+						'key' => 'author',
+						'value' => '',
+						'compare' => '='
+					],
+				],
 			]
 		);
 
@@ -137,64 +150,71 @@ class Author
 
 		$post_id = (!empty($post_id)) ? $post_id : get_the_ID();
 
-		$byline_instance = \PMC\Core\Inc\Meta\Byline::get_instance();
+		$custom_author = get_post_meta($post_id, 'author', true);
 
-		$authors = $byline_instance->get_authors($post_id);
-		$byline  = $byline_instance->get_the_mini_byline($post_id);
+		if ($custom_author) {
+			$byline = $custom_author;
+		} else {
 
-		$author_data = [];
+			$byline_instance = \PMC\Core\Inc\Meta\Byline::get_instance();
 
-		/**
-		 * If we only have one author, fill in the details.
-		 * This data will not be needed if we have more than one author.
-		 */
-		if (!empty($authors) && is_array($authors) && 1 === count($authors)) {
+			$authors = $byline_instance->get_authors($post_id);
+			$byline  = $byline_instance->get_the_mini_byline($post_id);
 
-			$author = $authors[0];
+			$author_data = [];
 
-			$twitter = [];
+			/**
+			 * If we only have one author, fill in the details.
+			 * This data will not be needed if we have more than one author.
+			 */
+			if (!empty($authors) && is_array($authors) && 1 === count($authors)) {
 
-			if (!empty($author->_pmc_user_twitter)) {
+				$author = $authors[0];
 
-				$share_url = sprintf(
-					'https://twitter.com/intent/follow?screen_name=%1$s&tw_p=followbutton&ref_src=twsrc%5Etfw&original_referer=%2$s',
-					$author->_pmc_user_twitter,
-					rawurlencode(home_url(add_query_arg([], $wp->request)))
-				);
+				$twitter = [];
 
-				$twitter = [
-					'link'      => sprintf('https://twitter.com/%s', trim($author->_pmc_user_twitter, '@')),
-					'handle'    => $author->_pmc_user_twitter,
-					'share_url' => $share_url,
+				if (!empty($author->_pmc_user_twitter)) {
+
+					$share_url = sprintf(
+						'https://twitter.com/intent/follow?screen_name=%1$s&tw_p=followbutton&ref_src=twsrc%5Etfw&original_referer=%2$s',
+						$author->_pmc_user_twitter,
+						rawurlencode(home_url(add_query_arg([], $wp->request)))
+					);
+
+					$twitter = [
+						'link'      => sprintf('https://twitter.com/%s', trim($author->_pmc_user_twitter, '@')),
+						'handle'    => $author->_pmc_user_twitter,
+						'share_url' => $share_url,
+					];
+				}
+
+				$role = (!empty($author->roles[0])) ? $author->roles[0] : $author->_pmc_title;
+
+				$author_data['single_author'] = [
+					'author'    => $author,
+					'more_info' => [
+						'author_name' => $author->display_name,
+						'author_role' => $role,
+						'byline'      => $byline,
+						'twitter'     => $twitter,
+					],
 				];
-			}
 
-			$role = (!empty($author->roles[0])) ? $author->roles[0] : $author->_pmc_title;
+				$user_avatar = get_the_post_thumbnail_url($author->ID, $avatar_size);
 
-			$author_data['single_author'] = [
-				'author'    => $author,
-				'more_info' => [
-					'author_name' => $author->display_name,
-					'author_role' => $role,
-					'byline'      => $byline,
-					'twitter'     => $twitter,
-				],
-			];
+				if (
+					!empty($user_avatar)
+					&& false !== strpos($user_avatar, 'gravatar')
+				) {
+					$user_avatar = false;
+				}
 
-			$user_avatar = get_the_post_thumbnail_url($author->ID, $avatar_size);
-
-			if (
-				!empty($user_avatar)
-				&& false !== strpos($user_avatar, 'gravatar')
-			) {
-				$user_avatar = false;
-			}
-
-			if (!empty($user_avatar)) {
-				$author_data['single_author']['picture'] = [
-					'image' => $user_avatar,
-					'name'  => $author->display_name,
-				];
+				if (!empty($user_avatar)) {
+					$author_data['single_author']['picture'] = [
+						'image' => $user_avatar,
+						'name'  => $author->display_name,
+					];
+				}
 			}
 		}
 
