@@ -86,7 +86,7 @@ $data['mega_menu_footer']['c_icon']['c_icon_url']            = 'https://pmc.com/
 $data['mega_menu_footer']['mega_menu_footer_copyright_text'] = sprintf('Variety Australia/New Zealand&reg; and &copy; %1$s Variety Media, LLC. All Rights Reserved. Published under license from Variety Media, LLC, a subsidiary of Penske Media Corporation', gmdate('Y'));
 
 // Mega subscribe link.
-$data['mega_menu_footer']['c_subscribe_link']['c_link_url']     = 'https://thebrag.com/observer/film-tv/?utm_source=varietyau&utm_medium=Mega';
+$data['mega_menu_footer']['c_subscribe_link']['c_link_url']     = 'https://thebrag.com/observer/entertainment-biz/?utm_source=varietyau&utm_medium=Mega';
 $data['mega_menu_footer']['c_subscribe_link']['modifier_class'] = 'cx-module-header-link-vy';
 
 // Mega Regions + tips.
@@ -122,7 +122,7 @@ $menu_items = [
 	// ],
 	[
 		'label' => __('Newsletters', 'pmc-variety'),
-		'url'   => 'https://thebrag.com/observer/film-tv/',
+		'url'   => 'https://thebrag.com/observer/entertainment-biz/',
 	],
 ];
 if (is_user_logged_in()) {
