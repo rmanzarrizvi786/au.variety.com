@@ -13,6 +13,8 @@ languages
 plugins/ssm-ga/*
 !plugins/ssm-ga/ssm-ga.php
 !plugins/tbm-amp
+!plugins/s3-uploads
+!plugins/tbm-braze
 
 !plugins/pmc-plugins/
 plugins/pmc-plugins/*

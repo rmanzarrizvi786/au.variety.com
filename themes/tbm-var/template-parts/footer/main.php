@@ -20,7 +20,7 @@ if (!empty($issue)) {
 
 // Subscribe Link
 // $footer['c_link_subscribe']['c_link_url'] = 'https://subscribe.variety.com/site/magazine-subscribe-choice';
-$footer['c_link_subscribe']['c_link_url'] = 'https://thebrag.com/observer/film-tv/';
+$footer['c_link_subscribe']['c_link_url'] = 'https://thebrag.com/observer/entertainment-biz/';
 
 // Logo URL.
 $footer['c_logo']['c_logo_url'] = '/';

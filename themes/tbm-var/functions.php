@@ -431,12 +431,12 @@ function brands()
 			'logo_name' => 'Dont-Bore-Us',
 			'ext' => 'svg',
 		],
-		'tio' => [
+		/* 'tio' => [
 			'title' => 'The Industry Observer',
 			'link' => 'https://theindustryobserver.thebrag.com/',
 			'logo_name' => 'The-Industry-Observer',
 			'ext' => 'svg',
-		],
+		], */
 		'rolling-stone-australia' => [
 			'title' => 'Rolling Stone Australia',
 			'link' => 'https://au.rollingstone.com/',
