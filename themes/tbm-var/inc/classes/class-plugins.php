@@ -54,6 +54,7 @@ class Plugins
 		// require_once( CHILD_THEME_PATH . '/plugins/variety-vip/variety-vip.php' );
 
 		require_once(CHILD_THEME_PATH . '/plugins/tbm-adm/tbm-adm.php');
+		require_once(CHILD_THEME_PATH . '/plugins/tbm-infinite-scroll/tbm-infinite-scroll.php');
 		require_once(CHILD_THEME_PATH . '/plugins/tbm-amp/tbm-amp.php');
 		require_once(CHILD_THEME_PATH . '/plugins/tbm-download-variety-content/tbm-download-variety-content.php');
 	}

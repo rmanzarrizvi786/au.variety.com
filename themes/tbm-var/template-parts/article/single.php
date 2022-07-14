@@ -11,7 +11,7 @@ while (have_posts()) :
 	the_post();
 ?>
 
-	<section class="article-with-sidebar // ">
+	<section class="article-with-sidebar // " data-id="<?php echo get_the_ID(); ?>">
 		<!-- <div class="lrv-a-wrapper lrv-u-flex@tablet lrv-u-margin-t-1"> -->
 		<div class="lrv-a-wrapper lrv-u-flex@tablet lrv-u-margin-t-1">
 

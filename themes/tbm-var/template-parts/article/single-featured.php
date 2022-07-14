@@ -112,11 +112,11 @@ while (have_posts()) :
 				?>
 
 				<?php
-				\PMC::render_template(
+				/* \PMC::render_template(
 					sprintf('%s/template-parts/ads/outbrain.php', untrailingslashit(CHILD_THEME_PATH)),
 					[],
 					true
-				);
+				); */
 				?>
 			</div>
 		</div>
