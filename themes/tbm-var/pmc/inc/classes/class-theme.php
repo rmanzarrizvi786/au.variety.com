@@ -71,6 +71,27 @@ class Theme
 			</div>';
 			return  $content . $html;
 		}, 10, 3);
+
+		add_action('edit_form_after_title', function ($post) {
+			$screen = get_current_screen();
+			if ($screen->id != 'post') {
+				return;
+			}
+			if ($post && ('post' != $post->post_type || 'publish' == $post->post_status)) {
+				return;
+			}
+?>
+			<div style="background-color: lightyellow; padding: 0.25rem 0.5rem">
+				<h3>Checklist:</h3>
+				<ol>
+					<li>Does this article adhere EXACTLY to the Crib Notes for this publication?</li>
+					<li>If it’s a news piece: Was it first published by another publication within the last hour?</li>
+					<li>If it was first published over an hour ago, do you have an original & exclusive angle?!</li>
+					<li>Are there any opps to add in a link to a relevant Observer newsletter?</li>
+				</ol>
+			</div>
+<?php
+		});
 	}
 
 	public function manage_post_posts_columns($columns)
