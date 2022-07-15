@@ -6,7 +6,7 @@
 	<?php } ?>
 
 	<?php if (!empty($c_heading_is_primary_heading)) { ?>
-		<h1 id="<?php echo esc_attr($c_heading_id_attr ?? ''); ?>" class="c-heading larva <?php echo esc_attr($modifier_class ?? ''); ?> <?php echo esc_attr($c_heading_classes ?? ''); ?>" data-href="<?php the_permalink(); ?>" data-title="<?php echo htmlentities($title); ?>">
+		<h1 id="<?php echo esc_attr($c_heading_id_attr ?? ''); ?>" class="c-heading larva <?php echo esc_attr($modifier_class ?? ''); ?> <?php echo esc_attr($c_heading_classes ?? ''); ?>" data-href="<?php the_permalink(); ?>" data-title="<?php echo htmlentities(get_the_title()); ?>">
 		<?php } else { ?>
 			<h2 id="<?php echo esc_attr($c_heading_id_attr ?? ''); ?>" class="c-heading larva <?php echo esc_attr($modifier_class ?? ''); ?> <?php echo esc_attr($c_heading_classes ?? ''); ?>">
 			<?php } ?>
