@@ -41,7 +41,7 @@ class InfiniteScroll
     if (!is_singular('post'))
       return;
 
-    wp_enqueue_script('tbm-infinite-scroll', CDN_URL . 'js/infinite-scroll.js', ['jquery'], time());
+    wp_enqueue_script('tbm-infinite-scroll', CDN_URL . 'js/infinite-scroll.js', ['jquery'], '1');
 
     $admin_ajax_url = admin_url('admin-ajax.php');
     global $post;
