@@ -44,6 +44,9 @@ class FloatingPlayer
   {
     if (!is_single())
       return;
+
+    if (!$this->playlistId || '' == trim($this->playlistId))
+      return;
 ?>
     <style>
       #floating-player-wrap {
