@@ -9,9 +9,26 @@
 while (have_posts()) :
 
 	the_post();
+
+	$tags = get_the_tags(get_the_ID());
+	$TagsCD = '';
+	if ($tags) :
+		foreach ($tags as $tag) :
+			$TagsCD .= $tag->slug . ' ';
+		endforeach; // For Each Tag
+	endif; // If there are tags for the post
+
+	$categories = get_the_category(get_the_ID());
+	$CategoryCD = '';
+	if ($categories) :
+		foreach ($categories as $category) :
+			$CategoryCD .= $category->slug . ' ';
+		endforeach; // For Each Category
+	endif; // If there are categories for the post
 ?>
 
 	<section class="article-with-sidebar // " data-id="<?php echo get_the_ID(); ?>">
+		<div class="cats" data-category="<?php echo $CategoryCD; ?>" data-tags="<?php echo $TagsCD; ?>"></div>
 		<!-- <div class="lrv-a-wrapper lrv-u-flex@tablet lrv-u-margin-t-1"> -->
 		<div class="lrv-a-wrapper lrv-u-flex@tablet lrv-u-margin-t-1">
 
