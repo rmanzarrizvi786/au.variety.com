@@ -26,6 +26,8 @@ plugins/pmc-plugins/*
 
 !plugins/cheezcap
 
+uploads
+
 # ignore specific themes
 themes/twenty*/
 
