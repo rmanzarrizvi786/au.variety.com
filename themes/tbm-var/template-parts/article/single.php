@@ -30,7 +30,7 @@ while (have_posts()) :
 	<section class="article-with-sidebar // " data-id="<?php echo get_the_ID(); ?>">
 		<div class="cats" data-category="<?php echo $CategoryCD; ?>" data-tags="<?php echo $TagsCD; ?>"></div>
 		<!-- <div class="lrv-a-wrapper lrv-u-flex@tablet lrv-u-margin-t-1"> -->
-		<div class="lrv-a-wrapper lrv-u-flex@tablet lrv-u-margin-t-1">
+		<div class="lrv-a-wrapper lrv-u-flex@tablet lrv-u-padding-t-1">
 
 			<article class="lrv-u-width-100p u-max-width-830 u-border-r-1@tablet u-border-color-brand-secondary-40 u-padding-r-125@tablet u-margin-r-125@tablet">
 
