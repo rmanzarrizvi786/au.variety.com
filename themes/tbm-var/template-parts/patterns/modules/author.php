@@ -1,7 +1,7 @@
 <?php
 // This is a generated file. Refer to the relevant Twig file for adjusting this markup.
 ?>
-<div class="author // <?php echo esc_attr($author_classes ?? ''); ?>">
+<div class="author // <?php echo esc_attr($author_classes ?? ''); ?>" data-author="<?php echo get_field('author') ? get_field('author') : get_the_author_meta('display_name', get_post_field('post_author', get_the_ID())); ?>">
 	<div class="<?php echo esc_attr($author_inner_classes ?? ''); ?>">
 		<div class="<?php echo esc_attr($author_wrapper_classes ?? ''); ?>">
 			<div class="<?php echo esc_attr($author_content_classes ?? ''); ?>">
