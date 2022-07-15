@@ -24,6 +24,8 @@ plugins/pmc-plugins/*
 !plugins/pmc-plugins/pmc-ajax-pagination
 !plugins/pmc-plugins/fm-widgets
 
+!plugins/tbm-floating-player
+
 !plugins/cheezcap
 
 uploads
