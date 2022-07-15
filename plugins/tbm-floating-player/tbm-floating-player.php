@@ -119,6 +119,7 @@ class FloatingPlayer
             dailymotion
               .createPlayer("floating-player", {
                 playlist: "<?php echo $this->playlistId; ?>",
+                mute: true
               })
               .then((player) => {
                 $('#floating-player-wrap').show();
