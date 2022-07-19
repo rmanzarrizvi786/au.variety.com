@@ -15,6 +15,7 @@ plugins/ssm-ga/*
 !plugins/tbm-amp
 !plugins/s3-uploads
 !plugins/tbm-braze
+!plugins/tbm-push-notifications
 
 !plugins/pmc-plugins/
 plugins/pmc-plugins/*
