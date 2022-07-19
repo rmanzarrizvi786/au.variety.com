@@ -25,7 +25,7 @@ class Braze
     $this->plugin_title = 'TBM Braze';
     $this->plugin_name = 'tbm_braze';
     $this->plugin_slug = 'tbm-braze';
-    $this->is_sandbox = (isset($_ENV) && isset($_ENV['ENVIRONMENT']) && 'sandbox' == $_ENV['ENVIRONMENT']) || str_contains($_SERVER['SERVER_NAME'], 'staging.');
+    $this->is_sandbox = (isset($_ENV) && isset($_ENV['ENVIRONMENT']) && 'sandbox' == $_ENV['ENVIRONMENT']) || str_contains($_SERVER['SERVER_NAME'], 'staging.') || str_contains($_SERVER['SERVER_NAME'], 'variety.thebrag.com');
     $this->api_key = $this->is_sandbox ? 'bba50f73-2e4d-4f8e-97d9-89d8206568bb' : '5fd1c924-ded7-46e7-b75d-1dc4831ecd92';
 
     // add_action('wp_head', [$this, 'wp_head']);
