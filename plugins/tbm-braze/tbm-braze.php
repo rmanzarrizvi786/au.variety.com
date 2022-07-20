@@ -33,8 +33,6 @@ class Braze
 
     $this->api_key = $this->is_sandbox ? '4bdcad2b-f354-48b5-a305-7a9d77eb356e' : '3570732f-b2bd-4687-9b19-e2cb32f226ae';
 
-    // $this->sdk_api_key = $this->is_sandbox ? 'bba50f73-2e4d-4f8e-97d9-89d8206568bb' : '5fd1c924-ded7-46e7-b75d-1dc4831ecd92'; // The Brag Dev
-    // $this->sdk_api_key = $this->is_sandbox ? 'd11a951b-92e7-4bcf-9a17-219c70251fc0' : '5fd1c924-ded7-46e7-b75d-1dc4831ecd92'; // Development Website
     $this->sdk_api_key = $this->is_sandbox ? '83e2253e-1275-4e71-bcd2-e587a3452b71' : 'e62bb798-8639-4eaa-8de3-3da1b59e6b9d'; // Variety Australia
 
     $this->api_url = 'https://rest.iad-05.braze.com';
@@ -50,7 +48,6 @@ class Braze
       'tech' => '445825cf-b657-47b5-8b0c-95ef9972d682',
     ];
 
-    // add_action('wp_head', [$this, 'wp_head']);
     add_action('wp_footer', [$this, 'wp_footer']);
 
     add_action('wp_ajax_get_user_external_id', [$this, 'get_user_external_id']);
@@ -113,7 +110,7 @@ class Braze
         ]
       );
     }
-  }
+  } // publish_post hook
 
   public function get_user_external_id()
   {
@@ -128,7 +125,7 @@ class Braze
     } // If user is logged in
     wp_send_json_error('Not logged in');
     wp_die();
-  }
+  } // get_user_external_id()
 
   public function wp_footer()
   {
@@ -188,8 +185,7 @@ class Braze
 
             // If this is our push primer message
             if (msgId == "push-primer-var") {
-              // We don't want to display the soft push prompt to users on browsers that don't support push, or if the user
-              // has already granted/blocked permission
+              // We don't want to display the soft push prompt to users on browsers that don't support push, or if the user has already granted/blocked permission
               if (
                 !window.braze.isPushSupported() ||
                 window.braze.isPushPermissionGranted() ||
@@ -205,13 +201,10 @@ class Braze
             window.braze.showInAppMessage(inAppMessage);
           }
         });
-
-
-
       }
     </script>
 <?php
-  } // wp_footer();
+  } // wp_footer()
 }
 
 new Braze();
