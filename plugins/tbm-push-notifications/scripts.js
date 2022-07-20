@@ -6,7 +6,7 @@ jQuery(document).ready(function ($) {
   // $("body").append(
   //   '<div class="overlay-push-permission"></div><div class="prompt-push-permission-wrap"><div class="prompt-push-permission"><div class="d-flex align-items-start"><div class="icon"><img alt="Variety Australia" src="/wp-content/themes/tbm-var/assets/app/icons/favicon.png"></div><div class="slidedown-body-message">We\'d like to show you notifications for the latest news and updates. </div><div class="clearfix"></div><div id="onesignal-loading-container"></div></div><div class="btns-wrap"><button class="btn-later">Maybe later</button><button class="btn-allow">Allow</button></div></div></div>'
   // );
-
+  /*
   $(".overlay-push-permission").on("click", function () {
     $(this).hide();
     $(".prompt-push-permission").hide();
@@ -20,7 +20,7 @@ jQuery(document).ready(function ($) {
     // window.braze.requestPushPermission();
   });
 
-  /*
+  
   if (!window.localStorage.getItem("tbm_isOptedOut")) {
     window.localStorage.setItem("tbm_isOptedOut", false);
   }

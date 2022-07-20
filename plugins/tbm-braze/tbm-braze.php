@@ -19,6 +19,10 @@ class Braze
   protected $plugin_slug;
   protected $is_sandbox;
   protected $api_key;
+  protected $sdk_api_key;
+  protected $safariWebsitePushId;
+  protected $api_url;
+  protected $verticalToCanvasId;
 
   public function __construct()
   {
@@ -26,13 +30,87 @@ class Braze
     $this->plugin_name = 'tbm_braze';
     $this->plugin_slug = 'tbm-braze';
     $this->is_sandbox = (isset($_ENV) && isset($_ENV['ENVIRONMENT']) && 'sandbox' == $_ENV['ENVIRONMENT']) || str_contains($_SERVER['SERVER_NAME'], 'staging.') || str_contains($_SERVER['SERVER_NAME'], 'variety.thebrag.com');
-    $this->api_key = $this->is_sandbox ? 'bba50f73-2e4d-4f8e-97d9-89d8206568bb' : '5fd1c924-ded7-46e7-b75d-1dc4831ecd92';
+
+    $this->api_key = $this->is_sandbox ? '4bdcad2b-f354-48b5-a305-7a9d77eb356e' : '3570732f-b2bd-4687-9b19-e2cb32f226ae';
+
+    // $this->sdk_api_key = $this->is_sandbox ? 'bba50f73-2e4d-4f8e-97d9-89d8206568bb' : '5fd1c924-ded7-46e7-b75d-1dc4831ecd92'; // The Brag Dev
+    // $this->sdk_api_key = $this->is_sandbox ? 'd11a951b-92e7-4bcf-9a17-219c70251fc0' : '5fd1c924-ded7-46e7-b75d-1dc4831ecd92'; // Development Website
+    $this->sdk_api_key = $this->is_sandbox ? '83e2253e-1275-4e71-bcd2-e587a3452b71' : 'e62bb798-8639-4eaa-8de3-3da1b59e6b9d'; // Variety Australia
+
+    $this->api_url = 'https://rest.iad-05.braze.com';
+
+    $this->safariWebsitePushId = 'web.com.variety.au';
+
+    $this->verticalToCanvasId = [
+      'film' => 'c0172ba9-9753-84ac-8b7c-37b8dca0d581',
+      'tv' => 'cf3feafa-fd4d-4ae4-a1d2-9290bcf59282',
+      'music' => '94a07ad5-12ac-4030-a934-3ec8ab93782b',
+      'tech' => '60a43c40-c389-4d66-b715-8cd9fa62a6bd',
+    ];
 
     // add_action('wp_head', [$this, 'wp_head']);
     add_action('wp_footer', [$this, 'wp_footer']);
 
     add_action('wp_ajax_get_user_external_id', [$this, 'get_user_external_id']);
     add_action('wp_ajax_nopriv_get_user_external_id', [$this, 'get_user_external_id']);
+
+    add_action('publish_post', [$this, 'publish_post'], 10, 3);
+  }
+
+  function publish_post($post_id, $job, $old_status)
+  {
+    // Stop if post's old status is published
+    if ('publish' == $old_status)
+      return;
+
+    // Stop if the mappign is not set or is empty
+    if (!$this->verticalToCanvasId || !is_array($this->verticalToCanvasId) && empty($this->verticalToCanvasId))
+      return;
+
+    // Get verticals for the post
+    $verticals = get_the_terms($post_id, 'vertical');
+
+    // Stop if vertical is not set
+    if (!$verticals)
+      return;
+    $verticals = wp_list_pluck($verticals, 'slug');
+
+    // Stop if vertical is not an arry or is empty
+    if (!is_array($verticals) || empty($verticals))
+      return;
+
+    // Get verticals for which canvases are mapped
+    $availableVerticals = array_keys($this->verticalToCanvasId);
+    foreach ($verticals as $vertical) {
+      // Stop if vertical is not in canvas mapping array
+      if (!in_array($vertical, $availableVerticals))
+        continue;
+
+      // Get ready with body to send with post request
+      $body = [
+        'canvas_id' => $this->verticalToCanvasId[$vertical],
+        'broadcast' => true,
+        'canvas_entry_properties' => [
+          'title' => get_the_title($post_id),
+          'message' => get_the_excerpt($post_id),
+          'url' => get_the_permalink($post_id),
+          'image_url' => get_the_post_thumbnail_url($post_id)
+        ]
+      ];
+      $body = wp_json_encode($body);
+
+      // Send post request to braze to trigger canvas send
+      wp_remote_post(
+        $this->api_url . '/canvas/trigger/send',
+        [
+          'headers' => [
+            'Content-Type' => 'application/json',
+            'Authorization' => 'Bearer ' . $this->api_key,
+          ],
+          'body' => $body,
+        ]
+      );
+    }
   }
 
   public function get_user_external_id()
@@ -80,14 +158,14 @@ class Braze
         }(window, document, 'script');
 
         // initialize the SDK
-        braze.initialize('<?php echo $this->api_key; ?>', {
+        braze.initialize('<?php echo $this->sdk_api_key; ?>', {
           baseUrl: "sdk.iad-05.braze.com",
-          <?php echo $this->is_sandbox ? 'enableLogging: true' : ''; ?>
+          inAppMessageZIndex: 12000,
+          allowUserSuppliedJavascript: true,
+          safariWebsitePushId: '<?php echo $this->safariWebsitePushId; ?>',
+          <?php echo $this->is_sandbox ? 'minimumIntervalBetweenTriggerActionsInSeconds: 5,' : ''; ?>
+          <?php echo $this->is_sandbox ? 'enableLogging: true,' : ''; ?>
         });
-
-        var message = new braze.SlideUpMessage("Welcome to Braze! This is an in-app message.");
-        message.slideFrom = braze.InAppMessage.SlideFrom.TOP;
-        braze.showInAppMessage(message);
 
         jQuery.get('<?php echo admin_url('admin-ajax.php'); ?>', {
           action: 'get_user_external_id',
@@ -97,12 +175,14 @@ class Braze
             braze.changeUser(user_external_id);
           }
         });
-
-
         braze.logCustomEvent("prime-for-push");
 
+        console.log('Braze: isPushSupported', window.braze.isPushSupported());
+        console.log('Braze: isPushPermissionGranted', window.braze.isPushPermissionGranted());
+        console.log('Braze: isPushBlocked', window.braze.isPushBlocked());
+
         window.braze.subscribeToInAppMessage(function(inAppMessage) {
-          // console.log(inAppMessage);
+          console.log('Braze: inAppMessage', inAppMessage);
           var shouldDisplay = true;
 
           if (inAppMessage instanceof window.braze.InAppMessage) {
@@ -110,7 +190,7 @@ class Braze
             var msgId = inAppMessage.extras["msg-id"];
 
             // If this is our push primer message
-            if (msgId == "push-primer") {
+            if (msgId == "push-primer-var" || msgId == "push-primer") {
               // We don't want to display the soft push prompt to users on browsers that don't support push, or if the user
               // has already granted/blocked permission
               if (
@@ -120,20 +200,27 @@ class Braze
               ) {
                 shouldDisplay = false;
               }
-              if (inAppMessage.buttons[1] != null) {
-                // Prompt the user when the second button is clicked
-                inAppMessage.buttons[1].subscribeToClickedEvent(function() {
+
+
+
+              /* if (inAppMessage.buttons[0] != null) {
+                // Prompt the user when the first button is clicked
+                inAppMessage.buttons[0].subscribeToClickedEvent(function() {
                   window.braze.requestPushPermission();
                 });
-              }
+              } */
             }
           }
+
+          console.log("Braze: shouldDisplay", shouldDisplay);
 
           // Display the message
           if (shouldDisplay) {
             window.braze.showInAppMessage(inAppMessage);
           }
         });
+
+
 
       }
     </script>
