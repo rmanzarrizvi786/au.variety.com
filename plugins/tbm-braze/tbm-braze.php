@@ -47,7 +47,7 @@ class Braze
       'music' => '94a07ad5-12ac-4030-a934-3ec8ab93782b',
       'radio' => '60a43c40-c389-4d66-b715-8cd9fa62a6bd',
       'awards' => '0d97548e-7e7b-439e-a0f7-04af5eeffc60',
-      // 'biz' => '445825cf-b657-47b5-8b0c-95ef9972d682',
+      'tech' => '445825cf-b657-47b5-8b0c-95ef9972d682',
     ];
 
     // add_action('wp_head', [$this, 'wp_head']);
@@ -188,7 +188,7 @@ class Braze
             var msgId = inAppMessage.extras["msg-id"];
 
             // If this is our push primer message
-            if (msgId == "push-primer-var" || msgId == "push-primer") {
+            if (msgId == "push-primer-var") {
               // We don't want to display the soft push prompt to users on browsers that don't support push, or if the user
               // has already granted/blocked permission
               if (
