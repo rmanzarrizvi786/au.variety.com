@@ -180,7 +180,6 @@ class Braze
         braze.logCustomEvent("prime-for-push");
 
         window.braze.subscribeToInAppMessage(function(inAppMessage) {
-          console.log('Braze: inAppMessage', inAppMessage);
           var shouldDisplay = true;
 
           if (inAppMessage instanceof window.braze.InAppMessage) {
@@ -198,19 +197,8 @@ class Braze
               ) {
                 shouldDisplay = false;
               }
-
-
-
-              /* if (inAppMessage.buttons[0] != null) {
-                // Prompt the user when the first button is clicked
-                inAppMessage.buttons[0].subscribeToClickedEvent(function() {
-                  window.braze.requestPushPermission();
-                });
-              } */
             }
           }
-
-          console.log("Braze: shouldDisplay", shouldDisplay);
 
           // Display the message
           if (shouldDisplay) {
