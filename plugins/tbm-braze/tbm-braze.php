@@ -45,7 +45,9 @@ class Braze
       'film' => 'c0172ba9-9753-84ac-8b7c-37b8dca0d581',
       'tv' => 'cf3feafa-fd4d-4ae4-a1d2-9290bcf59282',
       'music' => '94a07ad5-12ac-4030-a934-3ec8ab93782b',
-      'tech' => '60a43c40-c389-4d66-b715-8cd9fa62a6bd',
+      'radio' => '60a43c40-c389-4d66-b715-8cd9fa62a6bd',
+      'awards' => '0d97548e-7e7b-439e-a0f7-04af5eeffc60',
+      // 'biz' => '445825cf-b657-47b5-8b0c-95ef9972d682',
     ];
 
     // add_action('wp_head', [$this, 'wp_head']);
@@ -163,7 +165,7 @@ class Braze
           inAppMessageZIndex: 12000,
           allowUserSuppliedJavascript: true,
           safariWebsitePushId: '<?php echo $this->safariWebsitePushId; ?>',
-          <?php echo $this->is_sandbox ? 'minimumIntervalBetweenTriggerActionsInSeconds: 5,' : ''; ?>
+          <?php echo $this->is_sandbox ? 'minimumIntervalBetweenTriggerActionsInSeconds: 2,' : ''; ?>
           <?php echo $this->is_sandbox ? 'enableLogging: true,' : ''; ?>
         });
 
@@ -176,10 +178,6 @@ class Braze
           }
         });
         braze.logCustomEvent("prime-for-push");
-
-        console.log('Braze: isPushSupported', window.braze.isPushSupported());
-        console.log('Braze: isPushPermissionGranted', window.braze.isPushPermissionGranted());
-        console.log('Braze: isPushBlocked', window.braze.isPushBlocked());
 
         window.braze.subscribeToInAppMessage(function(inAppMessage) {
           console.log('Braze: inAppMessage', inAppMessage);
