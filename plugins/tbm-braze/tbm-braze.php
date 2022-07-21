@@ -70,7 +70,7 @@ class Braze
     add_action('publish_post', [$this, 'publish_post'], 10, 3);
   }
 
-  function publish_post($post_id, $job, $old_status)
+  function publish_post($post_id, $post, $old_status)
   {
     if (!$this->enablePush)
       return;
@@ -179,8 +179,8 @@ class Braze
           inAppMessageZIndex: 12000,
           allowUserSuppliedJavascript: true,
           safariWebsitePushId: '<?php echo $this->safariWebsitePushId; ?>',
-          <?php echo $this->is_sandbox ? 'minimumIntervalBetweenTriggerActionsInSeconds: 2,' : ''; ?>
-          <?php echo $this->is_sandbox ? 'enableLogging: true,' : ''; ?>
+          <?php echo $this->is_sandbox || current_user_can('administrator') ? 'minimumIntervalBetweenTriggerActionsInSeconds: 2,' : ''; ?>
+          <?php echo $this->is_sandbox || current_user_can('administrator') ? 'enableLogging: true,' : ''; ?>
         });
 
         jQuery.get('<?php echo admin_url('admin-ajax.php'); ?>', {
