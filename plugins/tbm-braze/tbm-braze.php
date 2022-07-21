@@ -174,7 +174,7 @@ class Braze
             braze.changeUser(user_external_id);
           }
         });
-        braze.logCustomEvent("prime-for-push");
+        braze.logCustomEvent("prime-for-push-var");
 
         window.braze.subscribeToInAppMessage(function(inAppMessage) {
           var shouldDisplay = true;
