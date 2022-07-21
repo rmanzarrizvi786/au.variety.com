@@ -39,14 +39,25 @@ class Braze
 
     $this->safariWebsitePushId = 'web.com.variety.au';
 
-    $this->verticalToCanvasId = [
-      'film' => 'c0172ba9-9753-84ac-8b7c-37b8dca0d581',
-      'tv' => 'cf3feafa-fd4d-4ae4-a1d2-9290bcf59282',
-      'music' => '94a07ad5-12ac-4030-a934-3ec8ab93782b',
-      'radio' => '60a43c40-c389-4d66-b715-8cd9fa62a6bd',
-      'awards' => '0d97548e-7e7b-439e-a0f7-04af5eeffc60',
-      'tech' => '445825cf-b657-47b5-8b0c-95ef9972d682',
-    ];
+    if ($this->is_sandbox) {
+      $this->verticalToCanvasId = [
+        'film' => 'c0172ba9-9753-84ac-8b7c-37b8dca0d581',
+        'tv' => 'cf3feafa-fd4d-4ae4-a1d2-9290bcf59282',
+        'music' => '94a07ad5-12ac-4030-a934-3ec8ab93782b',
+        'radio' => '60a43c40-c389-4d66-b715-8cd9fa62a6bd',
+        'awards' => '0d97548e-7e7b-439e-a0f7-04af5eeffc60',
+        'tech' => '445825cf-b657-47b5-8b0c-95ef9972d682',
+      ];
+    } else {
+      $this->verticalToCanvasId = [
+        'film' => 'd47b289f-ef44-29e9-7592-a69dc94978a7',
+        'tv' => 'e158234f-52f9-4f81-b246-45790dec9bba',
+        'music' => '12750618-1411-4234-9b4a-a80596ae12e0',
+        'radio' => '18967e74-bcbf-4993-88b0-ed3d1bea1d00',
+        'awards' => '0328e8dd-352e-470e-b2fd-15a8a55c612d',
+        'tech' => '634638f7-14cc-4759-aa4a-d01968626320',
+      ];
+    }
 
     add_action('wp_footer', [$this, 'wp_footer']);
 
