@@ -23,6 +23,7 @@ class Braze
   protected $safariWebsitePushId;
   protected $api_url;
   protected $verticalToCanvasId;
+  protected $enablePush;
 
   public function __construct()
   {
@@ -59,6 +60,8 @@ class Braze
       ];
     }
 
+    $this->enablePush = true;
+
     add_action('wp_footer', [$this, 'wp_footer']);
 
     add_action('wp_ajax_get_user_external_id', [$this, 'get_user_external_id']);
@@ -69,6 +72,9 @@ class Braze
 
   function publish_post($post_id, $job, $old_status)
   {
+    if (!$this->enablePush)
+      return;
+
     // Stop if post's old status is published
     if ('publish' == $old_status)
       return;
@@ -185,33 +191,37 @@ class Braze
             braze.changeUser(user_external_id);
           }
         });
-        braze.logCustomEvent("prime-for-push-var");
 
-        window.braze.subscribeToInAppMessage(function(inAppMessage) {
-          var shouldDisplay = true;
+        <?php if ($this->enablePush) : ?>
+          braze.logCustomEvent("prime-for-push-var");
 
-          if (inAppMessage instanceof window.braze.InAppMessage) {
-            // Read the key-value pair for msg-id
-            var msgId = inAppMessage.extras["msg-id"];
+          window.braze.subscribeToInAppMessage(function(inAppMessage) {
+            var shouldDisplay = true;
 
-            // If this is our push primer message
-            if (msgId == "push-primer-var") {
-              // We don't want to display the soft push prompt to users on browsers that don't support push, or if the user has already granted/blocked permission
-              if (
-                !window.braze.isPushSupported() ||
-                window.braze.isPushPermissionGranted() ||
-                window.braze.isPushBlocked()
-              ) {
-                shouldDisplay = false;
+            if (inAppMessage instanceof window.braze.InAppMessage) {
+              // Read the key-value pair for msg-id
+              var msgId = inAppMessage.extras["msg-id"];
+
+              // If this is our push primer message
+              if (msgId == "push-primer-var") {
+                // We don't want to display the soft push prompt to users on browsers that don't support push, or if the user has already granted/blocked permission
+                if (
+                  !window.braze.isPushSupported() ||
+                  window.braze.isPushPermissionGranted() ||
+                  window.braze.isPushBlocked()
+                ) {
+                  shouldDisplay = false;
+                }
               }
             }
-          }
 
-          // Display the message
-          if (shouldDisplay) {
-            window.braze.showInAppMessage(inAppMessage);
-          }
-        });
+            // Display the message
+            if (shouldDisplay) {
+              window.braze.showInAppMessage(inAppMessage);
+            }
+          });
+        <?php endif; // If push is enabled 
+        ?>
       }
     </script>
 <?php
