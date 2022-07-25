@@ -31,7 +31,7 @@ if ($jobs && is_array($jobs) && !empty($jobs)) {
                         'c_heading_id_attr' => 'section-heading',
                         'c_heading_text' => 'Latest Jobs',
                         'c_heading_url' => 'https://thebrag.com/jobs/',
-                        'c_heading_link_classes' => '',
+                        'c_heading_link_classes' => 'c-heading larva  a-font-accent-m lrv-u-text-align-center lrv-u-padding-tb-075 u-padding-t-025@tablet',
                         'c_heading_outer' => false,
                         'c_heading_outer_classes' => '',
                         'c_heading_is_primary_heading' => false,
