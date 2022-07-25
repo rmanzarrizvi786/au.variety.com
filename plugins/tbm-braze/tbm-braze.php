@@ -148,9 +148,22 @@ class Braze
   {
 ?>
     <script>
-      var user_external_id = null;
+      // var user_external_id = null;
 
-      window.callBraze = () => {
+      window.getUserExternalId = async () => {
+        return new Promise(function(resolve, reject) {
+          jQuery.get('<?php echo admin_url('admin-ajax.php'); ?>', {
+            action: 'get_user_external_id',
+          }, function(res) {
+            if (res.success && res.data) {
+              resolve(res.data);
+            }
+            reject(null);
+          });
+        });
+      }
+
+      window.callBraze = async () => {
         + function(a, p, P, b, y) {
           a.braze = {};
           a.brazeQueue = [];
@@ -183,14 +196,22 @@ class Braze
           <?php echo $this->is_sandbox || current_user_can('administrator') ? 'enableLogging: true,' : ''; ?>
         });
 
-        jQuery.get('<?php echo admin_url('admin-ajax.php'); ?>', {
+        /* jQuery.get('<?php echo admin_url('admin-ajax.php'); ?>', {
           action: 'get_user_external_id',
         }, function(res) {
           if (res.success && res.data) {
             user_external_id = res.data;
             braze.changeUser(user_external_id);
           }
-        });
+        }); */
+
+        if (window.getUserExternalId) {
+          getUserExternalId().then(function(user_external_id) {
+              braze.changeUser(user_external_id);
+            },
+            function(e) {}
+          )
+        }
 
         <?php if ($this->enablePush) : ?>
           braze.logCustomEvent("prime-for-push-var");
