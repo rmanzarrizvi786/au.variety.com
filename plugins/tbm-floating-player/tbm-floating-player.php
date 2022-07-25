@@ -125,7 +125,6 @@ class FloatingPlayer
               })
               .catch((e) => console.error(e));
           }
-
         });
       </script>
     </div>
