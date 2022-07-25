@@ -112,7 +112,6 @@ class FloatingPlayer
       <script>
         jQuery(document).ready(function($) {
           if (screen.width >= 768) {
-
             $('.floating-player-close').on('click', function() {
               $('#floating-player-wrap').detach();
             })
