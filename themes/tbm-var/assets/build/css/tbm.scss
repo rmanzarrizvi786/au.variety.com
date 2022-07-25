@@ -231,6 +231,9 @@ div.main-menu span {
   .col-md-6 {
     width: 50%;
   }
+  .col-md-4 {
+    width: calc(100% / 3);
+  }
   .flex-md-row {
     flex-direction: row;
   }
