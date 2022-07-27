@@ -24,7 +24,7 @@ class DownloadVarietyContent
     $this->plugin_name = 'tbm_download_variety_com_content';
     $this->plugin_slug = 'tbm-download-variety-com-content';
 
-    $this->rs_feed = 'https://variety.com/custom-feed/australia/?v=' . time();
+    $this->rs_feed = ''; // 'https://variety.com/custom-feed/australia/?v=' . time();
 
     $this->author_id = 16;
 
@@ -164,63 +164,67 @@ class DownloadVarietyContent
 
       ini_set('max_execution_time', 600); // 600 seconds = 10 minutes
 
-      include_once(ABSPATH . WPINC . '/feed.php');
-      $rss = fetch_feed($this->rs_feed);
+      if ('' != $this->rs_feed) {
 
-      if (is_wp_error($rss)) {
-        wp_send_json_error(['result' => '<div style="width: 100%; max-width: 100%:">Error fetching feed!</div>']);
-        die();
-      }
 
-      $rss_items = $rss->get_items(0);
+        include_once(ABSPATH . WPINC . '/feed.php');
+        $rss = fetch_feed($this->rs_feed);
 
-      if ($rss_items) {
-        $articles = [];
-        foreach ($rss_items as $item) {
-          $item_categories = $item->get_categories();
-          $categories = $tags = [];
-          if ($item_categories) {
-            foreach ($item_categories as $item_category) {
-              if (category_exists($item_category->term)) {
-                $categories[] = $item_category->term;
-              } else {
-                $tags[] = $item_category->term;
+        if (is_wp_error($rss)) {
+          wp_send_json_error(['result' => '<div style="width: 100%; max-width: 100%:">Error fetching feed!</div>']);
+          die();
+        }
+
+        $rss_items = $rss->get_items(0);
+
+        if ($rss_items) {
+          $articles = [];
+          foreach ($rss_items as $item) {
+            $item_categories = $item->get_categories();
+            $categories = $tags = [];
+            if ($item_categories) {
+              foreach ($item_categories as $item_category) {
+                if (category_exists($item_category->term)) {
+                  $categories[] = $item_category->term;
+                } else {
+                  $tags[] = $item_category->term;
+                }
               }
             }
+
+            $content = $item->get_content();
+            $doc = new \DOMDocument();
+            @$doc->loadHTML($content);
+            $imgs = $doc->getElementsbyTagName('img');
+
+            if ($imgs && isset($imgs->item)) {
+              $image = $imgs->item(0)->getAttribute('src');
+            } else {
+              $image = '';
+            }
+
+            $content = preg_replace("/<img[^>]+\>/i", "", $content, 1);
+
+            $articles[esc_url($item->get_permalink())] = [
+              'title' => esc_html($item->get_title()),
+              'categories' => $categories,
+              'tags' => $tags,
+              'author' => $item->get_author()->name,
+              'image' => $image,
+              'content' => $content,
+              'url' => esc_url($item->get_permalink()),
+            ];
           }
 
-          $content = $item->get_content();
-          $doc = new \DOMDocument();
-          @$doc->loadHTML($content);
-          $imgs = $doc->getElementsbyTagName('img');
+          // wp_send_json_success(['result' => '<pre>' . print_r(array_keys($articles), true) . '</pre>']);
+          // die();
 
-          if ($imgs && isset($imgs->item)) {
-            $image = $imgs->item(0)->getAttribute('src');
-          } else {
-            $image = '';
+          if (in_array($article_url, array_keys($articles))) {
+            $the_article = $articles[$article_url];
+            return $this->createArticle($the_article);
           }
-
-          $content = preg_replace("/<img[^>]+\>/i", "", $content, 1);
-
-          $articles[esc_url($item->get_permalink())] = [
-            'title' => esc_html($item->get_title()),
-            'categories' => $categories,
-            'tags' => $tags,
-            'author' => $item->get_author()->name,
-            'image' => $image,
-            'content' => $content,
-            'url' => esc_url($item->get_permalink()),
-          ];
         }
-
-        // wp_send_json_success(['result' => '<pre>' . print_r(array_keys($articles), true) . '</pre>']);
-        // die();
-
-        if (in_array($article_url, array_keys($articles))) {
-          $the_article = $articles[$article_url];
-          return $this->createArticle($the_article);
-        }
-      }
+      } // If Feed url is not empty
 
       // Not found in feed, try the other way
       return $this->downloadArticleFromUrl($article_url);
@@ -283,6 +287,9 @@ class DownloadVarietyContent
         }
       }
 
+      // wp_send_json_error(array('result' => '<pre>' . print_r($featured_img_credit, true) . '</pre>'));
+      // die();
+
       $dom_xpath = new \DOMXpath($doc);
 
       $content = '';
@@ -295,9 +302,6 @@ class DownloadVarietyContent
         wp_send_json_error(['result' => 'Unknown format!']);
         die();
       }
-
-      // wp_send_json_error(array('result' => '<pre>' . print_r($content_elements, true) . '</pre>'));
-      // die();
 
       foreach ($content_elements as $element) {
 
