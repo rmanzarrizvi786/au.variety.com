@@ -51,19 +51,30 @@ class FloatingPlayer
     <style>
       #floating-player-wrap {
         right: 0;
-        bottom: 0;
+        bottom: 65px;
         box-sizing: border-box;
         display: none;
         background-color: #fff;
         border-radius: 2px;
         box-shadow: 0 0 20px 0 rgb(0 0 0 / 25%);
-        padding: 0 .5rem .5rem;
+
         position: fixed;
         width: 415px;
-        max-width: 100%;
         height: auto;
         z-index: 5000009;
         margin: 0;
+        display: flex;
+        background-color: #2f2d2d;
+
+        max-width: 66%;
+        flex-direction: column;
+        padding: 0;
+      }
+
+      #floating-player-wrap.scrolled {
+        top: 0;
+        bottom: unset;
+        flex-direction: column-reverse;
       }
 
       .floating-player-title {
@@ -71,21 +82,24 @@ class FloatingPlayer
         text-overflow: ellipsis;
         white-space: nowrap;
         font-size: 13px;
-        line-height: 36px;
-        min-height: 36px;
-        padding: 0 46px 0 0;
+        line-height: 24px;
+        min-height: 24px;
+        padding: 0 46px 0 10px;
+        position: relative;
+        font-family: Graphik, sans-serif;
+        color: #fff;
       }
 
       .floating-player-close {
         top: 0;
         background: none;
-        color: #000;
+        color: #fff;
         font-size: 18px;
-        width: 36px;
-        line-height: 32px;
-        min-height: 36px;
+        width: 18px;
+        line-height: 24px;
+        min-height: 24px;
         border-radius: 0;
-        border: 1px solid #fff;
+        border: none;
         cursor: pointer;
         position: absolute;
         right: 0;
@@ -98,36 +112,60 @@ class FloatingPlayer
           right: 20px;
           bottom: 20px;
           display: block;
+          max-width: unset;
+          flex-direction: column;
         }
+
+        #floating-player-wrap.scrolled {
+          top: unset;
+          bottom: 20px;
+        }
+      }
+
+      #dailymotion-pip-small-viewport {
+        --position-top: 0;
+        --position-right: 0;
+        max-width: 66%;
+        left: unset !important;
+        right: 0 !important;
       }
     </style>
     <div id="floating-player-wrap" style="display: none">
       <div class="floating-player-title">
-        <?php echo $this->playerTitle; ?>
         <span class="floating-player-close" style="display: inline;">x</span>
       </div>
-      <script src="https://geo.dailymotion.com/libs/player/<?php echo $this->playerId; ?>.js"></script>
       <div id="floating-player"></div>
+    </div>
+    <script src="https://geo.dailymotion.com/libs/player/<?php echo $this->playerId; ?>.js"></script>
+    <script>
+      jQuery(document).ready(function($) {
 
-      <script>
-        jQuery(document).ready(function($) {
-          if (screen.width >= 768) {
-            $('.floating-player-close').on('click', function() {
-              $('#floating-player-wrap').detach();
-            })
-            dailymotion
-              .createPlayer("floating-player", {
-                playlist: "<?php echo $this->playlistId; ?>"
-              })
-              .then((player) => {
-                $('#floating-player-wrap').show();
-                player.setMute(true);
-              })
-              .catch((e) => console.error(e));
+        $(window).on('scroll', function() {
+          if (screen.width < 768) {
+            if ($(window).scrollTop() >= screen.height / 2) {
+              $('#floating-player-wrap').addClass('scrolled');
+
+            } else {
+              $('#floating-player-wrap').removeClass('scrolled');
+            }
           }
         });
-      </script>
-    </div>
+
+        $('.floating-player-close').on('click', function() {
+          $('#floating-player-wrap').detach();
+        })
+        dailymotion
+          .createPlayer("floating-player", {
+            playlist: "<?php echo $this->playlistId; ?>"
+          })
+          .then((player) => {
+            $('#floating-player-wrap').show();
+            player.setMute(true);
+          })
+          .catch((e) => console.error(e));
+      });
+    </script>
+
 <?php
   } // wp_footer();
 }
