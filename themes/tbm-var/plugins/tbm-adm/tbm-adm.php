@@ -185,6 +185,7 @@ class TBMAds
         if (isset($pagepath)) {
           $html .= 'fusetag.setTargeting("pagepath", ["' . $pagepath . '"]);';
         }
+        $html .= 'fusetag.setTargeting("site", "varietyau");';
         $html .= '</script>';
       }
 
