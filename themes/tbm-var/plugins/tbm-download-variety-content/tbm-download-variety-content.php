@@ -114,6 +114,8 @@ class DownloadVarietyContent
                 continue (2);
               }
             }
+          } elseif ('script' == $child->tagName) {
+            continue;
           }
         }
 
@@ -359,6 +361,7 @@ class DownloadVarietyContent
 
             // script
             if ('script' == $child->tagName) {
+              continue;
               $script_attr = '';
               foreach ($child->attributes as $key => $value) {
                 if ('' != $child->getAttribute($key)) {
@@ -395,7 +398,7 @@ class DownloadVarietyContent
             $content = str_replace('data-lazy-', '', $content);
           }
 
-          // wp_send_json_error(array('result' => '<div style="width: 100%; max-width: 100%:"><code>' . str_replace(['<', '>',], ['&lt;', '&gt;.',], $content) . '</code></div>'));
+          // wp_send_json_error(array('result' => '<div style="width: 100%; max-width: 100%:"><code>' . str_replace(['<', '>',], ['&lt;', '&gt;',], $content) . '</code></div>'));
           // die();
         }
       }
