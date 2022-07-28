@@ -273,7 +273,13 @@ class DownloadVarietyContent
             array_push($categories, $meta->getAttribute('content'));
           }
           if ($meta->getAttribute('name') == 'author') {
-            $authors[] = $meta->getAttribute('content');
+            // $authors[] = $meta->getAttribute('content');
+            $meta_authors = explode(',', $meta->getAttribute('content'));
+            foreach ($meta_authors as $meta_author) {
+              if (!in_array($meta_author, $authors)) {
+                $authors[] = $meta_author;
+              }
+            }
           }
         }
       }
@@ -281,16 +287,32 @@ class DownloadVarietyContent
       $author = implode(', ', $authors);
 
       // Image Credit
-      foreach ($doc->getElementsByTagName('figcaption') as $figcaption) {
+      /* foreach ($doc->getElementsByTagName('figcaption') as $figcaption) {
         if ($figcaption->nodeValue) {
           $featured_img_credit = $figcaption->nodeValue;
+          break;
+        }
+      } */
+
+      $dom_xpath = new \DOMXpath($doc);
+
+      $featured_img_elements = $dom_xpath->query("//*[contains(concat(' ', @class, ' '),'c-figcaption')]");
+      $featured_img_caption = $featured_img_credit = '';
+      foreach ($featured_img_elements as $element) {
+        $children = $element->childNodes;
+        if ($children->length > 0) {
+          foreach ($children as $child) {
+            $featured_img_credit = $this->get_inner_html($child);
+            break;
+          }
         }
       }
 
-      // wp_send_json_error(array('result' => '<pre>' . print_r($featured_img_credit, true) . '</pre>'));
-      // die();
+      // Featured Image Alt
+      $featured_img_alt = $this->getFeaturedImgAlt($dom_xpath);
 
-      $dom_xpath = new \DOMXpath($doc);
+      // wp_send_json_error(array('result' => '<pre>' . print_r($featured_img_alt, true) . '</pre>'));
+      // die();
 
       $content = '';
       $content_elements = $dom_xpath->query("//*[contains(concat(' ', @class, ' '),'vy-cx-page-content ')]");
@@ -391,6 +413,12 @@ class DownloadVarietyContent
         if (isset($featured_img_credit)) {
           $the_article['featured_img_credit'] = $featured_img_credit;
         }
+        if (isset($featured_img_caption)) {
+          $the_article['featured_img_caption'] = $featured_img_caption;
+        }
+        if (isset($featured_img_alt)) {
+          $the_article['featured_img_alt'] = $featured_img_alt;
+        }
 
         return $this->createArticle($the_article);
       }
@@ -435,8 +463,11 @@ class DownloadVarietyContent
     @$doc->loadHTML($html);
     $doc->preserveWhiteSpace = false;
 
-    $meta_og_description = '';
+    $meta_description = $meta_og_description = '';
     foreach ($doc->getElementsByTagName('meta') as $meta) {
+      if ($meta->getAttribute('name') == 'description') {
+        $meta_description = $meta->getAttribute('content');
+      }
       if ($meta->getAttribute('property') == 'og:description') {
         $meta_og_description = $meta->getAttribute('content');
       }
@@ -474,7 +505,7 @@ class DownloadVarietyContent
       'post_name' => $post_name,
       'post_content' => $content,
       'post_title' => $article['title'],
-      'post_excerpt' => $meta_og_description,
+      'post_excerpt' => $meta_description,
       'post_status' => 'draft',
       'post_type' => 'post',
       'post_category' => $cat_IDs,
@@ -521,10 +552,19 @@ class DownloadVarietyContent
 
       if (sizeof($attachments) > 0) {
         $attachment_id = $attachments[0]->ID;
-        if (isset($article['featured_img_credit']))
-          update_post_meta($attachment_id, '_image_credit', trim($article['featured_img_credit']));
+
         // set image as the post thumbnail
         set_post_thumbnail($new_article_id, $attachment_id);
+
+        if (isset($article['featured_img_credit'])) {
+          update_post_meta($attachment_id, '_image_credit', trim($article['featured_img_credit']));
+        }
+        if (isset($article['featured_img_caption'])) {
+          wp_update_post(['ID' => $attachment_id, 'post_excerpt' => trim($article['featured_img_caption'])]);
+        }
+        if (isset($article['featured_img_alt'])) {
+          update_post_meta($attachment_id, '_wp_attachment_image_alt', trim($article['featured_img_alt']));
+        }
       }
     }
 
@@ -627,6 +667,7 @@ class DownloadVarietyContent
         foreach ($doc->getElementsByTagName('figcaption') as $figcaption) {
           if ($figcaption->nodeValue) {
             $featured_img_credit = $figcaption->nodeValue;
+            break;
           }
         }
 
@@ -923,6 +964,36 @@ class DownloadVarietyContent
         }
       }
     }
+  }
+
+  private function getFeaturedImgAlt($dom_xpath, $element = null)
+  {
+    if (!is_null($element)) {
+      if ('img' == $element->tagName) {
+        foreach ($element->attributes as $attr) {
+          if ('alt' == $attr->name)
+            return $attr->value;
+        }
+        return $element;
+      }
+      if ('' != $element->tagName) {
+        foreach ($element->childNodes as $e) {
+          if (isset($e->tagName) && '' != $e->tagName) {
+            return $this->getFeaturedImgAlt($dom_xpath, $e);
+          }
+        }
+      }
+    } else {
+      $featured_img_elements = $dom_xpath->query("//*[contains(concat(' ', @class, ' '),'o-figure')]");
+      foreach ($featured_img_elements as $elem) {
+        if ('img' != $elem->tagName) {
+          foreach ($elem->childNodes as $e) {
+            return $this->getFeaturedImgAlt($dom_xpath, $e);
+          }
+        }
+      }
+    }
+    return '';
   }
 }
 new DownloadVarietyContent();
