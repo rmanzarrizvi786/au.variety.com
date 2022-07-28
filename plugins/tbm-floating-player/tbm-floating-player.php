@@ -23,7 +23,7 @@ class FloatingPlayer
 
     $this->playlistId = 'x6mqi7';
 
-    try {
+    /* try {
       $response = wp_remote_get('https://thebrag.com/wp-json/tbm/floating_dailymotion_playlist_id');
       if ((!is_wp_error($response)) && (200 === wp_remote_retrieve_response_code($response))) {
         $responseBody = json_decode($response['body']);
@@ -33,7 +33,8 @@ class FloatingPlayer
       }
     } catch (\Exception $ex) {
       $this->playlistId = 'x6mqi7';
-    }
+    } */
+    $this->playlistId = 'x6mqi7';
 
     $this->playerTitle = "Editor's Picks";
 
