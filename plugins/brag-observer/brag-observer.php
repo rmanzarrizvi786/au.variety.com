@@ -221,7 +221,8 @@ class BragObserver
         }
       }
 
-      $formData['list'] = 16; // Film & TV ( ID in Brag Observer Lists)
+      // $formData['list'] = 16; // Film & TV ( ID in Brag Observer Lists)
+      $formData['list'] = 61; // Entertainment Biz Observer ( ID in Brag Observer Lists)
 
       /* if (is_user_logged_in()) :
         $current_user = wp_get_current_user();
@@ -240,7 +241,6 @@ class BragObserver
             'source' => isset($formData['source']) ? $formData['source'] : 'VarietyAU',
             'status' => isset($formData['status']) && in_array($formData['status'], ['subscribed', 'unsubscribed']) ? $formData['status'] : 'subscribed',
           ),
-          'sslverify' => !in_array($_SERVER['REMOTE_ADDR'], ['127.0.0.1', '::1']),
         ]
       );
       $responseBody = wp_remote_retrieve_body($response);
