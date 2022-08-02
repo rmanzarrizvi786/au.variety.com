@@ -191,6 +191,7 @@ class Widgets
 		register_widget('\Variety\Inc\Widgets\Section_Awards');
 		register_widget('\Variety\Inc\Widgets\Section_Lists_IHeartRadio');
 		register_widget('\Variety\Inc\Widgets\Section_TV_Film_Music_Theater');
+		register_widget('\Variety\Inc\Widgets\Section_TV_Film_Music_Radio');
 		register_widget('\Variety\Inc\Widgets\Section_VIP');
 		register_widget('\Variety\Inc\Widgets\Special_Report');
 		register_widget('\Variety\Inc\Widgets\The_Magazine');
