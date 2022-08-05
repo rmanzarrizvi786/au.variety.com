@@ -157,7 +157,12 @@ class FloatingPlayer
         })
         dailymotion
           .createPlayer("floating-player", {
-            playlist: "<?php echo $this->playlistId; ?>"
+            playlist: "<?php echo $this->playlistId; ?>",
+            params: {
+              customConfig: {
+                customParams: '/22071836792/SSM_auvariety/preroll'
+              }
+            }
           })
           .then((player) => {
             $('#floating-player-wrap').show();
