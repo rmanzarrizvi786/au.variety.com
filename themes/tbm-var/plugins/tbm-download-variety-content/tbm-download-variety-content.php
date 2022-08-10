@@ -119,7 +119,7 @@ class DownloadVarietyContent
           }
         }
 
-        $innerHTML .= $child->ownerDocument->saveXML($child);
+        $innerHTML .= $child->ownerDocument->saveXML($child, LIBXML_NOEMPTYTAG);
       }
     }
     if ($strip_tags) {
@@ -335,6 +335,13 @@ class DownloadVarietyContent
           foreach ($children as $child) {
             if (!isset($child->tagName))
               continue;
+
+            // h tags
+            foreach (['h1', 'h2', 'h3', 'h4', 'h5', 'h6'] as $h_tag) {
+              if ($h_tag == $child->tagName) {
+                $content .= "<{$h_tag}>" . $this->get_inner_html($child) . "</{$h_tag}>";
+              }
+            }
 
             // p
             if ('p' == $child->tagName) { //} && trim($child->nodeValue) != '') {
