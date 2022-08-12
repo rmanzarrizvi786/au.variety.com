@@ -492,6 +492,7 @@ class DownloadVarietyContent
       '_yoast_wpseo_metadesc' => $meta_og_description,
       'apple_news_is_preview' => '1',
       'apple_news_is_hidden' => '1',
+      'imported_from' => 'variety.com',
     ];
 
     if (isset($article['author']) && '' != trim($article['author'])) {
@@ -613,7 +614,10 @@ class DownloadVarietyContent
         // wp_send_json_error(array('result' => '<pre>' . print_r(str_replace(['<', '>',], ['&lt;', '&gt;',], $html), true) . '</pre>'));
         // die();
 
-        $metas = ['_yoast_wpseo_canonical' => $list_url];
+        $metas = [
+          '_yoast_wpseo_canonical' => $list_url,
+          'imported_from' => 'variety.com',
+        ];
 
         $doc = new \DOMDocument();
         @$doc->loadHTML($html);
