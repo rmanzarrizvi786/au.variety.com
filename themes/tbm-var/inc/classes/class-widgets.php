@@ -195,6 +195,7 @@ class Widgets
 		register_widget('\Variety\Inc\Widgets\Special_Report');
 		register_widget('\Variety\Inc\Widgets\The_Magazine');
 		register_widget('\Variety\Inc\Widgets\Top_Stories');
+		register_widget('\Variety\Inc\Widgets\Top_Stories_TBM'); // 2022-08-12
 		register_widget('\Variety\Inc\Widgets\Trending');
 		register_widget('\Variety\Inc\Widgets\Videos');
 		register_widget('\Variety\Inc\Widgets\VIP_Banner');
