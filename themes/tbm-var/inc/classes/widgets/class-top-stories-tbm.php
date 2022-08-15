@@ -165,8 +165,8 @@ class Top_Stories_TBM extends Variety_Base_Widget
 		if ($top_story_query->have_posts()) {
 			while ($top_story_query->have_posts()) {
 				$top_story_query->the_post();
-				$post_id = get_the_ID();
-				$posts[$post_id] = $post_id;
+				$the_post_id = get_the_ID();
+				$posts[$the_post_id] = $the_post_id;
 			}
 		}
 
@@ -174,8 +174,8 @@ class Top_Stories_TBM extends Variety_Base_Widget
 		$args = array(
 			'posts_per_page'  => $num_articles - count($posts),
 			'post_type'       => 'post',
-			'orderby'         => 'menu_order',
-			'order'           => 'ASC',
+			// 'orderby'         => 'menu_order',
+			// 'order'           => 'ASC',
 			'meta_query' => array(
 				array(
 					'key' => 'imported_from',
@@ -184,13 +184,13 @@ class Top_Stories_TBM extends Variety_Base_Widget
 			)
 		);
 
-		$top_story_query = new \WP_Query($args);
+		$other_stories_query = new \WP_Query($args);
 
-		if ($top_story_query->have_posts()) {
-			while ($top_story_query->have_posts()) {
-				$top_story_query->the_post();
-				$post_id = get_the_ID();
-				$posts[$post_id] = $post_id;
+		if ($other_stories_query->have_posts()) {
+			while ($other_stories_query->have_posts()) {
+				$other_stories_query->the_post();
+				$the_post_id = get_the_ID();
+				$posts[$the_post_id] = $the_post_id;
 			}
 		}
 
