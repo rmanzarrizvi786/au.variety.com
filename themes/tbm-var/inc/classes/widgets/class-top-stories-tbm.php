@@ -176,6 +176,7 @@ class Top_Stories_TBM extends Variety_Base_Widget
 			'post_type'       => 'post',
 			// 'orderby'         => 'menu_order',
 			// 'order'           => 'ASC',
+			'post__not_in' => $posts,
 			'meta_query' => array(
 				array(
 					'key' => 'imported_from',
