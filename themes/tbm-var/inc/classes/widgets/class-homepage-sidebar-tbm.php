@@ -1,28 +1,33 @@
 <?php
 
 /**
- * Top Stories widget (TBM)
+ * Homepage Sidebar widget (TBM)
  *
  * @package pmc-variety-2017
- * @since 2022.08.02
+ * @since 2017.1.0
  */
 
 namespace Variety\Inc\Widgets;
 
-use \PMC_Cache;
-use Variety\Inc\Carousels;
+use \Variety\Inc\Carousels;
 
-class Top_Stories_TBM extends Variety_Base_Widget
+/**
+ * Class Homepage_Sidebar_TBM
+ *
+ * @since 2017.1.0
+ * @see Global_Curateable
+ */
+class Homepage_Sidebar_TBM extends Variety_Base_Widget
 {
 
-	const ID = 'top-stories-tbm';
+	const ID = 'homepage-sidebar-tbm';
 
 	/**
 	 * Count - How many posts to display.
 	 *
 	 * @var int
 	 */
-	private $count = 6;
+	private $count = 5;
 
 	/**
 	 * Register widget with WordPress.
@@ -32,8 +37,8 @@ class Top_Stories_TBM extends Variety_Base_Widget
 	{
 		parent::__construct(
 			static::ID,
-			__('Variety AU - Top Stories', 'pmc-variety'),
-			array('description' => __('Displays most recent articles in TV, Film, Awards, and Digital', 'pmc-variety'))
+			__('Variety AU Sidebar', 'pmc-variety'),
+			array('description' => __('Displays articles with what to watch in curation taxonomy', 'pmc-variety'))
 		);
 	}
 
@@ -43,21 +48,17 @@ class Top_Stories_TBM extends Variety_Base_Widget
 	 *
 	 * @since 2017-10-04 Amit Gupta - CDWE-702
 	 *
-	 * @return array
+	 * @param  array $data Widget data, from global data or overrides.
+	 * @return mixed
 	 *
 	 */
-	public function get_uncached_data($data = [])
+	public function get_uncached_data($data = array())
 	{
 
 		if (!empty($data['count'])) {
 			$this->count = $data['count'];
 		}
 
-		/* if (!empty($data['carousel'])) {
-			$data['articles'] = Carousels::get_carousel_posts($data['carousel'], $this->count);
-		} else {
-			$data['articles'] = [];
-		} */
 		$posts = $this->get_top_stories_tbm($this->count);
 
 		$data['articles'] = [];
@@ -115,17 +116,30 @@ class Top_Stories_TBM extends Variety_Base_Widget
 	 *
 	 * Get the option fields for this widget.
 	 *
+	 * @since 2017.1.0
 	 * @return array
 	 *
 	 */
 	protected function get_fields()
 	{
-		return [
-			'popular_count' => [
-				'label' => __('Number Of Sidebar Popular Articles', 'pmc-variety'),
+		return array(
+			'title'     => array(
+				'label' => __('Title', 'pmc-variety'),
 				'type'  => 'text',
-			],
-		];
+			),
+			'more_text' => array(
+				'label' => __('More Link Text', 'pmc-variety'),
+				'type'  => 'text',
+			),
+			'more_link' => array(
+				'label' => __('More Link URL', 'pmc-variety'),
+				'type'  => 'url',
+			),
+			'count'     => array(
+				'label' => __('Number Of Articles', 'pmc-variety'),
+				'type'  => 'text',
+			),
+		);
 	}
 
 	private function get_top_stories_tbm($num_articles = 5)
@@ -149,13 +163,13 @@ class Top_Stories_TBM extends Variety_Base_Widget
 
 		// Get TOP STORY using taxonomy
 		$args = array(
-			'posts_per_page'  => 1,
+			'posts_per_page'  => $num_articles,
 			'post_type'       => 'post',
 			'tax_query'      => array(
 				array(
 					'taxonomy'    => 'curation',
 					'field' => 'slug',
-					'terms'  => 'top-story',
+					'terms'  => 'what-to-watch',
 				),
 			),
 		);
@@ -165,33 +179,8 @@ class Top_Stories_TBM extends Variety_Base_Widget
 		if ($top_story_query->have_posts()) {
 			while ($top_story_query->have_posts()) {
 				$top_story_query->the_post();
-				$the_post_id = get_the_ID();
-				$posts[$the_post_id] = $the_post_id;
-			}
-		}
-
-		// Get rest of the stories which are not imported
-		$args = array(
-			'posts_per_page'  => $num_articles - count($posts),
-			'post_type'       => 'post',
-			// 'orderby'         => 'menu_order',
-			// 'order'           => 'ASC',
-			'post__not_in' => $posts,
-			'meta_query' => array(
-				array(
-					'key' => 'imported_from',
-					'compare' => 'NOT EXISTS'
-				),
-			)
-		);
-
-		$other_stories_query = new \WP_Query($args);
-
-		if ($other_stories_query->have_posts()) {
-			while ($other_stories_query->have_posts()) {
-				$other_stories_query->the_post();
-				$the_post_id = get_the_ID();
-				$posts[$the_post_id] = $the_post_id;
+				$post_id = get_the_ID();
+				$posts[$post_id] = $post_id;
 			}
 		}
 
@@ -284,8 +273,6 @@ class Top_Stories_TBM extends Variety_Base_Widget
 					}
 				}
 
-				// $add = (object) $add;
-
 				$output[get_the_ID()] = $add;
 			}
 		}
@@ -294,10 +281,6 @@ class Top_Stories_TBM extends Variety_Base_Widget
 		wp_reset_postdata();
 		$post = $old_post;
 
-		// echo '<pre>' . print_r($output, true) . '</pre>';
-
 		return $output;
 	}
 }
-
-//EOF

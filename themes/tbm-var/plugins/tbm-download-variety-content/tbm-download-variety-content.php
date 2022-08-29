@@ -119,7 +119,7 @@ class DownloadVarietyContent
           }
         }
 
-        $innerHTML .= $child->ownerDocument->saveXML($child);
+        $innerHTML .= $child->ownerDocument->saveXML($child, LIBXML_NOEMPTYTAG);
       }
     }
     if ($strip_tags) {
@@ -336,6 +336,13 @@ class DownloadVarietyContent
             if (!isset($child->tagName))
               continue;
 
+            // h tags
+            foreach (['h1', 'h2', 'h3', 'h4', 'h5', 'h6'] as $h_tag) {
+              if ($h_tag == $child->tagName) {
+                $content .= "<{$h_tag}>" . $this->get_inner_html($child) . "</{$h_tag}>";
+              }
+            }
+
             // p
             if ('p' == $child->tagName) { //} && trim($child->nodeValue) != '') {
               $content .= '<p>' . $this->get_inner_html($child) . '</p>';
@@ -488,6 +495,7 @@ class DownloadVarietyContent
       '_yoast_wpseo_metadesc' => $meta_og_description,
       'apple_news_is_preview' => '1',
       'apple_news_is_hidden' => '1',
+      'imported_from' => 'variety.com',
     ];
 
     if (isset($article['author']) && '' != trim($article['author'])) {
@@ -609,7 +617,10 @@ class DownloadVarietyContent
         // wp_send_json_error(array('result' => '<pre>' . print_r(str_replace(['<', '>',], ['&lt;', '&gt;',], $html), true) . '</pre>'));
         // die();
 
-        $metas = ['_yoast_wpseo_canonical' => $list_url];
+        $metas = [
+          '_yoast_wpseo_canonical' => $list_url,
+          'imported_from' => 'variety.com',
+        ];
 
         $doc = new \DOMDocument();
         @$doc->loadHTML($html);
