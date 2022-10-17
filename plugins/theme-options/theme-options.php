@@ -69,40 +69,24 @@ function tbm_theme_options()
                 </div>
                 <!-- Featured Article for Infinite Scroll ID -->
 
-                <!-- <div class="col-12 col-md-6">
-                    <h3>Force Trending on Home page</h3>
+                <div class="col-12 col-md-6">
+                    <h3>DailyMotion Player</h3>
 
                     <div class="form-group">
-                        <label>Post ID</label>
+                        <label>Player ID</label>
                         <label class="reset">x</label>
-                        <input name="force_most_viewed" id="force_most_viewed" type="number" value="<?php echo stripslashes(get_option('force_most_viewed')); ?>" placeholder="" class="form-control">
+                        <input name="tbm_floating_dm_player_id" id="tbm_floating_dm_player_id" type="text" value="<?php echo get_option('tbm_floating_dm_player_id'); ?>" placeholder="" class="form-control">
                     </div>
-                </div> -->
-                <!-- Force Trending on Home page -->
-                <hr>
-                <div class="row">
-                    <div class="col-12">
-                        <h3>DailyMotion Player</h3>
-                    </div>
-                    <div class="col-12">
-                        <div class="form-group">
-                            <label>Player ID</label>
-                            <label class="reset">x</label>
-                            <input name="tbm_floating_dm_player_id" id="tbm_floating_dm_player_id" type="text" value="<?php echo get_option('tbm_floating_dm_player_id'); ?>" placeholder="" class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <label>Playlist ID</label>
-                            <label class="reset">x</label>
-                            <input name="tbm_floating_dm_playlist_id" id="tbm_floating_dm_playlist_id" type="text" value="<?php echo get_option('tbm_floating_dm_playlist_id'); ?>" placeholder="" class="form-control">
-                        </div>
+                    <div class="form-group">
+                        <label>Playlist ID</label>
+                        <label class="reset">x</label>
+                        <input name="tbm_floating_dm_playlist_id" id="tbm_floating_dm_playlist_id" type="text" value="<?php echo get_option('tbm_floating_dm_playlist_id'); ?>" placeholder="" class="form-control">
                     </div>
                 </div>
-                <!-- DailyMotion Player -->
-                <hr>
-                <div class="row">
-                    <div class="col-12">
-                        <h3>GAM Ad Unit</h3>
-                    </div>
+
+                <div class="col-12 col-md-6">
+                    <h3>GAM Ad Unit</h3>
+
                     <div class="row">
                         <div class="col-12">
                             <div class="form-group">
@@ -113,6 +97,17 @@ function tbm_theme_options()
                         </div>
                     </div>
                 </div>
+
+                <!-- <div class="col-12 col-md-6">
+                    <h3>Force Trending on Home page</h3>
+
+                    <div class="form-group">
+                        <label>Post ID</label>
+                        <label class="reset">x</label>
+                        <input name="force_most_viewed" id="force_most_viewed" type="number" value="<?php echo stripslashes(get_option('force_most_viewed')); ?>" placeholder="" class="form-control">
+                    </div>
+                </div> -->
+                <!-- Force Trending on Home page -->
             </div>
 
             <div class="row">
