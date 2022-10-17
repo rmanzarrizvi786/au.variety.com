@@ -79,6 +79,40 @@ function tbm_theme_options()
                     </div>
                 </div> -->
                 <!-- Force Trending on Home page -->
+                <hr>
+                <div class="row">
+                    <div class="col-12">
+                        <h3>DailyMotion Player</h3>
+                    </div>
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label>Player ID</label>
+                            <label class="reset">x</label>
+                            <input name="tbm_floating_dm_player_id" id="tbm_floating_dm_player_id" type="text" value="<?php echo get_option('tbm_floating_dm_player_id'); ?>" placeholder="" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label>Playlist ID</label>
+                            <label class="reset">x</label>
+                            <input name="tbm_floating_dm_playlist_id" id="tbm_floating_dm_playlist_id" type="text" value="<?php echo get_option('tbm_floating_dm_playlist_id'); ?>" placeholder="" class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <!-- DailyMotion Player -->
+                <hr>
+                <div class="row">
+                    <div class="col-12">
+                        <h3>GAM Ad Unit</h3>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label>ID</label>
+                                <label class="reset">x</label>
+                                <input name="tbm_gam_ad_unit_id" id="tbm_gam_ad_unit_id" type="text" value="<?php echo get_option('tbm_gam_ad_unit_id'); ?>" placeholder="" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <div class="row">

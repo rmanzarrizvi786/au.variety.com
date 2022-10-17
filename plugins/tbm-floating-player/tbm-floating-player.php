@@ -11,46 +11,36 @@
 
 namespace TBM;
 
-class FloatingPlayer
-{
-  protected $playerId;
-  protected $playlistId;
-  protected $playerTitle;
+class FloatingPlayer {
+    protected $playerId;
+    protected $playlistId;
+    protected $playerTitle;
 
-  public function __construct()
-  {
-    $this->playerId = 'x9m1x';
+    public function __construct() {
+        $this->playerId = get_option('tbm_floating_dm_player_id', '');
+        $this->playlistId = get_option('tbm_floating_dm_playlist_id', '');
+        $this->adId = get_option('tbm_gam_ad_unit_id', '');
+        $this->playerTitle = "Editor's Picks";
 
-    $this->playlistId = 'x6mqi7';
+        add_action('wp_footer', [$this, 'wp_footer']);
+    }
 
-    /* try {
-      $response = wp_remote_get('https://thebrag.com/wp-json/tbm/floating_dailymotion_playlist_id');
-      if ((!is_wp_error($response)) && (200 === wp_remote_retrieve_response_code($response))) {
-        $responseBody = json_decode($response['body']);
-        if (json_last_error() === JSON_ERROR_NONE) {
-          $this->playlistId = $responseBody;
+    public function wp_footer() {
+        if (!is_single()) {
+            return;
         }
-      }
-    } catch (\Exception $ex) {
-      $this->playlistId = 'x6mqi7';
-    } */
-    $this->playlistId = 'x6mqi7';
-
-    $this->playerTitle = "Editor's Picks";
-
-    add_action('wp_footer', [$this, 'wp_footer']);
-  }
-
-  public function wp_footer()
-  {
-    if (!is_single())
-      return;
-
-    if (!$this->playlistId || '' == trim($this->playlistId))
-      return;
+        if (!$this->playerId || '' == trim($this->playerId)) {
+            return;
+        }
+        if (!$this->playlistId || '' == trim($this->playlistId)) {
+            return;
+        }
+        if (function_exists('get_field') && (get_field('disable_ads', $post->id) || get_field('disable_ads_in_content'))) {
+            return;
+        }
 ?>
-    <style>
-      #floating-player-wrap {
+<style>
+    #floating-player-wrap {
         right: 0;
         bottom: 65px;
         box-sizing: border-box;
@@ -70,15 +60,15 @@ class FloatingPlayer
         max-width: 66%;
         flex-direction: column;
         padding: 0;
-      }
+    }
 
-      #floating-player-wrap.scrolled {
+    #floating-player-wrap.scrolled {
         top: 0;
         bottom: unset;
         flex-direction: column-reverse;
-      }
+    }
 
-      .floating-player-title {
+    .floating-player-title {
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
@@ -89,9 +79,9 @@ class FloatingPlayer
         position: relative;
         font-family: Graphik, sans-serif;
         color: #fff;
-      }
+    }
 
-      .floating-player-close {
+    .floating-player-close {
         top: 0;
         background: none;
         color: #fff;
@@ -106,74 +96,71 @@ class FloatingPlayer
         right: 0;
         text-align: center;
         z-index: 899;
-      }
+    }
 
-      @media(min-width: 48rem) {
+    @media(min-width: 48rem) {
         #floating-player-wrap {
-          right: 20px;
-          bottom: 20px;
-          display: block;
-          max-width: unset;
-          flex-direction: column;
+            right: 20px;
+            bottom: 20px;
+            display: block;
+            max-width: unset;
+            flex-direction: column;
         }
 
         #floating-player-wrap.scrolled {
-          top: unset;
-          bottom: 20px;
+            top: unset;
+            bottom: 20px;
         }
-      }
+    }
 
-      #dailymotion-pip-small-viewport {
+    #dailymotion-pip-small-viewport {
         --position-top: 0;
         --position-right: 0;
         max-width: 66%;
         left: unset !important;
         right: 0 !important;
-      }
-    </style>
-    <div id="floating-player-wrap" style="display: none">
-      <div class="floating-player-title">
+    }
+</style>
+
+<div id="floating-player-wrap" style="display: none">
+    <div class="floating-player-title">
         <span class="floating-player-close" style="display: inline;">x</span>
-      </div>
-      <div id="floating-player"></div>
     </div>
-    <script src="https://geo.dailymotion.com/libs/player/<?php echo $this->playerId; ?>.js"></script>
-    <script>
-      jQuery(document).ready(function($) {
-
+    <div id="floating-player"></div>
+</div>
+<script src="https://geo.dailymotion.com/libs/player/<?php echo $this->playerId; ?>.js"></script>
+<script>
+    jQuery(document).ready(function($) {
         $(window).on('scroll', function() {
-          if (screen.width < 768) {
-            if ($(window).scrollTop() >= screen.height / 2) {
-              $('#floating-player-wrap').addClass('scrolled');
-
-            } else {
-              $('#floating-player-wrap').removeClass('scrolled');
+            if (screen.width < 768) {
+                if ($(window).scrollTop() >= screen.height / 2) {
+                    $('#floating-player-wrap').addClass('scrolled')
+                } else {
+                    $('#floating-player-wrap').removeClass('scrolled')
+                }
             }
-          }
-        });
+        })
 
         $('.floating-player-close').on('click', function() {
-          $('#floating-player-wrap').detach();
+            $('#floating-player-wrap').detach()
         })
-        dailymotion
-          .createPlayer("floating-player", {
-            playlist: "<?php echo $this->playlistId; ?>",
+        dailymotion.createPlayer("floating-player", {
+            playlist: '<?php echo $this->playlistId; ?>',
             params: {
-              customConfig: {
-                customParams: '/22071836792/SSM_auvariety/preroll'
-              }
+                customConfig: {
+                    customParams: '/22071836792/<?php echo $this->adId; ?>/preroll'
+                }
             }
-          })
-          .then((player) => {
-            $('#floating-player-wrap').show();
-            player.setMute(true);
-          })
-          .catch((e) => console.error(e));
-      });
-    </script>
-
+        })
+    .then((player) => {
+        $('#floating-player-wrap').show()
+        player.setMute(true)
+    })
+    .catch((e) => console.error(e))
+    })
+</script>
 <?php
-  } // wp_footer();
+    } // wp_footer();
 }
 
 new FloatingPlayer();
