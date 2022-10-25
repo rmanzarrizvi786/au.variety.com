@@ -383,6 +383,8 @@ function _wpcom_vip_load_plugin_sanitizer($folder)
 
 function pmc_adm_render_ads($ad_location, $ad_title = '', $echo = true, $provider = '')
 {
+	if (get_field('disable_ads'))
+		return;
 	if (!class_exists('\TBM\TBMAds'))
 		return;
 	$ads = \TBM\TBMAds::get_instance();
