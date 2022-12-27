@@ -38,6 +38,9 @@ class FloatingPlayer {
         if (function_exists('get_field') && (get_field('disable_ads', $post->id) || get_field('disable_ads_in_content'))) {
             return;
         }
+        if (function_exists('get_field') && (get_field('disable_player', $post->id))) {
+            return;
+        }
 ?>
 <style>
     #floating-player-wrap {
