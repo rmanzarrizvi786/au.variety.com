@@ -106,6 +106,7 @@ jQuery(document).ready(function ($) {
             .data("pubdate");
           window.dataLayer = window.dataLayer || [];
           window.dataLayer.push({
+            event: 'articleView',
             AuthorCD: author,
             CategoryCD: cats,
             TagsCD: tags,
