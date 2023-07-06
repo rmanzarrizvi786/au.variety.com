@@ -13,11 +13,7 @@
 			<?php if (!empty($c_lazy_image_markup1)) { ?>
 				<?php //echo wp_kses_post($c_lazy_image_markup ?? ''); ?>
 			<?php } else { ?>
-				<?php if(get_the_ID() == 9536) { ?>
-					$c_lazy_image_src_url = "https://images.thebrag.com/var/uploads/2023/07/gary-vee.jpg";
-				<?php } ?>
-
-				<img class="c-lazy-image__img <?php echo esc_attr($c_lazy_image_img_classes ?? ''); ?> id-<?php echo get_the_ID(); ?>" src="<?php echo esc_url($c_lazy_image_src_url ?? ''); ?>" alt="<?php echo esc_attr($c_lazy_image_alt_attr ?? ''); ?>" data-lazy-srcset="<?php echo esc_attr($c_lazy_image_srcset_attr ?? ''); ?>" data-lazy-sizes="<?php echo esc_attr($c_lazy_image_sizes_attr ?? ''); ?>" height="<?php echo esc_attr($c_lazy_image_height_attr ?? ''); ?>" width="<?php echo esc_attr($c_lazy_image_width_attr ?? ''); ?>">
+				<img class="c-lazy-image__img <?php echo esc_attr($c_lazy_image_img_classes ?? ''); ?>" src="<?php echo esc_url($c_lazy_image_src_url ?? ''); ?>" alt="<?php echo esc_attr($c_lazy_image_alt_attr ?? ''); ?>" data-lazy-srcset="<?php echo esc_attr($c_lazy_image_srcset_attr ?? ''); ?>" data-lazy-sizes="<?php echo esc_attr($c_lazy_image_sizes_attr ?? ''); ?>" height="<?php echo esc_attr($c_lazy_image_height_attr ?? ''); ?>" width="<?php echo esc_attr($c_lazy_image_width_attr ?? ''); ?>">
 			<?php } ?>
 
 			<?php if (!empty($c_lazy_image_crop_class)) { ?>
