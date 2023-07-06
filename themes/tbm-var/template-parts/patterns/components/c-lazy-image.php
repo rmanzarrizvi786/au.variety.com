@@ -10,8 +10,8 @@
 			<div class="<?php echo esc_attr($c_lazy_image_crop_class ?? ''); ?>" style="<?php echo esc_attr($c_lazy_image_crop_style_attr ?? ''); ?>">
 			<?php } ?>
 
-			<?php if (!empty($c_lazy_image_markup)) { ?>
-				<?php echo wp_kses_post($c_lazy_image_markup ?? ''); ?>
+			<?php if (!empty($c_lazy_image_markup1)) { ?>
+				<?php //echo wp_kses_post($c_lazy_image_markup ?? ''); ?>
 			<?php } else { ?>
 				<?php if(get_the_ID() == 9536) { ?>
 					$c_lazy_image_src_url = "https://images.thebrag.com/var/uploads/2023/07/gary-vee.jpg";
