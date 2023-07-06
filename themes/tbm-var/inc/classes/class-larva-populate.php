@@ -59,6 +59,8 @@ class Larva_Populate
 		$post_id      = $current_post->ID;
 		$c_lazy_image = [];
 
+		$c_lazy_image['post_id'] = $post_id;
+
 		// Add default image size if one is not provided
 		if (empty($options)) {
 			$options['image_size'] = 'landscape-large';

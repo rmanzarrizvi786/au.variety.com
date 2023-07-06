@@ -33,9 +33,9 @@
 		</div>
 	</div>
 
-	<?php if (!empty($c_lazy_image)) { ?>
+	<?php if (!empty($c_lazy_image)) { ?>	
 		<div class="o-story__secondary lrv-a-glue-parent // <?php echo esc_attr($o_story_secondary_classes ?? ''); ?>">
-			<!-- <?php echo get_the_ID(); ?> -->
+			<!-- <?php echo $c_lazy_image['post_id']; ?> -->
 			<?php if(get_the_ID() == 9536) { ?>
 				$c_lazy_image_src_url = "https://images.thebrag.com/var/uploads/2023/07/gary-vee.jpg";
 			<?php } ?>
