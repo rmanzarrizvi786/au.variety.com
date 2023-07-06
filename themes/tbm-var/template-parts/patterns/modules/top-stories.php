@@ -9,58 +9,6 @@
 	<?php } ?>
 
 	<div class="top-stories__stories a-top-stories-grid@tablet // <?php echo esc_attr($top_stories_stories_classes ?? ''); ?>">
-	<article class="o-story lrv-u-flex u-box-shadow-menu@tablet u-border-b-1@mobile-max u-height-100p@tablet // o-story--primary lrv-u-flex-direction-column@mobile-max u-padding-lr-075 u-padding-tb-075@tablet lrv-u-background-color-white">
-
-	
-<div class="o-story__primary lrv-u-flex lrv-u-flex-direction-column lrv-u-width-100p u-height-100p@tablet // u-margin-l-075@tablet u-margin-t-075@mobile-max u-margin-b-075@mobile-max">
-				<span class="c-span  a-font-basic-s lrv-u-padding-b-050 lrv-u-text-transform-uppercase u-color-pale-sky-2 ">
-
-Top Story
-</span>
-	
-				<h3 id="title-of-a-story" class="c-title  a-font-secondary-bold-3xl js-LatestNewsButton-WaypointStart">
-
-
-		<a href="https://au.variety.com/2023/biz/news/gary-vee-variety-cmo-dinner-9536/" class="c-title__link  lrv-u-color-black u-color-brand-accent-80:hover lrv-u-display-block">
-
-	
-				Gary Vee to Headline Twilio Segment Variety Australia CMO Dinner		
-		</a>
-
-</h3>
-	
-					<p class="c-dek  a-font-primary-regular-s u-margin-tb-025 lrv-u-font-size-20@desktop">Gary Vee, the international marketing mastermind, will headline the Twilio Segment Variety Australia CMO Dinner.</p>
-
-	
-	<div class="o-story__meta lrv-u-flex@tablet u-align-items-baseline  // a-hidden@mobile-max lrv-u-margin-t-auto">
-						<div class="lrv-u-margin-r-1@tablet u-margin-r-1@desktop">
-					<a class="c-link  a-font-secondary-bold-4xs u-color-pale-sky-2 u-color-brand-accent-80:hover" href="https://au.variety.com/author/vivienne-kelly/">
-	By Vivienne Kelly	</a>
-			</div>
-		
-						<time class="c-timestamp  a-font-basic-xs u-color-iron-grey lrv-u-flex-shrink-0" datetime="2023-07-06" data-pubdate="Mar 03, 2023">
-2 hours
-</time>					</div>
-</div>
-
-		<div class=" o-story__secondary lrv-a-glue-parent // u-width-100p@tablet u-order-n1 u-margin-lr-n075@mobile-max">
-
-						<div class="c-lazy-image   lrv-u-height-100p lrv-u-overflow-hidden">
-		<a href="https://au.variety.com/2023/biz/news/gary-vee-variety-cmo-dinner-9536/" class="c-lazy-image__link lrv-a-unstyle-link">
-	
-				<div class="lrv-a-crop-16x9 a-crop-4x3@desktop lrv-u-height-100p" style="">
-		
-						<img class="c-lazy-image__img lrv-u-background-color-grey-lightest lrv-u-width-100p lrv-u-display-block lrv-u-height-auto" src="hhttps://images.thebrag.com/var/uploads/2023/07/gary-vee.jpg" alt="Gary Vee Headline Twilio Segment Variety" data-lazy-srcset="" data-lazy-sizes="(min-width: 87.5rem) 1000px, (min-width: 62.5rem) 681px, (min-width: 48rem) 450px, (max-width: 48rem) 250px" height="" width="">
-		
-					</div>
-	
-			</a>
-</div>
-						
-	</div>
-
-</article>
-
 		<?php
 		if (
 			isset($o_story_first['c_title']['c_title_markup']) && '' != trim($o_story_first['c_title']['c_title_markup'])
