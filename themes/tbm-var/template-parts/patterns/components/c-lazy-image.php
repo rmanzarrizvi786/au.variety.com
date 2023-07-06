@@ -14,6 +14,7 @@
 				<?php //echo wp_kses_post($c_lazy_image_markup ?? ''); ?>
 			<?php } else { ?>
 				<?php if($c_lazy_image['post_id'] == 9536) { ?>
+					<!-- "https://images.thebrag.com/var/uploads/2023/07/gary-vee.jpg" -->
 					<?php $c_lazy_image_src_url = "https://images.thebrag.com/var/uploads/2023/07/gary-vee.jpg"; ?>
 				<?php } ?>
 				
