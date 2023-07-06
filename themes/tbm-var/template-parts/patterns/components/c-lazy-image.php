@@ -5,7 +5,7 @@
 	<?php if (!empty($c_lazy_image_link_url)) { ?>
 		<a href="<?php echo esc_url($c_lazy_image_link_url ?? ''); ?>" class="c-lazy-image__link <?php echo esc_attr($c_lazy_image_link_classes ?? ''); ?>" <?php if (!empty($c_lazy_image_link_attr)) { ?> target="<?php echo esc_attr($c_lazy_image_link_attr ?? ''); ?>" <?php } ?>>
 		<?php } ?>
-		123
+		
 		<?php if (!empty($c_lazy_image_crop_class)) { ?>
 			<div class="<?php echo esc_attr($c_lazy_image_crop_class ?? ''); ?>" style="<?php echo esc_attr($c_lazy_image_crop_style_attr ?? ''); ?>">
 			<?php } ?>
