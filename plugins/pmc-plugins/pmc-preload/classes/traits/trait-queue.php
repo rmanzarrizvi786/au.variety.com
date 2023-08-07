@@ -75,5 +75,5 @@ trait Queue {
 	 *
 	 * @param mixed $item Item to process.
 	 */
-	abstract protected function _process_item( $item ): void;
+	//abstract protected function _process_item( $item ): void;
 }
