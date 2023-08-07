@@ -21,6 +21,10 @@ define('PMC_PLUGINS_DIR', WP_PLUGIN_DIR . '/pmc-plugins/');
 define('CDN_URL', CHILD_THEME_URL . '/assets/build/');
 // define('CDN_URL', 'https://cdn.thebrag.com/var/');
 
+if (is_singular('pmc-gallery')) {
+	wp_enqueue_style('gallery', TBM_CDN . '/assets/css/gallery.css', [], '20210813.1', 'all');
+}
+
 
 if (!defined('PMC_SITE_NAME')) {
 	define('PMC_SITE_NAME', 'variety');
@@ -73,6 +77,28 @@ require_once PMC_CORE_PATH . '/inc/helpers/gallery-helpers.php';
 
 require_once PMC_PLUGINS_DIR . '/pmc-global-functions/pmc-global-functions.php';
 require_once PMC_PLUGINS_DIR . '/pmc-global-functions/classes/traits/trait-singleton.php';
+
+/**
+ * Temporary function to exclude wpcom-thumbnail-editor from RS
+ * This plugin is loaded by core-v2 and has to be excluded from RS
+ * Adding this here because RS class is set to run on after_setup_theme
+ * hook which is too late for this.
+ */
+function rollingstone_exclude_plugins(array $plugins = [])
+{
+
+    if (empty($plugins['plugins'])) {
+
+        $plugins['plugins'] = [];
+    }
+
+    $plugins['plugins'][]     = 'wpcom-thumbnail-editor';
+    $plugins['pmc-plugins'][] = 'pmc-gallery-v3';
+
+    return $plugins;
+}
+
+add_filter('load_pmc_plugins_exclude', 'rollingstone_exclude_plugins');
 
 require_once CHILD_THEME_PATH . '/inc/helpers/autoloader.php';
 
@@ -637,4 +663,115 @@ function inject_ga4()
         gtag('config', 'G-L8V4HEDPRH');
     </script>
     <?php
+}
+
+
+add_action('attachments_register', 'gallery_attachments');
+add_action('init', 'register_post_types');
+add_action('widgets_init', 'tbm_register_sidebars');
+
+/**
+ * Function is used to register post `pmc-attachments`.
+ */
+function register_post_types()
+{
+	register_post_type(
+		'pmc-gallery',
+		array(
+			'labels'        => array(
+				'name'               => esc_html__('Galleries', 'pmc-gallery-v4'),
+				'singular_name'      => esc_html__('Gallery', 'pmc-gallery-v4'),
+				'add_new'            => esc_html__('Add New Gallery', 'pmc-gallery-v4'),
+				'add_new_item'       => esc_html__('Add New Gallery', 'pmc-gallery-v4'),
+				'edit'               => esc_html__('Edit Gallery', 'pmc-gallery-v4'),
+				'edit_item'          => esc_html__('Edit Gallery', 'pmc-gallery-v4'),
+				'new_item'           => esc_html__('New Gallery', 'pmc-gallery-v4'),
+				'view'               => esc_html__('View Gallery', 'pmc-gallery-v4'),
+				'view_item'          => esc_html__('View Gallery', 'pmc-gallery-v4'),
+				'search_items'       => esc_html__('Search Galleries', 'pmc-gallery-v4'),
+				'not_found'          => esc_html__('No Gallery found', 'pmc-gallery-v4'),
+				'not_found_in_trash' => esc_html__('No Gallery found in Trash', 'pmc-gallery-v4'),
+			),
+			'public'        => true,
+			'menu_position' => 5,
+			'supports'      => array(
+				'title',
+				'editor',
+				'author',
+				'excerpt',
+				'comments',
+				'thumbnail',
+				'custom-fields',
+				'trackbacks',
+				'revisions',
+			),
+			'taxonomies'    => array('category', 'post_tag'),
+			// 'menu_icon'     => self::$url . 'assets/build/images/icon.png',
+			'has_archive'   => true,
+			'rewrite'       => array(
+				'slug' => apply_filters('pmc_gallery_standalone_slug', 'gallery'),
+			),
+		)
+	);
+}
+
+function gallery_attachments($attachments)
+{
+	$fields = array(
+		array(
+			'name'      => 'title',
+			'type'      => 'text',
+			'label'     => __('Title', 'photos'),
+			'default'   => 'title',
+		),
+		array(
+			'name'      => 'date',
+			'type'      => 'text',
+			'label'     => __('Date', 'photos'),
+			'default'   => 'date',
+		),
+		array(
+			'name'      => 'content',
+			'type'      => 'textarea',
+			'label'     => __('Content', 'photos'),
+			'default'   => 'content',
+		),
+		array(
+			'name'      => 'credit',
+			'type'      => 'text',
+			'label'     => __('Credit', 'photos'),
+			'default'   => 'credit',
+		),
+	);
+	$args = array(
+		'label'         => 'Gallery', // title of the meta box (string)
+		'post_type'     => array('pmc-gallery'), // all post types to utilize (string|array)
+		'position'      => 'normal', // meta box position (string) (normal, side or advanced)
+		'priority'      => 'high', // meta box priority (string) (high, default, low, core)
+		'filetype'      => null,  // no filetype limit // allowed file type(s) (array) (image|video|text|audio|application)
+		'note'          => 'Attach images here!', // include a note within the meta box (string)
+		'append'        => true, // by default new Attachments will be appended to the list but you can have then prepend if you set this to false
+		'button_text'   => __('Attach Images', 'images'), // text for 'Attach' button in meta box (string)
+		'modal_text'    => __('Attach', 'images'), // text for modal 'Attach' button (string)
+		'router'        => 'browse', // which tab should be the default in the modal (string) (browse|upload)
+		'post_parent'   => false, // whether Attachments should set 'Uploaded to' (if not already set)
+		'fields'        => $fields, // fields array
+	);
+
+	$attachments->register('gallery_attachments', $args); // unique instance name
+}
+
+function tbm_register_sidebars()
+{
+
+	register_sidebar(
+		array(
+			'name'          => __('Gallery Right Sidebar', 'pmc'),
+			'id'            => 'gallery-right',
+			'before_widget' => false,
+			'after_widget'  => false,
+			'before_title'  => false,
+			'after_title'   => false,
+		)
+	);
 }
