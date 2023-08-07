@@ -775,3 +775,10 @@ function tbm_register_sidebars()
 		)
 	);
 }
+
+function add_custom_post_type_to_query( $query ) {
+	if ( is_home() ) {
+	    $query->set( 'post_type', array('post', 'pmc-gallery', 'nav_menu_item') );
+	}
+}
+add_action( 'pre_get_posts', 'add_custom_post_type_to_query' );
