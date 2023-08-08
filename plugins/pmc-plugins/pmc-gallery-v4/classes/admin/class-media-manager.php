@@ -274,6 +274,8 @@ class Media_Manager
 
 		$query = array_intersect_key($query, array_flip($keys));
 
+		$query['posts_per_page'] = 500;
+
 		$query['post_type'] = array(
 			'attachment',
 			\PMC\Gallery\Attachment_Detail::NAME,
