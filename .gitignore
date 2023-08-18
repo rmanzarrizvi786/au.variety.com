@@ -4,7 +4,7 @@ plugins/*
 !plugins/tbm-shout-writer-beer
 !plugins/tbm-adm
 !plugins/brag-observer
-!plugins/theme-options
+plugins/theme-options
 !plugins/tbm-media-helper
 
 languages
