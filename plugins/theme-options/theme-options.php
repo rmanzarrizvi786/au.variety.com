@@ -63,7 +63,7 @@ function rest_get_latest()
         $articles_arr = [
             'read_more' => [
                 'title' => 'Read More',
-                'link' => 'https://au.rollingstone.com',
+                'link' => 'https://au.variety.com',
             ],
             'articles' => []
         ];
