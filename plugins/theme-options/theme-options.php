@@ -26,6 +26,16 @@ function tbm_theme_options_rest_api_init()
     ));
 }
 
+function string_limit_words($string, $word_limit)
+{
+    $words = explode(' ', $string, ($word_limit + 1));
+    if (count($words) > $word_limit) {
+        array_pop($words);
+        return implode(' ', $words) . '...';
+    }
+    return implode(' ', $words);
+}
+
 function rest_get_latest()
 {
     global $post;
@@ -114,7 +124,7 @@ function rest_get_latest()
 
             $image = '' !== get_the_post_thumbnail() ? get_the_post_thumbnail_url() : '';
             $metadesc = get_post_meta(get_the_ID(), '_yoast_wpseo_metadesc', true);
-            $excerpt = trim($metadesc) != '' ? $metadesc : get_the_excerpt();
+            $excerpt = trim($$metadesc) != '' ? $metadesc : string_limit_words(get_the_excerpt(), 25);
 
             $articles_arr['articles'][] = [
                 'image' => $image,
