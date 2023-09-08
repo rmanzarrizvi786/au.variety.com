@@ -782,3 +782,34 @@ function add_custom_post_type_to_query( $query ) {
 	}
 }
 add_action( 'pre_get_posts', 'add_custom_post_type_to_query' );
+
+# Create excerpt at the end of a sentence
+
+function tbm_the_excerpt( $excerpt ) {
+    $excerpt = str_replace( ' [&hellip;]', '', $excerpt );
+    $excerpt = str_replace( 'St. ', 'St*& ', $excerpt );
+
+    $excerpt = str_replace( 'aka. ', 'aka*& ', $excerpt );
+    $excerpt = str_replace( 'a.k.a. ', 'a*&a*&a ', $excerpt );
+    $excerpt = str_replace( 'a.k.a ', 'a*&a*&a ', $excerpt );
+
+    $excerpt = str_replace( 'M.I.A. ', 'm*&i*&a ', $excerpt );
+    $excerpt = str_replace( 'M.I.A ', 'm*&i*&a ', $excerpt );
+
+    $excerpt = str_replace( 'Dr. ', 'Dr*& ', $excerpt );
+
+    $excerpt = explode('// ', $excerpt);
+    $excerpt = count( $excerpt ) > 1 ? $excerpt[1] : $excerpt[0];
+    $excerpt = explode('.', $excerpt);
+    $excerpt = explode('!', $excerpt[0]);
+    $excerpt = explode('?', $excerpt[0]);
+    $excerpt = explode('…', $excerpt[0]);
+
+    $excerpt = str_replace( 'St*& ', 'St. ', $excerpt[0] );
+    $excerpt = str_replace( 'aka*& ', 'aka. ', $excerpt );
+    $excerpt = str_replace( 'a*&a*&a ', 'a.k.a. ', $excerpt );
+    $excerpt = str_replace( 'm*&i*&a ', 'M.I.A. ', $excerpt );
+    $excerpt = str_replace( 'Dr*& ', 'Dr. ', $excerpt );
+
+    return $excerpt . '.';
+}
