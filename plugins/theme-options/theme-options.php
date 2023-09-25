@@ -77,8 +77,8 @@ function rest_latest_articles() {
                 'image' => $image,
                 'title' => get_the_title(),
                 'category' => $categories[0]->cat_name,
-                'brand_logo' => 'https://images.thebrag.com/common/brands/thebrag.png',
-                'brand_link' => 'https://thebrag.com',
+                'brand_logo' => 'https://images-r2.thebrag.com/common/brands/202309/au.variety-dark.png',
+                'brank_link' => 'https://au.variety.com',
                 'excerpt' =>  $excerpt,
                 'link' => get_the_permalink(),
             ]; 
@@ -183,8 +183,8 @@ function rest_get_latest()
                 'image' => $image,
                 'title' => get_the_title(),
                 'category' => $category,
-                'brand_logo' => 'https://images.thebrag.com/common/brands/The-Brag_combo-light.svg',
-                'brank_link' => 'https://thebrag.com',
+                'brand_logo' => 'https://images-r2.thebrag.com/common/brands/202309/au.variety-dark.png',
+                'brank_link' => 'https://au.variety.com',
                 'excerpt' => $excerpt,
                 'link' => get_the_permalink(),
             ];
