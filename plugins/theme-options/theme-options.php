@@ -38,13 +38,13 @@ function rest_latest_articles() {
         'post_status' => 'publish',
         'ignore_sticky_posts' => 1,
         'posts_per_page' => 5,
-        'meta_query' => array(
-            array(
-                'key' => 'not_brand_safe',
-                'value' => 0,
-                'compare' => 'LIKE',
-            )
-        )
+        // 'meta_query' => array(
+        //     array(
+        //         'key' => 'not_brand_safe',
+        //         'value' => 0,
+        //         'compare' => 'LIKE',
+        //     )
+        // )
     ];
 
     $query = new WP_Query($args);
