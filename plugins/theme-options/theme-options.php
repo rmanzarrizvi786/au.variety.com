@@ -24,6 +24,69 @@ function tbm_theme_options_rest_api_init()
         'callback' => 'rest_get_latest',
         'permission_callback' => '__return_true',
     ));
+
+    register_rest_route('tbm', '/thelatest', array(
+        'methods' => 'GET',
+        'callback' => 'rest_latest_articles',
+        'permission_callback' => '__return_true',
+    ));
+}
+
+function rest_latest_articles() {
+    $articles_arr = array();
+    $args = [
+        'post_status' => 'publish',
+        'ignore_sticky_posts' => 1,
+        'posts_per_page' => 5,
+        'meta_query' => array(
+            array(
+                'key' => 'not_brand_safe',
+                'value' => 0,
+                'compare' => 'LIKE',
+            )
+        )
+    ];
+
+    $query = new WP_Query($args);
+    if ( $query->have_posts()) :
+        while ($query->have_posts()) :
+            $query->the_post();
+            
+            $categories = get_the_category();
+            if ($categories) :
+                if (isset($categories[0]) && 'Evergreen' != $categories[0]->cat_name) :
+                    if (0 == $categories[0]->parent) :
+                        $category = $categories[0]->cat_name;
+                    else : $parent_category = get_category($categories[0]->parent);
+                        $category = $parent_category->cat_name;
+                    endif;
+                elseif (isset($categories[1])) :
+                    if (0 == $categories[1]->parent) :
+                        $category = $categories[1]->cat_name;
+                    else : $parent_category = get_category($categories[1]->parent);
+                        $category = $parent_category->cat_name;
+                    endif;
+                endif;
+            endif;
+
+            $image = '' !== get_the_post_thumbnail() ? get_the_post_thumbnail_url() : '';
+            $metadesc = get_post_meta(get_the_ID(), '_yoast_wpseo_metadesc', true);
+            $excerpt = tbm_the_excerpt( $metadesc );
+            
+            $articles_arr[] = [
+                'image' => $image,
+                'title' => get_the_title(),
+                'category' => $categories[0]->cat_name,
+                'brand_logo' => 'https://images.thebrag.com/common/brands/thebrag.png',
+                'brand_link' => 'https://thebrag.com',
+                'excerpt' =>  $excerpt,
+                'link' => get_the_permalink(),
+            ]; 
+        endwhile;
+        wp_reset_query();
+    endif;
+
+    return $articles_arr;
 }
 
 function rest_get_latest()
