@@ -37,6 +37,8 @@ $bg_color_class = is_home() || (is_archive() && !is_author() && !is_tag('documen
 	<?php wp_head(); ?>
 	<?php do_action('pmc_tags_head'); ?>
 
+	<meta name='impact-site-verification' value='c9d092e3-f72c-4cca-b780-64a051b0a192'>
+
 	<style>
 
 	</style>
