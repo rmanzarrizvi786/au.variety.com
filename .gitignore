@@ -21,7 +21,7 @@ service-worker.js
 firebase-messaging-sw.js
 package*.json
 
-!plugins/pmc-plugins/
+!plugins/pmc-plugins
 
 !plugins/tbm-floating-player
 
