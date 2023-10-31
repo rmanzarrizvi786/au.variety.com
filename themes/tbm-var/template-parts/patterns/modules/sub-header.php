@@ -13,4 +13,9 @@
 			<?php } ?>
 		</div>
 	</div>
+	<?php if( $c_heading['c_heading_text'] ) : ?>
+	<div style="height: 110px; background-color: #0172fc;">
+		<img src="https://images-r2.thebrag.com/var/uploads/bb_stan.jpg" style="height: 6.875rem" alt="">
+	</div>
+	<?php endif; ?>
 </header>
