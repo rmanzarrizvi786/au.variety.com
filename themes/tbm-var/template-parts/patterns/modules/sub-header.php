@@ -14,7 +14,7 @@
 		</div>
 	</div>
 	<?php if( $c_heading['c_heading_text'] ) : ?>
-	<a href="https://www.stan.com.au/?utm_source=the-brag-media&utm_medium=sponsorship&utm_campaign=variety-tv-btyb" style="height: 110px; background-color: #0172fc; margin-bottom: 21px; display: block;">
+	<a href="https://www.stan.com.au/?utm_source=the-brag-media&utm_medium=sponsorship&utm_campaign=variety-tv-btyb" style="height: 110px; background-color: #0172fc; margin-bottom: 21px; display: block;" target="_blank">
 		<img src="https://images-r2.thebrag.com/var/uploads/bb_stan.jpg" style="height: 6.875rem" alt="">
 	</a>
 	<?php endif; ?>
