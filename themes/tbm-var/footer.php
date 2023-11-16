@@ -7,7 +7,7 @@
  */
 
 ?>
-
+</div>
 <?php if (!\PMC\Gallery\View::is_standard_gallery() && !is_page_template('page-editorial-hub.php') && !is_tag('documentaries-to-watch')) : ?>
 
 	<?php // PMC::render_template( CHILD_THEME_PATH . '/template-parts/module/newswire.php', [], true ); 
