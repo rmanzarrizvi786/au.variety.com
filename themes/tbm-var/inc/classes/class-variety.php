@@ -195,13 +195,13 @@ class Variety
 		return array_merge(
 			$args,
 			[
-				'public'              => false,
+				'public' => false,
 				'exclude_from_search' => false,
-				'publicly_queryable'  => false,
-				'show_ui'             => true,
-				'show_in_menu'        => true,
-				'show_in_nav_menus'   => false,
-				'show_in_admin_bar'   => false,
+				'publicly_queryable' => false,
+				'show_ui' => true,
+				'show_in_menu' => true,
+				'show_in_nav_menus' => false,
+				'show_in_admin_bar' => false,
 			]
 		);
 	}
@@ -479,8 +479,8 @@ class Variety
 		}
 
 		$vip_posts = [];
-		$args      = [
-			'post_type'      => ['variety_vip_post', 'variety_vip_video', 'variety_vip_report'],
+		$args = [
+			'post_type' => ['variety_vip_post', 'variety_vip_video', 'variety_vip_report'],
 			'posts_per_page' => 2,
 		];
 
@@ -494,21 +494,21 @@ class Variety
 				$vip_post = $template;
 
 				// Title.
-				$vip_post['c_title']['c_title_url']  = $the_permalink;
+				$vip_post['c_title']['c_title_url'] = $the_permalink;
 				$vip_post['c_title']['c_title_text'] = variety_get_card_title();
 
 				// Featured Image/Video.
 				$image = \PMC\Core\Inc\Media::get_instance()->get_image_data(get_post_thumbnail_id(), 'landscape-large');
 
 				if (!empty($image['src'])) {
-					$vip_post['c_lazy_image']['c_lazy_image_link_url']        = $the_permalink;
-					$vip_post['c_lazy_image']['c_lazy_image_alt_attr']        = $image['image_alt'];
+					$vip_post['c_lazy_image']['c_lazy_image_link_url'] = $the_permalink;
+					$vip_post['c_lazy_image']['c_lazy_image_alt_attr'] = $image['image_alt'];
 					$vip_post['c_lazy_image']['c_lazy_image_placeholder_url'] = \PMC\Core\Inc\Media::get_instance()->get_placeholder_img_url();
-					$vip_post['c_lazy_image']['c_lazy_image_srcset_attr']     = \wp_get_attachment_image_srcset(get_post_thumbnail_id());
-					$vip_post['c_lazy_image']['c_lazy_image_sizes_attr']      = \wp_get_attachment_image_sizes(get_post_thumbnail_id());
-					$vip_post['c_lazy_image']['c_lazy_image_src_url']         = $image['src'];
-					$vip_post['c_figcaption']['c_figcaption_caption_markup']  = $image['image_caption'];
-					$vip_post['c_figcaption']['c_figcaption_credit_text']     = $image['image_credit'];
+					$vip_post['c_lazy_image']['c_lazy_image_srcset_attr'] = \wp_get_attachment_image_srcset(get_post_thumbnail_id());
+					$vip_post['c_lazy_image']['c_lazy_image_sizes_attr'] = \wp_get_attachment_image_sizes(get_post_thumbnail_id());
+					$vip_post['c_lazy_image']['c_lazy_image_src_url'] = $image['src'];
+					$vip_post['c_figcaption']['c_figcaption_caption_markup'] = $image['image_caption'];
+					$vip_post['c_figcaption']['c_figcaption_credit_text'] = $image['image_credit'];
 				} else {
 					$vip_post['c_lazy_image'] = [];
 				}
@@ -516,19 +516,19 @@ class Variety
 				$vip_post['is_video'] = false;
 
 				if (PMC_Featured_Video_Override::get_instance()->has_featured_video(get_the_ID())) {
-					$vip_post['is_video']            = true;
+					$vip_post['is_video'] = true;
 					$vip_post['video_permalink_url'] = $the_permalink;
 				}
 
-				$vip_post['o_taxonomy_item']['c_span']['c_span_text']         = __('VIP+', 'pmc-variety');
-				$vip_post['o_taxonomy_item']['c_span']['c_span_url']          = \Variety\Plugins\Variety_VIP\VIP::vip_url();
+				$vip_post['o_taxonomy_item']['c_span']['c_span_text'] = __('VIP+', 'pmc-variety');
+				$vip_post['o_taxonomy_item']['c_span']['c_span_url'] = \Variety\Plugins\Variety_VIP\VIP::vip_url();
 				$vip_post['o_taxonomy_item']['c_span']['c_span_link_classes'] = str_replace('u-color-pale-sky-2', 'u-color-brand-vip-primary', $vip_post['o_taxonomy_item']['c_span']['c_span_link_classes']);
 
 				// Time.
 				$vip_post['c_timestamp']['c_timestamp_text'] = variety_human_time_diff(get_the_ID());
 
 				// Add to vip_posts, if there are any VIP posts
-				$vip_posts[] = $vip_post;
+				//$vip_posts[] = $vip_post;
 			}
 		}
 
