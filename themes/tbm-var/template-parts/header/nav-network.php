@@ -1,6 +1,6 @@
 <div class="nav-network-wrap" style="width: 100%; z-index: 11;">
     <a href="#" class="l_toggle_menu_network">
-        <img src="https://cdn.thebrag.com/tbm/The-Brag-Media-300px-light.png" alt="The BRAG Media" style="height: 15px !important;">
+        <img src="https://images-r2.thebrag.com/common/brands/202309/TBM_White.png" alt="The BRAG Media" style="height: 20px !important;">
         <i class="caret-down" style="font-size: 12px"></i>
     </a>
     <div class="brands__sub-menu is-open" id="menu-network" style="display: none;">
