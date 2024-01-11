@@ -69,7 +69,7 @@ class Theme
 			$html = '<div style="background-color: lightyellow; padding: 0.25rem">
 			<em>Recommended size: 1200 x 630 (px)</em>
 			</div>';
-			return  $content . $html;
+			return $content . $html;
 		}, 10, 3);
 
 		add_action('edit_form_after_title', function ($post) {
@@ -80,7 +80,7 @@ class Theme
 			if ($post && ('post' != $post->post_type || 'publish' == $post->post_status)) {
 				return;
 			}
-?>
+			?>
 			<div style="background-color: lightyellow; padding: 0.25rem 0.5rem">
 				<h3>Checklist:</h3>
 				<ol>
@@ -90,7 +90,7 @@ class Theme
 					<li>Are there any opps to add in a link to a relevant Observer newsletter?</li>
 				</ol>
 			</div>
-<?php
+			<?php
 		});
 	}
 
@@ -128,8 +128,8 @@ class Theme
 	}
 
 	/*
-	* Show admin bar only for admins and editors
-	*/
+	 * Show admin bar only for admins and editors
+	 */
 	public function _show_admin_bar()
 	{
 		return current_user_can('edit_posts');
@@ -147,12 +147,12 @@ class Theme
 	}
 
 	/*
-	* Inject Ads in content
-	*/
+	 * Inject Ads in content
+	 */
 	public function inject_ads($content)
 	{
 
-		if (function_exists('get_field') && (get_field('disable_ads') || get_field('disable_ads_in_content'))) :
+		if (function_exists('get_field') && (get_field('disable_ads') || get_field('disable_ads_in_content'))):
 			return $content;
 		endif;
 
@@ -168,7 +168,7 @@ class Theme
 			(function_exists('get_field') && get_field('paid_content'))
 			|| is_page_template('single-template-featured.php')
 			|| 'post' != get_post_type()
-		) :
+		):
 			return $content;
 		endif;
 
@@ -193,7 +193,7 @@ class Theme
 	{
 		$closing_p = '</p>';
 		$paragraphs = explode($closing_p, $content);
-		if (count($paragraphs) <= ($paragraph_id + 1)) :
+		if (count($paragraphs) <= ($paragraph_id + 1)):
 			return $content;
 		endif;
 		foreach ($paragraphs as $index => $paragraph) {
@@ -246,45 +246,45 @@ class Theme
 
 		register_sidebar(
 			array(
-				'name'          => 'Home right sidebar',
-				'id'            => 'home_right_1',
+				'name' => 'Home right sidebar',
+				'id' => 'home_right_1',
 				'before_widget' => '<div>',
-				'after_widget'  => '</div>',
-				'before_title'  => '<h2 class="rounded">',
-				'after_title'   => '</h2>',
+				'after_widget' => '</div>',
+				'before_title' => '<h2 class="rounded">',
+				'after_title' => '</h2>',
 			)
 		);
 
 		register_sidebar(
 			array(
-				'name'          => 'Archive right sidebar',
-				'id'            => 'archive_right_1',
+				'name' => 'Archive right sidebar',
+				'id' => 'archive_right_1',
 				'before_widget' => '<div>',
-				'after_widget'  => '</div>',
-				'before_title'  => '<h2 class="rounded">',
-				'after_title'   => '</h2>',
+				'after_widget' => '</div>',
+				'before_title' => '<h2 class="rounded">',
+				'after_title' => '</h2>',
 			)
 		);
 
 		register_sidebar(
 			array(
-				'name'          => __('Gallery Right Sidebar', 'pmc'),
-				'id'            => 'gallery-right',
+				'name' => __('Gallery Right Sidebar', 'pmc'),
+				'id' => 'gallery-right',
 				'before_widget' => false,
-				'after_widget'  => false,
-				'before_title'  => false,
-				'after_title'   => false,
+				'after_widget' => false,
+				'before_title' => false,
+				'after_title' => false,
 			)
 		);
 
 		register_sidebar(
 			array(
-				'name'          => __('Article Right Sidebar', 'pmc'),
-				'id'            => 'article_right_sidebar',
+				'name' => __('Article Right Sidebar', 'pmc'),
+				'id' => 'article_right_sidebar',
 				'before_widget' => false,
-				'after_widget'  => false,
-				'before_title'  => false,
-				'after_title'   => false,
+				'after_widget' => false,
+				'before_title' => false,
+				'after_title' => false,
 			)
 		);
 	}
@@ -299,21 +299,21 @@ class Theme
 
 		// Plugins should be loaded alphabetically
 		load_pmc_plugins([
-			'plugins'     => [
+			'plugins' => [
 				'add-meta-tags-mod',
 				'ajax-comment-loading',
-				'apple-news'              => '1.3',
+				'apple-news' => '1.3',
 				'cache-nav-menu',
 				'cheezcap',
-				'co-authors-plus'         => '3.4',
+				'co-authors-plus' => '3.4',
 				'custom-metadata',
 				'edit-flow',
-				'fieldmanager'            => '1.1',    // When this version is updated, update the version set for 'pmc_fieldmanager_version' hook as well
+				'fieldmanager' => '1.1',    // When this version is updated, update the version set for 'pmc_fieldmanager_version' hook as well
 				'multiple-post-thumbnails',
 				'safe-redirect-manager',
 				'wpcom-legacy-redirector' => '1.3.0',
 				'wpcom-thumbnail-editor',
-				'zoninator'               => '0.7',
+				'zoninator' => '0.7',
 			],
 			// pmc-plugins should be loaded alphabetically
 			'pmc-plugins' => [
@@ -468,7 +468,7 @@ class Theme
 		if (!empty($attachment_id)) {
 			if ($lazyload) {
 				$attr['class'] = !empty($attr['class']) ? $attr['class'] . ' lazyload' : 'lazyload';
-				$image         = wp_get_attachment_image_src($attachment_id, $size);
+				$image = wp_get_attachment_image_src($attachment_id, $size);
 				if (empty($image)) {
 					return false;
 				}
@@ -520,7 +520,7 @@ class Theme
 		}
 
 		$sub_category = '';
-		$sub_cat_id   = apply_filters('breadcrumb_secondary_category_id', get_post_meta($post_id, 'subcategories', true));
+		$sub_cat_id = apply_filters('breadcrumb_secondary_category_id', get_post_meta($post_id, 'subcategories', true));
 
 		if (!empty($sub_cat_id)) {
 			$sub_category = get_term_by('id', $sub_cat_id, 'category');
@@ -531,7 +531,7 @@ class Theme
 		}
 
 		if (is_page()) {
-			$post_id   = get_queried_object_id();
+			$post_id = get_queried_object_id();
 			$ancestors = get_post_ancestors($post_id);
 
 			if (is_array($ancestors)) {
@@ -543,7 +543,7 @@ class Theme
 			$ancestors[] = $post_id;
 
 			foreach ($ancestors as $ancestor) {
-				$item         = [];
+				$item = [];
 				$item['name'] = get_the_title($ancestor);
 				$item['link'] = get_permalink($ancestor);
 
@@ -856,12 +856,12 @@ class Theme
 			$args,
 			[
 				'attachment_id' => null,
-				'sizes_attr'    => null,
-				'sources'       => [],
-				'default_size'  => null,
-				'image_attr'    => ['srcset' => ''],
-				'echo'          => false,
-				'return'        => false,
+				'sizes_attr' => null,
+				'sources' => [],
+				'default_size' => null,
+				'image_attr' => ['srcset' => ''],
+				'echo' => false,
+				'return' => false,
 			]
 		);
 
@@ -953,7 +953,7 @@ class Theme
 
 		if (false === $query) {
 			$args = [
-				'post_type'      => ['post', 'pmc-gallery'],
+				'post_type' => ['post', 'pmc-gallery'],
 				'posts_per_page' => 10,
 			];
 
@@ -961,8 +961,8 @@ class Theme
 
 				$args['tax_query'] = [ //@codingStandardsIgnoreLine: Usage of tax_query is required as we need post with $taxonomy.
 					[
-						'taxonomy'         => $taxonomy,
-						'terms'            => [$term_obj->term_id],
+						'taxonomy' => $taxonomy,
+						'terms' => [$term_obj->term_id],
 						'include_children' => false,
 					],
 				];
@@ -986,7 +986,10 @@ class Theme
 
 		// Return a random post.
 		if (!empty($query->posts) && is_array($query->posts)) {
-			return isset($query->posts[mt_rand(0, count($query->posts) - 1)]) ? $query->posts[mt_rand(0, count($query->posts) - 1)] : false;
+			if (isset($query->posts)) {
+				return isset($query->posts[mt_rand(0, count($query->posts) - 1)]) ? $query->posts[mt_rand(0, count($query->posts) - 1)] : false;
+			}
+
 		}
 
 		return false;
@@ -1084,28 +1087,28 @@ class Theme
 	{
 
 		return [
-			'Artnews'                => 'https://artnews.com/',
-			'BGR'                    => 'https://bgr.com/',
-			'Billboard'              => 'https://billboard.com/',
-			'Deadline'               => 'https://deadline.com/',
-			'Fairchild Media'        => 'https://fairchildlive.com/',
-			'Footwear News'          => 'https://footwearnews.com/',
-			'Gold Derby'             => 'https://www.goldderby.com/',
-			'IndieWire'              => 'https://www.indiewire.com/',
-			'Robb Report'            => 'https://robbreport.com/',
-			'Rolling Stone'          => 'https://www.rollingstone.com/',
-			'SheKnows'               => 'https://www.sheknows.com/',
-			'She Media'              => 'https://www.shemedia.com/',
-			'Soaps'                  => 'https://soaps.sheknows.com/',
-			'Sourcing Journal'       => 'https://sourcingjournal.com/',
-			'Sportico'               => 'https://www.sportico.com/',
-			'Spy'                    => 'https://spy.com/',
-			'StyleCaster'            => 'https://stylecaster.com/',
+			'Artnews' => 'https://artnews.com/',
+			'BGR' => 'https://bgr.com/',
+			'Billboard' => 'https://billboard.com/',
+			'Deadline' => 'https://deadline.com/',
+			'Fairchild Media' => 'https://fairchildlive.com/',
+			'Footwear News' => 'https://footwearnews.com/',
+			'Gold Derby' => 'https://www.goldderby.com/',
+			'IndieWire' => 'https://www.indiewire.com/',
+			'Robb Report' => 'https://robbreport.com/',
+			'Rolling Stone' => 'https://www.rollingstone.com/',
+			'SheKnows' => 'https://www.sheknows.com/',
+			'She Media' => 'https://www.shemedia.com/',
+			'Soaps' => 'https://soaps.sheknows.com/',
+			'Sourcing Journal' => 'https://sourcingjournal.com/',
+			'Sportico' => 'https://www.sportico.com/',
+			'Spy' => 'https://spy.com/',
+			'StyleCaster' => 'https://stylecaster.com/',
 			'The Hollywood Reporter' => 'https://hollywoodreporter.com/',
-			'TVLine'                 => 'https://tvline.com/',
-			'Variety'                => 'https://variety.com/',
-			'Vibe'                   => 'https://vibe.com/',
-			'WWD'                    => 'https://wwd.com/',
+			'TVLine' => 'https://tvline.com/',
+			'Variety' => 'https://variety.com/',
+			'Vibe' => 'https://vibe.com/',
+			'WWD' => 'https://wwd.com/',
 		];
 	}
 
@@ -1202,7 +1205,7 @@ class Theme
 	{
 		if (!is_admin() && $query->is_main_query()) {
 			if (is_author()) {
-				$meta_query = (array)$query->get('meta_query');
+				$meta_query = (array) $query->get('meta_query');
 				$meta_query[] = [
 					'relation' => 'OR',
 					[
@@ -1224,10 +1227,12 @@ class Theme
 	{
 		$content = str_replace(
 			[
-				'data-lazy-src', 'data-lazy-srcset',
+				'data-lazy-src',
+				'data-lazy-srcset',
 			],
 			[
-				'src', 'srcset',
+				'src',
+				'srcset',
 			],
 			$content
 		);
