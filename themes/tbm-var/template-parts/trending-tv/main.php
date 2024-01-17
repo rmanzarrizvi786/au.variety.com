@@ -17,19 +17,19 @@ $current_page = (get_query_var('paged')) ? get_query_var('paged') : 1;
 
 // Get global curation settings.
 $settings = get_option('global_curation', []);
-$settings = $settings['tab_variety_trending_tv'];
+$settings = isset($settings['tab_variety_trending_tv']) ? $settings['tab_variety_trending_tv'] : '';
 
 $sponsor_heading = empty($settings['variety_sponsor_widget']) ? 'DirectTV Trending' : $settings['variety_sponsor_widget'];
 
 $trending_text = [
-	'seven_days'  => empty($settings['variety_trending_shows']) ? 'Top 10 Trending Shows' : $settings['variety_trending_shows'],
-	'engagement'  => empty($settings['variety_engagement']) ? 'Engagement of Top 3 Shows' : $settings['variety_engagement'],
+	'seven_days' => empty($settings['variety_trending_shows']) ? 'Top 10 Trending Shows' : $settings['variety_trending_shows'],
+	'engagement' => empty($settings['variety_engagement']) ? 'Engagement of Top 3 Shows' : $settings['variety_engagement'],
 	'continental' => empty($settings['variety_continental']) ? 'Top 2 Shows in the Continental U.S.' : $settings['variety_continental'],
 	'methodology' => empty($settings['variety_trending_methodology']) ? '' : $settings['variety_trending_methodology'],
 ];
 
 $header['c_heading']['c_heading_classes'] .= ' u-letter-spacing-012';
-$header['c_heading']['c_heading_text']     = !empty($settings['variety_heading_text']) ? $settings['variety_heading_text'] : $header['c_heading']['c_heading_text'];
+$header['c_heading']['c_heading_text'] = !empty($settings['variety_heading_text']) ? $settings['variety_heading_text'] : $header['c_heading']['c_heading_text'];
 
 $header['o_sponsored_by']['o_sponsored_by_text'] = !empty($settings['variety_sponsored_by_text']) ? $settings['variety_sponsored_by_text'] : $header['o_sponsored_by']['o_sponsored_by_text'];
 
@@ -60,21 +60,22 @@ $header['c_logo']['c_logo_url'] = !empty($settings['variety_sponsor_link']) ? $s
 			$trending_text,
 			true
 		);
-	?>
-		<div class="_trending_tv_methodology lrv-u-border-t-1 lrv-u-border-color-grey-light u-font-family-secondary a-font-secondary-regular-s">
+		?>
+		<div
+			class="_trending_tv_methodology lrv-u-border-t-1 lrv-u-border-color-grey-light u-font-family-secondary a-font-secondary-regular-s">
 			<p>
 				<?php echo wp_kses_post($trending_text['methodology']); ?>
 			</p>
 		</div>
-	<?php
+		<?php
 		// DirectTV Trending Widget
 		/* the_widget(
-			'\Variety\Inc\Widgets\What_To_Watch',
-			[
-				'stream_heading' => $sponsor_heading,
-				'stream_module'  => 'vy-trending-tv-directtv',
-			] 
-		); */
+				  '\Variety\Inc\Widgets\What_To_Watch',
+				  [
+					  'stream_heading' => $sponsor_heading,
+					  'stream_module'  => 'vy-trending-tv-directtv',
+				  ] 
+			  ); */
 
 		// AKA top stories
 		\PMC::render_template(
@@ -87,7 +88,7 @@ $header['c_logo']['c_logo_url'] = !empty($settings['variety_sponsor_link']) ? $s
 	\PMC::render_template(
 		sprintf('%s/template-parts/common/latest-news.php', untrailingslashit(CHILD_THEME_PATH)),
 		[
-			'module'      => 'modules/latest-news-river.docs',
+			'module' => 'modules/latest-news-river.docs',
 			'header_text' => __('TV News', 'pmc-variety'),
 			'more_button' => __('More TV News', 'pmc-variety'),
 		],

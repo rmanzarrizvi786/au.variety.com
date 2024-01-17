@@ -12,7 +12,8 @@
  * @since 2013-04-19 Amit Gupta
  */
 
-class PMC_Cache {
+class PMC_Cache
+{
 
 	const error_code = 'pmc_cache';
 
@@ -74,19 +75,20 @@ class PMC_Cache {
 	 *
 	 * @throws \ErrorException
 	 */
-	public function __construct( $cache_key = '', $cache_group = '' ) {
+	public function __construct($cache_key = '', $cache_group = '')
+	{
 
-		if ( empty( $cache_key ) || ! is_string( $cache_key ) ) {
+		if (empty($cache_key) || !is_string($cache_key)) {
 
 			throw new \ErrorException(
-				__( 'A non-empty string cache key is required to create PMC_Cache object', 'pmc-global-functions' )
+				__('A non-empty string cache key is required to create PMC_Cache object', 'pmc-global-functions')
 			);
 
 		}
 
 		$this->_unscrambled_key = $cache_key;
-		$this->_key             = md5( $cache_key );
-		$this->_attempt_key     = md5(
+		$this->_key = md5($cache_key);
+		$this->_attempt_key = md5(
 			sprintf(
 				'%s_%s',
 				$cache_key,
@@ -94,7 +96,7 @@ class PMC_Cache {
 			)
 		);
 
-		$this->cache_group = ( ! empty( $cache_group ) && is_string( $cache_group ) ) ? $cache_group : $this->cache_group;
+		$this->cache_group = (!empty($cache_group) && is_string($cache_group)) ? $cache_group : $this->cache_group;
 
 		//call init
 		$this->_init();
@@ -106,23 +108,24 @@ class PMC_Cache {
 	 *
 	 * @return void
 	 */
-	protected function _init() : void {
+	protected function _init(): void
+	{
 
 		// NOTE!!!
 		// Be very careful filtering this cache_group value!!
 		// All uses of PMC_Cache use this group!!
 		// Check the passed $_key value to ensure you're only
 		// filtering the group for your cache instance or similar.
-		$cache_group = apply_filters( 'pmc_cache_group_override', $this->cache_group, $this->_key );
+		$cache_group = apply_filters('pmc_cache_group_override', $this->cache_group, $this->_key);
 
-		if ( ! empty( $cache_group ) && is_string( $cache_group ) ) {
+		if (!empty($cache_group) && is_string($cache_group)) {
 			$this->cache_group = $cache_group;
 		}
 
-		unset( $cache_group );
+		unset($cache_group);
 
 		// Allow local dev debug and mocking of cache data
-		do_action( 'pmc_cache_init', $this );
+		do_action('pmc_cache_init', $this);
 	}
 
 	/**
@@ -132,15 +135,16 @@ class PMC_Cache {
 	 *
 	 * @return int
 	 */
-	protected function _get_randomized_expiry( int $expiry = 0 ) : int {
+	protected function _get_randomized_expiry(int $expiry = 0): int
+	{
 
-		if ( is_callable( 'wp_rand' ) ) {
-			$expiry += wp_rand( 1, 90 );
+		if (is_callable('wp_rand')) {
+			$expiry += wp_rand(1, 90);
 
 			// We can't cover this code due to wp_rand exist
-		} elseif ( is_callable( 'random_int' ) ) {  // @codeCoverageIgnore
+		} elseif (is_callable('random_int')) {  // @codeCoverageIgnore
 			// We can't cover this code due to wp_rand exist
-			$expiry += random_int( 1, 90 ); // @codeCoverageIgnore
+			$expiry += random_int(1, 90); // @codeCoverageIgnore
 		}
 
 		return $expiry;
@@ -150,10 +154,11 @@ class PMC_Cache {
 	/**
 	 * This function is for deleting the cache
 	 */
-	public function invalidate() : self {
+	public function invalidate(): self
+	{
 
-		wp_cache_delete( $this->_key, $this->cache_group );
-		wp_cache_delete( $this->_attempt_key, $this->cache_group );
+		wp_cache_delete($this->_key, $this->cache_group);
+		wp_cache_delete($this->_attempt_key, $this->cache_group);
 
 		return $this;
 
@@ -166,12 +171,13 @@ class PMC_Cache {
 	 *
 	 * @return \PMC_Cache
 	 */
-	public function expires_in( $expiry ) : self {
+	public function expires_in($expiry): self
+	{
 
-		$expiry = intval( $expiry );
+		$expiry = intval($expiry);
 
-		$this->_expiry = ( 0 < $expiry ) ? $expiry : $this->_expiry;
-		$this->_expiry = $this->_get_randomized_expiry( $this->_expiry );
+		$this->_expiry = (0 < $expiry) ? $expiry : $this->_expiry;
+		$this->_expiry = $this->_get_randomized_expiry($this->_expiry);
 
 		return $this;
 
@@ -184,10 +190,11 @@ class PMC_Cache {
 	 *
 	 * @return \PMC_Cache
 	 */
-	public function on_failure_expiry_in( int $expiry = 0 ) : self {
+	public function on_failure_expiry_in(int $expiry = 0): self
+	{
 
-		$this->_expiry_on_failure = ( 0 < $expiry ) ? $expiry : $this->_expiry_on_failure;
-		$this->_expiry_on_failure = $this->_get_randomized_expiry( $this->_expiry_on_failure );
+		$this->_expiry_on_failure = (0 < $expiry) ? $expiry : $this->_expiry_on_failure;
+		$this->_expiry_on_failure = $this->_get_randomized_expiry($this->_expiry_on_failure);
 
 		return $this;
 
@@ -198,10 +205,11 @@ class PMC_Cache {
 	 *
 	 * @return int
 	 */
-	public function get_failed_attempts_count() : int {
+	public function get_failed_attempts_count(): int
+	{
 
-		$count = wp_cache_get( $this->_attempt_key, $this->cache_group );
-		$count = ( empty( $count ) ) ? 0 : absint( $count );
+		$count = wp_cache_get($this->_attempt_key, $this->cache_group);
+		$count = (empty($count)) ? 0 : absint($count);
 
 		return $count;
 
@@ -214,9 +222,10 @@ class PMC_Cache {
 	 *
 	 * @return bool
 	 */
-	protected function _has_failed_attempts_maxed_out( int $count ) : bool {
+	protected function _has_failed_attempts_maxed_out(int $count): bool
+	{
 
-		return (bool) ( self::MAX_FAILED_ATTEMPTS_ALLOWED < $count );
+		return (bool) (self::MAX_FAILED_ATTEMPTS_ALLOWED < $count);
 
 	}
 
@@ -225,10 +234,11 @@ class PMC_Cache {
 	 *
 	 * @return void
 	 */
-	protected function _set_failed_attempt_count( int $count = 0 ) : void {
+	protected function _set_failed_attempt_count(int $count = 0): void
+	{
 
 		// Ignoring on PHPCS because cache expiry defaults to >900 seconds
-		wp_cache_set( $this->_attempt_key, $count, $this->cache_group, $this->_expiry );    // phpcs:ignore
+		wp_cache_set($this->_attempt_key, $count, $this->cache_group, $this->_expiry);    // phpcs:ignore
 
 	}
 
@@ -240,28 +250,29 @@ class PMC_Cache {
 	 *
 	 * @return \PMC_Cache|\WP_Error
 	 */
-	public function updates_with( $callback, $params = [] ) {
+	public function updates_with($callback, $params = [])
+	{
 
-		if ( empty( $callback ) || ! is_callable( $callback ) ) {
+		if (empty($callback) || !is_callable($callback)) {
 
 			return new WP_Error(
 				self::error_code,
-				__( 'Callback passed is not callable', 'pmc-global-functions' )
+				__('Callback passed is not callable', 'pmc-global-functions')
 			);
 
 		}
 
-		if ( ! is_array( $params ) ) {
+		if (!is_array($params)) {
 
 			return new WP_Error(
 				self::error_code,
-				__( 'All parameters for the callback must be in an array', 'pmc-global-functions' )
+				__('All parameters for the callback must be in an array', 'pmc-global-functions')
 			);
 
 		}
 
 		$this->_callback = $callback;
-		$this->_params   = $params;
+		$this->_params = $params;
 
 		return $this;
 
@@ -272,10 +283,11 @@ class PMC_Cache {
 	 *
 	 * @return bool|mixed
 	 */
-	protected function _get_data_from_cache() {
+	protected function _get_data_from_cache()
+	{
 
 		// $this->get() must operate on the raw value, as noted therein.
-		return wp_cache_get( $this->_key, $this->cache_group );
+		return wp_cache_get($this->_key, $this->cache_group);
 
 	}
 
@@ -284,14 +296,17 @@ class PMC_Cache {
 	 *
 	 * @return bool|mixed
 	 */
-	protected function _get_data_from_callback() {
+	protected function _get_data_from_callback()
+	{
 
 		try {
+			if (isset($this->_params)) {
+				$data = call_user_func_array($this->_callback, $this->_params);
+				$data = (empty($data)) ? false : $data;
+			}
 
-			$data = call_user_func_array( $this->_callback, $this->_params );
-			$data = ( empty( $data ) ) ? false : $data;
 
-		} catch ( \Exception $e ) {
+		} catch (\Exception $e) {
 			$data = false;
 		}
 
@@ -306,30 +321,31 @@ class PMC_Cache {
 	 *
 	 * @return void
 	 */
-	protected function _set_data_in_cache( $data ) : void {
+	protected function _set_data_in_cache($data): void
+	{
 
 		$expiry = $this->_expiry;
 
-		if ( empty( $data ) ) {
+		if (empty($data)) {
 
 			$failed_attempts = $this->get_failed_attempts_count();
 			$failed_attempts++;
 
 			$expiry = $this->_expiry_on_failure;
 
-			if ( $this->_has_failed_attempts_maxed_out( $failed_attempts ) ) {
+			if ($this->_has_failed_attempts_maxed_out($failed_attempts)) {
 				$failed_attempts = 0;
-				$expiry          = $this->_expiry;
+				$expiry = $this->_expiry;
 			}
 
-			$this->_set_failed_attempt_count( $failed_attempts );
+			$this->_set_failed_attempt_count($failed_attempts);
 
 			$data = 'empty';
 
 		}
 
 		// Ignoring on PHPCS because cache expiry defaults to >900 seconds
-		wp_cache_set( $this->_key, $data, $this->cache_group, $expiry );    // phpcs:ignore
+		wp_cache_set($this->_key, $data, $this->cache_group, $expiry);    // phpcs:ignore
 
 	}
 
@@ -337,7 +353,8 @@ class PMC_Cache {
 	 * This function returns the data from cache if it exists or returns the
 	 * data it gets back from the callback and caches it as well
 	 */
-	public function get() {
+	public function get()
+	{
 
 		$data = $this->_get_data_from_cache();
 
@@ -348,28 +365,28 @@ class PMC_Cache {
 		 *
 		 * This logic cannot live in $this->_get_data_from_cache().
 		 */
-		if ( 'empty' === $data ) {
+		if ('empty' === $data) {
 			return false;
 		}
-		if ( false !== $data ) {
+		if (false !== $data) {
 			return $data;
 		}
 
 		//If we don't have a callback to get data from or if its not a valid
 		//callback then return error. This will happen in the case when
 		//updates_with() is not called before get()
-		if ( empty( $this->_callback ) || ! is_callable( $this->_callback ) ) {
+		if (empty($this->_callback) || !is_callable($this->_callback)) {
 
 			return new WP_Error(
 				self::error_code,
-				__( 'No valid callback set', 'pmc-global-functions' )
+				__('No valid callback set', 'pmc-global-functions')
 			);
 
 		}
 
 		$data = $this->_get_data_from_callback();
 
-		$this->_set_data_in_cache( $data );
+		$this->_set_data_in_cache($data);
 
 		return $data;
 
